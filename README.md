@@ -8,7 +8,11 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.1.** The skill and the first map (video production, 86 sourced nodes) are here. It has been tested on twelve altered skills. It is early and the report format may change.
+> **Status: v0.2.** The skill and five maps are here. It has been tested on twelve altered skills and used to audit 20 public video skills. It is early and the report format may change.
+
+## First report
+
+[What 20 public video skills leave out](reports/video-20.md): 11 of 20 have no step to label AI-generated content, 10 have no rights step for footage, music or voices, 9 call the video done without anyone watching the final file, and 8 never fact-check the script.
 
 ## Install
 
@@ -66,7 +70,7 @@ The split between a shared catalogue and a personal profile follows established 
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
-- [ ] Report: what public video skills most often leave out
+- [x] Report: [what 20 public video skills leave out](reports/video-20.md)
 - [x] Second domain (writing) and a guide for building a map: [docs/map-format.md](docs/map-format.md)
 
 ## Sources for the video map
