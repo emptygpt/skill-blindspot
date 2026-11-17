@@ -6,21 +6,24 @@ English | [中文](README.zh-CN.md)
 
 Skill linters check format. Skill evals check whether the skill works on the tasks you thought of. Neither tells you about the step you never thought of.
 
-`skill-blindspot` compares an agent skill (a folder with a `SKILL.md`) against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation. It reports which parts of the domain your skill covers, which it only touches, and which it never mentions. Every finding links to its source.
+`skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
 > **Status: early.** The repository is being built in public. The first domain is video production. Nothing here is installable yet. See the roadmap below.
 
-## Why
+## What we tested first
 
-When you write a skill, you and the model both work inside the frame you started with. The model will polish what is there. It rarely tells you that a whole stage is absent. A video skill can have a careful scripting step and no step for clearing the rights to the footage it uses.
+Before building anything we tested the obvious objection: can you just ask the model what is missing? We removed stages from six public skills in two domains and ran blind checks.
 
-Asking a model "what is missing?" gives an answer drawn from the model's own prior, with no source and no way to compare two runs. A domain map is a text file. It can be reviewed, versioned, diffed and corrected by people who know the field.
+**Asking the model recovered 20 of 24 removed items. The map-guided check recovered 18.** A map does not find more. It gives each finding a source and quoted evidence, and it produces a complete table instead of a top-10 list. Full method and numbers: [docs/validation.md](docs/validation.md).
+
+So this tool uses both. The model finds gaps. The map supplies the evidence, the table and a place to record what you skip on purpose.
 
 ## How it works
 
-1. **Domain map.** A YAML tree of the stages and concerns of a domain. Every node carries an id, a parent, a source, a link and a licence. A node with no source is not allowed in. The model may merge synonyms and adjust granularity. It may not add knowledge.
-2. **Match.** For each node, the tool looks for evidence in the skill and quotes the lines it found. Each node gets one of four states: covered, shallow, absent, or excluded on purpose.
-3. **Profile.** Not every gap should be filled. You record what does not apply to you, with an optional reason, in a small profile file. The next run respects it. The public map stays the same for everyone and your profile holds what is specific to you.
+1. **Ask.** The model lists what it thinks the skill is missing, from its own knowledge of the domain.
+2. **Map.** Each node of the domain map is checked against the skill and marked covered, shallow, absent or excluded on purpose, with the quoted lines as evidence. The map is a YAML tree. Every node carries an id, a parent, a source, a link and a licence. A node with no source is not allowed in.
+3. **Trace.** Each step's output is followed to see whether a later step uses it. This finds gaps that no map lists.
+4. **Profile.** Not every gap should be filled. You record what does not apply to you, with an optional reason, in a small profile file. The next run respects it. The public map stays the same for everyone and your profile holds what is specific to you.
 
 The split between a shared catalogue and a personal profile follows established practice in other fields, such as profiles in the NIST Cybersecurity Framework and catalogues and profiles in OSCAL.
 
@@ -32,9 +35,10 @@ The split between a shared catalogue and a personal profile follows established 
 
 ## Roadmap
 
-- [ ] Validation: does a sourced map find removed stages that a plain "what is missing?" prompt does not? Results will be published here either way.
+- [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
+- [ ] `blindspot` skill: ask, map, trace, profile
 - [ ] `maps/video.yaml`: first domain map, every node sourced
-- [ ] `blindspot` command line tool: skill folder + map in, Markdown and JSON report out
+- [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
 - [ ] Report: what public video skills most often leave out
 - [ ] Second domain (writing) and a guide for building a map for a new domain
 
