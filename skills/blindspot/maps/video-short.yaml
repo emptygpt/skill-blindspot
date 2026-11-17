@@ -21,6 +21,12 @@
 #   academy "视频制作" course titles (base B6), cited by title or short phrase only.
 #   Not read: the Douyin creator learning centre (login by phone or QR code).
 #
+# Sources added in 0.2.1 (read 2026-11-17)
+#   YouTube Help "Add custom thumbnails on YouTube" (T3); TikTok Business Help
+#   Center "Creative best practices for performance ads" (T4, written for ads);
+#   Douyin rule document "诱导互动" (base D3). Shared items (publish time,
+#   upload frequency, sponsor disclosure, duplicate uploads) went to the base map.
+#
 # Sources read for this map (2026-11-16)
 #   Opened: YouTube Help "Get started creating YouTube Shorts" (T1),
 #   "Understand three-minute YouTube Shorts" (T2); YouTube for Creators
@@ -31,16 +37,21 @@
 #   login-gated); two YouTube Help article ids tried returned "page can't be found".
 #
 # Not yet covered (no source found, so no node)
-#   - Platform-specific rules of TikTok and Reels vertical video (Douyin and
-#     Bilibili general rules are now in the base map and in the nodes below)
-#   - Hook length in seconds, loop or replay design, and ideal duration
-#   - Text-on-screen safe zones and caption placement for vertical UI
+#   - Platform rules of Reels; TikTok community rules for organic posts (only
+#     TikTok's ad creative guidance is cited, see short.hook-first-seconds)
+#   - Ideal duration of a short and loop design as a positive technique (only
+#     the Douyin rule against hidden loops is covered)
+#   - Exact pixel sizes of the safe zone (the TikTok page only says to keep
+#     content inside it and points to ad specifications)
 #   - Trending sounds and hashtag strategy outside YouTube
-#   - Posting frequency and best time for short-form
-#   - Cover or thumbnail rules for Shorts specifically
-#   - Cross-posting the same file to several platforms (only the Douyin rule on
-#     other platforms' watermarks is covered, see short.no-foreign-watermark)
-#   - Screen recording and tool demo capture in vertical format
+#   - Best time and frequency specific to short-form (the base map's
+#     pub.publish-time and topic.cadence cite YouTube's general FAQ)
+#   - Cross-posting the same file to several platforms (only the Douyin rules
+#     on other platforms' watermarks and on one account per material are
+#     covered: short.no-foreign-watermark, base comp.no-duplicate-upload)
+#   - How to capture a screen recording or tool demo in vertical format (only
+#     the Bilibili rule that a plain recording is not original, base
+#     comp.screen-recording-original)
 #   - Body content of the Shorts sub-pages (music eligibility, upload, remix,
 #     templates, Create from your videos): only their titles were seen
 
@@ -48,9 +59,9 @@ map:
   id: video-short
   extends: video
   title: Short-form vertical video
-  version: 0.2.0
+  version: 0.2.1
   updated: 2026-11-17
-  scope: "Vertical or square videos of up to about three minutes made for feeds such as YouTube Shorts. Sources are YouTube's plus official Bilibili and Douyin course titles and rule documents (cited from the base map's B and D sources); TikTok and Reels have no usable source yet (see header). Out of scope: long-form, live and podcast video."
+  scope: "Vertical or square videos of up to about three minutes made for feeds such as YouTube Shorts. Sources are YouTube's plus official Bilibili and Douyin course titles and rule documents (cited from the base map's B and D sources), and TikTok's ad creative guidance (T4); Reels has no usable source yet (see header). Out of scope: long-form, live and podcast video."
 
 sources:
   - id: T1
@@ -64,6 +75,18 @@ sources:
     publisher: "Google / YouTube"
     url: "https://support.google.com/youtube/answer/15424877"
     retrieved: 2026-11-16
+    licence: "not verified"
+  - id: T3
+    title: "YouTube Help: Add custom thumbnails on YouTube"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/72431"
+    retrieved: 2026-11-17
+    licence: "not verified"
+  - id: T4
+    title: "TikTok Business Help Center: Creative best practices for performance ads (last updated June 2025)"
+    publisher: "TikTok For Business"
+    url: "https://ads.tiktok.com/help/article/creative-best-practices"
+    retrieved: 2026-11-17
     licence: "not verified"
 
 exclude:
@@ -137,6 +160,43 @@ groups:
             locator: "Photo to video"
           - ref: T1
             locator: "Create content for Shorts using AI-generated features"
+      - id: short.hook-first-seconds
+        title: "Hook in the first seconds"
+        description: "Put the hook in the first six seconds and say what the video offers within the first three."
+        applies_when: "The source is TikTok's guidance for ads; use it as a reference for organic short videos"
+        sources:
+          - ref: T4
+            locator: "Prioritize your hook in the first 6 seconds"
+          - ref: T4
+            locator: "Introduce your content proposition in the first 3 seconds"
+      - id: short.safe-zone
+        title: "Keep text inside the UI safe zone"
+        description: "Keep text, faces and key visuals inside the area the app's buttons and caption do not cover."
+        sources:
+          - ref: T4
+            locator: "keeping your content visible within the UI safe zone"
+      - id: short.text-pace
+        title: "Pace on-screen text"
+        description: "Use captions or text overlays for context and keep them short enough to read, about five to ten words per second."
+        sources:
+          - ref: T4
+            locator: "5-10 words per second"
+      - id: short.cover
+        title: "Set the Short's cover"
+        description: "Pick the frame or upload a custom vertical cover for the Short; custom uploads should be 9:16."
+        sources:
+          - ref: T3
+            locator: "Add a custom Short thumbnail"
+          - ref: T3
+            locator: "the recommended aspect ratio is 9:16"
+      - id: short.honest-loop-payoff
+        title: "No hidden loops or unpaid-off hooks"
+        description: "Do not make the start and end identical so the loop goes unnoticed, and do not open with a promise the video never delivers."
+        sources:
+          - ref: D3
+            locator: "首尾内容完全一致，让人不易觉察循环播放"
+          - ref: D3
+            locator: "建立不恰当的预期吸引观看"
   - id: short-sound-rights
     title: "Music and claims for short-form"
     nodes:

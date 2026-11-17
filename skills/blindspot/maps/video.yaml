@@ -28,11 +28,21 @@
 #   convention (D1) and Douyin rule centre rule-document list (D2). Only titles
 #   and short phrases are cited. Courses by individual uploaders were not used.
 #   Not read: the Douyin creator learning centre (login by phone or QR code).
+#
+# Sources added in 0.2.1 (read 2026-11-17)
+#   Bilibili help centre, public pages (B11-B18): submission rules, commercial
+#   declaration, submission states, tags, trending rules, incentive programme,
+#   original-content protection. Douyin rule-centre documents (D3-D6), public.
+#   YouTube Help performance FAQ, audience report and branded content (Y1-Y3);
+#   FTC "Disclosures 101 for Social Media Influencers" (F1); China's
+#   互联网广告管理办法 article 9 (G1). Titles, headings and short phrases only.
+#   Still not read: Douyin creator learning centre (login), Bilibili community
+#   convention sub-pages (login), Douyin e-commerce rule centre (out of scope).
 
 map:
   id: video
   title: Video production
-  version: 0.2.0
+  version: 0.2.1
   updated: 2026-11-17
   scope: "Online video made for platforms such as YouTube, Bilibili and short-video apps: explainers, reviews and shorts, from choosing a topic to publishing and reviewing results. Out of scope: live broadcast and studio switching, feature film financing, casting, distribution deals and managing a film crew."
 
@@ -216,6 +226,120 @@ sources:
     url: "https://aweme.snssdk.com/falcon/fe_douyin_security_react/rule/platform_norm/?hide_nav_bar=1&page_type=platform_norm"
     retrieved: 2026-11-17
     licence: "not verified; titles only"
+  - id: B11
+    title: "帮助中心「投稿规则 > 投稿规范」(对稿件内容的要求/非自制内容范围/对稿件的其他规则/对稿件信息的要求)"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=335"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B12
+    title: "帮助中心「内容合作（商单）相关」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=341"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B13
+    title: "帮助中心「创作中心 > 稿件状态」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=316"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B14
+    title: "帮助中心「创作中心 > 投稿相关」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=314"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B15
+    title: "帮助中心「标签相关」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=327"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B16
+    title: "帮助中心「热门规则」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=595"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B17
+    title: "帮助中心「创作激励计划 > 违规类型与处罚」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=346"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: B18
+    title: "帮助中心「原创认证」"
+    publisher: "哔哩哔哩"
+    url: "https://www.bilibili.com/blackboard/help.html#/?qid=372"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; question list read via the help centre's public list endpoint"
+  - id: D3
+    title: "抖音规则中心 规则文件「诱导互动」"
+    publisher: "抖音"
+    url: "https://api.amemv.com/falcon/fe_douyin_security_react/rule/norm_content/?hide_nav_bar=1&commerce_id=aJ9TGBjxFXK7"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; the page opens in the Douyin app, its text was read from the rule centre's public list endpoint https://aweme.snssdk.com/aweme/v3/user_notification/safetycenter/rule/list"
+  - id: D4
+    title: "抖音规则中心 规则文件「原创」"
+    publisher: "抖音"
+    url: "https://api.amemv.com/falcon/fe_douyin_security_react/rule/norm_content/?hide_nav_bar=1&commerce_id=aJ9TY6wQP4rc"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; the page opens in the Douyin app, its text was read from the rule centre's public list endpoint https://aweme.snssdk.com/aweme/v3/user_notification/safetycenter/rule/list"
+  - id: D5
+    title: "抖音规则中心 规则文件「营销行为」"
+    publisher: "抖音"
+    url: "https://api.amemv.com/falcon/fe_douyin_security_react/rule/norm_content/?hide_nav_bar=1&commerce_id=aJ9SAzPyce3L"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; the page opens in the Douyin app, its text was read from the rule centre's public list endpoint https://aweme.snssdk.com/aweme/v3/user_notification/safetycenter/rule/list"
+  - id: D6
+    title: "抖音规则中心 规则文件「【2023年3月】规则变更」"
+    publisher: "抖音"
+    url: "https://api.amemv.com/falcon/fe_douyin_security_react/rule/norm_content/?hide_nav_bar=1&commerce_id=aHpEc9vJoYm7"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; the page opens in the Douyin app, its text was read from the rule centre's public list endpoint https://aweme.snssdk.com/aweme/v3/user_notification/safetycenter/rule/list"
+  - id: Y1
+    title: "YouTube Help: YouTube performance FAQ & Troubleshooting"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/141805"
+    retrieved: 2026-11-17
+    licence: "not verified"
+  - id: Y2
+    title: "YouTube Help: Understand your YouTube audience"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/9314416"
+    retrieved: 2026-11-17
+    licence: "not verified"
+  - id: Y3
+    title: "YouTube Help: Add branded content restrictions & disclosure labels"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/154235"
+    retrieved: 2026-11-17
+    licence: "not verified"
+  - id: F1
+    title: "Disclosures 101 for Social Media Influencers (November 2019)"
+    publisher: "U.S. Federal Trade Commission (FTC staff)"
+    url: "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+    retrieved: 2026-11-17
+    licence: "US federal government work; public domain status not verified"
+  - id: G1
+    title: "互联网广告管理办法（国家市场监督管理总局令第72号，2023年5月1日起施行）"
+    publisher: "国家市场监督管理总局 (via 中国政府网 国务院公报 2023年第16号)"
+    url: "https://www.gov.cn/gongbao/2023/issue_10506/202306/content_6885261.html"
+    retrieved: 2026-11-17
+    licence: "official regulation text; not verified"
 groups:
   - id: topic
     title: "Topic and research"
@@ -286,6 +410,8 @@ groups:
         sources:
           - ref: S2d
             locator: "Create consistency, your way"
+          - ref: Y1
+            locator: "Do I need to upload daily or at least once a week?"
       - id: topic.new-formats
         title: "Test new formats"
         description: "Try different video formats to find out what works for the channel."
@@ -865,6 +991,8 @@ groups:
             locator: "零设计基础get精美封面"
           - ref: B10
             locator: "生活区｜有效封面技巧"
+          - ref: B11
+            locator: "封面图内容应与视频主体内容一致"
       - id: pack.title
         title: "Title writing"
         description: "Write an accurate, short title with the key words first."
@@ -880,6 +1008,8 @@ groups:
             locator: "爆款标题的关键因素"
           - ref: B10
             locator: "生活区｜爆款标题技巧"
+          - ref: B11
+            locator: "禁止填写无意义的、与视频内容完全无关"
       - id: pack.title-type
         title: "Searchable versus intriguing titles"
         description: "Choose between a title that matches a search and one that raises curiosity."
@@ -902,6 +1032,10 @@ groups:
             locator: "manage content metadata"
           - ref: B1
             locator: "利用标签提升播放量"
+          - ref: B15
+            locator: "如何填写标签？"
+          - ref: B11
+            locator: "标签（tag）"
       - id: pack.description-chapters
         title: "Description and chapters"
         description: "Write the description and chapter markers, with AI help if wanted."
@@ -1019,6 +1153,8 @@ groups:
             locator: "conduct search engine optimisation"
           - ref: B1
             locator: "解读流量曝光密码（上）"
+          - ref: B16
+            locator: "平台鼓励什么样的稿件上热门？"
       - id: pub.promotion
         title: "Promote the video"
         description: "Tell people about the video through other channels."
@@ -1085,6 +1221,16 @@ groups:
         sources:
           - ref: B5
             locator: "【功能介绍】UP主稿件预约上线啦！"
+          - ref: B14
+            locator: "定时发布和转载撞车的判定"
+      - id: pub.publish-time
+        title: "Choose the publish time"
+        description: "Check when the audience is on the platform; publish time helps early views and matters for premieres and live, but is not known to change a video's long-term performance."
+        sources:
+          - ref: Y1
+            locator: "When is the best time to publish videos?"
+          - ref: Y2
+            locator: "When your viewers are on YouTube"
   - id: analytics
     title: "Analytics and review"
     nodes:
@@ -1276,6 +1422,12 @@ groups:
             locator: "视频整体为搬运内容"
           - ref: B2
             locator: "原创水印操作指南"
+          - ref: B11
+            locator: "非自制内容范围"
+          - ref: D4
+            locator: "原创"
+          - ref: B16
+            locator: "【坚持原创】"
       - id: comp.fake-engagement
         title: "No fake data or engagement"
         description: "Do not buy or fake followers, views, comments or likes."
@@ -1284,6 +1436,8 @@ groups:
             locator: "违背诚信与真实性"
           - ref: D2
             locator: "抖音违规涨粉治理规范"
+          - ref: B16
+            locator: "【真实数据】"
       - id: comp.offsite-leads
         title: "No off-platform contact details or links in the video"
         description: "Check that the video carries no contact details, QR codes or links that the platform treats as lead generation or spam."
@@ -1316,6 +1470,87 @@ groups:
             locator: "涉及危险行为、易造成人身伤害"
           - ref: D1
             locator: "（2）发布易引发人身安全风险的内容"
+      - id: comp.declare-original-repost
+        title: "Declare original or repost and credit the source"
+        description: "Mark the upload as self-made or reposted, and for reposts give the original source; passing a repost off as original is a serious violation."
+        applies_when: "the platform asks for the upload type"
+        sources:
+          - ref: B11
+            locator: "4、投稿类型"
+          - ref: B11
+            locator: "5、视频出处"
+          - ref: B17
+            locator: "投稿类型选择错误"
+      - id: comp.screen-recording-original
+        title: "Plain screen recordings of others' work are not original"
+        description: "A recording of someone else's work with no editing or added work of your own counts as a repost, not as self-made content."
+        applies_when: "the video records another work on screen"
+        sources:
+          - ref: B11
+            locator: "4、录屏"
+      - id: comp.no-duplicate-upload
+        title: "No duplicate uploads"
+        description: "Do not upload the same video twice or post the same or similar material on several accounts; search the platform for near-identical videos first."
+        sources:
+          - ref: B11
+            locator: "撞车及重复投稿规则"
+          - ref: D4
+            locator: "相同/相似素材，在多个账号重复发布"
+      - id: comp.returned-submission
+        title: "Handle a returned or locked submission"
+        description: "Know the submission states, read the moderator's reason when a video is returned or locked, fix it against the rules and resubmit or appeal."
+        sources:
+          - ref: B13
+            locator: "稿件为什么被退回？之后还能提交么？"
+          - ref: B13
+            locator: "稿件为什么被锁定？"
+          - ref: B13
+            locator: "稿件有哪些状态？"
+      - id: comp.sponsor-disclosure
+        title: "Disclose sponsorship clearly"
+        description: "Tell viewers about any paid, gifted or other brand relationship in the video itself, in clear words, and also use the platform's commercial declaration; ads must be recognisable as ads."
+        applies_when: "the video has a sponsor, a gifted product or a purchase link"
+        sources:
+          - ref: F1
+            locator: "How to Disclose"
+          - ref: F1
+            locator: "the disclosure should be in the video"
+          - ref: Y3
+            locator: "paid promotion button"
+          - ref: B12
+            locator: "什么是“商业声明”？"
+          - ref: B12
+            locator: "哪些内容合作需要进行商业声明？"
+          - ref: G1
+            locator: "第九条"
+      - id: comp.honest-review
+        title: "Honest reviews and fair comparisons"
+        description: "Only describe products you have really used, say what you really think even when paid, and avoid one-sided or poorly argued negative verdicts."
+        applies_when: "the video reviews, tests or compares products"
+        sources:
+          - ref: F1
+            locator: "What Else to Know"
+          - ref: B16
+            locator: "论证不合理的负面评价"
+          - ref: D5
+            locator: "有品牌方赞助的体验、测评"
+      - id: comp.engagement-bait
+        title: "No tricks to get likes, comments or full views"
+        description: "Do not fake buttons, threaten, guilt-trip, promise rewards or mislead viewers to make them like, comment or watch to the end."
+        sources:
+          - ref: D3
+            locator: "骗取互动"
+          - ref: D3
+            locator: "强迫用户参与互动"
+          - ref: D3
+            locator: "承诺不恰当的利益诱导互动"
+      - id: comp.staged-content
+        title: "Label staged or fictional scenes"
+        description: "When an acted or staged story could be taken as real, label it clearly as staged or fictional."
+        applies_when: "the video re-enacts or stages events"
+        sources:
+          - ref: D6
+            locator: "虚假摆拍"
   - id: account
     title: "Account setup and operation"
     nodes:
@@ -1347,6 +1582,15 @@ groups:
             locator: "平台规则的重要性"
           - ref: D2
             locator: "抖音账号运营规范指南"
+      - id: acct.original-protection
+        title: "Apply for original-content protection"
+        description: "Check whether the account can apply for the platform's original-content protection and apply for it."
+        applies_when: "the account publishes its own original work"
+        sources:
+          - ref: B18
+            locator: "什么是原创保护"
+          - ref: B18
+            locator: "原创保护的申请条件是什么"
   - id: monetisation
     title: "Monetisation and brand deals"
     nodes:
@@ -1359,6 +1603,10 @@ groups:
             locator: "保姆级花火平台入驻教学，从今天开始做好接单准备！"
           - ref: B9
             locator: "商单执行流程教学，新手一定要注意的花火接单贴士！"
+          - ref: B12
+            locator: "内容合作是否都需要通过花火官方平台进行？"
+          - ref: D5
+            locator: "1.未使用平台合作推广渠道发布营销内容"
       - id: mon.ad-review-standards
         title: "Advertising review standards for sponsored videos"
         description: "Check a sponsored video against the platform advertising review rules before submitting it."
@@ -1370,3 +1618,14 @@ groups:
             locator: "【商单必看】广告审核常见驳回案例总结"
           - ref: D2
             locator: "抖音生态营销内容创作指南"
+          - ref: B12
+            locator: "现行内容合作审核规范有哪些？"
+          - ref: B12
+            locator: "合作内容被审核驳回后该如何修改？"
+      - id: mon.incentive-rules
+        title: "Know the creator incentive programme rules"
+        description: "Know what the platform's creator incentive programme requires and which violations freeze or remove earnings."
+        applies_when: "the account earns from the platform incentive programme"
+        sources:
+          - ref: B17
+            locator: "什么行为会触发违规？对应什么处罚？"

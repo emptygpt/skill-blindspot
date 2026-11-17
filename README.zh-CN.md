@@ -24,13 +24,13 @@ npx skills add emptygpt/skill-blindspot
 
 | 底图 | 覆盖 | 节点数 |
 |---|---|---|
-| `video` | 线上视频，从选题到发布和复盘 | 107 |
-| `video-short` | 竖屏短视频，在 `video` 之上 | +24 |
-| `video-long` | 长视频，在 `video` 之上 | +20 |
+| `video` | 线上视频，从选题到发布和复盘 | 118 |
+| `video-short` | 竖屏短视频，在 `video` 之上 | +29 |
+| `video-long` | 长视频，在 `video` 之上 | +22 |
 | `writing` | 在线发表的非虚构文章 | 78 |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 
-细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、B 站和抖音的官方页面，抖音创作者学习中心没有读到。
+细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
 想补节点或加底图，见 [docs/map-format.md](docs/map-format.md)（英文）。提 PR 前运行 `python3 scripts/check_maps.py`。
 

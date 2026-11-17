@@ -18,6 +18,12 @@
 #   Bilibili sources are behind a login; the Douyin creator learning centre was
 #   not read.
 #
+# Sources added in 0.2.1 (read 2026-11-17)
+#   Douyin rule document "中长视频营销-植入体验要求" (L7, public) and YouTube
+#   Help "Add branded content restrictions & disclosure labels" (base Y3).
+#   Review honesty, sponsor disclosure, publish time and screen-recording
+#   originality were added to the base map as shared nodes.
+#
 # Sources read for this map (2026-11-16)
 #   Opened: YouTube Help "Video Chapters", "Add end screens to videos",
 #   "Add info cards to videos", "Measure key moments for audience retention";
@@ -31,13 +37,18 @@
 #   - Mid-video pacing and retention devices (pattern interrupts, re-hooks);
 #     only a generic Bilibili course title exists, see base node
 #     script.audience-retention
-#   - Mid-roll ad placement for long videos
+#   - Platform mid-roll ad breaks (inserted by the platform's ad system);
+#     sponsored segments placed by the creator are now covered, see
+#     long.sponsor-integration
 #   - Series structure and episode order outside the podcast case
 #   - Intro length and recap or cold-open practice
-#   - Method of a review, tutorial or explainer (structure, test design,
-#     comparison criteria)
-#   - Screen recording and tool demonstration capture
-#   - Sponsor or affiliate disclosure placement
+#   - Method of a tutorial or explainer, and test design or comparison
+#     criteria for reviews (only honesty and fairness of reviews is covered,
+#     base comp.honest-review)
+#   - How to capture a screen recording or tool demonstration (only the
+#     originality rule is covered, base comp.screen-recording-original)
+#   - Affiliate link disclosure beyond the general rules in base
+#     comp.sponsor-disclosure
 #   - Horizontal long-form on Bilibili: partly covered by the nodes from B2 and
 #     B5 below; no source seen for structure or length norms
 
@@ -45,9 +56,9 @@ map:
   id: video-long
   extends: video
   title: Long-form horizontal video
-  version: 0.2.0
+  version: 0.2.1
   updated: 2026-11-17
-  scope: "Horizontal videos of several minutes or more, such as explainers, reviews and tutorials, published on YouTube-style platforms. Sources are YouTube's plus official Bilibili course titles (cited from the base map's B sources); other platforms have no usable source yet. Out of scope: Shorts, live streaming."
+  scope: "Horizontal videos of several minutes or more, such as explainers, reviews and tutorials, published on YouTube-style platforms. Sources are YouTube's plus official Bilibili course titles (cited from the base map's B sources) and one Douyin rule on sponsored segments (L7). Out of scope: Shorts, live streaming."
 
 sources:
   - id: L1
@@ -86,6 +97,13 @@ sources:
     url: "https://www.youtube.com/creators/create/podcasts/"
     retrieved: 2026-11-16
     licence: "not verified"
+  - id: L7
+    title: "抖音规则中心 规则文件「中长视频营销-植入体验要求」"
+    publisher: "抖音"
+    url: "https://api.amemv.com/falcon/fe_douyin_security_react/rule/norm_content/?hide_nav_bar=1&commerce_id=aJEg7gAYxaij"
+    retrieved: 2026-11-17
+    licence: "not verified; titles and short phrases only"
+    access: "public; the page opens in the Douyin app, its text was read from the rule centre's public list endpoint https://aweme.snssdk.com/aweme/v3/user_notification/safetycenter/rule/list"
 
 exclude:
   - node: shoot.shorts-capture
@@ -178,6 +196,29 @@ groups:
         sources:
           - ref: L3
             locator: "Add cards to a video"
+  - id: long-sponsor
+    title: "Sponsored segments in long videos"
+    nodes:
+      - id: long.sponsor-integration
+        title: "Integrate the sponsored segment"
+        description: "Lead into a sponsored segment instead of cutting the story abruptly, keep its style close to the rest of the video, and avoid stiff read-outs that only list price and features."
+        applies_when: "the video is three minutes or longer and contains a sponsored segment"
+        sources:
+          - ref: L7
+            locator: "1.营销素材植入破坏情节连贯性"
+          - ref: L7
+            locator: "2.营销素材制作生硬"
+      - id: long.sponsor-amount-position
+        title: "Limit and place the sponsored material"
+        description: "Keep the number and total length of sponsored inserts modest; an insert at the start or end, clearly separated from the main content, does not interrupt viewing."
+        applies_when: "the video is three minutes or longer and contains a sponsored segment"
+        sources:
+          - ref: L7
+            locator: "3.营销推广内容浓度过高"
+          - ref: L7
+            locator: "植入出现在视频开头或结尾，与主线内容有明显分隔"
+          - ref: Y3
+            locator: "disclosure label that appears at the beginning of your video"
   - id: long-retention
     title: "Retention analysis"
     nodes:
