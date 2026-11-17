@@ -47,6 +47,18 @@ Chosen as a less familiar domain with an authoritative text.
 
 What the map reliably added: a source for each finding, quoted evidence from the skill, and a complete table that can be reviewed and compared between runs.
 
+## Test 3: the combined skill (v0.1)
+
+We then wrote the `blindspot` skill to combine the three checks: the model lists gaps first, the map is opened afterwards, each step's output is traced, and the results are merged without cutting the list to a fixed length. We ran it once on the same twelve altered skills. The video map was rebuilt as `maps/video.yaml` (86 nodes) with nodes added from O*NET and ESCO, including audio-visual sync and final review.
+
+| | Model only (average of two runs) | Map-guided (average of two runs) | Combined skill (one run) |
+|---|---|---|---|
+| Removed items recovered, of 12 | 10 | 9 | 11 |
+
+The one item nobody recovered in any run was the qualification of the clinical evaluator. It comes from guidance outside the regulation text and is not in the map.
+
+The combined reports are long: 22 to 36 findings per skill, sorted into three bands. All eleven recovered items appeared within the first ten findings. One run is not enough to claim the combined skill is better than asking the model. It is enough to say it is not worse, and it adds sources, evidence and a full table.
+
 ## What this changes
 
 The tool is built as a combination. The model lists gaps first. The map then supplies the node-by-node table with sources, and a profile records what you leave out on purpose. The step-to-step check stays.

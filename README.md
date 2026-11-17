@@ -8,13 +8,23 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: early.** The repository is being built in public. The first domain is video production. Nothing here is installable yet. See the roadmap below.
+> **Status: v0.1.** The skill and the first map (video production, 86 sourced nodes) are here. It has been tested on twelve altered skills. It is early and the report format may change.
+
+## Install
+
+```bash
+npx skills add emptygpt/skill-blindspot
+```
+
+Or copy `skills/blindspot/` into your agent's skills folder, and keep `maps/` next to it or pass a map path. Then ask your agent: "run blindspot on `path/to/my-skill` with the video map".
 
 ## What we tested first
 
 Before building anything we tested the obvious objection: can you just ask the model what is missing? We removed stages from six public skills in two domains and ran blind checks.
 
 **Asking the model recovered 20 of 24 removed items. The map-guided check recovered 18.** A map does not find more. It gives each finding a source and quoted evidence, and it produces a complete table instead of a top-10 list. Full method and numbers: [docs/validation.md](docs/validation.md).
+
+On the same twelve items the combined skill recovered 11 in a single run.
 
 So this tool uses both. The model finds gaps. The map supplies the evidence, the table and a place to record what you skip on purpose.
 
@@ -36,21 +46,21 @@ The split between a shared catalogue and a personal profile follows established 
 ## Roadmap
 
 - [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
-- [ ] `blindspot` skill: ask, map, trace, profile
-- [ ] `maps/video.yaml`: first domain map, every node sourced
+- [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
+- [x] `maps/video.yaml` v0.1: 86 nodes, every node sourced
 - [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
 - [ ] Report: what public video skills most often leave out
 - [ ] Second domain (writing) and a guide for building a map for a new domain
 
 ## Sources for the video map
 
-Planned sources. Licences are checked before any data is added to this repository.
+`maps/video.yaml` cites these. Each node names the section, task statement or skill it comes from.
 
-- O*NET task statements (U.S. Department of Labor, CC BY 4.0)
-- ESCO occupations and skills (European Commission)
-- Official creator documentation from video platforms
-- Published course and textbook outlines
-- Stages observed in public video skills
+- O*NET 31.0 task statements. This product includes information from the O*NET 31.0 Database by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Used under the CC BY 4.0 license. O*NET® is a trademark of USDOL/ETA. The statements are shortened and regrouped here, and USDOL/ETA has not endorsed this adaptation.
+- ESCO. This publication uses the ESCO classification of the European Commission. Skill names are regrouped here, so the map is an adaptation.
+- Official creator documentation from video platforms, and published course and textbook outlines. Only section titles are cited. Their licences are not verified.
+
+Not yet covered because no source was found: screen recording, and comparison method for tool reviews. A node needs a source before it goes in.
 
 ## Related work
 

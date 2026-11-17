@@ -1,0 +1,1011 @@
+# skill-blindspot map: video production (maps/video.yaml)
+#
+# Rules for this map
+#   - Every node must cite at least one source that really exists in the
+#     "sources" list, with a locator copied from that source: a section or
+#     chapter title, an O*NET task sentence (may be shortened), or an ESCO
+#     skill name.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Gaps that no source covers are recorded elsewhere, not as nodes.
+#   - Sources are only cited for titles and short task statements; no body
+#     text of the platform pages, syllabi or textbooks is copied.
+#
+# Licence and attribution
+#   O*NET: This product includes information from the O*NET 31.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license. O*NET(R) is a trademark of
+#   USDOL/ETA. The task statements are shortened and regrouped here, so this
+#   map is an adaptation and has not been endorsed by USDOL/ETA.
+#   ESCO: This publication uses the ESCO classification of the European
+#   Commission. ESCO skill names are regrouped here, so this map is an
+#   adaptation of ESCO. https://esco.ec.europa.eu
+#   All other sources (platform pages, syllabi, textbooks): only titles and
+#   section headings are cited; their licences are not verified.
+
+map:
+  id: video
+  title: Video production
+  version: 0.1.0
+  updated: 2026-11-16
+  scope: "Online video made for platforms such as YouTube, Bilibili and short-video apps: explainers, reviews and shorts, from choosing a topic to publishing and reviewing results. Out of scope: live broadcast and studio switching, feature film financing, casting, distribution deals and managing a film crew."
+
+sources:
+  - id: S1
+    title: "YouTube for Creators (top-level navigation)"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/"
+    retrieved: 2026-11-16
+    licence: "not verified (Google/YouTube site content; copyright assumed reserved)"
+  - id: S2a
+    title: "YouTube for Creators: Longform"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/create/longform/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S2b
+    title: "YouTube for Creators: Shorts"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/create/shorts/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S2c
+    title: "YouTube for Creators: Understand your audience"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/grow/understand-your-audience/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S2d
+    title: "YouTube for Creators: Optimize your content"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/grow/optimize-your-content/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S2e
+    title: "YouTube for Creators: Helpful Resources"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/resources/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S3a
+    title: "YouTube Help: Thumbnail & title tips"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/12340300"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S3b
+    title: "YouTube Help: Add subtitles & captions"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/2734796"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S3c
+    title: "YouTube Help: Edit or remove captions"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/2734705"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: S4
+    title: "哔哩哔哩《UP主创作手册 通用篇》(2020)"
+    publisher: "哔哩哔哩 UP主运营部"
+    url: "https://activity.hdslb.com/blackboard/static/pdf/20200331.pdf"
+    retrieved: 2026-11-16
+    licence: "not verified (marked as copyright of the publisher)"
+  - id: S6
+    title: "Video Production Course Online (Self-Paced) syllabus"
+    publisher: "Graduate School USA"
+    url: "https://www.graduateschool.edu/outlines/video-production-course-online-self-paced-syllabus.pdf"
+    retrieved: 2026-11-16
+    licence: "not verified (no copyright statement seen); only module and section titles cited"
+  - id: S7
+    title: "Video: Digital Communication & Production, 5th edition (2023)"
+    publisher: "Goodheart-Willcox"
+    url: "https://www.g-wonlinetextbooks.com/video-digital-communication-production-ot-2023/"
+    retrieved: 2026-11-16
+    licence: "commercial textbook, copyright reserved; only table-of-contents titles cited"
+  - id: S8
+    title: "Video Production I (Comm 3560) syllabus, Spring 2025"
+    publisher: "University of Utah"
+    url: "https://class-tools.app.utah.edu/syllabus/1254/17042/S25%20Syllabus.pdf"
+    retrieved: 2026-11-16
+    licence: "not verified; only weekly topic titles cited"
+  - id: S9
+    title: "Video Production handbook (2016 revision)"
+    publisher: "Ann Arbor Community Television Network"
+    url: "https://www.a2gov.org/media/01pgn5jo/produce.pdf"
+    retrieved: 2026-11-16
+    licence: "not verified; only table-of-contents titles cited"
+  - id: ONET
+    title: "O*NET 31.0 Database, task statements for video-related occupations"
+    publisher: "U.S. Department of Labor, Employment and Training Administration (USDOL/ETA)"
+    url: "https://www.onetcenter.org/database.html"
+    retrieved: 2026-11-16
+    licence: "CC BY 4.0"
+  - id: ESCO
+    title: "ESCO classification v1.2.1, skills of video-related occupations"
+    publisher: "European Commission"
+    url: "https://esco.ec.europa.eu"
+    retrieved: 2026-11-16
+    licence: "reusable with acknowledgement under Commission Decision 2011/833/EU; adapted versions must be marked as adapted"
+
+groups:
+  - id: topic
+    title: "Topic and research"
+    nodes:
+      - id: topic.focus
+        title: "Find your focus"
+        description: "Decide what the video is about and who it is for before anything else."
+        sources:
+          - ref: S2a
+            locator: "Find your focus"
+          - ref: ONET
+            locator: "27-3041.00 task: Develop story or content ideas, considering reader or audience appeal."
+          - ref: ONET
+            locator: "27-2012.00 task: Select plays, scripts, books, news content, or ideas to be produced."
+          - ref: ESCO
+            locator: "develop creative ideas"
+      - id: topic.project-definition
+        title: "Define the project"
+        description: "State the goals and the intended audience of the project in a few clear sentences."
+        sources:
+          - ref: S7
+            locator: "Ch13 Defining the Project"
+          - ref: ESCO
+            locator: "follow a brief"
+      - id: topic.subject-research
+        title: "Research the subject matter"
+        description: "Gather factual material on the subject from the internet, archives and other sources before writing."
+        sources:
+          - ref: ONET
+            locator: "27-2012.00 task: Research production topics using the internet, video archives, and other informational sources."
+          - ref: ONET
+            locator: "27-3043.05 task: Conduct research to obtain factual information and authentic detail"
+          - ref: ESCO
+            locator: "study topics"
+          - ref: ESCO
+            locator: "consult information sources"
+      - id: topic.audience-research
+        title: "Audience research"
+        description: "Use platform data to find out what viewers search for and what else they watch."
+        sources:
+          - ref: S2c
+            locator: "Use data to understand your audience"
+          - ref: S3a
+            locator: "Dive into the data"
+          - ref: ESCO
+            locator: "research website users"
+      - id: topic.trends-evergreen
+        title: "Balance trends and evergreen topics"
+        description: "Mix topical subjects with subjects that stay relevant over a long time."
+        sources:
+          - ref: S2d
+            locator: "Balance trends vs. evergreen"
+          - ref: ESCO
+            locator: "keep up with trends"
+      - id: topic.cadence
+        title: "Plan a publishing rhythm"
+        description: "Set a sustainable and regular schedule for releasing videos."
+        sources:
+          - ref: S2d
+            locator: "Create consistency, your way"
+      - id: topic.new-formats
+        title: "Test new formats"
+        description: "Try different video formats to find out what works for the channel."
+        sources:
+          - ref: S2d
+            locator: "Test new formats"
+  - id: script
+    title: "Script"
+    nodes:
+      - id: script.story-message
+        title: "Story and core message"
+        description: "Decide the story and the main message the video must deliver before writing."
+        sources:
+          - ref: S6
+            locator: "M1 Story and message"
+          - ref: ESCO
+            locator: "tell a story"
+          - ref: ESCO
+            locator: "write storylines"
+      - id: script.hook
+        title: "Opening hook"
+        description: "Design the first seconds so that viewers want to keep watching."
+        sources:
+          - ref: S6
+            locator: "M1 hooks"
+          - ref: S6
+            locator: "M13 hooks, pacing"
+      - id: script.outline
+        title: "Outline the video"
+        description: "List the main points and their order before shooting."
+        sources:
+          - ref: S2a
+            locator: "Outline your video"
+          - ref: ONET
+            locator: "27-3043.05 task: Plan project arrangements or outlines, and organize material accordingly."
+      - id: script.treatment-script
+        title: "Treatment, script and screenplay"
+        description: "Write the treatment and the full script in a suitable format."
+        sources:
+          - ref: S7
+            locator: "Ch13 Preparing a Treatment / Creating a Storyboard / Writing a Script"
+          - ref: S9
+            locator: "Writing (Script Format)"
+          - ref: ONET
+            locator: "27-2012.00 task: Compose and edit scripts or provide screenwriters with story outlines from which scripts can be written."
+          - ref: ESCO
+            locator: "create a shooting script"
+      - id: script.narration
+        title: "Write narration and voice-over"
+        description: "Write the spoken commentary so that it fits the pictures and the timing."
+        applies_when: "the video uses narration or voice-over"
+        sources:
+          - ref: ESCO
+            locator: "write voice-overs"
+          - ref: ONET
+            locator: "27-4011.00 task: Perform narration of productions or present announcements."
+      - id: script.revision
+        title: "Revise the script"
+        description: "Rework the script after feedback until it is ready to shoot."
+        sources:
+          - ref: ESCO
+            locator: "edit scripts"
+          - ref: ESCO
+            locator: "adapt a script"
+          - ref: ONET
+            locator: "27-2012.00 task: Consult with writers, producers, or actors about script changes"
+      - id: script.shot-list-storyboard
+        title: "Shot list and storyboard"
+        description: "Plan each shot and sketch the key frames before filming."
+        sources:
+          - ref: S6
+            locator: "M1 Shot lists and storyboards"
+          - ref: ESCO
+            locator: "create storyboards"
+          - ref: ONET
+            locator: "27-2012.00 task: Plan details such as framing, composition, camera movement, sound, and actor movement for each shot or scene."
+      - id: script.ai-assisted
+        title: "AI-assisted scripting and shot planning"
+        description: "Use AI tools to draft scripts and shot plans, and check what they produce."
+        applies_when: "AI tools are used in planning"
+        sources:
+          - ref: S6
+            locator: "M14 Plan and produce with AI"
+  - id: preproduction
+    title: "Pre-production"
+    nodes:
+      - id: pre.breakdown
+        title: "Script reading and breakdown"
+        description: "Read the script closely and list the scenes, locations, people and equipment each needs."
+        sources:
+          - ref: S6
+            locator: "M1 Breakdown"
+          - ref: ONET
+            locator: "27-2012.00 task: Study and research scripts to determine how they should be directed."
+          - ref: ONET
+            locator: "27-4032.00 task: Study scripts to become familiar with production concepts and requirements."
+          - ref: ESCO
+            locator: "analyse a script"
+          - ref: ESCO
+            locator: "read scripts"
+      - id: pre.production-plan
+        title: "Production plan"
+        description: "Plan people, places, equipment, schedule and workflow for the shoot."
+        sources:
+          - ref: S7
+            locator: "Ch15 People / Places / Things / Plans"
+          - ref: S9
+            locator: "Pre-Production Planning"
+          - ref: ESCO
+            locator: "create production schedules"
+          - ref: ESCO
+            locator: "make film shooting schedule"
+          - ref: ONET
+            locator: "27-2012.00 task: Identify and approve equipment and elements required for productions"
+      - id: pre.budget
+        title: "Budget"
+        description: "Estimate and keep track of what the production will cost."
+        sources:
+          - ref: S6
+            locator: "M4 Budgeting"
+          - ref: S7
+            locator: "Ch15 Budgets"
+          - ref: ESCO
+            locator: "calculate production costs"
+          - ref: ESCO
+            locator: "monitor production costs"
+      - id: pre.location
+        title: "Location scouting and sound assessment"
+        description: "Check locations for light, power, space and noise before shooting."
+        applies_when: "filming outside a controlled space"
+        sources:
+          - ref: S6
+            locator: "M3 Sound assessment"
+          - ref: S6
+            locator: "M3 Light, power, space"
+          - ref: ONET
+            locator: "27-4031.00 task: Observe sets or locations for potential problems and to determine filming and lighting requirements."
+          - ref: ESCO
+            locator: "search for a suitable location"
+      - id: pre.releases
+        title: "Releases and permissions"
+        description: "Get written permission for likenesses and locations that appear in the video."
+        applies_when: "filming identifiable people or private places"
+        sources:
+          - ref: S6
+            locator: "M1 Releases"
+          - ref: S7
+            locator: "Ch3 Releases"
+          - ref: S9
+            locator: "Copyright & Talent Releases"
+          - ref: S9
+            locator: "Talent Release"
+      - id: pre.aspect-ratio
+        title: "Choose format for the target platform"
+        description: "Pick the aspect ratio and format that suit the platform the video is for."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S6
+            locator: "M13 Format and aspect ratio"
+      - id: pre.thumbnail-stills
+        title: "Capture thumbnail material while shooting"
+        description: "Take extra photos during the shoot to use for the thumbnail."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S3a
+            locator: "We recommend"
+  - id: shooting
+    title: "Shooting and capture"
+    nodes:
+      - id: shoot.equipment-test
+        title: "Test equipment before shooting"
+        description: "Check that cameras, microphones and other gear work properly before the shoot."
+        sources:
+          - ref: ONET
+            locator: "27-4031.00 task: Test, clean, maintain, and repair broadcast equipment, including testing microphones, to ensure proper working condition."
+          - ref: ONET
+            locator: "27-2012.05 task: Test equipment to ensure proper operation."
+          - ref: ESCO
+            locator: "set up cameras"
+          - ref: ESCO
+            locator: "maintain audiovisual equipment"
+      - id: shoot.camera-controls
+        title: "Camera and phone manual controls"
+        description: "Operate the camera or phone with manual control of focus, exposure and settings."
+        sources:
+          - ref: S6
+            locator: "M5 The Phone as a Pro Camera"
+          - ref: S7
+            locator: "Ch9 Camera Operation"
+          - ref: ESCO
+            locator: "operate a camera"
+          - ref: ESCO
+            locator: "select camera apertures"
+      - id: shoot.composition-coverage
+        title: "Composition and coverage"
+        description: "Frame shots well and cover the scene with enough shots, including B-roll, to edit later."
+        sources:
+          - ref: S6
+            locator: "M6 Composition & Coverage"
+          - ref: S7
+            locator: "Ch8 Video Composition"
+          - ref: ONET
+            locator: "27-4031.00 task: Compose and frame each shot, applying the technical aspects of light, lenses, film, filters, and camera settings"
+          - ref: ESCO
+            locator: "plan shots"
+      - id: shoot.lighting
+        title: "Lighting"
+        description: "Light the subject so the picture is clear and looks as intended."
+        sources:
+          - ref: S6
+            locator: "M7 Lighting Fundamentals"
+          - ref: S7
+            locator: "Lighting a Production (Ch16-18)"
+          - ref: ESCO
+            locator: "lighting techniques"
+      - id: shoot.on-camera
+        title: "On-camera presenting and interviews"
+        description: "Set up and direct presenters and interviewees in front of the camera."
+        applies_when: "people appear on camera"
+        sources:
+          - ref: S6
+            locator: "M9 On-camera presenting / Interview setup"
+          - ref: ESCO
+            locator: "interview techniques"
+      - id: shoot.pickups
+        title: "Continuity and pickups"
+        description: "Check continuity and re-shoot missing or poor shots."
+        sources:
+          - ref: S6
+            locator: "M9 Continuity and pickups"
+      - id: shoot.shorts-capture
+        title: "Record or upload a Short"
+        description: "Record the vertical short-form video or bring in existing footage."
+        applies_when: "making short-form vertical video"
+        sources:
+          - ref: S2b
+            locator: "3 Upload or record your video"
+      - id: shoot.review-footage-daily
+        title: "Review footage during production"
+        description: "Look at what has been shot while production is still running, to catch problems and plan what to shoot next."
+        sources:
+          - ref: ONET
+            locator: "27-2012.00 task: Review film daily to check on work in progress and to plan for future filming."
+          - ref: ONET
+            locator: "27-4031.00 task: View films to resolve problems of exposure control"
+          - ref: S8
+            locator: "Acquisition Lab / Log Acquisition shots"
+  - id: assets
+    title: "Assets and rights"
+    nodes:
+      - id: assets.file-management
+        title: "File management"
+        description: "Import, name, organise and back up all media files."
+        sources:
+          - ref: S6
+            locator: "M10 File management"
+          - ref: ESCO
+            locator: "file-based workflow"
+          - ref: ESCO
+            locator: "convert different audiovisual formats"
+      - id: assets.ingest-logging
+        title: "Ingest and log footage"
+        description: "Transfer raw recordings to the computer and log what each clip contains."
+        sources:
+          - ref: S8
+            locator: "Acquisition Lab / Log Acquisition shots"
+          - ref: ONET
+            locator: "27-4011.00 task: Compress, digitize, duplicate, and store audio and video data."
+          - ref: ESCO
+            locator: "transfer uncut audiovisual material to computer"
+          - ref: ESCO
+            locator: "put uncut recordings into computer"
+      - id: assets.music-licensing
+        title: "Music licensing and copyright basics"
+        description: "Check that the music used is licensed for the platform and purpose."
+        sources:
+          - ref: S6
+            locator: "M1 music-licensing and copyright basics"
+          - ref: S2b
+            locator: "Choose your music"
+          - ref: ESCO
+            locator: "purchase music"
+      - id: assets.rights-acquisition
+        title: "Obtain rights to third-party material"
+        description: "Get permission or a licence to use other people's footage, images, music or scripts."
+        applies_when: "using material made by others"
+        sources:
+          - ref: ONET
+            locator: "27-2012.00 task: Obtain rights to scripts or to such items as existing video footage."
+          - ref: ONET
+            locator: "27-3041.00 task: Arrange for copyright permissions."
+          - ref: ESCO
+            locator: "negotiate exploitation rights"
+      - id: assets.copyright-fair-use
+        title: "Copyright and fair use rules"
+        description: "Understand copyright, fair use and what a copyright strike means."
+        sources:
+          - ref: S2e
+            locator: "Copyright"
+          - ref: S2e
+            locator: "Fair use"
+          - ref: S2e
+            locator: "What is a copyright strike?"
+          - ref: ESCO
+            locator: "copyright legislation"
+      - id: assets.font-licensing
+        title: "Font licensing for covers"
+        description: "Make sure fonts used in covers and graphics may be used."
+        applies_when: "using fonts in covers or on-screen text"
+        sources:
+          - ref: S4
+            locator: "注意字体版权问题"
+      - id: assets.generative-material
+        title: "Boundaries for generated footage"
+        description: "Decide what AI-generated B-roll and other generated material may be used for."
+        applies_when: "AI-generated material is used"
+        sources:
+          - ref: S6
+            locator: "M14 generative b-roll"
+  - id: editing
+    title: "Editing"
+    nodes:
+      - id: edit.review-footage
+        title: "Review footage before cutting"
+        description: "Watch all the material through once, scene by scene, before assembling."
+        sources:
+          - ref: ONET
+            locator: "27-4032.00 task: Review footage sequence by sequence to become familiar with it before assembling it into a final product."
+          - ref: ESCO
+            locator: "watch scenes"
+      - id: edit.rough-cut
+        title: "Rough cut and assembly test"
+        description: "Assemble a rough cut to find gaps in coverage."
+        sources:
+          - ref: S6
+            locator: "M10 Assemble one scene"
+          - ref: ONET
+            locator: "27-4032.00 task: Organize and string together raw footage into a continuous whole according to scripts or the instructions of directors and producers."
+      - id: edit.principles
+        title: "Editing principles"
+        description: "Apply continuity, emphasis and pace when cutting."
+        sources:
+          - ref: S7
+            locator: "Ch22 Continuity / Emphasis / Pace"
+          - ref: S9
+            locator: "Editing (Principles)"
+          - ref: ONET
+            locator: "27-4032.00 task: Select and combine the most effective shots of each scene to form a logical and smoothly running story."
+          - ref: ONET
+            locator: "27-2012.00 task: Establish pace of programs and sequences of scenes"
+      - id: edit.workflow
+        title: "Editing workflow"
+        description: "Cut the video in an editing program from raw clips to a finished edit."
+        sources:
+          - ref: S2a
+            locator: "Edit your video"
+          - ref: S2b
+            locator: "Edit your Short"
+          - ref: ONET
+            locator: "27-4032.00 task: Edit films and videotapes to insert music, dialogue, and sound effects, to arrange films into sequences, and to correct errors"
+          - ref: ESCO
+            locator: "perform video editing"
+          - ref: ESCO
+            locator: "cut raw footage digitally"
+      - id: edit.colour
+        title: "Colour correction and grading"
+        description: "Correct and match colour and brightness between shots."
+        sources:
+          - ref: S6
+            locator: "M10 basic color correction"
+          - ref: ESCO
+            locator: "apply colour grading"
+          - ref: ESCO
+            locator: "colour grading"
+      - id: edit.titles-transitions
+        title: "On-screen titles, graphics and transitions"
+        description: "Add title cards, lower thirds, transitions and effects."
+        sources:
+          - ref: S6
+            locator: "M10 titles and lower thirds"
+          - ref: S7
+            locator: "Ch23 Adding Transitions and Other Effects"
+          - ref: ONET
+            locator: "27-4032.00 task: Program computerized graphic effects."
+          - ref: ESCO
+            locator: "motion graphics"
+          - ref: ESCO
+            locator: "create special effects"
+  - id: sound
+    title: "Sound"
+    nodes:
+      - id: sound.recording-monitoring
+        title: "Recording and monitoring audio"
+        description: "Place microphones, set levels and monitor sound while recording."
+        sources:
+          - ref: S6
+            locator: "M8 Placement and levels / Monitoring and room"
+          - ref: S7
+            locator: "Ch12 Recording Audio"
+          - ref: ESCO
+            locator: "set up basic recording"
+          - ref: ESCO
+            locator: "plan audiovisual recording"
+      - id: sound.narration-recording
+        title: "Record narration"
+        description: "Record the voice-over in a quiet place with good levels."
+        applies_when: "the video uses narration or voice-over"
+        sources:
+          - ref: ONET
+            locator: "27-4011.00 task: Perform narration of productions or present announcements."
+      - id: sound.audio-editing
+        title: "Edit recorded sound"
+        description: "Clean up, trim and arrange recorded dialogue and other audio."
+        sources:
+          - ref: ONET
+            locator: "27-4011.00 task: Record and edit audio material, such as movie soundtracks, using audio recording and editing equipment."
+          - ref: ESCO
+            locator: "edit recorded sound"
+          - ref: ESCO
+            locator: "audio editing software"
+      - id: sound.ai-cleanup
+        title: "AI noise reduction and repair"
+        description: "Use AI tools to reduce noise and repair poor audio."
+        applies_when: "AI tools are used for audio"
+        sources:
+          - ref: S6
+            locator: "M8 AI audio cleanup"
+      - id: sound.music-selection
+        title: "Choose music"
+        description: "Pick the music that fits the video and the platform."
+        sources:
+          - ref: S2b
+            locator: "Choose your music"
+          - ref: ONET
+            locator: "27-4032.00 task: Determine the specific audio and visual effects and music necessary to complete films."
+          - ref: ONET
+            locator: "27-4032.00 task: Collaborate with music editors to select appropriate passages of music"
+      - id: sound.effects
+        title: "Sound effects: record or select"
+        description: "Record needed sounds or pick them from a sound effects library."
+        sources:
+          - ref: ONET
+            locator: "27-4032.00 task: Record needed sounds or obtain them from sound effects libraries."
+          - ref: ONET
+            locator: "27-4032.00 task: Discuss the sound requirements of pictures with sound effects editors."
+      - id: sound.mix
+        title: "Audio mix and sound design"
+        description: "Balance dialogue, music and effects into the final soundtrack."
+        sources:
+          - ref: S6
+            locator: "M10 an audio mix"
+          - ref: S7
+            locator: "Ch23 Designing the Audio"
+          - ref: ONET
+            locator: "27-4032.00 task: Piece sounds together to develop film soundtracks."
+          - ref: ESCO
+            locator: "mix multi-track recordings"
+          - ref: ESCO
+            locator: "structure soundtrack"
+  - id: captions
+    title: "Captions and accessibility"
+    nodes:
+      - id: captions.transcription
+        title: "Transcribe the dialogue"
+        description: "Write down what is said so that captions and translations can be made from it."
+        sources:
+          - ref: ESCO
+            locator: "transcribe dialogues"
+          - ref: ESCO
+            locator: "transcription methods"
+          - ref: ESCO
+            locator: "speech recognition"
+      - id: captions.create
+        title: "Create subtitles and captions"
+        description: "Make captions by upload, auto-sync, typing or auto-translation."
+        sources:
+          - ref: S3b
+            locator: "Create subtitles & captions"
+          - ref: ESCO
+            locator: "create subtitles"
+          - ref: ESCO
+            locator: "captioning software"
+      - id: captions.edit
+        title: "Edit caption text and timing"
+        description: "Correct caption wording and fix when each caption appears."
+        sources:
+          - ref: S3c
+            locator: "Edit caption text"
+          - ref: S3c
+            locator: "Edit caption timing"
+          - ref: S3c
+            locator: "Use the YouTube captions editor"
+      - id: captions.translate
+        title: "Translated captions"
+        description: "Offer captions in other languages."
+        applies_when: "the audience speaks more than one language"
+        sources:
+          - ref: S2c
+            locator: "Add captions and translations"
+          - ref: ESCO
+            locator: "translate foreign language"
+          - ref: ESCO
+            locator: "translate soundtrack"
+      - id: captions.reach
+        title: "Captions to widen reach"
+        description: "Use captions as a way to reach more viewers."
+        sources:
+          - ref: S2d
+            locator: "Does adding subtitles (captions) help my channel grow?"
+      - id: captions.accuracy-accessibility
+        title: "Caption accuracy and accessibility standards"
+        description: "Check captions are accurate enough to meet accessibility standards."
+        sources:
+          - ref: S6
+            locator: "M14 caption accuracy for accessibility"
+          - ref: ESCO
+            locator: "hearing disability"
+      - id: captions.silent-viewing
+        title: "Design for silent viewing"
+        description: "Make the video understandable when it is watched with the sound off."
+        sources:
+          - ref: S6
+            locator: "M13 captions-on viewing"
+  - id: packaging
+    title: "Packaging: title and cover"
+    nodes:
+      - id: pack.thumbnail
+        title: "Thumbnail design"
+        description: "Design a cover image that stands out and is readable on small screens."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S3a
+            locator: "Design thumbnails that stand out"
+          - ref: S4
+            locator: "1 封面"
+          - ref: S2c
+            locator: "Craft your packaging"
+          - ref: ESCO
+            locator: "design graphics"
+      - id: pack.title
+        title: "Title writing"
+        description: "Write an accurate, short title with the key words first."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S3a
+            locator: "How to write titles"
+          - ref: S4
+            locator: "2 标题"
+          - ref: ESCO
+            locator: "create content title"
+      - id: pack.title-type
+        title: "Searchable versus intriguing titles"
+        description: "Choose between a title that matches a search and one that raises curiosity."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S3a
+            locator: "Types of video titles"
+      - id: pack.tags
+        title: "Tags, topics and category"
+        description: "Choose the tags, topics and category that help the video get found."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S4
+            locator: "3 标签"
+          - ref: S2c
+            locator: "Make your content discoverable"
+          - ref: ESCO
+            locator: "keywords in digital content"
+          - ref: ESCO
+            locator: "manage content metadata"
+      - id: pack.description-chapters
+        title: "Description and chapters"
+        description: "Write the description and chapter markers, with AI help if wanted."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S6
+            locator: "M14 AI-drafted titles and chapters"
+          - ref: ESCO
+            locator: "manage content metadata"
+      - id: pack.playlists
+        title: "Playlists"
+        description: "Group videos into playlists on the channel."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S2c
+            locator: "Create channel playlists"
+  - id: assembly
+    title: "Assembly and quality control"
+    nodes:
+      - id: asm.timecode-check
+        title: "Verify time codes and mark in/out points"
+        description: "Check time codes and key numbers on material and mark where each shot or sound starts and ends."
+        sources:
+          - ref: ONET
+            locator: "27-4032.00 task: Verify key numbers and time codes on materials."
+          - ref: ONET
+            locator: "27-4032.00 task: Mark frames where a particular shot or piece of sound is to begin or end."
+      - id: asm.av-sync
+        title: "Synchronise sound and picture"
+        description: "Make sure sound lines up with the pictures, including speech and lip movement."
+        sources:
+          - ref: ESCO
+            locator: "synchronise sound with images"
+          - ref: ESCO
+            locator: "synchronise with mouth movements"
+          - ref: ONET
+            locator: "27-4032.00 task: Edit films and videotapes to insert music, dialogue, and sound effects"
+      - id: asm.review-revision
+        title: "Review the cut and revise"
+        description: "Watch the assembled video on a screen, collect feedback and make corrections."
+        sources:
+          - ref: S6
+            locator: "M10 review-and-revision workflow"
+          - ref: ONET
+            locator: "27-4032.00 task: Review assembled films or edited videotapes on screens or monitors to determine if corrections are necessary."
+          - ref: ONET
+            locator: "27-4032.00 task: Conduct film screenings for directors and members of production staffs."
+          - ref: ONET
+            locator: "27-4032.00 task: Confer with producers and directors concerning layout or editing approaches"
+      - id: asm.platform-standards
+        title: "Check against platform and broadcast standards"
+        description: "Check the finished video against the target platform's or broadcaster's technical and content standards before release."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: ONET
+            locator: "27-2012.00 task: Review film, recordings, or rehearsals to ensure conformance to production and broadcast standards."
+          - ref: ONET
+            locator: "27-2012.05 task: Monitor broadcasts to ensure that programs conform to station or network policies and regulations."
+          - ref: ESCO
+            locator: "conduct content quality assurance"
+  - id: publishing
+    title: "Publishing"
+    nodes:
+      - id: pub.export
+        title: "Export with platform presets"
+        description: "Export the video in the format and settings the platform needs."
+        sources:
+          - ref: S6
+            locator: "M10 Export"
+          - ref: S7
+            locator: "Ch23 Storing and Publishing"
+          - ref: S7
+            locator: "Ch24 Exporting and Digital Distribution"
+      - id: pub.upload
+        title: "Upload and publish"
+        description: "Upload the video, choose category and tags, fill in details and publish."
+        sources:
+          - ref: S2a
+            locator: "Upload & share in YouTube Studio"
+          - ref: S2b
+            locator: "5 Upload and share"
+          - ref: S4
+            locator: "上传流程：上传完毕-选分区-选标签-填简介-完善信息-发布"
+          - ref: ESCO
+            locator: "manage online content"
+          - ref: ESCO
+            locator: "use content management system software"
+      - id: pub.discoverability
+        title: "Make the video discoverable in search"
+        description: "Make the video easier to find in platform search."
+        sources:
+          - ref: S2c
+            locator: "Make your content discoverable"
+          - ref: S2d
+            locator: "How do I get my videos to appear in YouTube Search?"
+          - ref: ESCO
+            locator: "conduct search engine optimisation"
+      - id: pub.promotion
+        title: "Promote the video"
+        description: "Tell people about the video through other channels."
+        sources:
+          - ref: S2c
+            locator: "Promote your video"
+          - ref: S7
+            locator: "Ch24 Maximizing Reach"
+          - ref: ESCO
+            locator: "apply social media marketing"
+      - id: pub.platform-events
+        title: "Join platform activities"
+        description: "Take part in activities run by the platform."
+        sources:
+          - ref: S4
+            locator: "4 活动"
+      - id: pub.one-to-many
+        title: "One shoot, several platform cuts"
+        description: "Re-cut one production into versions for different platforms."
+        sources:
+          - ref: S6
+            locator: "M14 one-to-many platform cuts"
+          - ref: S7
+            locator: "Ch24 Filming and Editing for Social Media"
+          - ref: ESCO
+            locator: "adapt to type of media"
+      - id: pub.archive
+        title: "Archive the project"
+        description: "Store the final video, project files and related documents for later use."
+        sources:
+          - ref: S6
+            locator: "M10 archiving"
+          - ref: ONET
+            locator: "27-4011.00 task: Compress, digitize, duplicate, and store audio and video data."
+          - ref: ESCO
+            locator: "archive documentation related to the work"
+  - id: analytics
+    title: "Analytics and review"
+    nodes:
+      - id: ana.insights
+        title: "Use insights to decide the next step"
+        description: "Use what the data shows to decide what to make next."
+        sources:
+          - ref: S2d
+            locator: "Let insights guide your next move"
+      - id: ana.tracking
+        title: "Track channel data"
+        description: "Track views and audience figures in the creator back end."
+        sources:
+          - ref: S2c
+            locator: "How to track your data in YouTube Studio"
+          - ref: ESCO
+            locator: "web analytics"
+          - ref: ESCO
+            locator: "track key performance indicators"
+          - ref: ESCO
+            locator: "perform online data analysis"
+      - id: ana.early-ctr
+        title: "First 24 hours click-through"
+        description: "Watch click-through in the first day across home, recommended and subscription feeds."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S3a
+            locator: "Dive into the data"
+      - id: ana.ab-test
+        title: "A/B test thumbnails and titles"
+        description: "Test different covers and titles against each other."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S2d
+            locator: "A/B test thumbnails and titles"
+      - id: ana.refresh-old
+        title: "Refresh older content"
+        description: "Give old videos new life by updating titles, covers or content."
+        sources:
+          - ref: S2d
+            locator: "Give old content new life"
+          - ref: S3a
+            locator: "Dive into the data"
+      - id: ana.community
+        title: "Engage and moderate the community"
+        description: "Reply to comments and requests and keep the comment space in order."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S1
+            locator: "Engage your community"
+          - ref: ESCO
+            locator: "manage feedback"
+          - ref: ESCO
+            locator: "carry out forum moderation"
+          - ref: ESCO
+            locator: "follow up online user requests"
+  - id: compliance
+    title: "Compliance"
+    nodes:
+      - id: comp.community-guidelines
+        title: "Community guidelines and content policy"
+        description: "Follow platform rules on hate, harassment, misinformation and content for children."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S2e
+            locator: "Community Guidelines"
+          - ref: S2e
+            locator: "Hate & harassment"
+          - ref: S2e
+            locator: "Misinformation"
+          - ref: S2e
+            locator: "Made for Kids"
+      - id: comp.copyright-strike
+        title: "Handling copyright strikes"
+        description: "Know how a copyright strike arises and how to deal with it."
+        applies_when: "publishing to a platform"
+        sources:
+          - ref: S2e
+            locator: "How do I fix a copyright strike?"
+      - id: comp.advertiser-friendly
+        title: "Advertiser-friendly rules and monetisation"
+        description: "Check the content against advertiser-friendly guidelines and monetisation rules."
+        applies_when: "earning money from the video"
+        sources:
+          - ref: S2e
+            locator: "Advertiser-friendly content guidelines"
+          - ref: S2e
+            locator: "Monetization"
+      - id: comp.media-law-ethics
+        title: "Media law and ethics"
+        description: "Understand legal and ethical limits, including licences and confidentiality."
+        sources:
+          - ref: S7
+            locator: "Ch3 Media Law / Media Ethics"
+          - ref: S8
+            locator: "Legal"
+          - ref: ESCO
+            locator: "intellectual property law"
+          - ref: ESCO
+            locator: "ensure fulfilment of legal requirements"
+          - ref: ESCO
+            locator: "information confidentiality"
+      - id: comp.ai-disclosure
+        title: "AI content disclosure and labelling"
+        description: "Label AI-made or AI-altered content as the platform requires."
+        applies_when: "AI-generated material is used"
+        sources:
+          - ref: S6
+            locator: "M14 Use AI responsibly"
+      - id: comp.fact-check
+        title: "Fact-check before release"
+        description: "Check facts, dates and figures, including anything drafted by AI."
+        sources:
+          - ref: S6
+            locator: "M14 verifying AI-drafted facts"
+          - ref: ONET
+            locator: "27-3041.00 task: Verify facts, dates, and statistics, using standard reference sources."
+          - ref: ESCO
+            locator: "check correctness of information"
