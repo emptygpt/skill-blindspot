@@ -16,7 +16,23 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 npx skills add emptygpt/skill-blindspot
 ```
 
-Or copy `skills/blindspot/` into your agent's skills folder. The maps come with it. Then ask your agent: "run blindspot on `path/to/my-skill` with the video map".
+Or copy `skills/blindspot/` into your agent's skills folder. The maps come with it. Then ask your agent: "run blindspot on `path/to/my-skill` with the video map", or name another map from the table below.
+
+## Maps in this repository
+
+Use them directly. Every node cites its source, so you do not have to search for one. Details and scope: [skills/blindspot/maps/INDEX.md](skills/blindspot/maps/INDEX.md).
+
+| Map | Covers | Nodes |
+|---|---|---|
+| `video` | Online video, from topic to publishing and review | 86 |
+| `video-short` | Short-form vertical video, on top of `video` | +19 |
+| `video-long` | Long-form video, on top of `video` | +17 |
+| `writing` | Non-fiction articles published online | 78 |
+| `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
+
+The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The short and long video maps rely on YouTube's documentation, because the creator documentation of other platforms could not be read without an account.
+
+To add a node or a map, see [docs/map-format.md](docs/map-format.md). Run `python3 scripts/check_maps.py` before opening a pull request.
 
 ## What we tested first
 
@@ -47,7 +63,8 @@ The split between a shared catalogue and a personal profile follows established 
 
 - [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
-- [x] `skills/blindspot/maps/video.yaml` v0.1: 86 nodes, every node sourced
+- [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
+- [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
 - [ ] Report: what public video skills most often leave out
 - [ ] Second domain (writing) and a guide for building a map for a new domain

@@ -18,6 +18,22 @@ npx skills add emptygpt/skill-blindspot
 
 或者把 `skills/blindspot/` 复制到你的 Agent 的 skills 目录，底图在它里面的 `maps/` 目录。然后对 Agent 说：「用视频底图对 `path/to/my-skill` 跑 blindspot」。
 
+## 仓库里的底图
+
+可以直接用。每个节点都写明出处，不用自己再去搜。范围和细节见 [skills/blindspot/maps/INDEX.md](skills/blindspot/maps/INDEX.md)。
+
+| 底图 | 覆盖 | 节点数 |
+|---|---|---|
+| `video` | 线上视频，从选题到发布和复盘 | 86 |
+| `video-short` | 竖屏短视频，在 `video` 之上 | +19 |
+| `video-long` | 长视频，在 `video` 之上 | +17 |
+| `writing` | 在线发表的非虚构文章 | 78 |
+| `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
+
+细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。短视频和长视频底图目前主要依据 YouTube 的官方文档，因为其他平台的创作者文档不登录读不到。
+
+想补节点或加底图，见 [docs/map-format.md](docs/map-format.md)（英文）。提 PR 前运行 `python3 scripts/check_maps.py`。
+
 ## 我们先测了什么
 
 动手之前，我们先测了最直接的质疑：直接问模型缺什么，不就行了？我们从两个领域的 6 个公开 Skill 里删掉环节，做了盲测。
@@ -47,7 +63,8 @@ npx skills add emptygpt/skill-blindspot
 
 - [x] 验证：带出处的底图，比直接问「缺什么」找到的更多吗？没有。见 [docs/validation.md](docs/validation.md)
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
-- [x] `skills/blindspot/maps/video.yaml` v0.1：86 个节点，每个都有来源
+- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`，每个节点都有来源
+- [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [ ] `benchmark/`：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [ ] 报告：公开的视频 Skill 最常缺哪些环节
 - [ ] 第二个领域（写作），以及给新领域做底图的指南

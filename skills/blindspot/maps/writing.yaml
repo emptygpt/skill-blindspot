@@ -1,0 +1,908 @@
+# skill-blindspot map: non-fiction article writing (maps/writing.yaml)
+#
+# Rules for this map
+#   - Every node must cite at least one source that really exists in the
+#     "sources" list, with a locator copied from that source: a section or
+#     resource title, an O*NET task sentence (may be shortened), a short
+#     statement of a code or guideline, or an ESCO skill name.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Gaps that no source covers are listed below, not added as nodes.
+#   - Sources are only cited for titles and short statements; no body text of
+#     the codes, guidelines or web pages is copied.
+#
+# Licence and attribution
+#   O*NET: This product includes information from the O*NET 30.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license. O*NET(R) is a trademark of
+#   USDOL/ETA. The task statements are shortened and regrouped here, so this
+#   map is an adaptation and has not been endorsed by USDOL/ETA.
+#   ESCO: This publication uses the ESCO classification of the European
+#   Commission. ESCO skill names are regrouped here, so this map is an
+#   adaptation of ESCO. https://esco.ec.europa.eu
+#   Google Search Central page: content licensed under CC BY 4.0 as stated on
+#   the page; only headings and questions are cited, in shortened form.
+#   All other sources (codes of ethics, guidelines, university writing centre,
+#   FTC page): only titles and short statements are cited; their licences are
+#   not verified.
+#
+# Not yet covered (no source found or read, so no node)
+#   - Opening paragraph (lede) and introduction: no source with a usable
+#     heading was read; the headline node is the only opening-related node.
+#   - Summary or standfirst text, pull quotes and subheadings.
+#   - Plain-language and reading-level checks; accessibility of articles
+#     (alt text, heading structure, colour contrast).
+#   - Image licences in practice (stock libraries, Creative Commons terms),
+#     fair use and how much quotation is allowed.
+#   - Source and note security (protecting leaked material, encrypted notes).
+#   - Interview consent beyond the BBC recording note; embargoes.
+#   - Translation and localisation; newsletters and email distribution.
+#   - Technical SEO (URLs, structured data, internal links) beyond the ESCO
+#     keyword and metadata skills.
+#   - Testing a draft with real readers before release.
+#   - The AP, Reuters and similar newsroom handbooks: the AP "News values and
+#     principles" page was opened but showed only an introduction and download
+#     links, so it is not cited.
+
+map:
+  id: writing
+  title: Non-fiction article writing
+  version: 0.1.0
+  updated: '2026-11-16'
+  scope: 'Non-fiction articles published online: blog posts, platform articles, columns, press-release-style and newsletter-style pieces, from choosing a topic to publishing and following up. Out of scope: fiction, poetry and lyrics, academic papers, books, scripts, and the details of any one platform.'
+sources:
+- id: S1
+  title: SPJ Code of Ethics (Society of Professional Journalists)
+  publisher: Society of Professional Journalists
+  url: https://www.spj.org/spj-code-of-ethics/
+  retrieved: '2026-11-16'
+  licence: not verified (copyright notice on site; only principle headings and short statements cited)
+- id: S2
+  title: The commitments of the Code of Principles (IFCN)
+  publisher: International Fact-Checking Network, Poynter Institute
+  url: https://ifcncodeofprinciples.poynter.org/know-more/the-commitments-of-the-code-of-principles
+  retrieved: '2026-11-16'
+  licence: not verified; only principle titles and one short statement cited
+- id: S3
+  title: 'BBC Editorial Guidelines 2025 (section index and Section 3: Accuracy, Guidelines)'
+  publisher: BBC
+  url: https://www.bbc.co.uk/editorialguidelines/guidelines
+  retrieved: '2026-11-16'
+  licence: not verified; only section titles and short statements cited
+- id: S4a
+  title: 'Purdue OWL: The Writing Process (section overview)'
+  publisher: Purdue University, The Writing Lab and The OWL
+  url: https://owl.purdue.edu/owl/general_writing/the_writing_process/index.html
+  retrieved: '2026-11-16'
+  licence: not verified (page states permission is needed to reproduce); only resource titles cited
+- id: S4b
+  title: 'Purdue OWL: Prewriting (Invention)'
+  publisher: Purdue University, The Writing Lab and The OWL
+  url: https://owl.purdue.edu/owl/general_writing/the_writing_process/prewriting/index.html
+  retrieved: '2026-11-16'
+  licence: not verified; only short headings and sentences cited
+- id: S4c
+  title: 'Purdue OWL: Proofreading'
+  publisher: Purdue University, The Writing Lab and The OWL
+  url: https://owl.purdue.edu/owl/general_writing/the_writing_process/proofreading/index.html
+  retrieved: '2026-11-16'
+  licence: not verified; only short headings and sentences cited
+- id: S5
+  title: Creating helpful, reliable, people-first content
+  publisher: Google Search Central
+  url: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+  retrieved: '2026-11-16'
+  licence: CC BY 4.0 (stated on the page; code samples Apache 2.0)
+- id: S6
+  title: Disclosures 101 for Social Media Influencers
+  publisher: U.S. Federal Trade Commission
+  url: https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers
+  retrieved: '2026-11-16'
+  licence: not verified; only section headings cited
+- id: ONET
+  title: O*NET 30.0 Database, task statements for writing-related occupations (27-3043.00, 27-3043.05, 27-3041.00, 27-3042.00, 27-3023.00, 27-3031.00)
+  publisher: U.S. Department of Labor, Employment and Training Administration (USDOL/ETA)
+  url: https://www.onetcenter.org/database.html
+  retrieved: '2026-11-16'
+  licence: CC BY 4.0
+- id: ESCO
+  title: ESCO classification, skills of journalist, blogger, advertising copywriter, newspaper editor, web content manager, writer and technical communicator
+  publisher: European Commission
+  url: https://esco.ec.europa.eu
+  retrieved: '2026-11-16'
+  licence: reusable with acknowledgement under Commission Decision 2011/833/EU; adapted versions must be marked as adapted
+groups:
+- id: topic
+  title: Topic, purpose and planning
+  nodes:
+  - id: topic.ideas
+    title: Generate topic ideas
+    description: Come up with several candidate topics and judge each for reader appeal.
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Develop story or content ideas, considering reader or audience appeal.'
+    - ref: ONET
+      locator: '27-3023.00 task: Receive assignments or evaluate leads or tips to develop story ideas.'
+    - ref: S4b
+      locator: Brainstorm.
+    - ref: ESCO
+      locator: develop creative ideas
+    - ref: ESCO
+      locator: brainstorm ideas
+  - id: topic.purpose
+    title: State the purpose of the piece
+    description: Write down why this piece exists and why anyone should read it.
+    sources:
+    - ref: S4b
+      locator: ASK YOURSELF WHAT YOUR PURPOSE IS FOR WRITING ABOUT THE SUBJECT.
+    - ref: S5
+      locator: Why (was the content created)
+  - id: topic.subject-form
+    title: Choose the subject and the form
+    description: Pick the subject and the kind of article that suits it.
+    sources:
+    - ref: ONET
+      locator: '27-3043.05 task: Choose subject matter and suitable form to express personal feelings and experiences or ideas, or to narrate stories or events.'
+    - ref: ESCO
+      locator: select subject matter
+  - id: topic.news-judgement
+    title: Judge whether the topic is worth covering now
+    description: Weigh the significance and timeliness of a topic that responds to current events.
+    applies_when: the piece responds to current events
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Examine news items of local, national, and international significance to determine topics to address, or obtain assignments from editorial staff members.'
+    - ref: ESCO
+      locator: follow the news
+  - id: topic.brief
+    title: Confirm the brief
+    description: Agree with the commissioner what the piece must do, and note later changes.
+    applies_when: writing for a client or an editor
+    sources:
+    - ref: ESCO
+      locator: follow a brief
+    - ref: ESCO
+      locator: identify customer's needs
+    - ref: ONET
+      locator: '27-3043.00 task: Discuss with the client the product, advertising themes and methods, and any changes that should be made in advertising copy.'
+  - id: topic.people-first
+    title: Check the topic serves readers, not only search traffic
+    description: Make sure the piece is chosen to help readers and adds something original.
+    applies_when: publishing on the open web
+    sources:
+    - ref: S5
+      locator: Avoid creating search engine-first content
+    - ref: S5
+      locator: Focus on people-first content
+    - ref: S5
+      locator: Does the content provide original information, reporting, research, or analysis?
+  - id: topic.plan-schedule
+    title: Plan the piece and its deadline
+    description: Fit the piece into the publication's plan and set a working schedule.
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Plan the contents of publications according to the publication''s style, editorial policy, and publishing requirements.'
+    - ref: ESCO
+      locator: participate in editorial meetings
+    - ref: ESCO
+      locator: write to a deadline
+    - ref: S4a
+      locator: 'Time Management: Conquering Long Assignments'
+- id: audience
+  title: Audience
+  nodes:
+  - id: audience.define
+    title: Define the reader
+    description: Decide who the reader is and write at their level.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Write to customers in their terms and on their level so that the script, story, or advertisement message is more readily received.'
+    - ref: ESCO
+      locator: meet expectations of target audience
+  - id: audience.tone-medium
+    title: Fit language and tone to the medium
+    description: Adjust vocabulary and tone for the channel the piece is published on.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Vary language and tone of messages based on product and medium.'
+    - ref: ESCO
+      locator: adapt to type of media
+  - id: audience.research
+    title: Use audience data or ask readers
+    description: Look at audience data or ask a few readers what they want to know.
+    applies_when: audience data or a way to ask readers is available
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Review advertising trends, consumer surveys, and other data regarding marketing of goods and services to determine the best way to promote products.'
+    - ref: ESCO
+      locator: research website users
+    - ref: S4b
+      locator: Talk to your audience, or pretend that you are being interviewed by someone
+- id: research
+  title: Research and sourcing
+  nodes:
+  - id: research.background
+    title: Research the background
+    description: Gather factual information and detail on the subject before writing.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Conduct research to obtain factual information and authentic detail, using sources such as newspaper accounts, diaries, and interviews.'
+    - ref: ONET
+      locator: '27-3023.00 task: Research a story''s background information to provide complete and accurate information.'
+    - ref: ESCO
+      locator: perform background research on writing subject
+    - ref: ESCO
+      locator: study topics
+  - id: research.consult-sources
+    title: Use original and reference sources
+    description: Go to first-hand and original sources, and check reference materials.
+    sources:
+    - ref: ESCO
+      locator: consult information sources
+    - ref: ONET
+      locator: '27-3023.00 task: Check reference materials, such as books, news files, or public records, to obtain relevant facts.'
+    - ref: S3
+      locator: gather material using first-hand sources
+    - ref: S1
+      locator: Use original sources whenever possible.
+  - id: research.interviews
+    title: Interview people who know
+    description: Arrange interviews, use sound technique and keep a record.
+    applies_when: the piece draws on interviews
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Arrange interviews with people who can provide information about a story.'
+    - ref: ESCO
+      locator: interview techniques
+    - ref: ESCO
+      locator: document interviews
+    - ref: S3
+      locator: Research interviews with sources making serious allegations should, wherever practicable, be recorded.
+  - id: research.source-network
+    title: Keep relationships with credible sources
+    description: Build and maintain contacts who can supply reliable information.
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Establish and maintain relationships with individuals who are credible sources of information.'
+    - ref: ESCO
+      locator: build contacts to maintain news flow
+    - ref: ESCO
+      locator: develop professional network
+  - id: research.online-third-party
+    title: Treat online and third-party material with care
+    description: Check who runs a site or supplied a release before relying on it.
+    sources:
+    - ref: S3
+      locator: Even apparently reliable sources of information on the internet may not always be accurate or complete.
+    - ref: S3
+      locator: Material from Third Parties Including Video and Audio News Releases
+    - ref: S3
+      locator: User-Generated Content, Social Media and Other Online Material
+  - id: research.notes
+    title: Keep research notes
+    description: Keep notes of significant research so they can be checked later.
+    sources:
+    - ref: S3
+      locator: Note-Taking
+    - ref: ONET
+      locator: '27-3023.00 task: Review and evaluate notes taken about news events to isolate pertinent facts and details.'
+  - id: research.anonymous-sources
+    title: Handle anonymous sources carefully
+    description: Use anonymity only as a last resort and explain it to readers.
+    applies_when: a source asks not to be named
+    sources:
+    - ref: S1
+      locator: Reserve anonymity or confidentiality as a last resort
+    - ref: S3
+      locator: Whenever anonymity is agreed
+  - id: research.technical-subject
+    title: Learn the technical subject
+    description: Read specifications and talk to specialists before explaining a technical subject.
+    applies_when: the subject is a technology or a product
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Interview production and engineering personnel and read journals and other material to become familiar with product technologies and production methods.'
+    - ref: ESCO
+      locator: gather technical information
+- id: structure
+  title: Structure
+  nodes:
+  - id: structure.outline
+    title: Make an outline
+    description: Write the order of the sections before drafting.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Plan project arrangements or outlines, and organize material accordingly.'
+    - ref: S4a
+      locator: Developing an Outline
+    - ref: S4b
+      locator: Diagram your major points somehow.
+  - id: structure.main-point
+    title: State the main point in a few sentences
+    description: Be able to say the central claim of the piece briefly.
+    sources:
+    - ref: S4a
+      locator: Tips and Examples for Writing Thesis Statements
+    - ref: S4b
+      locator: Summarize your whole idea.
+    - ref: S4b
+      locator: Tell it to someone in three or four sentences.
+  - id: structure.select-material
+    title: Select and order the material
+    description: Keep the material that matters most and put it in a sensible order.
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Select material most pertinent to presentation, and organize this material into appropriate formats.'
+    - ref: ESCO
+      locator: compile content
+  - id: structure.length-format
+    title: Decide emphasis, length and format
+    description: Choose how long the piece is and what it stresses.
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Determine a published or broadcasted story''s emphasis, length, and format, organizing material accordingly.'
+    - ref: ESCO
+      locator: respect publication formats
+  - id: structure.context
+    title: Give context and complete information
+    description: Add the background readers need so the facts are not misleading.
+    sources:
+    - ref: S3
+      locator: Omitting significant details may lead to inaccuracy.
+    - ref: ESCO
+      locator: provide context to news stories
+    - ref: S3
+      locator: weigh, interpret and contextualise claims, including statistical claims
+- id: drafting
+  title: Drafting
+  nodes:
+  - id: draft.first-draft
+    title: Write the first draft
+    description: Write the full text following the outline.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Write fiction or nonfiction prose, such as short stories, novels, biographies, articles, descriptive or critical analyses, and essays.'
+    - ref: S4b
+      locator: Write a first draft.
+    - ref: ESCO
+      locator: use specific writing techniques
+    - ref: ESCO
+      locator: provide written content
+  - id: draft.complete-coverage
+    title: Cover the topic completely
+    description: Check that the piece gives a substantial and complete account of the topic.
+    sources:
+    - ref: S5
+      locator: Does the content provide a substantial, complete, or comprehensive description of the topic?
+  - id: draft.first-hand
+    title: Show first-hand experience, only where it is real
+    description: Include real experience of using or visiting, and do not claim what was not done.
+    applies_when: the piece claims personal experience or product use
+    sources:
+    - ref: S5
+      locator: Does your content clearly demonstrate first-hand expertise and a depth of knowledge
+    - ref: S6
+      locator: What Else to Know
+  - id: draft.opinion-labelled
+    title: Label opinion and analysis
+    description: Make clear which parts are opinion or analysis and support them with facts.
+    applies_when: the piece interprets events or offers opinions
+    sources:
+    - ref: S1
+      locator: Label opinion journalism and news analysis.
+    - ref: ONET
+      locator: '27-3023.00 task: Write columns, editorials, commentaries, or reviews that interpret events or offer opinions.'
+  - id: draft.blog-commentary
+    title: Write blog or commentary form
+    description: Write the piece in the short, informal blog or commentary form.
+    applies_when: the piece is a blog post or commentary
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Write online blog entries that address news developments or offer additional information, opinions, or commentary on news events.'
+  - id: draft.press-release
+    title: Write the press release
+    description: Write media communications that promote the client.
+    applies_when: the piece is a press release or an article in press-release form
+    sources:
+    - ref: ONET
+      locator: '27-3031.00 task: Write press releases or other media communications to promote clients.'
+    - ref: ESCO
+      locator: draft press releases
+- id: revision
+  title: Revision
+  nodes:
+  - id: revise.rewrite
+    title: Rewrite for readability
+    description: Rework the text so it reads more clearly.
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Prepare, rewrite and edit copy to improve readability, or supervise others who do this work.'
+    - ref: ESCO
+      locator: rewrite articles
+    - ref: ESCO
+      locator: rewrite manuscripts
+  - id: revise.requirements
+    title: Revise to the requirements
+    description: Change the text to meet the standards of the client, publisher or editor, and the length limit.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Revise written material to meet personal standards and to satisfy needs of clients, publishers, directors, or producers.'
+    - ref: ONET
+      locator: '27-3023.00 task: Revise work to meet editorial approval or to fit time or space requirements.'
+  - id: revise.feedback
+    title: Collect and act on feedback
+    description: Get comments from an editor or reader and decide what to change.
+    sources:
+    - ref: S4a
+      locator: Writing with Feedback
+    - ref: ESCO
+      locator: evaluate writings in response to feedback
+    - ref: ESCO
+      locator: consult with editor
+    - ref: ONET
+      locator: '27-3041.00 task: Read, evaluate and edit manuscripts or other materials submitted for publication, and confer with authors regarding changes in content, style or organization, or publication.'
+  - id: revise.structure-cohesion
+    title: Check structure and cohesion
+    description: Review the order of points and how the parts connect.
+    sources:
+    - ref: S4a
+      locator: 'Reverse Outlining: An Exercise for Taking Notes and Revising Your Work'
+    - ref: S4c
+      locator: Revising for Cohesion
+    - ref: S4c
+      locator: Steps for Revising Your Paper
+  - id: revise.consistency
+    title: Keep a series consistent
+    description: Make names, terms and facts consistent across pieces and authors.
+    applies_when: several authors or a series of articles
+    sources:
+    - ref: ESCO
+      locator: ensure consistency of published articles
+    - ref: ONET
+      locator: '27-3042.00 task: Edit, standardize, or make changes to material prepared by other writers or establishment personnel.'
+- id: factcheck
+  title: Fact-checking
+  nodes:
+  - id: fact.verify
+    title: Verify facts, dates and figures
+    description: Check each fact, date and number against a reliable reference.
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Verify facts, dates, and statistics, using standard reference sources.'
+    - ref: S1
+      locator: Take responsibility for the accuracy of their work before releasing it.
+    - ref: S3
+      locator: check facts and statistics, identifying important caveats and limitations
+    - ref: ESCO
+      locator: check correctness of information
+    - ref: ESCO
+      locator: check stories
+  - id: fact.statistics
+    title: Check statistics and how they were produced
+    description: Put numbers in context, check them, and say how data were obtained.
+    sources:
+    - ref: S3
+      locator: Reporting Statistics and Risk
+    - ref: S3
+      locator: '11: Statistics, Polls, Data and Surveys'
+    - ref: S2
+      locator: A commitment to Standards and Transparency of Methodology
+    - ref: S3
+      locator: When analysing datasets the methodology should normally be available to the audience
+  - id: fact.corroborate
+    title: Corroborate claims with a second source
+    description: Do not rest a claim on a single source when it can be checked.
+    sources:
+    - ref: S3
+      locator: corroborate claims and allegations made by contributors
+    - ref: S3
+      locator: Content producers should be reluctant to rely on a single source.
+  - id: fact.authenticity
+    title: Check the authenticity of documents and digital material
+    description: Confirm that documents, images and tools used are genuine.
+    sources:
+    - ref: S3
+      locator: validate the authenticity of documentary evidence and digital material
+    - ref: S1
+      locator: Verify the provenance and authenticity of the methods, sources and technology used to produce news.
+  - id: fact.rumour
+    title: Separate fact from rumour
+    description: Do not repeat unverified claims as fact.
+    sources:
+    - ref: S3
+      locator: Fact must be distinguished from rumour
+    - ref: S1
+      locator: Identify misinformation and disinformation. Challenge provable falsehoods and avoid uncritically repeating them.
+  - id: fact.cite-sources
+    title: Name and link the sources
+    description: Identify sources, say what could not be verified, and give readers the way to check.
+    sources:
+    - ref: S3
+      locator: Sources of information and significant contributors should normally be identified and their credentials made clear so that audiences can judge their status.
+    - ref: S1
+      locator: Provide access to source material when it is relevant and appropriate.
+    - ref: S2
+      locator: A commitment to Standards and Transparency of Sources
+    - ref: S3
+      locator: If content producers have been unable to verify material, they should usually say so and attribute the information.
+    - ref: S3
+      locator: Links to Third-Party Websites
+  - id: fact.right-of-reply
+    title: Offer the right of reply
+    description: Give people criticised in the piece a fair chance to respond.
+    applies_when: the piece criticises a person or organisation or reports allegations
+    sources:
+    - ref: S1
+      locator: Without exception, diligently provide fair opportunity for subjects of news coverage to respond to criticism or allegations of wrongdoing.
+    - ref: S3
+      locator: '6: Fairness'
+  - id: fact.not-misleading
+    title: Check the piece does not mislead
+    description: Check that selection, editing and presentation do not give a false overall impression.
+    sources:
+    - ref: S3
+      locator: Commentary and editing must never be used to give the audience a materially misleading impression of events or a contribution.
+    - ref: S3
+      locator: Avoiding Misleading Audiences
+  - id: fact.expert-review
+    title: Have a specialist review
+    description: Ask someone who knows the topic to check the piece.
+    applies_when: the topic is specialist or affects health, money or safety
+    sources:
+    - ref: S5
+      locator: Is this content written or reviewed by an expert or enthusiast who demonstrably knows the topic well?
+- id: editing
+  title: Editing and proofreading
+  nodes:
+  - id: edit.copyedit
+    title: Copy-edit spelling, grammar and syntax
+    description: Correct errors in spelling, punctuation and sentence structure.
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Read copy or proof to detect and correct errors in spelling, punctuation, and syntax.'
+    - ref: ESCO
+      locator: proofread text
+    - ref: ESCO
+      locator: apply grammar and spelling rules
+    - ref: S4c
+      locator: Finding Common Errors
+  - id: edit.proofread-method
+    title: Proofread with a method
+    description: Rest the text, work from a list of known errors, read aloud, and read from the end.
+    sources:
+    - ref: S4c
+      locator: General Strategies Before You Proofread
+    - ref: S4c
+      locator: Have a list of what to look for.
+    - ref: S4c
+      locator: Read aloud.
+    - ref: S4c
+      locator: Read from the end.
+  - id: edit.second-reader
+    title: Get a second reader for the final proof
+    description: Have another person read the corrected text before it goes out.
+    sources:
+    - ref: S4c
+      locator: Have a friend look at your paper after you have made all the corrections you identified.
+    - ref: ONET
+      locator: '27-3041.00 task: Review and approve proofs submitted by composing room prior to publication production.'
+  - id: edit.style-standards
+    title: Apply the house style and editorial standards
+    description: Check the text against the style guide for clarity, conciseness and terminology.
+    sources:
+    - ref: ONET
+      locator: '27-3023.00 task: Review written, audio, or video copy, and correct errors in content, grammar, or punctuation, following prescribed editorial style and formatting guidelines.'
+    - ref: ONET
+      locator: '27-3042.00 task: Organize material and complete writing assignment according to set standards regarding order, clarity, conciseness, style, and terminology.'
+    - ref: ESCO
+      locator: editorial standards
+    - ref: S4a
+      locator: STYLE GUIDE OVERVIEW
+- id: packaging
+  title: Headline and packaging
+  nodes:
+  - id: head.headline
+    title: Write an accurate headline
+    description: Write a title that summarises the piece and does not exaggerate.
+    sources:
+    - ref: ESCO
+      locator: write headlines
+    - ref: ESCO
+      locator: create content title
+    - ref: S5
+      locator: Does the main heading or page title provide a descriptive, helpful summary of the content?
+    - ref: S5
+      locator: Does the main heading or page title avoid exaggerating or being shocking in nature?
+  - id: head.metadata-seo
+    title: Set keywords and metadata
+    description: Choose keywords and fill in the metadata that help readers find the piece.
+    applies_when: published online
+    sources:
+    - ref: ESCO
+      locator: keywords in digital content
+    - ref: ESCO
+      locator: manage content metadata
+    - ref: ESCO
+      locator: conduct search engine optimisation
+    - ref: S5
+      locator: What about SEO? Isn't that search engine-first?
+  - id: head.byline
+    title: Show who wrote it
+    description: Put a byline and author information where readers expect it.
+    applies_when: published online
+    sources:
+    - ref: S5
+      locator: Do pages carry a byline, where one might be expected?
+    - ref: S5
+      locator: Do bylines lead to further information about the author or authors involved, giving background about them and the areas they write about?
+- id: visuals
+  title: Images and layout
+  nodes:
+  - id: visual.select
+    title: Choose illustrations
+    description: Pick the photographs, diagrams or charts that explain the text.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Select photographs, drawings, sketches, diagrams, and charts to illustrate material.'
+  - id: visual.captions
+    title: Write captions
+    description: Write a caption for each image that explains what it shows.
+    applies_when: the piece contains images
+    sources:
+    - ref: ESCO
+      locator: write captions
+  - id: visual.edit-integrity
+    title: Keep image editing honest
+    description: Do not alter or generate images so that they mislead, and label illustrations.
+    applies_when: images are edited or generated
+    sources:
+    - ref: ESCO
+      locator: perform image editing
+    - ref: ESCO
+      locator: edit photographs
+    - ref: S3
+      locator: digital creation or manipulation of material such as the use of synthetic content does not distort the meaning of events
+    - ref: S1
+      locator: Never publish fabricated content that could be confused with reality. Clearly label illustrations and reenactments.
+  - id: visual.layout
+    title: Lay out text and images
+    description: Arrange text, images and headings so the piece reads well.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Assist in laying out material for publication.'
+    - ref: ONET
+      locator: '27-3041.00 task: Allocate print space for story text, photos, and illustrations according to space parameters and copy significance, using knowledge of layout principles.'
+    - ref: ESCO
+      locator: lay out digital written content
+    - ref: ESCO
+      locator: desktop publishing
+- id: rights
+  title: Rights and attribution
+  nodes:
+  - id: rights.permissions
+    title: Clear permissions for third-party material
+    description: Get permission to use others' text, images or other work, and know the copyright rules.
+    applies_when: the piece uses material made by others
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Arrange for copyright permissions.'
+    - ref: ESCO
+      locator: copyright legislation
+  - id: rights.attribution
+    title: Attribute and avoid plagiarism
+    description: Credit every source, and add value of your own instead of copying or rewording.
+    sources:
+    - ref: S1
+      locator: Never plagiarize. Always attribute.
+    - ref: S4a
+      locator: Avoiding Plagiarism
+    - ref: S5
+      locator: If the content draws on other sources, does it avoid simply copying or rewriting those sources, and instead provide substantial additional value and originality?
+  - id: rights.own-copyright
+    title: Register copyright in your own work
+    description: Follow the procedure to secure copyright in the finished work.
+    applies_when: the author wants formal copyright protection
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Follow appropriate procedures to get copyrights for completed work.'
+  - id: rights.commission-terms
+    title: Agree rights and payment
+    description: Settle contract, royalties, payment and publishing rights with the other party.
+    applies_when: commissioning or being commissioned
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Interview and hire writers and reporters or negotiate contracts, royalties, and payments for authors or freelancers.'
+    - ref: ESCO
+      locator: negotiate publishing rights
+- id: publishing
+  title: Publishing
+  nodes:
+  - id: publish.format-upload
+    title: Prepare the final format and publish
+    description: Put the final text in the publication format and upload it with the content system.
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Prepare works in appropriate format for publication, and send them to publishers or producers.'
+    - ref: ESCO
+      locator: use content management system software
+    - ref: ESCO
+      locator: manage online content
+  - id: publish.stale-check
+    title: Check the piece is not out of date
+    description: Check that events have not overtaken a piece written some time before release.
+    sources:
+    - ref: S3
+      locator: Content Affected by Changing Circumstances
+  - id: publish.approval
+    title: Get sign-off before release
+    description: Submit the piece to the editor or publisher for approval.
+    applies_when: an editor or publisher approves releases
+    sources:
+    - ref: ONET
+      locator: '27-3043.00 task: Edit or rewrite existing written material as necessary, and submit written material for approval by supervisor, editor, or publisher.'
+    - ref: ONET
+      locator: '27-3041.00 task: Make manuscript acceptance or revision recommendations to the publisher.'
+  - id: publish.schedule
+    title: Set the publishing schedule
+    description: Decide the release date and keep to deadline and budget.
+    sources:
+    - ref: ONET
+      locator: '27-3041.00 task: Oversee publication production, including artwork, layout, computer typesetting, and printing, ensuring adherence to deadlines and budget requirements.'
+    - ref: ESCO
+      locator: publishing strategy
+  - id: publish.promote
+    title: Share and promote the piece
+    description: Post the piece on the site and social channels and tell readers it exists.
+    sources:
+    - ref: ONET
+      locator: '27-3031.00 task: Post and update content on the company''s Web site and social media outlets.'
+    - ref: ESCO
+      locator: promote your writings
+    - ref: ESCO
+      locator: apply social media marketing
+- id: feedback
+  title: Feedback and follow-up
+  nodes:
+  - id: feedback.corrections
+    title: Correct mistakes openly
+    description: Fix errors promptly, say what was wrong, and follow a written corrections policy.
+    sources:
+    - ref: S1
+      locator: Acknowledge mistakes. Correct them promptly and prominently.
+    - ref: S3
+      locator: Correcting Mistakes
+    - ref: S2
+      locator: A commitment to an Open & Honest Corrections Policy
+    - ref: S2
+      locator: Signatories publish their corrections policy and follow it scrupulously.
+  - id: feedback.reader-response
+    title: Answer readers
+    description: Respond to reader questions, requests and criticism.
+    sources:
+    - ref: S1
+      locator: Listen respectfully while encouraging a civil dialogue with the public, and respond quickly to legitimate questions, concerns and criticism.
+    - ref: ONET
+      locator: '27-3023.00 task: Communicate with readers, viewers, advertisers, or the general public via mail, email, or telephone.'
+    - ref: ESCO
+      locator: follow up online user requests
+  - id: feedback.moderation
+    title: Moderate comments
+    description: Remove abusive comments and keep the discussion civil.
+    applies_when: comments are open
+    sources:
+    - ref: ESCO
+      locator: online moderation techniques
+  - id: feedback.analytics
+    title: Review performance data
+    description: Look at readership data to learn what worked.
+    applies_when: published online
+    sources:
+    - ref: ESCO
+      locator: perform online data analysis
+    - ref: ESCO
+      locator: research website users
+  - id: feedback.update-older
+    title: Update older pieces
+    description: Revise published pieces when facts change, without faking a fresh date.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Analyze developments in specific field to determine need for revisions in previously published materials and development of new material.'
+    - ref: S1
+      locator: Gather, update and correct information throughout the life of a news story.
+    - ref: S5
+      locator: Are you changing the date of pages to make them seem fresh when the content has not substantially changed?
+- id: compliance
+  title: Ethics and compliance
+  nodes:
+  - id: comp.minimize-harm
+    title: Weigh harm to people
+    description: Balance the public's need to know against harm to the people named.
+    sources:
+    - ref: S1
+      locator: Minimize Harm
+    - ref: S3
+      locator: '5: Harm and Offence'
+  - id: comp.privacy
+    title: Protect private information
+    description: Think before publishing personal details of private people.
+    sources:
+    - ref: S1
+      locator: Weigh the consequences of reporting or amplifying personal information.
+    - ref: S3
+      locator: '7: Privacy'
+  - id: comp.vulnerable-subjects
+    title: Take extra care with vulnerable people
+    description: Be careful with victims, minors and people unable to give consent.
+    applies_when: the piece involves victims, minors or people unable to consent
+    sources:
+    - ref: S1
+      locator: Use heightened sensitivity when dealing with crime victims
+    - ref: S3
+      locator: '9: Children and Young People as Contributors'
+  - id: comp.conflicts
+    title: Disclose conflicts of interest
+    description: Avoid conflicts, and state those that cannot be avoided.
+    sources:
+    - ref: S1
+      locator: Avoid conflicts of interest, real or perceived.
+    - ref: S3
+      locator: '4: Conflicts of Interest'
+    - ref: S3
+      locator: '15: Independence from Commercial and other External Interests'
+  - id: comp.sponsored-disclosure
+    title: Label sponsored content and brand ties
+    description: Tell readers about payment, free products or other ties to a brand.
+    applies_when: sponsored, affiliate or gifted content
+    sources:
+    - ref: S1
+      locator: Prominently label sponsored content and partnerships.
+    - ref: S6
+      locator: When to Disclose
+    - ref: S6
+      locator: How to Disclose
+    - ref: S3
+      locator: '16: External Relationships, including Commercial Relationships, and Financing'
+  - id: comp.stereotypes
+    title: Avoid stereotyping
+    description: Check the text for stereotypes of groups.
+    sources:
+    - ref: S1
+      locator: Avoid stereotyping.
+  - id: comp.law
+    title: Check legal risks
+    description: Check the piece against press law, such as defamation, before release.
+    applies_when: the piece names people or organisations or makes allegations
+    sources:
+    - ref: ESCO
+      locator: press law
+    - ref: S3
+      locator: '18: The Law'
+  - id: comp.ai-disclosure
+    title: Disclose AI use
+    description: Tell readers when AI helped produce the piece.
+    applies_when: AI tools are used to research, draft or edit
+    sources:
+    - ref: S3
+      locator: Any use of AI by the BBC must be transparent and clear to the audience.
+    - ref: S5
+      locator: Is the use of automation, including AI-generation, self-evident to visitors through disclosures or in other ways?
+    - ref: S1
+      locator: Clearly identify the sources and technology that shape the creation of news.
+  - id: comp.ai-accuracy
+    title: Check AI output for errors
+    description: Check anything an AI tool produced for invented or wrong content.
+    applies_when: AI tools are used to research, draft or edit
+    sources:
+    - ref: S3
+      locator: Use of Automated Technology and Artificial Intelligence
+    - ref: S3
+      locator: content or answers that appear plausible but are not necessarily factually accurate – often known as hallucinations
+    - ref: S1
+      locator: Remember that speed, technology or medium do not excuse inaccuracy or unfairness.
+  - id: comp.honest-authorship
+    title: Do not fake authorship
+    description: Do not invent authors, profiles or credentials.
+    sources:
+    - ref: S5
+      locator: avoid using deceptive authorship information
+    - ref: S5
+      locator: Fabricating creator profiles

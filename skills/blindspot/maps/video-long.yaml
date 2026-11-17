@@ -1,0 +1,215 @@
+# skill-blindspot map: long-form horizontal video (maps/video-long.yaml)
+# Extends maps/video.yaml. Only nodes the base map does not have, or whose
+# requirements clearly differ for long-form, are listed here.
+#
+# Rules for this map
+#   - Every node cites at least one source that exists in this file's
+#     "sources" list or in the base map's "sources" list. Each locator is text
+#     that really appears on the source page (a heading or a short phrase).
+#   - A node with no source is never added. Gaps are listed under
+#     "Not yet covered" below, not as nodes.
+#
+# Licence
+#   Platform pages (YouTube Help, YouTube for Creators): only titles and short
+#   phrases are cited. Licence: not verified.
+#
+# Sources read for this map (2026-11-16)
+#   Opened: YouTube Help "Video Chapters", "Add end screens to videos",
+#   "Add info cards to videos", "Measure key moments for audience retention";
+#   YouTube for Creators "Engage your community", "Podcasts"; "Longform"
+#   (base S2a) re-read for its FAQ.
+#   Not usable: no TikTok, Douyin or Bilibili source was reachable (see the
+#   short-form map header); two YouTube Help article ids tried returned
+#   "page can't be found".
+#
+# Not yet covered (no source found, so no node)
+#   - Mid-video pacing and retention devices (pattern interrupts, re-hooks)
+#   - Mid-roll ad placement for long videos
+#   - Series structure and episode order outside the podcast case
+#   - Intro length and recap or cold-open practice
+#   - Method of a review, tutorial or explainer (structure, test design,
+#     comparison criteria)
+#   - Screen recording and tool demonstration capture
+#   - Sponsor or affiliate disclosure placement
+#   - Horizontal long-form on Bilibili (source behind login)
+
+map:
+  id: video-long
+  extends: video
+  title: Long-form horizontal video
+  version: 0.1.0
+  updated: 2026-11-16
+  scope: "Horizontal videos of several minutes or more, such as explainers, reviews and tutorials, published on YouTube-style platforms. Sources are YouTube's; other platforms have no usable source yet. Out of scope: Shorts, live streaming."
+
+sources:
+  - id: L1
+    title: "YouTube Help: Video Chapters"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/9884579"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: L2
+    title: "YouTube Help: Add end screens to videos"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/6388789"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: L3
+    title: "YouTube Help: Add info cards to videos"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/6140493"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: L4
+    title: "YouTube Help: Measure key moments for audience retention"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/9314415"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: L5
+    title: "YouTube for Creators: Engage your community"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/grow/engage-your-community/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: L6
+    title: "YouTube for Creators: Podcasts"
+    publisher: "Google / YouTube"
+    url: "https://www.youtube.com/creators/create/podcasts/"
+    retrieved: 2026-11-16
+    licence: "not verified"
+
+exclude:
+  - node: shoot.shorts-capture
+    reason: "Recording a vertical short-form video belongs to the short-form map, not to horizontal long-form."
+
+groups:
+  - id: long-structure
+    title: "Structure of a long video"
+    nodes:
+      - id: long.open-close-key-moments
+        title: "Plan the opening, the close and the key moments between"
+        description: "Decide how the video opens and closes and what the key moments in between are, while writing, so the edit can follow."
+        sources:
+          - ref: S2a
+            locator: "How do I edit videos for YouTube?"
+      - id: long.chapters
+        title: "Add chapters with timestamps"
+        description: "Divide the video into titled sections with timestamps in the description (first at 00:00, at least three, each at least 10 seconds)."
+        sources:
+          - ref: L1
+            locator: "To add your own video chapters"
+      - id: long.auto-chapters
+        title: "Decide on automatic chapters"
+        description: "Choose whether to allow automatic chapters for the video or opt out; own chapters override them."
+        sources:
+          - ref: L1
+            locator: "To use automatic video chapters"
+          - ref: L1
+            locator: "To opt out of automatic video chapters for a specific video"
+      - id: long.collab-series
+        title: "Joint videos and series with other creators"
+        description: "Consider a joint video or series with another creator to reach their audience."
+        applies_when: "working with other creators"
+        sources:
+          - ref: L5
+            locator: "Create a joint video or series"
+  - id: long-end
+    title: "End of the video"
+    nodes:
+      - id: long.end-screen
+        title: "Add an end screen"
+        description: "Use the last 5 to 20 seconds to point to another video, a playlist, a subscribe prompt or a channel; the video must be at least 25 seconds."
+        sources:
+          - ref: L2
+            locator: "Add an end screen"
+      - id: long.end-screen-timing
+        title: "Leave room for the end screen"
+        description: "Leave space and time at the end of the video, and set when elements appear and where they sit, because other interactive elements are suppressed during it."
+        sources:
+          - ref: L2
+            locator: "Change element timing"
+          - ref: L2
+            locator: "Change element placement"
+          - ref: L2
+            locator: "Best practices for creating end screens"
+      - id: long.end-screen-metrics
+        title: "Check end screen performance"
+        description: "Review end screen metrics in the expanded analytics report."
+        sources:
+          - ref: L2
+            locator: "Check end screen metrics"
+      - id: long.info-cards
+        title: "Add info cards"
+        description: "Add up to five cards linking to a video, playlist, channel or link at chosen moments."
+        applies_when: "the video is not made for kids"
+        sources:
+          - ref: L3
+            locator: "Add cards to a video"
+  - id: long-retention
+    title: "Retention analysis"
+    nodes:
+      - id: long.retention-report
+        title: "Read the audience retention report"
+        description: "Open the video-level retention report to see which moments held attention; data takes one to two days to appear and needs enough length and views."
+        sources:
+          - ref: L4
+            locator: "Measure key moments for audience retention"
+      - id: long.retention-moments
+        title: "Find intros, top moments, spikes and dips"
+        description: "Read the shape of the line: flat parts, gradual declines, spikes where viewers rewatch or share, and dips where they leave or skip."
+        sources:
+          - ref: L4
+            locator: "Understand key moments for audience retention"
+          - ref: L4
+            locator: "Intros"
+          - ref: L4
+            locator: "Dips"
+      - id: long.retention-benchmark
+        title: "Compare with similar-length videos"
+        description: "Compare the video's retention with typical retention for videos of similar length and with the channel's latest videos."
+        sources:
+          - ref: L4
+            locator: "typical retention"
+      - id: long.retention-segments
+        title: "Split retention by audience segment"
+        description: "Compare retention of new and returning viewers, subscribers and non-subscribers, and organic and paid traffic."
+        sources:
+          - ref: L4
+            locator: "View audience retention by segment type"
+      - id: long.retention-detail
+        title: "Check where viewers start and stop"
+        description: "Use the detailed activity view to see how many viewers started and stopped at each moment and improve the content from it."
+        sources:
+          - ref: L4
+            locator: "View detailed activity for audience retention"
+  - id: long-publish
+    title: "Publishing long videos"
+    nodes:
+      - id: long.upload-limits
+        title: "Know the upload limits"
+        description: "Know the default length limit, that verified accounts can upload longer, and the maximum file size."
+        sources:
+          - ref: S2a
+            locator: "Can you upload long videos to YouTube?"
+      - id: long.trim-after-publish
+        title: "Trim before or after publishing"
+        description: "Trim sections of the video in the studio, including after it is published."
+        sources:
+          - ref: S2a
+            locator: "How do I edit videos for YouTube?"
+      - id: long.podcast-show
+        title: "Publish episodes as a podcast show"
+        description: "Set up a podcast as a playlist of full-length episodes in order, with a square thumbnail and details."
+        applies_when: "the long video is a podcast episode"
+        sources:
+          - ref: L6
+            locator: "How do I start a podcast on YouTube?"
+          - ref: L6
+            locator: "How do I turn an existing playlist into a podcast?"
+      - id: long.clips-from-long
+        title: "Cut highlight clips from long episodes"
+        description: "Turn long episodes into short shareable clips by finding highlight moments."
+        sources:
+          - ref: L6
+            locator: "Video Clips in YouTube Studio"

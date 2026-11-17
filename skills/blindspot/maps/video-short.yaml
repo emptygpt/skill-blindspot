@@ -1,0 +1,217 @@
+# skill-blindspot map: short-form vertical video (maps/video-short.yaml)
+# Extends maps/video.yaml. Only nodes the base map does not have, or whose
+# requirements clearly differ for short-form, are listed here.
+#
+# Rules for this map
+#   - Every node cites at least one source that exists in this file's
+#     "sources" list or in the base map's "sources" list. Each locator is text
+#     that really appears on the source page (a heading, a page title shown in
+#     the page's own navigation, or a short phrase).
+#   - A node with no source is never added. Gaps are listed under
+#     "Not yet covered" below, not as nodes.
+#   - Nodes with a title-only locator taken from a navigation list were not
+#     opened as pages; only the title is cited, nothing is said about their body.
+#
+# Licence
+#   Platform pages (YouTube Help, YouTube for Creators): only titles and short
+#   phrases are cited. Licence: not verified.
+#
+# Sources read for this map (2026-11-16)
+#   Opened: YouTube Help "Get started creating YouTube Shorts" (T1),
+#   "Understand three-minute YouTube Shorts" (T2); YouTube for Creators
+#   "Shorts" (base S2b), "Engage your community" (read, not cited here).
+#   Not usable: TikTok Creator Academy (home page returned only its menu; an
+#   article URL tried returned "Page not found"); TikTok Help Center (empty page);
+#   Douyin creator center (page not found); Bilibili creator academy (error page,
+#   login-gated); two YouTube Help article ids tried returned "page can't be found".
+#
+# Not yet covered (no source found, so no node)
+#   - Platform-specific rules of TikTok, Douyin, Reels and Bilibili vertical video
+#   - Hook length in seconds, loop or replay design, and ideal duration
+#   - Text-on-screen safe zones and caption placement for vertical UI
+#   - Trending sounds and hashtag strategy outside YouTube
+#   - Posting frequency and best time for short-form
+#   - Cover or thumbnail rules for Shorts specifically
+#   - Cross-posting the same file to several platforms (watermark rules)
+#   - Screen recording and tool demo capture in vertical format
+#   - Body content of the Shorts sub-pages (music eligibility, upload, remix,
+#     templates, Create from your videos): only their titles were seen
+
+map:
+  id: video-short
+  extends: video
+  title: Short-form vertical video
+  version: 0.1.0
+  updated: 2026-11-16
+  scope: "Vertical or square videos of up to about three minutes made for feeds such as YouTube Shorts. Sources are mainly YouTube's; other short-video platforms have no usable source yet (see header). Out of scope: long-form, live and podcast video."
+
+sources:
+  - id: T1
+    title: "YouTube Help: Get started creating YouTube Shorts"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/10059070"
+    retrieved: 2026-11-16
+    licence: "not verified"
+  - id: T2
+    title: "YouTube Help: Understand three-minute YouTube Shorts"
+    publisher: "Google / YouTube"
+    url: "https://support.google.com/youtube/answer/15424877"
+    retrieved: 2026-11-16
+    licence: "not verified"
+
+exclude:
+  - node: pre.aspect-ratio
+    reason: "The frame is fixed to vertical or square for this kind of work; replaced by short.vertical-frame."
+  - node: script.treatment-script
+    reason: "A full treatment and screenplay is out of proportion for a video of up to three minutes; the outline node is enough."
+  - node: pre.budget
+    reason: "Phone-based short-form is normally made without a production budget to estimate."
+  - node: pack.description-chapters
+    reason: "Chapters divide longer videos into sections; they do not suit a video of up to three minutes."
+  - node: asm.timecode-check
+    reason: "Frame-level time-code and key-number checks are broadcast conformance work, not needed for a short in a feed."
+
+groups:
+  - id: short
+    title: "Short-form specifics"
+    nodes:
+      - id: short.vertical-frame
+        title: "Frame for vertical or square"
+        description: "Compose and export in a vertical or square frame so the video counts as a Short."
+        sources:
+          - ref: T2
+            locator: "Eligibility for three-minute Shorts"
+      - id: short.duration-limit
+        title: "Keep within the length limit"
+        description: "Keep the video within three minutes and know that uploads in the app and in the desktop studio are both possible."
+        sources:
+          - ref: T2
+            locator: "Upload three-minute Shorts"
+          - ref: T1
+            locator: "short-form videos that are up to 3 minutes long"
+      - id: short.multi-segment-camera
+        title: "Record in segments with the in-app camera"
+        description: "Build the video from several recorded segments in the platform's own camera."
+        sources:
+          - ref: T1
+            locator: "multi-segment camera"
+      - id: short.templates-effects
+        title: "Use templates and effects"
+        description: "Start from the platform's Shorts templates and effects to enhance the video."
+        sources:
+          - ref: T1
+            locator: "Enhance your Shorts"
+          - ref: T1
+            locator: "Get Started with Shorts templates"
+          - ref: T1
+            locator: "Effect Maker on YouTube"
+      - id: short.mobile-editor
+        title: "Edit with a mobile editing app"
+        description: "Use a free mobile editor for filters, effects, transitions and royalty-free music."
+        sources:
+          - ref: S2b
+            locator: "Check out the YouTube Create app"
+      - id: short.thumbnail-framing
+        title: "Thumbnail-friendly framing"
+        description: "Frame shots so a good cover frame is available."
+        sources:
+          - ref: S6
+            locator: "M13 thumbnail-friendly framing"
+      - id: short.ai-tools
+        title: "Platform generative tools for Shorts"
+        description: "Decide whether to use the platform's generative tools for soundtrack, clips, effects or photo-to-video, and check the result."
+        applies_when: "AI-generated features are used"
+        sources:
+          - ref: S2b
+            locator: "Dream Track"
+          - ref: S2b
+            locator: "Veo in Shorts"
+          - ref: S2b
+            locator: "Photo to video"
+          - ref: T1
+            locator: "Create content for Shorts using AI-generated features"
+  - id: short-sound-rights
+    title: "Music and claims for short-form"
+    nodes:
+      - id: short.music-eligibility
+        title: "Check music eligibility for Shorts"
+        description: "Check which music may be used in a Short before relying on it."
+        sources:
+          - ref: T1
+            locator: "Music eligibility for YouTube Shorts"
+      - id: short.claims-over-one-minute
+        title: "Copyright claims on Shorts over one minute"
+        description: "Know that a Short over one minute with an active copyright claim is blocked, so check claimed content before uploading."
+        sources:
+          - ref: T2
+            locator: "Third-party claimed content for Short that is over one minute"
+      - id: short.original-content
+        title: "Make the Short original"
+        description: "Avoid unedited clips from others, re-uploads and compilations with nothing added; they do not count for revenue sharing."
+        sources:
+          - ref: S2b
+            locator: "Ineligible Shorts views"
+          - ref: S2b
+            locator: "Non-original Shorts"
+  - id: short-discovery
+    title: "Discovery and reuse"
+    nodes:
+      - id: short.trending-inspiration
+        title: "Look at what is trending"
+        description: "Check the trending view in the app for ideas."
+        sources:
+          - ref: S2b
+            locator: "Trending on Shorts"
+      - id: short.feed-discovery
+        title: "Understand how viewers find Shorts"
+        description: "Know the places Shorts are found: the Shorts feed, search, home page, channel page, subscriptions and notifications."
+        sources:
+          - ref: S2b
+            locator: "How will viewers find my Shorts"
+      - id: short.repurpose-from-long
+        title: "Cut Shorts from longer videos"
+        description: "Turn parts of existing videos into Shorts."
+        sources:
+          - ref: T1
+            locator: "Create YouTube Shorts from your videos"
+      - id: short.related-video
+        title: "Link a related video"
+        description: "Add a related video to the Short to lead viewers to more."
+        sources:
+          - ref: T1
+            locator: "Add a related video to your YouTube Shorts"
+      - id: short.remix
+        title: "Remix other creators' content"
+        description: "Make a Short from remixed content, within the platform's rules."
+        applies_when: "building on someone else's video"
+        sources:
+          - ref: T1
+            locator: "Create YouTube Shorts with remixed content"
+      - id: short.comment-reply
+        title: "Reply to comments with a Short"
+        description: "Answer a viewer comment with a Short."
+        sources:
+          - ref: T1
+            locator: "Reply to comments with your YouTube Shorts"
+  - id: short-measure
+    title: "Measurement and earning"
+    nodes:
+      - id: short.engaged-views
+        title: "Read views and engaged views"
+        description: "Know that views count every start or replay while engaged views show who chose to keep watching, and compare Shorts on engaged views."
+        sources:
+          - ref: T1
+            locator: "Changes to Shorts views count"
+      - id: short.analytics-app
+        title: "Check Shorts analytics"
+        description: "Open the Shorts analytics from the channel in the app."
+        sources:
+          - ref: S2b
+            locator: "How can I view my Shorts Analytics"
+      - id: short.monetisation-module
+        title: "Accept the Shorts monetisation terms"
+        description: "Partners must accept the Shorts monetisation module; only views after acceptance share in revenue."
+        applies_when: "earning money from Shorts"
+        sources:
+          - ref: S2b
+            locator: "Turning on Shorts ad revenue sharing"
