@@ -3,7 +3,7 @@ name: blindspot
 description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
 license: MIT
 metadata:
-  version: 0.2.0
+  version: 0.2.1
 ---
 
 # blindspot
@@ -68,6 +68,8 @@ Check meaning and not only words. A skill can use the word "hook" for the topic 
 
 Whole groups that are out of scope can be marked `not-applicable` in one row.
 
+Choosing between `absent` and `not-applicable`: a node is `not-applicable` only when the work it describes happens outside the boundary written in step 1, such as a publishing node for a skill that stops at a saved draft. If the skill does the work the node belongs to and leaves the node out, it is `absent`. When unsure, mark it `absent` and place it in the Minor band, so the author sees it and can exclude it in the profile.
+
 ### 4. Trace
 
 List the skill's steps in order. For each step, write what it produces. Then check:
@@ -93,6 +95,10 @@ Then sort the findings into three bands, judged against the scope from step 1:
 - **Minor**
 
 Do not cut the list to a fixed length. A node marked `absent` or `shallow` in the table must appear in one of the bands.
+
+Several nodes that point at the same underlying gap become one finding. List every node id on it. Do not write one finding per node when they would all be fixed by the same change.
+
+If the skill refers to files that are not available, such as scripts, say for the affected nodes that the answer could not be determined. Do not guess either way.
 
 ### 6. Report
 
