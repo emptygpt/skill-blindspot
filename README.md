@@ -67,7 +67,7 @@ The split between a shared catalogue and a personal profile follows established 
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
 - [ ] Report: what public video skills most often leave out
-- [ ] Second domain (writing) and a guide for building a map for a new domain
+- [x] Second domain (writing) and a guide for building a map: [docs/map-format.md](docs/map-format.md)
 
 ## Sources for the video map
 

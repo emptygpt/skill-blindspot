@@ -67,7 +67,7 @@ npx skills add emptygpt/skill-blindspot
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [ ] `benchmark/`：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [ ] 报告：公开的视频 Skill 最常缺哪些环节
-- [ ] 第二个领域（写作），以及给新领域做底图的指南
+- [x] 第二个领域（写作），以及做底图的说明：[docs/map-format.md](docs/map-format.md)
 
 ## 视频底图的来源
 
