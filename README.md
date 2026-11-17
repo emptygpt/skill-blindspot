@@ -24,13 +24,13 @@ Use them directly. Every node cites its source, so you do not have to search for
 
 | Map | Covers | Nodes |
 |---|---|---|
-| `video` | Online video, from topic to publishing and review | 86 |
-| `video-short` | Short-form vertical video, on top of `video` | +19 |
-| `video-long` | Long-form video, on top of `video` | +17 |
+| `video` | Online video, from topic to publishing and review | 107 |
+| `video-short` | Short-form vertical video, on top of `video` | +24 |
+| `video-long` | Long-form video, on top of `video` | +20 |
 | `writing` | Non-fiction articles published online | 78 |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
 
-The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The short and long video maps rely on YouTube's documentation, because the creator documentation of other platforms could not be read without an account.
+The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, Bilibili and Douyin official pages. Douyin's creator learning centre could not be read.
 
 To add a node or a map, see [docs/map-format.md](docs/map-format.md). Run `python3 scripts/check_maps.py` before opening a pull request.
 

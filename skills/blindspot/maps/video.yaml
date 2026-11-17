@@ -21,12 +21,19 @@
 #   adaptation of ESCO. https://esco.ec.europa.eu
 #   All other sources (platform pages, syllabi, textbooks): only titles and
 #   section headings are cited; their licences are not verified.
+#
+# Sources added in 0.2.0 (read 2026-11-17)
+#   Bilibili creator academy course titles and Bilibili community convention
+#   headings (B1-B10, login required); Douyin community self-discipline
+#   convention (D1) and Douyin rule centre rule-document list (D2). Only titles
+#   and short phrases are cited. Courses by individual uploaders were not used.
+#   Not read: the Douyin creator learning centre (login by phone or QR code).
 
 map:
   id: video
   title: Video production
-  version: 0.1.0
-  updated: 2026-11-16
+  version: 0.2.0
+  updated: 2026-11-17
   scope: "Online video made for platforms such as YouTube, Bilibili and short-video apps: explainers, reviews and shorts, from choosing a topic to publishing and reviewing results. Out of scope: live broadcast and studio switching, feature film financing, casting, distribution deals and managing a film crew."
 
 sources:
@@ -127,6 +134,88 @@ sources:
     retrieved: 2026-11-16
     licence: "reusable with acknowledgement under Commission Decision 2011/833/EU; adapted versions must be marked as adapted"
 
+  - id: B1
+    title: "创作学院 精选专题「UP主起航计划」(34节, 分组: 账号搭建/高播秘籍/爆款指南/账号运营/观众角度找选题)"
+    publisher: "哔哩哔哩 (哔哩哔哩客服)"
+    url: "https://member.bilibili.com/academy/seriesDetail?id=2"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B2
+    title: "创作学院 精选专题「视频功能操作指南」"
+    publisher: "哔哩哔哩 (哔哩哔哩客服)"
+    url: "https://member.bilibili.com/academy/seriesDetail?id=18"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B3
+    title: "创作学院 精选专题「爆款内容创作指南」"
+    publisher: "哔哩哔哩 (哔哩哔哩UP主服务中心)"
+    url: "https://member.bilibili.com/academy/seriesDetail?id=8"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B4
+    title: "创作学院 精选专题「涨粉秘籍大揭秘」"
+    publisher: "哔哩哔哩 (哔哩哔哩UP主服务中心)"
+    url: "https://member.bilibili.com/academy/seriesDetail?id=9"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B5
+    title: "创作学院 分类「视频管理」(课程列表)"
+    publisher: "哔哩哔哩 (哔哩哔哩创作中心)"
+    url: "https://member.bilibili.com/academy/classList?tid=3"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B6
+    title: "创作学院 分类「视频制作」(课程列表)"
+    publisher: "哔哩哔哩 (哔哩哔哩创作中心, 哔哩哔哩客服, 哔哩哔哩UP主服务中心, 必剪)"
+    url: "https://member.bilibili.com/academy/classList?tid=2"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B7
+    title: "创作学院 分类「账号运营」(课程列表)"
+    publisher: "哔哩哔哩 (哔哩哔哩客服, 哔哩哔哩UP主服务中心)"
+    url: "https://member.bilibili.com/academy/classList?tid=4"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B8
+    title: "bilibili社区公约 (创作中心)"
+    publisher: "哔哩哔哩"
+    url: "https://member.bilibili.com/platform/convention/"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B9
+    title: "创作学院 分类「内容变现」(课程列表, 花火平台)"
+    publisher: "哔哩哔哩 (花火招财喵, 花火平台账号)"
+    url: "https://member.bilibili.com/academy/classList?tid=5"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: B10
+    title: "创作学院 精选专题「生活区UP主指南」"
+    publisher: "哔哩哔哩 (哔哩哔哩客服)"
+    url: "https://member.bilibili.com/academy/seriesDetail?id=4"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+    access: login required
+  - id: D1
+    title: "抖音社区自律公约"
+    publisher: "抖音 (北京抖音科技有限公司)"
+    url: "https://lf3-cdn-tos.draftstatic.com/obj/ies-hotsoon-draft/douyin_creator/40db1b96-0eb0-4754-a052-16e8325af350.html"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
+  - id: D2
+    title: "抖音规则中心 > 社区细则「社区规则」(规则文件目录)"
+    publisher: "抖音"
+    url: "https://aweme.snssdk.com/falcon/fe_douyin_security_react/rule/platform_norm/?hide_nav_bar=1&page_type=platform_norm"
+    retrieved: 2026-11-17
+    licence: "not verified; titles only"
 groups:
   - id: topic
     title: "Topic and research"
@@ -143,6 +232,8 @@ groups:
             locator: "27-2012.00 task: Select plays, scripts, books, news content, or ideas to be produced."
           - ref: ESCO
             locator: "develop creative ideas"
+          - ref: B1
+            locator: "内容垂直的重要性"
       - id: topic.project-definition
         title: "Define the project"
         description: "State the goals and the intended audience of the project in a few clear sentences."
@@ -173,6 +264,10 @@ groups:
             locator: "Dive into the data"
           - ref: ESCO
             locator: "research website users"
+          - ref: B1
+            locator: "观众需求产生选题"
+          - ref: B1
+            locator: "选题不是你创造的"
       - id: topic.trends-evergreen
         title: "Balance trends and evergreen topics"
         description: "Mix topical subjects with subjects that stay relevant over a long time."
@@ -181,6 +276,10 @@ groups:
             locator: "Balance trends vs. evergreen"
           - ref: ESCO
             locator: "keep up with trends"
+          - ref: B1
+            locator: "爆款选题的寻找方法"
+          - ref: B6
+            locator: "先人一步掌握全站创作热点！创作灵感来啦！"
       - id: topic.cadence
         title: "Plan a publishing rhythm"
         description: "Set a sustainable and regular schedule for releasing videos."
@@ -193,6 +292,12 @@ groups:
         sources:
           - ref: S2d
             locator: "Test new formats"
+      - id: topic.success-definition
+        title: "Define what a hit means for the channel"
+        description: "Set out what counts as a successful video for the channel, so topics and results can be judged against it."
+        sources:
+          - ref: B1
+            locator: "如何定义爆款视频"
   - id: script
     title: "Script"
     nodes:
@@ -222,6 +327,8 @@ groups:
             locator: "Outline your video"
           - ref: ONET
             locator: "27-3043.05 task: Plan project arrangements or outlines, and organize material accordingly."
+          - ref: B1
+            locator: "爆款内容的制作结构"
       - id: script.treatment-script
         title: "Treatment, script and screenplay"
         description: "Write the treatment and the full script in a suitable format."
@@ -270,6 +377,14 @@ groups:
         sources:
           - ref: S6
             locator: "M14 Plan and produce with AI"
+      - id: script.audience-retention
+        title: "Design to avoid viewer drop-off"
+        description: "Plan the content and form so that viewers do not leave part-way through."
+        sources:
+          - ref: B1
+            locator: "如何避免观众流失"
+          - ref: B1
+            locator: "内容形式创作角度"
   - id: preproduction
     title: "Pre-production"
     nodes:
@@ -301,6 +416,8 @@ groups:
             locator: "make film shooting schedule"
           - ref: ONET
             locator: "27-2012.00 task: Identify and approve equipment and elements required for productions"
+          - ref: B10
+            locator: "生活区｜视频创作前期的准备动作"
       - id: pre.budget
         title: "Budget"
         description: "Estimate and keep track of what the production will cost."
@@ -380,6 +497,8 @@ groups:
             locator: "operate a camera"
           - ref: ESCO
             locator: "select camera apertures"
+          - ref: B6
+            locator: "从拍摄到后期，用手机就能完成视频创作"
       - id: shoot.composition-coverage
         title: "Composition and coverage"
         description: "Frame shots well and cover the scene with enough shots, including B-roll, to edit later."
@@ -392,6 +511,8 @@ groups:
             locator: "27-4031.00 task: Compose and frame each shot, applying the technical aspects of light, lenses, film, filters, and camera settings"
           - ref: ESCO
             locator: "plan shots"
+          - ref: B6
+            locator: "这些小技巧让你的拍摄事半功倍【学园公开课】"
       - id: shoot.lighting
         title: "Lighting"
         description: "Light the subject so the picture is clear and looks as intended."
@@ -506,6 +627,12 @@ groups:
         sources:
           - ref: S6
             locator: "M14 generative b-roll"
+      - id: assets.trademarks
+        title: "Trademark basics"
+        description: "Know the basics of trademarks before using or registering names and logos in videos."
+        sources:
+          - ref: B3
+            locator: "商标知识小课堂 速来围观"
   - id: editing
     title: "Editing"
     nodes:
@@ -624,6 +751,8 @@ groups:
             locator: "27-4032.00 task: Determine the specific audio and visual effects and music necessary to complete films."
           - ref: ONET
             locator: "27-4032.00 task: Collaborate with music editors to select appropriate passages of music"
+          - ref: B6
+            locator: "我整理了最常用的音乐音效素材！剪辑必备！"
       - id: sound.effects
         title: "Sound effects: record or select"
         description: "Record needed sounds or pick them from a sound effects library."
@@ -669,6 +798,10 @@ groups:
             locator: "create subtitles"
           - ref: ESCO
             locator: "captioning software"
+          - ref: B2
+            locator: "字幕功能操作指南"
+          - ref: B5
+            locator: "智能字幕上线！AI算法为视频添加字幕"
       - id: captions.edit
         title: "Edit caption text and timing"
         description: "Correct caption wording and fix when each caption appears."
@@ -726,6 +859,12 @@ groups:
             locator: "Craft your packaging"
           - ref: ESCO
             locator: "design graphics"
+          - ref: B1
+            locator: "如何打造优秀的封面"
+          - ref: B5
+            locator: "零设计基础get精美封面"
+          - ref: B10
+            locator: "生活区｜有效封面技巧"
       - id: pack.title
         title: "Title writing"
         description: "Write an accurate, short title with the key words first."
@@ -737,6 +876,10 @@ groups:
             locator: "2 标题"
           - ref: ESCO
             locator: "create content title"
+          - ref: B1
+            locator: "爆款标题的关键因素"
+          - ref: B10
+            locator: "生活区｜爆款标题技巧"
       - id: pack.title-type
         title: "Searchable versus intriguing titles"
         description: "Choose between a title that matches a search and one that raises curiosity."
@@ -757,6 +900,8 @@ groups:
             locator: "keywords in digital content"
           - ref: ESCO
             locator: "manage content metadata"
+          - ref: B1
+            locator: "利用标签提升播放量"
       - id: pack.description-chapters
         title: "Description and chapters"
         description: "Write the description and chapter markers, with AI help if wanted."
@@ -766,6 +911,8 @@ groups:
             locator: "M14 AI-drafted titles and chapters"
           - ref: ESCO
             locator: "manage content metadata"
+          - ref: B2
+            locator: "分段章节操作指南"
       - id: pack.playlists
         title: "Playlists"
         description: "Group videos into playlists on the channel."
@@ -773,6 +920,8 @@ groups:
         sources:
           - ref: S2c
             locator: "Create channel playlists"
+          - ref: B5
+            locator: "合集功能正式上线，解锁三大惊喜！"
   - id: assembly
     title: "Assembly and quality control"
     nodes:
@@ -806,6 +955,8 @@ groups:
             locator: "27-4032.00 task: Conduct film screenings for directors and members of production staffs."
           - ref: ONET
             locator: "27-4032.00 task: Confer with producers and directors concerning layout or editing approaches"
+          - ref: B10
+            locator: "生活区｜视频创作后期的注意事项"
       - id: asm.platform-standards
         title: "Check against platform and broadcast standards"
         description: "Check the finished video against the target platform's or broadcaster's technical and content standards before release."
@@ -817,6 +968,12 @@ groups:
             locator: "27-2012.05 task: Monitor broadcasts to ensure that programs conform to station or network policies and regulations."
           - ref: ESCO
             locator: "conduct content quality assurance"
+          - ref: B6
+            locator: "画质极限！如何在B站上传画质最高的视频"
+          - ref: B5
+            locator: "B站迈入8K超高清时代！8K用户投稿正式上线！"
+          - ref: B2
+            locator: "HDR视频指南"
   - id: publishing
     title: "Publishing"
     nodes:
@@ -830,6 +987,8 @@ groups:
             locator: "Ch23 Storing and Publishing"
           - ref: S7
             locator: "Ch24 Exporting and Digital Distribution"
+          - ref: B6
+            locator: "画质极限！如何在B站上传画质最高的视频"
       - id: pub.upload
         title: "Upload and publish"
         description: "Upload the video, choose category and tags, fill in details and publish."
@@ -844,6 +1003,10 @@ groups:
             locator: "manage online content"
           - ref: ESCO
             locator: "use content management system software"
+          - ref: B5
+            locator: "批量投稿功能上线啦，带给你更灵活的投稿体验"
+          - ref: B2
+            locator: "极速发布操作指南"
       - id: pub.discoverability
         title: "Make the video discoverable in search"
         description: "Make the video easier to find in platform search."
@@ -854,6 +1017,8 @@ groups:
             locator: "How do I get my videos to appear in YouTube Search?"
           - ref: ESCO
             locator: "conduct search engine optimisation"
+          - ref: B1
+            locator: "解读流量曝光密码（上）"
       - id: pub.promotion
         title: "Promote the video"
         description: "Tell people about the video through other channels."
@@ -864,12 +1029,18 @@ groups:
             locator: "Ch24 Maximizing Reach"
           - ref: ESCO
             locator: "apply social media marketing"
+          - ref: B2
+            locator: "引导关注操作指南"
+          - ref: B4
+            locator: "这些运营手段，帮你视频增加曝光【学园公开课】"
       - id: pub.platform-events
         title: "Join platform activities"
         description: "Take part in activities run by the platform."
         sources:
           - ref: S4
             locator: "4 活动"
+          - ref: B5
+            locator: "【创作君的小课堂01】参加投稿活动和投稿页编辑小技巧"
       - id: pub.one-to-many
         title: "One shoot, several platform cuts"
         description: "Re-cut one production into versions for different platforms."
@@ -890,6 +1061,30 @@ groups:
             locator: "27-4011.00 task: Compress, digitize, duplicate, and store audio and video data."
           - ref: ESCO
             locator: "archive documentation related to the work"
+      - id: pub.precheck
+        title: "Run the platform pre-publication check"
+        description: "Use the platform own self-check tool on the video before publishing."
+        sources:
+          - ref: D2
+            locator: "发布前自查：快速检测使用指南"
+      - id: pub.platform-features
+        title: "Use the platform interactive features"
+        description: "Decide whether to add interactive features such as polls on danmaku, branching interactive video, related videos and a next-episode notice."
+        sources:
+          - ref: B2
+            locator: "投票弹幕操作指南"
+          - ref: B2
+            locator: "互动视频操作指南"
+          - ref: B2
+            locator: "关联视频操作指南"
+          - ref: B2
+            locator: "下期预告操作指南"
+      - id: pub.scheduled-publish
+        title: "Schedule publishing"
+        description: "Set the video to publish at a chosen time instead of immediately."
+        sources:
+          - ref: B5
+            locator: "【功能介绍】UP主稿件预约上线啦！"
   - id: analytics
     title: "Analytics and review"
     nodes:
@@ -899,6 +1094,8 @@ groups:
         sources:
           - ref: S2d
             locator: "Let insights guide your next move"
+          - ref: B1
+            locator: "利用数据分析问题（上）"
       - id: ana.tracking
         title: "Track channel data"
         description: "Track views and audience figures in the creator back end."
@@ -911,6 +1108,8 @@ groups:
             locator: "track key performance indicators"
           - ref: ESCO
             locator: "perform online data analysis"
+          - ref: B5
+            locator: "web端数据中心大升级！三大维度助你了解你的账号！"
       - id: ana.early-ctr
         title: "First 24 hours click-through"
         description: "Watch click-through in the first day across home, recommended and subscription feeds."
@@ -946,6 +1145,28 @@ groups:
             locator: "carry out forum moderation"
           - ref: ESCO
             locator: "follow up online user requests"
+          - ref: B2
+            locator: "评论功能操作指南"
+          - ref: B1
+            locator: "粉丝互动运营重要技巧"
+          - ref: D2
+            locator: "抖音网络暴力治理规范"
+      - id: ana.case-teardown
+        title: "Break down successful videos"
+        description: "Take apart videos that did well to see how they were made."
+        sources:
+          - ref: B1
+            locator: "爆款内容实例拆解"
+      - id: ana.reach-restriction
+        title: "Diagnose limited reach"
+        description: "Find out why a video or account gets less reach than expected and what the platform rules say about restricted reach."
+        sources:
+          - ref: B7
+            locator: "全新功能上线！遇到“限流”怎么办？"
+          - ref: B7
+            locator: "“限流”规则深度解读！五分钟看懂实战案例"
+          - ref: D2
+            locator: "作品流量问题，一篇给你讲明白"
   - id: compliance
     title: "Compliance"
     nodes:
@@ -962,6 +1183,10 @@ groups:
             locator: "Misinformation"
           - ref: S2e
             locator: "Made for Kids"
+          - ref: B8
+            locator: "bilibili社区公约"
+          - ref: D1
+            locator: "抖音社区自律公约"
       - id: comp.copyright-strike
         title: "Handling copyright strikes"
         description: "Know how a copyright strike arises and how to deal with it."
@@ -969,6 +1194,10 @@ groups:
         sources:
           - ref: S2e
             locator: "How do I fix a copyright strike?"
+          - ref: B5
+            locator: "【UP主版权保护计划】权益升级，自动监测功能对电磁力Lv4用户开放啦！"
+          - ref: B2
+            locator: "原创水印操作指南"
       - id: comp.advertiser-friendly
         title: "Advertiser-friendly rules and monetisation"
         description: "Check the content against advertiser-friendly guidelines and monetisation rules."
@@ -978,6 +1207,10 @@ groups:
             locator: "Advertiser-friendly content guidelines"
           - ref: S2e
             locator: "Monetization"
+          - ref: B9
+            locator: "看视频提高商单审核通过率！这二十一条规范务必牢记"
+          - ref: D2
+            locator: "抖音生态营销内容创作指南"
       - id: comp.media-law-ethics
         title: "Media law and ethics"
         description: "Understand legal and ethical limits, including licences and confidentiality."
@@ -999,6 +1232,12 @@ groups:
         sources:
           - ref: S6
             locator: "M14 Use AI responsibly"
+          - ref: D2
+            locator: "抖音内容标识使用规范"
+          - ref: D2
+            locator: "抖音关于AI生成内容的答疑公告"
+          - ref: D2
+            locator: "AIGC标识的水印与元数据规范"
       - id: comp.fact-check
         title: "Fact-check before release"
         description: "Check facts, dates and figures, including anything drafted by AI."
@@ -1009,3 +1248,125 @@ groups:
             locator: "27-3041.00 task: Verify facts, dates, and statistics, using standard reference sources."
           - ref: ESCO
             locator: "check correctness of information"
+      - id: comp.submission-rules
+        title: "Read the platform submission rules"
+        description: "Read what the platform says about what may be submitted, and what it forbids or does not welcome, before publishing."
+        sources:
+          - ref: B8
+            locator: "投稿规范"
+          - ref: D1
+            locator: "（一）抖音平台禁止以下行为"
+          - ref: D1
+            locator: "（二）抖音平台不欢迎以下行为"
+      - id: comp.violation-categories
+        title: "Know violation categories and penalties"
+        description: "Know how the platform classifies violations and what it does about them."
+        sources:
+          - ref: B8
+            locator: "违规分类"
+          - ref: D1
+            locator: "二、抖音社区管理方式"
+      - id: comp.originality-reposts
+        title: "Original work versus reposted content"
+        description: "Keep the work original; the platforms ask for creative work and discourage reposted or copied material."
+        sources:
+          - ref: B8
+            locator: "认真创作"
+          - ref: D1
+            locator: "视频整体为搬运内容"
+          - ref: B2
+            locator: "原创水印操作指南"
+      - id: comp.fake-engagement
+        title: "No fake data or engagement"
+        description: "Do not buy or fake followers, views, comments or likes."
+        sources:
+          - ref: D1
+            locator: "违背诚信与真实性"
+          - ref: D2
+            locator: "抖音违规涨粉治理规范"
+      - id: comp.offsite-leads
+        title: "No off-platform contact details or links in the video"
+        description: "Check that the video carries no contact details, QR codes or links that the platform treats as lead generation or spam."
+        sources:
+          - ref: D1
+            locator: "不利于平台良好生态"
+          - ref: D1
+            locator: "联系方式、二维码、链接"
+      - id: comp.minors
+        title: "Content involving minors"
+        description: "Check the video against the platform rules that protect minors."
+        applies_when: "minors appear in or are targeted by the video"
+        sources:
+          - ref: D1
+            locator: "危及未成年人安全"
+          - ref: D2
+            locator: "抖音社区未成年规范"
+      - id: comp.medical-claims
+        title: "Medical and health claims"
+        description: "Check health content against the platform rules for medical content."
+        applies_when: "the video covers health, medicine or wellness"
+        sources:
+          - ref: D1
+            locator: "不合规的医疗内容"
+      - id: comp.dangerous-content
+        title: "Dangerous acts and distressing material"
+        description: "Check the video for dangerous acts, self-harm and other material that may cause harm or distress."
+        sources:
+          - ref: D1
+            locator: "涉及危险行为、易造成人身伤害"
+          - ref: D1
+            locator: "（2）发布易引发人身安全风险的内容"
+  - id: account
+    title: "Account setup and operation"
+    nodes:
+      - id: acct.profile-setup
+        title: "Set up the account profile"
+        description: "Choose the avatar, name and home page so viewers can tell what the account is about."
+        sources:
+          - ref: B1
+            locator: "优秀头像选取公式"
+          - ref: B1
+            locator: "昵称命名万能法则"
+          - ref: B1
+            locator: "主页搭建攻略"
+          - ref: D2
+            locator: "抖音企业机构账号-用户资料规范"
+      - id: acct.positioning
+        title: "Positioning and persona"
+        description: "Define the focus and persona of the account so that viewers remember it."
+        sources:
+          - ref: B1
+            locator: "强化人设助涨粉"
+          - ref: B4
+            locator: "打造人设，让别人记住你！"
+      - id: acct.platform-rules
+        title: "Learn the platform account rules"
+        description: "Learn the platform rules for running an account, and why they matter."
+        sources:
+          - ref: B1
+            locator: "平台规则的重要性"
+          - ref: D2
+            locator: "抖音账号运营规范指南"
+  - id: monetisation
+    title: "Monetisation and brand deals"
+    nodes:
+      - id: mon.brand-deals
+        title: "Brand deals through the platform"
+        description: "Join the platform brand-deal programme and follow its order process."
+        applies_when: "the creator takes sponsored work"
+        sources:
+          - ref: B9
+            locator: "保姆级花火平台入驻教学，从今天开始做好接单准备！"
+          - ref: B9
+            locator: "商单执行流程教学，新手一定要注意的花火接单贴士！"
+      - id: mon.ad-review-standards
+        title: "Advertising review standards for sponsored videos"
+        description: "Check a sponsored video against the platform advertising review rules before submitting it."
+        applies_when: "the video is sponsored or promotional"
+        sources:
+          - ref: B9
+            locator: "看视频提高商单审核通过率！这二十一条规范务必牢记"
+          - ref: B9
+            locator: "【商单必看】广告审核常见驳回案例总结"
+          - ref: D2
+            locator: "抖音生态营销内容创作指南"

@@ -16,6 +16,11 @@
 #   Platform pages (YouTube Help, YouTube for Creators): only titles and short
 #   phrases are cited. Licence: not verified.
 #
+# Sources added in 0.2.0 (read 2026-11-17)
+#   Douyin community self-discipline convention (base D1) and Bilibili creator
+#   academy "视频制作" course titles (base B6), cited by title or short phrase only.
+#   Not read: the Douyin creator learning centre (login by phone or QR code).
+#
 # Sources read for this map (2026-11-16)
 #   Opened: YouTube Help "Get started creating YouTube Shorts" (T1),
 #   "Understand three-minute YouTube Shorts" (T2); YouTube for Creators
@@ -26,13 +31,15 @@
 #   login-gated); two YouTube Help article ids tried returned "page can't be found".
 #
 # Not yet covered (no source found, so no node)
-#   - Platform-specific rules of TikTok, Douyin, Reels and Bilibili vertical video
+#   - Platform-specific rules of TikTok and Reels vertical video (Douyin and
+#     Bilibili general rules are now in the base map and in the nodes below)
 #   - Hook length in seconds, loop or replay design, and ideal duration
 #   - Text-on-screen safe zones and caption placement for vertical UI
 #   - Trending sounds and hashtag strategy outside YouTube
 #   - Posting frequency and best time for short-form
 #   - Cover or thumbnail rules for Shorts specifically
-#   - Cross-posting the same file to several platforms (watermark rules)
+#   - Cross-posting the same file to several platforms (only the Douyin rule on
+#     other platforms' watermarks is covered, see short.no-foreign-watermark)
 #   - Screen recording and tool demo capture in vertical format
 #   - Body content of the Shorts sub-pages (music eligibility, upload, remix,
 #     templates, Create from your videos): only their titles were seen
@@ -41,9 +48,9 @@ map:
   id: video-short
   extends: video
   title: Short-form vertical video
-  version: 0.1.0
-  updated: 2026-11-16
-  scope: "Vertical or square videos of up to about three minutes made for feeds such as YouTube Shorts. Sources are mainly YouTube's; other short-video platforms have no usable source yet (see header). Out of scope: long-form, live and podcast video."
+  version: 0.2.0
+  updated: 2026-11-17
+  scope: "Vertical or square videos of up to about three minutes made for feeds such as YouTube Shorts. Sources are YouTube's plus official Bilibili and Douyin course titles and rule documents (cited from the base map's B and D sources); TikTok and Reels have no usable source yet (see header). Out of scope: long-form, live and podcast video."
 
 sources:
   - id: T1
@@ -153,6 +160,14 @@ groups:
             locator: "Ineligible Shorts views"
           - ref: S2b
             locator: "Non-original Shorts"
+          - ref: D1
+            locator: "（7）发布刻意照搬、模仿他人创意和文案等同质化内容的行为"
+      - id: short.no-foreign-watermark
+        title: "No other platforms' watermarks"
+        description: "Do not post a video with large parts carrying another platform's watermark or logo; Douyin lists this among content it does not welcome."
+        sources:
+          - ref: D1
+            locator: "大段内容带有其他平台水印logo"
   - id: short-discovery
     title: "Discovery and reuse"
     nodes:
@@ -193,6 +208,32 @@ groups:
         sources:
           - ref: T1
             locator: "Reply to comments with your YouTube Shorts"
+      - id: short.quality-floor
+        title: "Avoid blurry or incomplete videos"
+        description: "Keep picture quality clear and the content complete; Douyin does not welcome blurry videos without a complete content."
+        sources:
+          - ref: D1
+            locator: "视频画质模糊，无完整内容"
+      - id: short.real-presenter
+        title: "Show a real presenter or voice"
+        description: "Douyin encourages a real person on camera or explaining, and discourages exaggerated or false personas."
+        sources:
+          - ref: D1
+            locator: "建议真人出镜或讲解"
+          - ref: D1
+            locator: "避免故意夸大、营造虚假人设"
+      - id: short.no-bulk-posting
+        title: "No bulk same-type low-value posting"
+        description: "Do not publish large numbers of samey, low-quality or meaningless videos."
+        sources:
+          - ref: D1
+            locator: "批量发布同质化、低质量、无意义的内容"
+      - id: short.story-mode
+        title: "Learn the platform story mode"
+        description: "Learn the story-mode viewing format of the platform before making vertical content for it."
+        sources:
+          - ref: B6
+            locator: "一节课带你玩转bilibili&story-mode模式"
   - id: short-measure
     title: "Measurement and earning"
     nodes:

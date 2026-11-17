@@ -13,6 +13,11 @@
 #   Platform pages (YouTube Help, YouTube for Creators): only titles and short
 #   phrases are cited. Licence: not verified.
 #
+# Sources added in 0.2.0 (read 2026-11-17)
+#   Bilibili creator academy course titles (base B2, B5), cited by title only.
+#   Bilibili sources are behind a login; the Douyin creator learning centre was
+#   not read.
+#
 # Sources read for this map (2026-11-16)
 #   Opened: YouTube Help "Video Chapters", "Add end screens to videos",
 #   "Add info cards to videos", "Measure key moments for audience retention";
@@ -23,7 +28,9 @@
 #   "page can't be found".
 #
 # Not yet covered (no source found, so no node)
-#   - Mid-video pacing and retention devices (pattern interrupts, re-hooks)
+#   - Mid-video pacing and retention devices (pattern interrupts, re-hooks);
+#     only a generic Bilibili course title exists, see base node
+#     script.audience-retention
 #   - Mid-roll ad placement for long videos
 #   - Series structure and episode order outside the podcast case
 #   - Intro length and recap or cold-open practice
@@ -31,15 +38,16 @@
 #     comparison criteria)
 #   - Screen recording and tool demonstration capture
 #   - Sponsor or affiliate disclosure placement
-#   - Horizontal long-form on Bilibili (source behind login)
+#   - Horizontal long-form on Bilibili: partly covered by the nodes from B2 and
+#     B5 below; no source seen for structure or length norms
 
 map:
   id: video-long
   extends: video
   title: Long-form horizontal video
-  version: 0.1.0
-  updated: 2026-11-16
-  scope: "Horizontal videos of several minutes or more, such as explainers, reviews and tutorials, published on YouTube-style platforms. Sources are YouTube's; other platforms have no usable source yet. Out of scope: Shorts, live streaming."
+  version: 0.2.0
+  updated: 2026-11-17
+  scope: "Horizontal videos of several minutes or more, such as explainers, reviews and tutorials, published on YouTube-style platforms. Sources are YouTube's plus official Bilibili course titles (cited from the base map's B sources); other platforms have no usable source yet. Out of scope: Shorts, live streaming."
 
 sources:
   - id: L1
@@ -99,6 +107,8 @@ groups:
         sources:
           - ref: L1
             locator: "To add your own video chapters"
+          - ref: B2
+            locator: "分段章节操作指南"
       - id: long.auto-chapters
         title: "Decide on automatic chapters"
         description: "Choose whether to allow automatic chapters for the video or opt out; own chapters override them."
@@ -114,6 +124,28 @@ groups:
         sources:
           - ref: L5
             locator: "Create a joint video or series"
+      - id: long.next-preview
+        title: "Announce the next episode"
+        description: "Use the platform feature that previews the next video or episode of a series."
+        sources:
+          - ref: B2
+            locator: "下期预告操作指南"
+      - id: long.interactive-video
+        title: "Branching interactive video"
+        description: "Consider an interactive video in which the viewer chooses the path, and plan its branches and endings."
+        applies_when: "the video has branching choices"
+        sources:
+          - ref: B2
+            locator: "互动视频操作指南"
+          - ref: B5
+            locator: "【互动视频UP主课堂】零基础如何制作一期高质量互动视频？"
+      - id: long.panorama
+        title: "360 panoramic video"
+        description: "Produce and publish a 360-degree panoramic video where the format suits the subject."
+        applies_when: "the video is shot in 360 degrees"
+        sources:
+          - ref: B2
+            locator: "360全景视频操作指南"
   - id: long-end
     title: "End of the video"
     nodes:
