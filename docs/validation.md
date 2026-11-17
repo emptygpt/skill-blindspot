@@ -49,7 +49,7 @@ What the map reliably added: a source for each finding, quoted evidence from the
 
 ## Test 3: the combined skill (v0.1)
 
-We then wrote the `blindspot` skill to combine the three checks: the model lists gaps first, the map is opened afterwards, each step's output is traced, and the results are merged without cutting the list to a fixed length. We ran it once on the same twelve altered skills. The video map was rebuilt as `maps/video.yaml` (86 nodes) with nodes added from O*NET and ESCO, including audio-visual sync and final review.
+We then wrote the `blindspot` skill to combine the three checks: the model lists gaps first, the map is opened afterwards, each step's output is traced, and the results are merged without cutting the list to a fixed length. We ran it once on the same twelve altered skills. The video map was rebuilt as `skills/blindspot/maps/video.yaml` (86 nodes) with nodes added from O*NET and ESCO, including audio-visual sync and final review.
 
 | | Model only (average of two runs) | Map-guided (average of two runs) | Combined skill (one run) |
 |---|---|---|---|

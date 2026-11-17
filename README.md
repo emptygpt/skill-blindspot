@@ -16,7 +16,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 npx skills add emptygpt/skill-blindspot
 ```
 
-Or copy `skills/blindspot/` into your agent's skills folder, and keep `maps/` next to it or pass a map path. Then ask your agent: "run blindspot on `path/to/my-skill` with the video map".
+Or copy `skills/blindspot/` into your agent's skills folder. The maps come with it. Then ask your agent: "run blindspot on `path/to/my-skill` with the video map".
 
 ## What we tested first
 
@@ -47,14 +47,14 @@ The split between a shared catalogue and a personal profile follows established 
 
 - [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
-- [x] `maps/video.yaml` v0.1: 86 nodes, every node sourced
+- [x] `skills/blindspot/maps/video.yaml` v0.1: 86 nodes, every node sourced
 - [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
 - [ ] Report: what public video skills most often leave out
 - [ ] Second domain (writing) and a guide for building a map for a new domain
 
 ## Sources for the video map
 
-`maps/video.yaml` cites these. Each node names the section, task statement or skill it comes from.
+`skills/blindspot/maps/video.yaml` cites these. Each node names the section, task statement or skill it comes from.
 
 - O*NET 31.0 task statements. This product includes information from the O*NET 31.0 Database by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). Used under the CC BY 4.0 license. O*NET® is a trademark of USDOL/ETA. The statements are shortened and regrouped here, and USDOL/ETA has not endorsed this adaptation.
 - ESCO. This publication uses the ESCO classification of the European Commission. Skill names are regrouped here, so the map is an adaptation.

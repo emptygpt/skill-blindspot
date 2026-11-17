@@ -16,7 +16,7 @@
 npx skills add emptygpt/skill-blindspot
 ```
 
-或者把 `skills/blindspot/` 复制到你的 Agent 的 skills 目录，`maps/` 放在旁边，或者运行时给出底图路径。然后对 Agent 说：「用视频底图对 `path/to/my-skill` 跑 blindspot」。
+或者把 `skills/blindspot/` 复制到你的 Agent 的 skills 目录，底图在它里面的 `maps/` 目录。然后对 Agent 说：「用视频底图对 `path/to/my-skill` 跑 blindspot」。
 
 ## 我们先测了什么
 
@@ -47,14 +47,14 @@ npx skills add emptygpt/skill-blindspot
 
 - [x] 验证：带出处的底图，比直接问「缺什么」找到的更多吗？没有。见 [docs/validation.md](docs/validation.md)
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
-- [x] `maps/video.yaml` v0.1：86 个节点，每个都有来源
+- [x] `skills/blindspot/maps/video.yaml` v0.1：86 个节点，每个都有来源
 - [ ] `benchmark/`：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [ ] 报告：公开的视频 Skill 最常缺哪些环节
 - [ ] 第二个领域（写作），以及给新领域做底图的指南
 
 ## 视频底图的来源
 
-`maps/video.yaml` 引用了下面这些来源，每个节点都写明出自哪个章节、哪条任务或哪项技能。
+`skills/blindspot/maps/video.yaml` 引用了下面这些来源，每个节点都写明出自哪个章节、哪条任务或哪项技能。
 
 - O*NET 31.0 任务清单（美国劳工部，CC BY 4.0）。署名原文见英文 README 和底图文件开头。条目在这里做了缩写和重新分组，属于改编，未经 USDOL/ETA 认可。
 - ESCO（欧盟委员会）。This publication uses the ESCO classification of the European Commission. 技能名在这里重新分组，属于改编。

@@ -3,7 +3,7 @@ name: blindspot
 description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
 license: MIT
 metadata:
-  version: 0.1.0
+  version: 0.2.0
 ---
 
 # blindspot
@@ -22,7 +22,9 @@ A skill author and a model both work inside the frame the skill started with. Th
 ## Inputs
 
 1. **The skill.** A folder with a `SKILL.md`. Read `SKILL.md` and any file it tells the agent to read, such as files under `references/`. If a referenced file is absent, say so in the report and do not guess its content.
-2. **A domain map** (optional). A file that lists the stages and concerns of a domain, each with a source. Look for one in this order: a path the user gives, then `maps/<domain>.yaml` in this repository. If none fits the skill's domain, run without a map and say so.
+2. **A domain map** (optional). A file that lists the stages and concerns of a domain, each with a source. Look for one in this order: a path the user gives, then the `maps/` folder next to this file. Read `maps/INDEX.md` to see which maps exist and pick the one whose scope fits the skill. If the user names a map, use that one. If none fits, run without a map and say so.
+
+   A map may build on another one. When its header has `extends: <id>`, load the base map first, drop the base nodes listed under `exclude`, then add the map's own nodes. Use the combined set in step 3 and name both maps in the report.
 3. **A profile** (optional). `.blindspot.yaml` in the skill's folder. It lists map nodes or findings the author leaves out on purpose.
 
 ## Steps
