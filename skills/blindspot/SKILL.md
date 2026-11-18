@@ -1,9 +1,9 @@
 ---
 name: blindspot
-description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
+description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Before a skill is written, it can also give a sourced checklist of what the domain expects. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
 license: MIT
 metadata:
-  version: 0.3.0
+  version: 0.4.0
 ---
 
 # blindspot
@@ -31,11 +31,23 @@ python3 $S prepare <skill-folder> --map <id> --out worksheet.md   # also writes 
 python3 $S grep <skill-folder> [<repo-root>] -e <term> -e <term>  # before rating a finding Needed
 python3 $S sources --map <id> <node-id> [<node-id> ...]       # sources for the report
 python3 $S lint blindspot-report.md --map <id>                # check the finished report
+python3 $S checklist --map <id> [--skip <group> ...] --out checklist.md  # before a skill exists
 ```
 
 `prepare` reads every prose file in the skill folder and the data files `SKILL.md` names, lists code files by name without reading them, and flags files `SKILL.md` links to that are missing. It writes two files: `worksheet.md` with the files and headings, and `worksheet-nodes.md` with each map node and the lines of the skill that share its key words. Hits are hints. A node without a hit can be covered in other words.
 
 `grep` searches every file, code included, and prints matching lines. Rules a skill enforces in its scripts or engine are often only in code.
+
+## Before the skill exists
+
+If the user has not written the skill yet and wants to know what it should cover, do not run the audit. Make a checklist instead:
+
+1. Ask in one or two lines what the skill will do and where it stops (for example: makes vertical shorts, ends at an exported file, does not publish).
+2. Pick the map. Run `checklist --map <id> --groups`, choose the groups that lie outside that boundary, and run `checklist --map <id> --skip <groups> --out checklist.md`. Tell the user which groups you left out and why.
+3. Give the user the path. Do not answer the items for them. Each item has a source they can open, so an answer that comes later, from them or from the model that writes the skill, can be checked against it.
+4. When the skill is written, the audit with the same map shows which items made it in.
+
+Without the helper, list the map's nodes and sources by reading the map file.
 
 ## Inputs
 

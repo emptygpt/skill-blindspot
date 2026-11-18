@@ -24,3 +24,4 @@ jobs:
           python3 skills/blindspot/scripts/blindspot.py maps
           python3 skills/blindspot/scripts/blindspot.py sources --map video comp.ai-disclosure
           python3 skills/blindspot/scripts/blindspot.py lint reports/video-20/V03.md --map video-short
+          python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip shooting publishing > /dev/null

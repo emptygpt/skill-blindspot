@@ -10,6 +10,8 @@ tokens on judgement:
   grep     search every file under one or more folders, code included, for
            the words of a finding before it is rated Needed
   sources  print the sources of some map nodes, for the report
+  checklist  before a skill is written: the map's nodes as a design checklist,
+           one source each, minus the groups outside the planned skill
   lint     check a finished report against the map: unknown node ids, nodes
            missing from the table, absent or shallow nodes that no finding
            mentions, counts that do not add up
@@ -20,6 +22,8 @@ Usage:
   python3 blindspot.py grep <folder> [<folder> ...] -e <term> [-e <term> ...]
   python3 blindspot.py sources --map <id> <node-id> [<node-id> ...]
   python3 blindspot.py lint <report.md> --map <id> [--profile <.blindspot.yaml>]
+  python3 blindspot.py checklist --map <id> [--skip <group> ...] [--out checklist.md]
+  python3 blindspot.py checklist --map <id> --groups    (list group ids to skip)
   python3 blindspot.py maps
 
 A keyword hit is a hint, not a verdict. A node with no hit can still be
@@ -406,6 +410,52 @@ def cmd_lint(args):
     return 1 if problems else 0
 
 
+def cmd_checklist(args):
+    m = resolve(load_maps(), args.map)
+    if args.groups:
+        for g in m["groups"]:
+            print(f"{g['id']}: {g['title']} ({len(g['nodes'])} nodes)")
+        return 0
+    skip = set(args.skip or [])
+    unknown = skip - {g["id"] for g in m["groups"]}
+    if unknown:
+        sys.exit(f"unknown group(s): {', '.join(sorted(unknown))}; run with --groups to list them")
+    kept = [g for g in m["groups"] if g["id"] not in skip]
+    total = sum(len(g["nodes"]) for g in kept)
+    out = [f"# Design checklist: {m['label']}", "",
+           f"Map scope: {m['scope']}", "",
+           f"{total} items in {len(kept)} groups."
+           + (f" Left out as outside the planned skill: {', '.join(sorted(skip))}." if skip else ""), "",
+           "Use it before writing the skill. For each item decide: the skill does it (say in which step),",
+           "or it is left out on purpose (say why; later this goes in the profile). Every item cites where",
+           "it comes from, so an answer can be checked instead of guessed. After the skill is written,",
+           "run the audit with the same map to see what made it in.", ""]
+    for g in kept:
+        out += [f"## {g['title']} (`{g['id']}`)", ""]
+        for n in g["nodes"]:
+            line = f"- [ ] **{n['title']}** `{n['id']}`"
+            if n.get("description"):
+                line += f": {n['description'].strip()}"
+            out.append(line)
+            srcs = n.get("sources") or []
+            for s_ in srcs[:args.max_sources]:
+                src = m["sources"].get(s_["ref"], {})
+                url = f" <{src['url']}>" if src.get("url") else ""
+                out.append(f"  - {src.get('title', s_['ref'])}: \"{clip(s_.get('locator', ''), 120)}\"{url}")
+            if len(srcs) > args.max_sources:
+                out.append(f"  - {len(srcs) - args.max_sources} more: `sources --map {args.map} {n['id']}`")
+        out.append("")
+    text = "\n".join(out)
+    if args.out:
+        path = pathlib.Path(args.out)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        print(f"wrote {path} ({total} items, {len(text.encode('utf-8')) // 1024} KB)")
+    else:
+        print(text)
+    return 0
+
+
 def cmd_maps(_):
     maps = load_maps()
     for mid in sorted(maps):
@@ -422,9 +472,11 @@ def main():
     p.add_argument("--max", type=int, default=40)
     p = sub.add_parser("sources"); p.add_argument("--map", required=True); p.add_argument("nodes", nargs="+")
     p = sub.add_parser("lint"); p.add_argument("report"); p.add_argument("--map", required=True); p.add_argument("--profile")
+    p = sub.add_parser("checklist"); p.add_argument("--map", required=True); p.add_argument("--skip", nargs="+")
+    p.add_argument("--groups", action="store_true"); p.add_argument("--out"); p.add_argument("--max-sources", type=int, default=1)
     sub.add_parser("maps")
     args = ap.parse_args()
-    return {"prepare": cmd_prepare, "grep": cmd_grep, "sources": cmd_sources, "lint": cmd_lint, "maps": cmd_maps}[args.cmd](args) or 0
+    return {"prepare": cmd_prepare, "grep": cmd_grep, "sources": cmd_sources, "lint": cmd_lint, "checklist": cmd_checklist, "maps": cmd_maps}[args.cmd](args) or 0
 
 
 if __name__ == "__main__":

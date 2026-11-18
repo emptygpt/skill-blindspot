@@ -8,7 +8,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.3.** The skill, six maps and a helper script are here. It has been tested on twelve altered skills, used to audit 20 public video skills, and corrected after we re-checked that audit. It is early and the report format may change.
+> **Status: v0.4.** The skill, six maps and a helper script are here. It has been tested on twelve altered skills, used to audit 20 public video skills, and corrected after we re-checked that audit. It is early and the report format may change.
 
 ## First report
 
@@ -87,6 +87,14 @@ A small Python script (standard library only) does the mechanical parts: it read
 4. **Profile.** Not every gap should be filled. You record what does not apply to you, with an optional reason, in a small profile file. The next run respects it. The public map stays the same for everyone and your profile holds what is specific to you.
 
 The split between a shared catalogue and a personal profile follows established practice in other fields, such as profiles in the NIST Cybersecurity Framework and catalogues and profiles in OSCAL.
+
+## Before you write a skill
+
+The same maps work as a checklist before a skill exists. Tell the agent what the skill will do and where it stops, and it writes `checklist.md`: every node of the map inside that boundary, each with a source, so the questions a skill builder asks you ("do you need rights to the images?") have something to check against. No model call is needed for the list itself:
+
+```bash
+python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip shooting publishing analytics --out checklist.md
+```
 
 ## What it is not
 
