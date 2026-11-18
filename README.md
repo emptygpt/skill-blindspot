@@ -14,6 +14,28 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 [What 20 public video skills leave out](reports/video-20.md): 11 of 20 have no step to label AI-generated content, 10 have no rights step for footage, music or voices, 9 call the video done without anyone watching the final file, and 8 never fact-check the script.
 
+## What you get
+
+An excerpt from a real run, on a public skill that edits talking-head reels ([full report](reports/video-20/V03.md)). First, the findings, each tagged with who found it and where the source is:
+
+> **Needed**
+> 1. **No label or disclosure step for AI-generated stills, voices and cut-outs** [model+map]
+>    Map node: comp.ai-disclosure — source: Video Production Course Online (Self-Paced) syllabus, "M14 Use AI responsibly"
+>    Why: Searched for disclosure, label, synthetic. The skill allows "AI stills", an ElevenLabs narrator recipe and AI cut-out effects but only limits what they may show.
+
+Then the full table: every node of the map, with the skill's own lines as evidence.
+
+| Node | State | Evidence |
+|---|---|---|
+| script.hook | covered | "`textfx` beats `hook` (the first 1.5-3 s)"; QA checks "the first 1.5 s". |
+| assets.music-licensing | covered | "library/music/ licensed music beds + manifest" |
+| assets.rights-acquisition | shallow | "on Mixkit only clips offered in 2160p carry the free commercial licence"; memes "the user adds them at their own risk". |
+| comp.fact-check | shallow | Data Story recipe: "only real numbers, each with its source on screen"; the speaker's other claims are not checked. |
+| comp.ai-disclosure | absent | Nothing in the skill corresponds to it. |
+| pre.location | not-applicable | Shoot happens before the skill starts. |
+
+The report also lists findings the model raised that no source backs (marked unsourced), and a trace of which step's output feeds which later step.
+
 ## Install
 
 ```bash
@@ -36,7 +58,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 
 The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, TikTok, Bilibili and Douyin official pages, the US FTC and a Chinese advertising regulation. Douyin's creator learning centre could not be read.
 
-To add a node or a map, see [docs/map-format.md](docs/map-format.md). Run `python3 scripts/check_maps.py` before opening a pull request.
+To add a node or a map, see [CONTRIBUTING.md](CONTRIBUTING.md). Missing a domain? [Ask for a map](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml).
 
 ## What we tested first
 

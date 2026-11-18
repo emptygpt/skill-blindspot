@@ -1,0 +1,22 @@
+name: Map request
+description: Ask for a domain map, or a narrower map on top of an existing one
+title: "Map request: "
+labels: ["map-request"]
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: What kind of work should the map cover? For example "podcast production", "API design", "grant writing".
+    validations:
+      required: true
+  - type: textarea
+    id: skills
+    attributes:
+      label: Skills you would audit with it
+      description: Links to one or more public skills (folders with a SKILL.md), yours or others'.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources you know of
+      description: Standards, occupational databases, course outlines, official docs, regulations. Links if you have them. Not required.

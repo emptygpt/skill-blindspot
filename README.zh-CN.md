@@ -14,6 +14,28 @@
 
 [20 个公开视频 Skill 缺了什么](reports/video-20.md)（英文）：11 个没有标注 AI 生成内容的步骤，10 个没有素材、音乐或声音的版权步骤，9 个没人看过成片就算完成，8 个从不核对脚本里的事实。
 
+## 你会得到什么
+
+下面摘自一次真实运行，对象是一个剪口播短视频的公开 Skill（[完整报告](reports/video-20/V03.md)，英文）。先是发现，每条标明是谁找到的、出处在哪：
+
+> **必需**
+> 1. **AI 生成的图片、配音、抠像没有标注步骤** [model+map]
+>    底图节点：comp.ai-disclosure，出处：Video Production Course Online (Self-Paced) 课程大纲，"M14 Use AI responsibly"
+>    理由：搜过 disclosure、label、synthetic。这个 Skill 允许用「AI 静图」、ElevenLabs 旁白和 AI 抠像特效，但只限制了它们能出现什么内容。
+
+然后是完整对照表：底图的每个节点，附 Skill 自己的原文作证据。
+
+| 节点 | 状态 | 证据 |
+|---|---|---|
+| script.hook | 已覆盖 | "`textfx` beats `hook` (the first 1.5-3 s)"；质检查 "the first 1.5 s"。 |
+| assets.music-licensing | 已覆盖 | "library/music/ licensed music beds + manifest" |
+| assets.rights-acquisition | 很浅 | "on Mixkit only clips offered in 2160p carry the free commercial licence"；表情包 "the user adds them at their own risk"。 |
+| comp.fact-check | 很浅 | 只有 Data Story 模板要求 "only real numbers, each with its source on screen"，说话人的其他说法不核对。 |
+| comp.ai-disclosure | 没有 | Skill 里没有对应内容。 |
+| pre.location | 不适用 | 拍摄在 Skill 开始之前。 |
+
+报告还会单列模型提出、但没有来源支持的发现（标为「无出处」），以及一张追踪表：每一步的产出被后面哪一步用上。
+
 ## 安装
 
 ```bash
@@ -36,7 +58,7 @@ npx skills add emptygpt/skill-blindspot
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
-想补节点或加底图，见 [docs/map-format.md](docs/map-format.md)（英文）。提 PR 前运行 `python3 scripts/check_maps.py`。
+想补节点或加底图，见 [CONTRIBUTING.md](CONTRIBUTING.md)（英文）。缺某个领域的底图，可以[提一个底图请求](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml)。
 
 ## 我们先测了什么
 

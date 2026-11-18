@@ -1,0 +1,23 @@
+name: Node correction
+description: A node is wrong, misattributed, out of date, or a stage is missing from a map
+title: "Node: "
+labels: ["map-fix"]
+body:
+  - type: input
+    id: map
+    attributes:
+      label: Map and node id
+      description: For example "video / comp.ai-disclosure". For a missing stage, give the group it belongs in.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: URL and the exact text (section title, clause, task statement) that supports the change. A missing stage without a source goes in the map's "not yet covered" list instead.
