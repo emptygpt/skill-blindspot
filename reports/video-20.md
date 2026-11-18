@@ -67,7 +67,7 @@ The model found 44 of the 46 by itself. This matches our [earlier validation](..
 
 ## Limits
 
-- **One run per skill, by one model.** The audits were run by Claude Sonnet subagents. Every Needed finding was later re-checked by a second model run against the whole repository ([recheck](video-20/recheck.md)); no person checked all of them. We checked two by hand (V04, V20). V04 does not forbid AI labels: it defers them to the user at the final stage and removes them from generated output. V20's engine does block delivery until an AI label is recorded.
+- **One run per skill, by one model.** The audits were run by Claude Sonnet subagents. Every Needed finding was later re-checked by a second model run against the whole repository ([recheck](video-20/recheck.md)); no person checked them. Two (V04, V20) were also checked directly against the code and text in a third pass by Claude Opus. V04 does not forbid AI labels: it defers them to the user at the final stage and removes them from generated output. V20's engine does block delivery until an AI label is recorded.
 - **Text only.** No code from these repositories was run. Where a skill relies on an engine or service not in the repository, behaviour was judged from the documentation.
 - **Map choice affects the counts.** V10 makes 30–90 second videos but was audited with the long-form map, so many nodes were marked not applicable.
 - **"Needed" is a judgment.** It means needed for the skill's own stated goal, not needed for every user. A skill that stops at an MP4 file is not faulted for missing publishing steps.
