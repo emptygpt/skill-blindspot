@@ -1,0 +1,1304 @@
+# skill-blindspot map: changing software with an AI coding agent (maps/software.yaml)
+#
+# Rules for this map
+#   - Every node must cite at least one source that really exists in the
+#     "sources" list, with a locator copied from that source: a practice id and
+#     title, a requirement or chapter title, an O*NET task statement with its
+#     Task ID (may be shortened), a heading, or an ESCO skill name.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Gaps that no source covers are listed below, not added as nodes.
+#   - Sources are only cited for titles and short statements; no body text is
+#     copied.
+#   - Group "agent" names risks that its sources describe. The sources name the
+#     risks; they do not prescribe the practice written in the node description.
+#
+# Licence and attribution
+#   O*NET: This product includes information from the O*NET 31.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license. O*NET(R) is a trademark of
+#   USDOL/ETA. The task statements are shortened and regrouped here, so this
+#   map is an adaptation and has not been endorsed by USDOL/ETA.
+#   ESCO: This publication uses the ESCO classification of the European
+#   Commission. ESCO skill names are regrouped here, so this map is an
+#   adaptation of ESCO. https://esco.ec.europa.eu
+#   OWASP: ASVS 5.0.0, the OWASP Top 10 for LLM Applications 2025 and the OWASP
+#   Top 10 for Agentic Applications 2026 are CC BY-SA 4.0; OWASP Top 10:2025 is
+#   CC BY 3.0 as stated on its page. Only chapter, section and risk titles and
+#   a few short phrases are cited. Descriptions here are the map's own words;
+#   this map is shared under the same terms for the parts derived from them.
+#   SWEBOK Guide v4.0 (IEEE Computer Society): knowledge area titles only, as a
+#   citation under the terms that allow quoting reasonable passages.
+#   NIST SSDF (SP 800-218) and NIST AI 600-1: titles and short task statements.
+#   Google engineering practices, Semantic Versioning, Conventional Commits:
+#   CC BY 3.0. Keep a Changelog: MIT. DORA: CC BY 4.0. OpenChain: CC BY 4.0.
+#   GitHub Docs, WCAG 2.2 and The Twelve-Factor App: page and criterion titles
+#   only; their licences are not fully verified (see "sources").
+#   Not used on purpose: the Google SRE book (CC BY-NC-ND 4.0, no adaptation),
+#   SPDX and Diataxis (licence not found).
+#
+# Not yet covered (no source found or read, so no node)
+#   - Requirement acceptance criteria and scope changes: only the SWEBOK
+#     chapter title, one O*NET task and ESCO skill names exist; no step-level
+#     source read (ISO/IEC/IEEE 29148 is a paid standard).
+#   - Refactoring and technical debt: only the DORA "Code maintainability"
+#     capability title and a Google review heading; no practice source.
+#   - Debugging method: only ESCO "debug software" and one O*NET task;
+#     no step-based source.
+#   - Rules for an agent changing code (read the code first, keep to the task,
+#     do not touch unrelated files, do not fake test results): no authoritative
+#     source found. Group "agent" holds only named risks.
+#   - Database migration and rollback practice beyond the DORA capability
+#     title; performance tuning method.
+#   - Release checklists, rollback plans, launch coordination, incident
+#     management and post-mortems: the only found source is the SRE book
+#     (licence blocks adaptation), so there is no node for them.
+#   - Documentation types and style (tutorial, how-to, reference): Diataxis
+#     licence not verified. API documentation and code comments style.
+#   - Privacy law, licence choice for your own code, and export rules.
+#   - Mobile, embedded and data/ML specifics; infrastructure as code.
+#   - Estimating effort and project scheduling (SWEBOK management chapters were
+#     not read below the chapter title).
+
+map:
+  id: software
+  title: Changing software with an AI coding agent
+  version: 0.1.0
+  updated: '2026-11-17'
+  scope: 'Making a change to software with the help of an AI coding agent, from understanding the request through design, implementation, testing, review, release, operation and maintenance. Out of scope: hiring and managing a team, project budgeting, hardware design.'
+sources:
+- id: S1
+  title: Guide to the Software Engineering Body of Knowledge (SWEBOK Guide), Version 4.0 (knowledge area titles only)
+  publisher: IEEE Computer Society
+  url: https://www.computer.org/education/bodies-of-knowledge/software-engineering
+  retrieved: '2026-11-17'
+  licence: 'Terms permit quoting reasonable passages with citation; only the knowledge area titles are cited, no text copied. Citation: H. Washizaki, eds., SWEBOK Guide, Version 4.0, IEEE Computer Society, 2024; www.swebok.org'
+- id: S2
+  title: NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1
+  publisher: NIST
+  url: https://csrc.nist.gov/pubs/sp/800/218/final
+  retrieved: '2026-11-17'
+  licence: Not subject to copyright in the United States; attribution appreciated (stated on the page)
+- id: S3
+  title: OWASP Application Security Verification Standard (ASVS) 5.0.0
+  publisher: OWASP Foundation
+  url: https://github.com/OWASP/ASVS/tree/master/5.0/en
+  retrieved: '2026-11-17'
+  licence: CC BY-SA 4.0; only chapter and section titles and short phrases are cited
+- id: S4
+  title: OWASP Top 10:2025
+  publisher: OWASP Foundation
+  url: https://owasp.org/Top10/2025/0x00_2025-Introduction/
+  retrieved: '2026-11-17'
+  licence: CC BY 3.0 (stated on the page); only titles cited
+- id: S5
+  title: Google Engineering Practices Documentation (code review guide)
+  publisher: Google
+  url: https://google.github.io/eng-practices/
+  retrieved: '2026-11-17'
+  licence: CC BY 3.0 (stated on the page)
+- id: S6
+  title: Semantic Versioning 2.0.0
+  publisher: Tom Preston-Werner
+  url: https://semver.org/
+  retrieved: '2026-11-17'
+  licence: CC BY 3.0 (stated on the page)
+- id: S7
+  title: Keep a Changelog 1.1.0
+  publisher: Olivier Lacan
+  url: https://keepachangelog.com/en/1.1.0/
+  retrieved: '2026-11-17'
+  licence: MIT (stated on the page)
+- id: S8
+  title: Conventional Commits 1.0.0
+  publisher: Conventional Commits
+  url: https://www.conventionalcommits.org/en/v1.0.0/
+  retrieved: '2026-11-17'
+  licence: CC BY 3.0 (stated on the page)
+- id: S9
+  title: 'GitHub Docs: pull requests, code owners, supply chain security, secret scanning (page and navigation titles)'
+  publisher: GitHub
+  url: https://docs.github.com/en/pull-requests
+  retrieved: '2026-11-17'
+  licence: Pages do not state a licence; the github/docs repository README gives CC BY 4.0 for content. Only titles cited. Page bodies not read.
+- id: S10
+  title: The Twelve-Factor App (factor titles only)
+  publisher: Adam Wiggins (Heroku, now Salesforce)
+  url: https://12factor.net/
+  retrieved: '2026-11-17'
+  licence: not verified (page shows only a copyright notice; the GitHub repository carries an MIT file); only factor titles cited; applies to services
+- id: S11
+  title: DORA capabilities catalog
+  publisher: DORA, Google LLC
+  url: https://dora.dev/capabilities/
+  retrieved: '2026-11-17'
+  licence: CC BY 4.0 (stated on the site)
+- id: S12
+  title: Web Content Accessibility Guidelines (WCAG) 2.2 (guideline and criterion titles only)
+  publisher: W3C
+  url: https://www.w3.org/TR/WCAG22/
+  retrieved: '2026-11-17'
+  licence: W3C document licence, not fully verified; only titles cited
+- id: S13
+  title: OpenChain License Compliance Specification 2.1 (ISO/IEC 5230:2020)
+  publisher: OpenChain Project
+  url: https://github.com/OpenChain-Project/License-Compliance-Specification
+  retrieved: '2026-11-17'
+  licence: CC BY 4.0 (stated in the file)
+- id: S14
+  title: OWASP Top 10 for LLM Applications 2025
+  publisher: OWASP GenAI Security Project
+  url: https://genai.owasp.org/llm-top-10/
+  retrieved: '2026-11-17'
+  licence: CC BY-SA 4.0 (stated on the site); only risk titles cited
+- id: S15
+  title: OWASP Top 10 for Agentic Applications for 2026
+  publisher: OWASP GenAI Security Project
+  url: https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/
+  retrieved: '2026-11-17'
+  licence: CC BY-SA 4.0 (site statement); only risk titles from the announcement page cited
+- id: S16
+  title: 'NIST AI 600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile'
+  publisher: NIST
+  url: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
+  retrieved: '2026-11-17'
+  licence: not verified (no copyright statement found in the text); only risk titles cited
+- id: ONET
+  title: O*NET 31.0 Database, task statements and detailed work activities for 15-1252.00 Software Developers and 15-1253.00 Software Quality Assurance Analysts and Testers
+  publisher: U.S. Department of Labor, Employment and Training Administration (USDOL/ETA)
+  url: https://www.onetcenter.org/database.html
+  retrieved: '2026-11-17'
+  licence: CC BY 4.0
+- id: ESCO
+  title: ESCO classification, skills of software developer (2512.3) and software tester (2519.6)
+  publisher: European Commission
+  url: https://esco.ec.europa.eu
+  retrieved: '2026-11-17'
+  licence: CC BY 4.0 (European Commission legal notice); adapted versions must be marked as adapted
+groups:
+- id: requirements
+  title: Understanding the request and its requirements
+  nodes:
+  - id: requirements.understand-request
+    title: Understand what is being asked
+    description: Restate the request in your own words, find the user need behind it, and check it is feasible within the time and cost available.
+    sources:
+    - ref: ONET
+      locator: '15-1252.00 task 21662: Analyze user needs and software requirements to determine feasibility of design within time and cost constraints.'
+    - ref: ESCO
+      locator: identify customer requirements
+    - ref: S1
+      locator: 'Chapter 1: Software Requirements'
+  - id: requirements.technical-spec
+    title: Turn the request into technical requirements
+    description: Interpret and define the technical requirements and performance standards the change must meet, and analyse the existing specification for conflicts.
+    sources:
+    - ref: ESCO
+      locator: interpret technical requirements
+    - ref: ESCO
+      locator: define technical requirements
+    - ref: ESCO
+      locator: analyse software specifications
+    - ref: ONET
+      locator: '15-1252.00 task 21668: Determine system performance standards.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Analyze project data to determine specifications or requirements.'
+  - id: requirements.consult-and-report
+    title: Consult the people affected and report status
+    description: Confirm limits, interfaces and open questions with the people who know them, and keep requesters informed about status and technical issues.
+    sources:
+    - ref: ONET
+      locator: '15-1252.00 task 21664: Confer with systems analysts, engineers, programmers and others to design systems and to obtain information on project limitations and capabilities, performance requirements and interfaces.'
+    - ref: ONET
+      locator: '15-1252.00 task 21665: Consult with customers or other departments on project status, proposals, or technical issues, such as software system design or maintenance.'
+    - ref: ONET
+      locator: '15-1252.00 task 21673: Prepare reports or correspondence concerning project specifications, activities, or status.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Collaborate with others to determine design specifications or details.'
+  - id: requirements.security-requirements
+    title: Write down the security requirements
+    description: Identify and document the security requirements the change must meet, and keep them current as the software changes.
+    sources:
+    - ref: S2
+      locator: PO.1 Define Security Requirements for Software Development
+    - ref: S2
+      locator: 'PO.1.2: Identify and document all security requirements for organization-developed software to meet, and maintain the requirements over time.'
+- id: design
+  title: Architecture and design
+  nodes:
+  - id: design.plan-change
+    title: Plan the change before making it
+    description: Work out how a new system or a modification to an existing one will fit in, and decide the approach before writing code.
+    sources:
+    - ref: ONET
+      locator: '15-1252.00 task 21661: Analyze information to determine, recommend, and plan installation of a new system or modification of an existing system.'
+    - ref: ONET
+      locator: '15-1252.00 task 21667: Design, develop and modify software systems, using scientific analysis and mathematical models to predict and measure outcomes and consequences of design.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Design software applications.'
+  - id: design.architecture-and-patterns
+    title: Fit the change into the architecture and use known design patterns
+    description: Check that the change respects the existing architecture and reach for established design patterns rather than inventing structure.
+    sources:
+    - ref: S1
+      locator: 'Chapter 2: Software Architecture'
+    - ref: S1
+      locator: 'Chapter 3: Software Design'
+    - ref: ESCO
+      locator: use software design patterns
+    - ref: S5
+      locator: 'What to look for in a code review: Design'
+  - id: design.prototype
+    title: Build a prototype to test an idea
+    description: Make a small throwaway version to learn whether an approach works before committing to it.
+    sources:
+    - ref: ESCO
+      locator: develop software prototype
+  - id: design.risk-modeling
+    title: Model risks and threats
+    description: Use threat modeling, attack modeling or attack-surface mapping to assess the security risk of the change, and avoid insecure design.
+    keywords:
+    - threat model
+    sources:
+    - ref: S2
+      locator: 'PW.1.1: Use forms of risk modeling - such as threat modeling, attack modeling, or attack surface mapping - to help assess the security risk for the software.'
+    - ref: S2
+      locator: PW.1 Design Software to Meet Security Requirements and Mitigate Security Risks
+    - ref: S4
+      locator: A06:2025 - Insecure Design
+  - id: design.decision-log
+    title: Record design decisions
+    description: Track the requirements, risks and design decisions behind the change so they can be found later, and reuse standard security features instead of home-made ones.
+    keywords:
+    - ADR
+    - architecture decision record
+    sources:
+    - ref: S2
+      locator: 'PW.1.2: Track and maintain the software''s security requirements, risks, and design decisions.'
+    - ref: S2
+      locator: 'PW.1.3: Where appropriate, build in support for using standardized security features and services'
+    - ref: S3
+      locator: V15.1 Secure Coding and Architecture Documentation
+  - id: design.design-review
+    title: Review the design before building
+    description: Have someone who was not involved in the design, or an automated check, confirm it meets the requirements and addresses the known risks.
+    sources:
+    - ref: S2
+      locator: PW.2 Review the Software Design to Verify Compliance with Security Requirements and Risk Information
+    - ref: ONET
+      locator: '15-1253.00 task 14646: Participate in product design reviews to provide input on functional requirements, product designs, schedules, or potential problems.'
+    - ref: S5
+      locator: 'What to look for in a code review: Design'
+  - id: design.user-interface
+    title: Design the user interface
+    description: Design what the user sees and does for the change, where it has a visible interface.
+    applies_when: the change touches a user interface
+    sources:
+    - ref: ESCO
+      locator: design user interface
+  - id: design.service-runtime-model
+    title: Design a service to run as stateless processes with attached backing services
+    description: For a service application, treat databases and queues as attached resources, keep processes stateless and scale by running more processes.
+    applies_when: the software runs as a network service (not a library, CLI or mobile app)
+    sources:
+    - ref: S10
+      locator: 'IV. Backing services: Treat backing services as attached resources'
+    - ref: S10
+      locator: VI. Processes
+    - ref: S10
+      locator: VII. Port binding
+    - ref: S10
+      locator: VIII. Concurrency
+- id: implementation
+  title: Implementation
+  nodes:
+  - id: implementation.modify-existing
+    title: Modify existing code to correct, adapt or improve it
+    description: Change existing software to fix errors, adapt it to a new environment or interface, or improve performance, while keeping the rest working.
+    sources:
+    - ref: ONET
+      locator: '15-1252.00 task 21670: Modify existing software to correct errors, adapt it to new hardware, or upgrade interfaces and improve performance.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Modify software programs to improve performance.'
+    - ref: ESCO
+      locator: computer programming
+    - ref: S1
+      locator: 'Chapter 4: Software Construction'
+  - id: implementation.toolchain-and-build
+    title: Use the agreed toolchain and secure build settings
+    description: Use the project's tools, editors and build settings, and the compiler or build options that improve executable security.
+    sources:
+    - ref: S2
+      locator: PO.3 Implement Supporting Toolchains
+    - ref: S2
+      locator: 'PW.6.1: Use compiler, interpreter, and build tools that offer features to improve executable security.'
+    - ref: ESCO
+      locator: utilise computer-aided software engineering tools
+    - ref: ESCO
+      locator: integrated development environment software
+  - id: implementation.secure-coding
+    title: Follow secure and defensive coding practices
+    description: Apply the secure coding practices for the language in use and write defensively against bad inputs and states.
+    sources:
+    - ref: S2
+      locator: PW.5 Create Source Code by Adhering to Secure Coding Practices
+    - ref: S3
+      locator: V15.3 Defensive Coding
+    - ref: S3
+      locator: V15.4 Safe Concurrency
+  - id: implementation.input-and-output-handling
+    title: Validate input and encode output
+    description: Validate all input and business rules, use parameterised queries and encode output for its context to prevent injection.
+    keywords:
+    - sql injection
+    - sanitize
+    - escape
+    sources:
+    - ref: S3
+      locator: V1 Encoding and Sanitization
+    - ref: S3
+      locator: V2 Validation and Business Logic
+    - ref: S3
+      locator: '1.2.4: parameterized queries'
+    - ref: S4
+      locator: A05:2025 - Injection
+  - id: implementation.error-handling
+    title: Handle errors without leaking internals
+    description: Handle unexpected and exceptional conditions and return generic messages that do not expose stack traces or secrets.
+    keywords:
+    - exception
+    - stack trace
+    sources:
+    - ref: S3
+      locator: V16.5 Error Handling
+    - ref: S3
+      locator: '16.5.1: generic message'
+    - ref: S4
+      locator: A10:2025 - Mishandling of Exceptional Conditions
+  - id: implementation.secrets
+    title: Keep secrets out of code
+    description: Store keys, tokens and passwords in a secrets manager or the environment, never in source, and block pushes that contain them.
+    keywords:
+    - api key
+    - token
+    - credential
+    - .env
+    sources:
+    - ref: S3
+      locator: V13.3 Secret Management
+    - ref: S3
+      locator: '13.3.1: A secrets management solution, such as a key vault, is used'
+    - ref: S9
+      locator: 'Secret scanning: Push protection'
+    - ref: S9
+      locator: 'Secret scanning: Secret leakage risks'
+  - id: implementation.configuration
+    title: Separate configuration from code and set secure defaults
+    description: Keep deploy-specific settings outside the code, define a secure baseline, and make sure production carries no test code or sample snippets.
+    sources:
+    - ref: S10
+      locator: 'III. Config: Store config in the environment'
+    - ref: S2
+      locator: PW.9 Configure Software to Have Secure Settings by Default
+    - ref: S3
+      locator: V13 Configuration
+    - ref: S3
+      locator: '15.2.3: production environment only includes functionality that is required'
+    - ref: S4
+      locator: A02:2025 - Security Misconfiguration
+  - id: implementation.maintainable-code
+    title: Keep the code simple, readable and maintainable
+    description: 'Write code that other people can read and change: avoid needless complexity, use clear names and comments.'
+    sources:
+    - ref: S11
+      locator: Code maintainability
+    - ref: S5
+      locator: 'What to look for in a code review: Complexity'
+    - ref: S5
+      locator: 'What to look for in a code review: Naming'
+    - ref: S5
+      locator: 'What to look for in a code review: Comments'
+  - id: implementation.data-migration
+    title: Migrate data and schema safely
+    description: Plan and script data migrations and database schema changes so they can be repeated and checked.
+    applies_when: the change alters stored data or a schema
+    keywords:
+    - migration
+    - schema change
+    sources:
+    - ref: ESCO
+      locator: develop automated migration methods
+    - ref: ESCO
+      locator: migrate existing data
+    - ref: S11
+      locator: Database change management
+  - id: implementation.accessibility
+    title: Keep the interface accessible
+    description: Check text alternatives, keyboard use, contrast and input help so that people with disabilities can use the changed interface.
+    applies_when: the change touches a user interface
+    keywords:
+    - a11y
+    - WCAG
+    - aria
+    sources:
+    - ref: S12
+      locator: 1.1 Text Alternatives
+    - ref: S12
+      locator: 2.1 Keyboard Accessible
+    - ref: S12
+      locator: 1.4.3 Contrast (Minimum)
+    - ref: S12
+      locator: 3.3 Input Assistance
+- id: testing
+  title: Testing and verification
+  nodes:
+  - id: testing.plan-strategy
+    title: Plan the testing
+    description: Decide what to test, how and when, in line with scope and delivery dates, and write the plan, scenarios and procedures down so they can be repeated.
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14638: Design test plans, scenarios, scripts, or procedures.'
+    - ref: ONET
+      locator: '15-1253.00 task 14645: Plan test schedules or strategies in accordance with project scope or delivery dates.'
+    - ref: ONET
+      locator: '15-1253.00 task 14648: Document test procedures to ensure replicability and compliance with standards.'
+    - ref: ESCO
+      locator: provide software testing documentation
+    - ref: S1
+      locator: 'Chapter 5: Software Testing'
+  - id: testing.test-the-change
+    title: Test the change before it goes in
+    description: Run the tests that exercise the modification, and execute them at the appropriate levels.
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14639: Test system modifications to prepare for implementation.'
+    - ref: ESCO
+      locator: execute software tests
+    - ref: ESCO
+      locator: levels of software testing
+  - id: testing.unit-tests
+    title: Write unit tests with the code
+    description: Add or update unit tests in the same change as the code they cover.
+    keywords:
+    - unit test
+    sources:
+    - ref: ESCO
+      locator: perform software unit testing
+    - ref: S5
+      locator: 'What to look for in a code review: Tests'
+    - ref: S5
+      locator: 'Small CLs: Keep related test code in the same CL'
+  - id: testing.regression-and-negative
+    title: Cover regression and negative cases
+    description: Test that old behaviour still works, that bad inputs fail properly, and that earlier bugs stay fixed.
+    keywords:
+    - regression
+    - edge case
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14640: Develop testing programs that address areas such as database impacts, software scenarios, regression testing, negative testing, error or bug retests, or usability.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Develop testing routines or procedures.'
+  - id: testing.reproduce-and-report
+    title: Reproduce problems and report defects
+    description: Reproduce a reported problem, document the defect in the tracker with enough detail, report it, and follow it to resolution.
+    keywords:
+    - bug report
+    - reproduce
+    sources:
+    - ref: ESCO
+      locator: replicate customer software issues
+    - ref: ESCO
+      locator: report test findings
+    - ref: ONET
+      locator: '15-1253.00 task 14641: Document software defects, using a bug tracking system, and report defects to software developers.'
+    - ref: ONET
+      locator: '15-1253.00 task 14642: Identify, analyze, and document problems with program function, output, online screen, or content.'
+    - ref: ONET
+      locator: '15-1253.00 task 14643: Monitor bug resolution efforts and track successes.'
+  - id: testing.automation
+    title: Automate tests and keep them current
+    description: Put repeatable tests under automation and update the scripts as the software changes.
+    keywords:
+    - CI tests
+    - test suite
+    sources:
+    - ref: S11
+      locator: Test automation
+    - ref: ONET
+      locator: '15-1253.00 task 14650: Update automated test scripts to ensure currency.'
+    - ref: ONET
+      locator: '15-1253.00 task 14659: Design or develop automated testing tools.'
+  - id: testing.environment-and-data
+    title: Test in a realistic environment with suitable data
+    description: Recreate the production environment, check compatibility with other systems and platforms, and use test data that represents real cases.
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14656: Install and configure recreations of software production environments to allow testing of software performance.'
+    - ref: ONET
+      locator: '15-1253.00 task 14655: Conduct software compatibility tests with programs, hardware, operating systems, or network environments.'
+    - ref: S11
+      locator: Test data management
+  - id: testing.security-testing
+    title: Test for vulnerabilities
+    description: Decide which security tests to run on the executable, scope and run them, and triage what they find.
+    keywords:
+    - pen test
+    - fuzz
+    - SAST
+    - DAST
+    sources:
+    - ref: S2
+      locator: PW.8 Test Executable Code to Identify Vulnerabilities and Verify Compliance with Security Requirements
+    - ref: S2
+      locator: 'PW.8.2: Scope the testing, design the tests, perform the testing, and document the results'
+  - id: testing.release-criteria
+    title: Define when the change is ready to release
+    description: Agree the standards and methods that decide product quality and release readiness before testing ends, and analyse results over time.
+    keywords:
+    - definition of done
+    - acceptance
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14649: Develop or specify standards, methods, or procedures to determine product quality or release readiness.'
+    - ref: ONET
+      locator: '15-1253.00 task 14664: Conduct historical analyses of test results.'
+    - ref: ESCO
+      locator: software metrics
+- id: review
+  title: Code review and approval
+  nodes:
+  - id: review.standard
+    title: Hold review to a clear standard
+    description: Approve a change when it improves the overall health of the code, and decide disagreements by principle.
+    sources:
+    - ref: S5
+      locator: 'The Standard of Code Review: Principles'
+    - ref: S5
+      locator: 'The Standard of Code Review: Resolving Conflicts'
+    - ref: S2
+      locator: 'PW.7.1: Determine whether code review (a person looks directly at the code to find issues) and/or code analysis'
+  - id: review.design-and-function
+    title: Review design, behaviour and tests
+    description: Check that the change is well designed, does what the author intends, has the right tests, and read every changed line in context.
+    sources:
+    - ref: S5
+      locator: 'What to look for in a code review: Design'
+    - ref: S5
+      locator: 'What to look for in a code review: Functionality'
+    - ref: S5
+      locator: 'What to look for in a code review: Tests'
+    - ref: S5
+      locator: 'What to look for in a code review: Every Line'
+  - id: review.readability
+    title: Review readability and consistency
+    description: Check complexity, naming, comments, style, consistency and documentation of the change.
+    sources:
+    - ref: S5
+      locator: 'What to look for in a code review: Complexity'
+    - ref: S5
+      locator: 'What to look for in a code review: Naming'
+    - ref: S5
+      locator: 'What to look for in a code review: Style'
+    - ref: S5
+      locator: 'What to look for in a code review: Consistency'
+  - id: review.separate-refactoring
+    title: Keep refactoring out of feature and fix changes
+    description: Send refactoring as its own small change so reviewers can see the behaviour change clearly.
+    keywords:
+    - refactor
+    sources:
+    - ref: S5
+      locator: 'Small CLs: Separate Out Refactorings'
+  - id: review.analysis-tools
+    title: Use code analysis and record findings
+    description: Run static analysis or other code analysis per the team's standards, and record and triage the issues found.
+    keywords:
+    - lint
+    - static analysis
+    sources:
+    - ref: S2
+      locator: PW.7 Review and/or Analyze Human-Readable Code to Identify Vulnerabilities and Verify Compliance with Security Requirements
+    - ref: S2
+      locator: 'PW.7.2: Perform the code review and/or code analysis based on the organization''s secure coding standards'
+  - id: review.pull-request
+    title: Open and review a pull request
+    description: Open the change as a pull request (draft if unfinished), request reviewers, and review the proposed changes.
+    keywords:
+    - PR
+    sources:
+    - ref: S9
+      locator: 'Pull requests documentation: Draft pull requests'
+    - ref: S9
+      locator: 'Pull requests documentation: Request a PR review'
+    - ref: S9
+      locator: 'Pull requests documentation: Review proposed changes'
+  - id: review.handle-comments
+    title: Respond to reviewer comments
+    description: Fix the code when a reviewer points something out, treat comments as shared work, and resolve disagreement openly.
+    sources:
+    - ref: S5
+      locator: 'How to handle reviewer comments: Fix the Code'
+    - ref: S5
+      locator: 'How to handle reviewer comments: Think Collaboratively'
+    - ref: S5
+      locator: 'How to handle reviewer comments: Resolving Conflicts'
+  - id: review.owners-and-approval
+    title: Route changes to the right owners with light approval
+    description: Use code owners and branch protection so the right people review, and keep the approval process fast.
+    keywords:
+    - CODEOWNERS
+    sources:
+    - ref: S9
+      locator: 'About code owners: CODEOWNERS and branch protection'
+    - ref: S11
+      locator: Streamlining change approval
+    - ref: S5
+      locator: Speed of Code Reviews
+- id: security
+  title: Security
+  nodes:
+  - id: security.identity-and-access
+    title: Get authentication, sessions and authorization right
+    description: Check how users and services prove who they are, how sessions and tokens are handled, and what each is allowed to do.
+    keywords:
+    - login
+    - oauth
+    - jwt
+    - permissions
+    sources:
+    - ref: S3
+      locator: V6 Authentication
+    - ref: S3
+      locator: V7 Session Management
+    - ref: S3
+      locator: V8 Authorization
+    - ref: S3
+      locator: V9 Self-contained Tokens
+    - ref: S3
+      locator: V10 OAuth and OIDC
+    - ref: S4
+      locator: A01:2025 - Broken Access Control
+    - ref: S4
+      locator: A07:2025 - Authentication Failures
+  - id: security.crypto-and-transport
+    title: Use cryptography and secure communication correctly
+    description: Use vetted cryptographic methods and protect data in transit instead of writing your own.
+    keywords:
+    - tls
+    - encryption
+    - hash
+    sources:
+    - ref: S3
+      locator: V11 Cryptography
+    - ref: S3
+      locator: V12 Secure Communication
+    - ref: S4
+      locator: A04:2025 - Cryptographic Failures
+  - id: security.data-protection
+    title: Protect sensitive data
+    description: Identify sensitive data and prevent unintended leakage in responses, logs and configuration.
+    keywords:
+    - pii
+    - personal data
+    sources:
+    - ref: S3
+      locator: V14 Data Protection
+    - ref: S3
+      locator: V13.4 Unintended Information Leakage
+  - id: security.web-api-and-files
+    title: Secure the web frontend, APIs and file handling
+    description: Check browser-side security, API and web service rules, and file upload and download handling.
+    keywords:
+    - xss
+    - csrf
+    - cors
+    - file upload
+    sources:
+    - ref: S3
+      locator: V3 Web Frontend Security
+    - ref: S3
+      locator: V4 API and Web Service
+    - ref: S3
+      locator: V5 File Handling
+  - id: security.protect-environments-and-code
+    title: Protect environments and source code
+    description: Separate and protect each environment used for development, and give code and configuration-as-code only to those who need it.
+    sources:
+    - ref: S2
+      locator: PO.5 Implement and Maintain Secure Environments for Software Development
+    - ref: S2
+      locator: PS.1 Protect All Forms of Code from Unauthorized Access and Tampering
+    - ref: S2
+      locator: 'PS.1.1: Store all forms of code'
+  - id: security.security-criteria
+    title: Set and track security check criteria
+    description: Define the criteria for security checks and track them through the life cycle, not only at the end.
+    sources:
+    - ref: S2
+      locator: PO.4 Define and Use Criteria for Software Security Checks
+    - ref: S2
+      locator: 'PO.4.1: Define criteria for software security checks and track throughout the SDLC.'
+    - ref: S11
+      locator: Pervasive security
+  - id: security.logging-and-detection
+    title: Log security events and protect the logs
+    description: Record the security-relevant events needed to detect and investigate problems, and protect the logs.
+    sources:
+    - ref: S3
+      locator: V16.3 Security Events
+    - ref: S3
+      locator: V16.4 Log Protection
+    - ref: S4
+      locator: A09:2025 - Security Logging & Alerting Failures
+  - id: security.integrity
+    title: Guard software and data integrity
+    description: Verify that code, updates and data have not been tampered with before they are trusted.
+    sources:
+    - ref: S4
+      locator: A08:2025 - Software or Data Integrity Failures
+    - ref: S2
+      locator: PS.2 Provide a Mechanism for Verifying Software Release Integrity
+- id: dependencies
+  title: Dependencies and licences
+  nodes:
+  - id: dependencies.choose-and-verify
+    title: Choose and verify third-party components
+    description: Reuse well-secured components rather than duplicating them, acquire them from trusted sources, and check they meet your requirements.
+    sources:
+    - ref: S2
+      locator: PW.4 Reuse Existing, Well-Secured Software When Feasible Instead of Duplicating Functionality
+    - ref: S2
+      locator: 'PW.4.1: Acquire and maintain well-secured software components'
+    - ref: S2
+      locator: 'PW.4.4: Verify that acquired commercial, open-source, and all other third-party software components comply with the requirements'
+    - ref: ESCO
+      locator: use software libraries
+  - id: dependencies.declare-and-inventory
+    title: Declare dependencies and keep an inventory
+    description: Declare every dependency explicitly, isolate it from the system, and keep a bill of materials of what is in use.
+    keywords:
+    - SBOM
+    - lockfile
+    - requirements.txt
+    - package.json
+    sources:
+    - ref: S10
+      locator: 'II. Dependencies: Explicitly declare and isolate dependencies'
+    - ref: S3
+      locator: '15.1.2: An inventory catalog, such as software bill of materials (SBOM), is maintained'
+    - ref: S13
+      locator: 3.3.1 Bill of materials
+    - ref: S2
+      locator: 'PS.3.2: Collect, safeguard, maintain, and share provenance data for all components of each software release'
+  - id: dependencies.update-timeframes
+    title: Update vulnerable dependencies on a defined schedule
+    description: Set remediation time frames for vulnerable component versions and use alerts and automated updates to meet them.
+    keywords:
+    - dependabot
+    - renovate
+    - npm audit
+    sources:
+    - ref: S3
+      locator: '15.1.1: risk based remediation time frames for 3rd party component versions with vulnerabilities'
+    - ref: S3
+      locator: '15.2.1: only contains components which have not breached the documented update and remediation time frames'
+    - ref: S9
+      locator: 'Securing your supply chain: Dependabot security updates'
+    - ref: S9
+      locator: 'Securing your supply chain: Dependabot version updates'
+  - id: dependencies.supply-chain
+    title: Defend against supply-chain attacks
+    description: Make sure packages come from the expected repository, carry no dependency-confusion risk, and review what a dependency change brings in.
+    keywords:
+    - typosquatting
+    - dependency confusion
+    sources:
+    - ref: S4
+      locator: A03:2025 - Software Supply Chain Failures
+    - ref: S3
+      locator: '15.2.4: no risk of a dependency confusion attack'
+    - ref: S3
+      locator: V15.2 Security Architecture and Dependencies
+    - ref: S9
+      locator: 'Securing your supply chain: Dependency review'
+    - ref: S9
+      locator: 'Pull requests documentation: Review dependency changes'
+  - id: dependencies.licence-compliance
+    title: Check open source licence obligations
+    description: Know the licence of each component added, meet its obligations and review it before use.
+    keywords:
+    - license
+    - GPL
+    - MIT
+    sources:
+    - ref: S13
+      locator: 3.3.2 License compliance
+    - ref: S13
+      locator: 3.1.5 License obligations
+    - ref: S9
+      locator: 'Securing your supply chain: Open source license compliance'
+- id: version-control
+  title: Version control and integration
+  nodes:
+  - id: version-control.version-control
+    title: Keep the change under version control
+    description: Track all code, tests and configuration in revision control so any change can be traced and reverted.
+    keywords:
+    - git
+    sources:
+    - ref: S11
+      locator: Version control
+    - ref: S1
+      locator: 'Chapter 8: Software Configuration Management'
+    - ref: S10
+      locator: 'I. Codebase: One codebase tracked in revision control, many deploys'
+    - ref: ESCO
+      locator: tools for software configuration management
+  - id: version-control.small-changes
+    title: Work in small changes
+    description: Break work into small batches, each coherent and complete, that do not break the build.
+    keywords:
+    - small commits
+    - atomic commit
+    sources:
+    - ref: S11
+      locator: Working in small batches
+    - ref: S5
+      locator: 'Small CLs: Why Write Small CLs?'
+    - ref: S5
+      locator: 'Small CLs: Don’t Break the Build'
+  - id: version-control.commit-messages
+    title: Write clear commit messages
+    description: Write a short first line that says what changed, in a consistent format, and body text that explains why.
+    keywords:
+    - commit message
+    - conventional commit
+    sources:
+    - ref: S8
+      locator: 'Specification: <type>[optional scope]: <description>'
+    - ref: S5
+      locator: 'Writing good CL descriptions: First Line'
+    - ref: S5
+      locator: 'Writing good CL descriptions: Body is Informative'
+  - id: version-control.change-description
+    title: Describe the change for reviewers
+    description: Write a pull request or change description that states what and why, and re-read it before submitting.
+    keywords:
+    - PR description
+    - pull request description
+    sources:
+    - ref: S5
+      locator: 'Writing good CL descriptions: Review the description before submitting the CL'
+    - ref: S9
+      locator: 'Pull requests documentation: Draft pull requests'
+  - id: version-control.integrate-and-merge
+    title: Integrate often and merge cleanly
+    description: Integrate to a shared main line frequently, resolve conflicts, and merge only when status checks pass.
+    keywords:
+    - CI
+    - merge conflict
+    - rebase
+    sources:
+    - ref: S11
+      locator: Trunk-based development
+    - ref: S11
+      locator: Continuous integration
+    - ref: S9
+      locator: 'Pull requests documentation: Merge a pull request'
+    - ref: S9
+      locator: 'Pull requests documentation: Resolve merge conflicts'
+    - ref: S9
+      locator: 'Pull requests documentation: Troubleshoot status checks'
+  - id: version-control.revert
+    title: Be able to revert a change
+    description: Know how to back out a change cleanly if it causes trouble.
+    keywords:
+    - rollback
+    - revert
+    sources:
+    - ref: S9
+      locator: 'Pull requests documentation: Revert a pull request'
+    - ref: S8
+      locator: 'FAQ: How does Conventional Commits handle revert commits?'
+- id: release
+  title: Versioning and release
+  nodes:
+  - id: release.versioning
+    title: Choose the version number
+    description: 'Version the software by a defined scheme: declare a public API, and decide whether a change is a patch, minor or major release.'
+    keywords:
+    - semver
+    - version bump
+    sources:
+    - ref: S6
+      locator: 'Semantic Versioning Specification (SemVer): Software using Semantic Versioning MUST declare a public API.'
+    - ref: S6
+      locator: 'FAQ: How should I deal with revisions in the 0.y.z initial development phase?'
+    - ref: S6
+      locator: 'FAQ: How do I know when to release 1.0.0?'
+  - id: release.breaking-changes
+    title: Flag breaking changes
+    description: Mark a change that breaks backward compatibility so the version number and the message both say so.
+    keywords:
+    - breaking change
+    - backward compatible
+    sources:
+    - ref: S8
+      locator: 'Specification: BREAKING CHANGE'
+    - ref: S6
+      locator: 'FAQ: What do I do if I accidentally release a backward incompatible change as a minor version?'
+  - id: release.changelog
+    title: Write the changelog
+    description: Keep a human-readable log of notable changes, grouped as added, changed, deprecated, removed, fixed or security.
+    keywords:
+    - release notes
+    - CHANGELOG
+    sources:
+    - ref: S7
+      locator: Guiding Principles
+    - ref: S7
+      locator: 'Types of changes: Added / Changed / Deprecated / Removed / Fixed / Security'
+    - ref: S7
+      locator: How do I make a good changelog?
+  - id: release.build-release-run
+    title: Separate build, release and run
+    description: Build once, combine the build with its configuration as a release, and run that release; do not change code at run time.
+    applies_when: the software runs as a network service
+    sources:
+    - ref: S10
+      locator: 'V. Build, release, run: Strictly separate build and run stages'
+    - ref: S11
+      locator: Continuous delivery
+    - ref: S2
+      locator: 'PO.3.1: Specify which tools or tool types must or should be included in each toolchain'
+  - id: release.deploy
+    title: Deploy with automation
+    description: Install the release through a scripted, repeatable process, and coordinate the installation with whoever it affects.
+    keywords:
+    - deploy
+    - rollout
+    sources:
+    - ref: S11
+      locator: Deployment automation
+    - ref: ONET
+      locator: '15-1252.00 task 21666: Coordinate installation of software system.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Coordinate software or hardware installation.'
+  - id: release.archive-and-integrity
+    title: Archive each release and make it verifiable
+    description: Archive and protect each release, with a way to verify its integrity and provenance.
+    keywords:
+    - signing
+    - checksum
+    - artifact
+    sources:
+    - ref: S2
+      locator: PS.3 Archive and Protect Each Software Release
+    - ref: S2
+      locator: PS.2 Provide a Mechanism for Verifying Software Release Integrity
+  - id: release.environment-parity
+    title: Keep environments alike
+    description: Keep development, staging and production as similar as possible so what is tested is what runs.
+    applies_when: the software runs as a network service
+    sources:
+    - ref: S10
+      locator: 'X. Dev/prod parity: Keep development, staging, and production as similar as possible'
+    - ref: ONET
+      locator: '15-1253.00 task 14656: Install and configure recreations of software production environments to allow testing of software performance.'
+- id: operations
+  title: Operation and monitoring
+  nodes:
+  - id: operations.monitoring
+    title: Monitor the system and use the signals
+    description: Watch performance and function against specification, and use what you learn for engineering and business decisions.
+    keywords:
+    - observability
+    - metrics
+    - dashboard
+    sources:
+    - ref: S11
+      locator: Monitoring and observability
+    - ref: ONET
+      locator: '15-1252.00 task 21671: Monitor functioning of equipment to ensure system operates in conformance with specifications.'
+    - ref: ONET
+      locator: '15-1253.00 task 14654: Monitor program performance to ensure efficient and problem-free operations.'
+    - ref: S11
+      locator: Monitoring systems to inform business decisions
+    - ref: S1
+      locator: 'Chapter 6: Software Engineering Operations'
+  - id: operations.logs
+    title: Treat logs as event streams
+    description: Emit logs as a stream of events and cover the events needed to investigate problems.
+    applies_when: the software runs as a network service
+    keywords:
+    - logging
+    - log level
+    sources:
+    - ref: S10
+      locator: 'XI. Logs: Treat logs as event streams'
+    - ref: S3
+      locator: V16.2 General Logging
+    - ref: S3
+      locator: V16.1 Security Logging Documentation
+  - id: operations.failure-notification
+    title: Get early warning of failure
+    description: Notify the right people when something is failing before users report it.
+    keywords:
+    - alert
+    - pager
+    - on-call
+    sources:
+    - ref: S11
+      locator: Proactive failure notification
+  - id: operations.admin-processes
+    title: Run admin tasks as one-off processes and shut down gracefully
+    description: Run migrations and maintenance tasks as one-off processes in the same release, and keep start-up fast and shutdown graceful.
+    applies_when: the software runs as a network service
+    sources:
+    - ref: S10
+      locator: 'XII. Admin processes: Run admin/management tasks as one-off processes'
+    - ref: S10
+      locator: 'IX. Disposability: Maximize robustness with fast startup and graceful shutdown'
+  - id: operations.root-cause
+    title: Find the root cause of a failure
+    description: Analyse each vulnerability or failure to find its root cause and update the process so it does not recur.
+    keywords:
+    - postmortem
+    - incident
+    - root cause
+    sources:
+    - ref: S2
+      locator: RV.3 Analyze Vulnerabilities to Identify Their Root Causes
+    - ref: S2
+      locator: 'RV.3.1: Analyze identified vulnerabilities to determine their root causes.'
+    - ref: S2
+      locator: 'RV.3.4: Review the SDLC process, and update it if appropriate'
+- id: maintenance
+  title: Maintenance and defect handling
+  nodes:
+  - id: maintenance.fix-defects
+    title: Fix defects in released software
+    description: Correct the error in existing software, test the fix and release it with a clear note.
+    keywords:
+    - bugfix
+    - hotfix
+    sources:
+    - ref: S1
+      locator: 'Chapter 7: Software Maintenance'
+    - ref: ONET
+      locator: '15-1252.00 task 21670: Modify existing software to correct errors, adapt it to new hardware, or upgrade interfaces and improve performance.'
+    - ref: ONET
+      locator: '15-1253.00 task 14658: Identify program deviance from standards, and suggest modifications to ensure compliance.'
+  - id: maintenance.first-look
+    title: Take a first look at a breakdown
+    description: Review configuration files, logs and code to find where something broke, using debugging tools and known anomalies.
+    keywords:
+    - debug
+    - stack trace
+    - log
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14661: Perform initial debugging procedures by reviewing configuration files, logs, or code pieces to determine breakdown source.'
+    - ref: ESCO
+      locator: debug software
+    - ref: ESCO
+      locator: ICT debugging tools
+    - ref: ESCO
+      locator: software anomalies
+  - id: maintenance.user-problems
+    title: Handle problems users report
+    description: Investigate problems referred by support, give technical help and answer on maintenance questions.
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14651: Investigate customer problems referred by technical support.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Provide technical support for software maintenance or use.'
+    - ref: ESCO
+      locator: collect customer feedback on applications
+  - id: maintenance.vulnerability-watch
+    title: Watch for new vulnerabilities
+    description: Gather reports on vulnerabilities in the software and its components, investigate credible ones, and have a disclosure policy.
+    sources:
+    - ref: S2
+      locator: RV.1 Identify and Confirm Vulnerabilities on an Ongoing Basis
+    - ref: S2
+      locator: 'RV.1.1: Gather information from software acquirers, users, and public sources on potential vulnerabilities'
+    - ref: S2
+      locator: 'RV.1.3: Have a policy that addresses vulnerability disclosure and remediation'
+    - ref: S9
+      locator: 'Securing your supply chain: Dependabot alerts'
+  - id: maintenance.remediate-vulnerabilities
+    title: Assess, prioritise and remediate vulnerabilities
+    description: Analyse the risk of each vulnerability and plan and carry out a response.
+    keywords:
+    - CVE
+    - security advisory
+    sources:
+    - ref: S2
+      locator: RV.2 Assess, Prioritize, and Remediate Vulnerabilities
+    - ref: S2
+      locator: 'RV.2.1: Analyze each vulnerability to gather sufficient information about risk to plan its remediation or other risk response.'
+    - ref: S2
+      locator: 'RV.2.2: Plan and implement risk responses for vulnerabilities.'
+    - ref: S9
+      locator: How-tos for fixing vulnerabilities
+  - id: maintenance.deprecations
+    title: Announce and handle deprecations
+    description: Say in advance what is being deprecated and removed so users are not surprised.
+    sources:
+    - ref: S7
+      locator: 'Can changelogs be bad?: Ignoring Deprecations'
+    - ref: S7
+      locator: 'Types of changes: Deprecated'
+  - id: maintenance.bad-release
+    title: Recover from a bad release
+    description: If a release turns out to break compatibility, fix forward or retract, and say so in the notes.
+    sources:
+    - ref: S6
+      locator: 'FAQ: What do I do if I accidentally release a backward incompatible change as a minor version?'
+    - ref: S9
+      locator: 'Pull requests documentation: Revert a pull request'
+  - id: maintenance.performance
+    title: Improve performance and adapt to new environments
+    description: Tune slow code or adapt it to a changed platform or interface without breaking behaviour.
+    keywords:
+    - optimise
+    - profiling
+    - slow
+    sources:
+    - ref: ONET
+      locator: '15-1252.00 task 21670: Modify existing software to correct errors, adapt it to new hardware, or upgrade interfaces and improve performance.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Modify software programs to improve performance.'
+    - ref: ONET
+      locator: '15-1252.00 detailed work activity: Monitor computer system performance to ensure proper operation.'
+- id: documentation
+  title: Documentation
+  nodes:
+  - id: documentation.technical-docs
+    title: Document the software and the change
+    description: Provide technical documentation and update it with the change that makes it out of date.
+    keywords:
+    - README
+    - docs
+    sources:
+    - ref: ESCO
+      locator: provide technical documentation
+    - ref: ONET
+      locator: '15-1252.00 task 21669: Develop or direct software system testing or validation procedures, programming, or documentation.'
+    - ref: S5
+      locator: 'What to look for in a code review: Documentation'
+  - id: documentation.review-docs
+    title: Review documentation for accuracy
+    description: Check technical accuracy, compliance and completeness of documents, and keep test procedures written down.
+    sources:
+    - ref: ONET
+      locator: '15-1253.00 task 14647: Review software documentation to ensure technical accuracy, compliance, or completeness, or to mitigate risks.'
+    - ref: ONET
+      locator: '15-1253.00 task 14648: Document test procedures to ensure replicability and compliance with standards.'
+  - id: documentation.admin-settings
+    title: Document default settings for administrators
+    description: Implement the secure default settings and write down each setting for those who run the software.
+    sources:
+    - ref: S2
+      locator: 'PW.9.2: Implement the default settings (or groups of default settings, if applicable), and document each setting for software administrators.'
+  - id: documentation.config-and-architecture
+    title: Document configuration and security architecture
+    description: Keep documentation of how the software is configured and how its secure coding, architecture and logging are meant to work.
+    sources:
+    - ref: S3
+      locator: V13.1 Configuration Documentation
+    - ref: S3
+      locator: V15.1 Secure Coding and Architecture Documentation
+    - ref: S3
+      locator: V16.1 Security Logging Documentation
+- id: agent
+  title: Risks specific to AI agent help
+  nodes:
+  - id: agent.wrong-output
+    title: Do not trust confident but wrong output
+    description: Treat generated code, API names and explanations as unverified until run and checked.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    keywords:
+    - hallucination
+    - made-up
+    sources:
+    - ref: S16
+      locator: 2.2 Confabulation
+    - ref: S14
+      locator: LLM09:2025 Misinformation
+  - id: agent.injected-instructions
+    title: Resist instructions hidden in content
+    description: Do not follow instructions found in files, web pages or tool output; they can redirect the agent.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    sources:
+    - ref: S14
+      locator: LLM01:2025 Prompt Injection
+    - ref: S15
+      locator: ASI01 - Agent Goal Hijack
+  - id: agent.limit-agency
+    title: Limit what the agent may do
+    description: Give the agent only the tools, permissions and identity it needs, and guard against misuse of those tools.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    keywords:
+    - permissions
+    - sandbox
+    sources:
+    - ref: S14
+      locator: LLM06:2025 Excessive Agency
+    - ref: S15
+      locator: ASI02 - Tool Misuse
+    - ref: S15
+      locator: ASI03 - Identity & Privilege Abuse
+  - id: agent.generated-code-execution
+    title: Treat generated output as untrusted before running it
+    description: Check generated code and commands before executing them or passing them to other systems.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    sources:
+    - ref: S14
+      locator: LLM05:2025 Improper Output Handling
+    - ref: S15
+      locator: ASI05 - Unexpected Code Execution
+  - id: agent.suggested-dependencies
+    title: Check dependencies the agent suggests
+    description: Verify that suggested packages and components exist and are legitimate before adding them.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    sources:
+    - ref: S14
+      locator: LLM03:2025 Supply Chain
+    - ref: S15
+      locator: ASI04 - Agentic Supply Chain Vulnerabilities
+    - ref: S16
+      locator: 2.12 Value Chain and Component Integration
+  - id: agent.sensitive-data
+    title: Keep sensitive data out of prompts and output
+    description: Do not paste secrets or private data into the agent, and check that output does not reveal them.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    sources:
+    - ref: S14
+      locator: LLM02:2025 Sensitive Information Disclosure
+    - ref: S16
+      locator: 2.9 Information Security
+    - ref: S16
+      locator: 2.4 Data Privacy
+  - id: agent.generated-ip
+    title: Check ownership and licence of generated code
+    description: Be aware that generated code may copy protected material and check its licence and origin.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    sources:
+    - ref: S16
+      locator: 2.10 Intellectual Property
+  - id: agent.human-oversight
+    title: Keep a human checking the agent
+    description: Stay critical of the agent's output and keep a person responsible for review; do not over-trust it.
+    applies_when: an AI agent writes or runs code or acts on the repository
+    keywords:
+    - review the agent
+    - over-trust
+    sources:
+    - ref: S15
+      locator: ASI09 - Human-Agent Trust Exploitation
+    - ref: S16
+      locator: 2.7 Human-AI Configuration
+    - ref: S11
+      locator: Version control
