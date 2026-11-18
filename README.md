@@ -38,6 +38,10 @@ Then the full table: every node of the map, with the skill's own lines as eviden
 
 The report also lists findings the model raised that no source backs (marked unsourced), and a trace of which step's output feeds which later step.
 
+## Second report
+
+[Five public coding skills](reports/code-5.md), audited with the new `software` map and version 0.3.0. Eight Needed findings, all of which held on a separate re-check, among them a security-audit skill whose agents are never told that the target repository's text is not instructions, and a TDD skill that never says to watch the test fail.
+
 ## Install
 
 ```bash
@@ -95,6 +99,7 @@ The split between a shared catalogue and a personal profile follows established 
 - [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
+- [x] Map: `software` and a report on five coding skills ([reports/code-5.md](reports/code-5.md))
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
 - [x] Report: [what 20 public video skills leave out](reports/video-20.md)

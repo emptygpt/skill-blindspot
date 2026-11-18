@@ -7,13 +7,17 @@ tokens on judgement:
   prepare  read the skill folder and build a worksheet: files read, files the
            skill mentions that are missing, its headings, and for every map
            node the lines of the skill that look related
+  grep     search every file under one or more folders, code included, for
+           the words of a finding before it is rated Needed
   sources  print the sources of some map nodes, for the report
   lint     check a finished report against the map: unknown node ids, nodes
            missing from the table, absent or shallow nodes that no finding
            mentions, counts that do not add up
 
 Usage:
-  python3 blindspot.py prepare <skill-folder> --map <id> [--out worksheet.md]
+  python3 blindspot.py prepare <skill-folder> --map <id> --out worksheet.md
+           (writes worksheet.md and worksheet-nodes.md; open the nodes file in step 3)
+  python3 blindspot.py grep <folder> [<folder> ...] -e <term> [-e <term> ...]
   python3 blindspot.py sources --map <id> <node-id> [<node-id> ...]
   python3 blindspot.py lint <report.md> --map <id> [--profile <.blindspot.yaml>]
   python3 blindspot.py maps
@@ -260,6 +264,7 @@ def cmd_prepare(args):
         out += [f"- excluded node: {n}" for n in sorted(excl_nodes)]
         out += [f"- excluded finding: {f}" for f in excl_findings]
         out.append("")
+    head_len = len(out)
     out.append("## Nodes")
     out.append("Each node with the skill lines that share its key words. `no hit` means no shared key words, not that it is absent.")
     no_hit = 0
@@ -283,12 +288,44 @@ def cmd_prepare(args):
                 out.append(f"  - {rel}:{i}: {clip(text, 110)}")
     out.append("")
     out.append(f"Summary: {total_nodes} nodes, {total_nodes - no_hit} with hits, {no_hit} without.")
-    text = "\n".join(out) + "\n"
     if args.out:
-        pathlib.Path(args.out).write_text(text, encoding="utf-8")
-        print(f"wrote {args.out}: {total_nodes} nodes, {total_nodes - no_hit} with hits, {no_hit} without, {len(miss)} missing files")
+        main_path = pathlib.Path(args.out)
+        main_path.parent.mkdir(parents=True, exist_ok=True)
+        nodes_path = main_path.with_name(main_path.stem + "-nodes" + main_path.suffix)
+        main_path.write_text("\n".join(out[:head_len] + [f"Map nodes are in {nodes_path.name}. Open it in step 3, after the step 2 list is written."]) + "\n", encoding="utf-8")
+        nodes_path.write_text("\n".join([out[0], ""] + out[head_len:]) + "\n", encoding="utf-8")
+        print(f"wrote {main_path} and {nodes_path}: {total_nodes} nodes, {total_nodes - no_hit} with hits, {no_hit} without, {len(miss)} missing files")
     else:
-        sys.stdout.write(text)
+        sys.stdout.write("\n".join(out) + "\n")
+
+
+def cmd_grep(args):
+    terms = [t.lower() for t in args.e]
+    shown = 0
+    for folder in args.folders:
+        root = pathlib.Path(folder).resolve()
+        for p in sorted(root.rglob("*")):
+            if not p.is_file() or any(part in SKIP_DIRS for part in p.relative_to(root).parts):
+                continue
+            if p.suffix.lower() not in PROSE_EXT | DATA_EXT | CODE_EXT and p.suffix:
+                continue
+            if p.stat().st_size > MAX_FILE_BYTES:
+                continue
+            try:
+                lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
+            except OSError:
+                continue
+            for i, line in enumerate(lines, 1):
+                low = line.lower()
+                hit = [t for t in terms if t in low]
+                if hit:
+                    shown += 1
+                    if shown <= args.max:
+                        print(f"{p.relative_to(root.parent)}:{i}: {clip(line.strip(), 160)}")
+    if shown > args.max:
+        print(f"... {shown - args.max} more lines; narrow the terms")
+    if not shown:
+        print("no match in " + ", ".join(args.folders))
 
 
 def cmd_sources(args):
@@ -381,11 +418,13 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("prepare"); p.add_argument("skill"); p.add_argument("--map", required=True)
     p.add_argument("--profile"); p.add_argument("--out")
+    p = sub.add_parser("grep"); p.add_argument("folders", nargs="+"); p.add_argument("-e", action="append", required=True)
+    p.add_argument("--max", type=int, default=40)
     p = sub.add_parser("sources"); p.add_argument("--map", required=True); p.add_argument("nodes", nargs="+")
     p = sub.add_parser("lint"); p.add_argument("report"); p.add_argument("--map", required=True); p.add_argument("--profile")
     sub.add_parser("maps")
     args = ap.parse_args()
-    return {"prepare": cmd_prepare, "sources": cmd_sources, "lint": cmd_lint, "maps": cmd_maps}[args.cmd](args) or 0
+    return {"prepare": cmd_prepare, "grep": cmd_grep, "sources": cmd_sources, "lint": cmd_lint, "maps": cmd_maps}[args.cmd](args) or 0
 
 
 if __name__ == "__main__":

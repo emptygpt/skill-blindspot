@@ -27,12 +27,15 @@ A skill author and a model both work inside the frame the skill started with. Th
 ```bash
 S=<folder of this file>/scripts/blindspot.py
 python3 $S maps                                               # list maps and their scope
-python3 $S prepare <skill-folder> --map <id> --out worksheet.md
+python3 $S prepare <skill-folder> --map <id> --out worksheet.md   # also writes worksheet-nodes.md
+python3 $S grep <skill-folder> [<repo-root>] -e <term> -e <term>  # before rating a finding Needed
 python3 $S sources --map <id> <node-id> [<node-id> ...]       # sources for the report
 python3 $S lint blindspot-report.md --map <id>                # check the finished report
 ```
 
-`prepare` reads every prose file in the skill folder and the data files `SKILL.md` names, lists code files by name without reading them, flags files `SKILL.md` links to that are missing, and writes a worksheet: for each map node, its title and description and the lines of the skill that share its key words. Hits are hints. A node without a hit can be covered in other words.
+`prepare` reads every prose file in the skill folder and the data files `SKILL.md` names, lists code files by name without reading them, and flags files `SKILL.md` links to that are missing. It writes two files: `worksheet.md` with the files and headings, and `worksheet-nodes.md` with each map node and the lines of the skill that share its key words. Hits are hints. A node without a hit can be covered in other words.
+
+`grep` searches every file, code included, and prints matching lines. Rules a skill enforces in its scripts or engine are often only in code.
 
 ## Inputs
 
@@ -48,7 +51,7 @@ Do the steps in this order. The order matters: step 2 must be finished and writt
 
 ### 1. Scope
 
-Read `SKILL.md` in full. If you use the helper, run `prepare` now, but do not read the node list yet: read only its Files and headings sections, then read the other files the skill tells the agent to read. Write three to five lines:
+Read `SKILL.md` in full. If you use the helper, run `prepare` now and read `worksheet.md` (files and headings), then the other files the skill tells the agent to read. Do not open `worksheet-nodes.md` until step 3. Write three to five lines:
 
 - what kind of work it does and what it delivers
 - where its responsibility starts and ends (for example: ends at a rendered file, does not publish)
@@ -69,7 +72,7 @@ List up to 15, each as one specific item. "Fact checking of figures in the scrip
 
 Skip this step if there is no map.
 
-With the helper, work from the worksheet's node list instead of the map file. It has every node of the combined map, already without the nodes the narrower map excludes. Open a hit line before you mark a node `covered`; a shared word is not coverage. Without the helper, read the map file.
+With the helper, work from `worksheet-nodes.md` instead of the map file. It has every node of the combined map, already without the nodes the narrower map excludes. Open a hit line before you mark a node `covered`; a shared word is not coverage. Without the helper, read the map file.
 
 For each node in the map, decide one of:
 
@@ -107,7 +110,7 @@ Combine the three lists. Two findings that name the same gap become one, and it 
 
 Before a finding goes in **Needed**, check it twice:
 
-- Search the whole skill folder for it, not only `SKILL.md`: references, docs, templates, recipe files, and the names and comments of scripts. If it is covered there, even in part, it is not Needed.
+- Search the whole skill folder for it, not only `SKILL.md`: references, docs, templates, recipe files, and the code. If the skill runs an engine, scripts or other skills elsewhere in its repository, search those too. With the helper, run `grep` on the skill folder and the repository root with three to five words for the finding, including likely identifiers (for example `disclos`, `label`, `consent`). If it is covered there, even in part, it is not Needed.
 - Check it against the scope from step 1. If the stage happens outside the skill, such as publishing for a skill that stops at a file, it is not Needed, and usually not a finding at all.
 
 Then sort the findings into three bands, judged against the scope from step 1:
