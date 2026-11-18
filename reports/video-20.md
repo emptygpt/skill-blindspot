@@ -4,11 +4,13 @@ Audit date: 2026-11-17. Tool: `blindspot` 0.2.1 with the `video`, `video-short` 
 
 We ran `blindspot` on 20 public agent skills for making videos: 8 short-form, 8 long-form or explainer, and 4 general. The 20 were taken from two community lists, [awesome-claude-video-skills](https://github.com/zhuyansen/awesome-claude-video-skills) and [awesome-video-skills](https://github.com/ella-wang-opus/awesome-video-skills). Each one describes a multi-stage workflow. We left out skills that only wrap one tool.
 
+> **Re-check, same day:** we checked all 46 Needed findings against each skill's whole repository. 45 point at a real gap, but only 12 hold as Needed: 33 were partly covered elsewhere in the repository or belong in a lower band, and 1 was wrong. The counts in the table below are the audit as first run. Details and the per-finding verdicts: [video-20/recheck.md](video-20/recheck.md). `blindspot` 0.3.0 changes the audit because of it.
+
 ## The short version
 
 The 20 skills are good at making the video. What they skip happens **around** the video: telling viewers that content was made by AI, checking the facts the video states, rights to footage, music and voices, and having someone watch or listen to the final file.
 
-| Gap (needed findings only) | Skills | Example sources in the map |
+| Gap (needed findings as first reported) | Skills | Example sources in the map |
 |---|---|---|
 | No AI-content disclosure step | **11 of 20** | Douyin rules "抖音内容标识使用规范" and "AIGC标识的水印与元数据规范"; a video production course syllabus, "Use AI responsibly" |
 | Claims in the script are not researched or fact-checked | **8 of 20** | O*NET 27-3041.00 "Verify facts, dates, and statistics"; ESCO "check correctness of information" |
@@ -65,7 +67,7 @@ The model found 44 of the 46 by itself. This matches our [earlier validation](..
 
 ## Limits
 
-- **One run per skill, by one model.** The audits were run by Claude Sonnet subagents. No person re-checked every finding. We spot-checked two (V04, V17) against the skill text. One summary overstated the skill and was reworded here: V04 does not forbid AI labels. It defers them to the user at the final stage and removes them from generated output.
+- **One run per skill, by one model.** The audits were run by Claude Sonnet subagents. Every Needed finding was later re-checked by a second model run against the whole repository ([recheck](video-20/recheck.md)); no person checked all of them. We checked two by hand (V04, V20). V04 does not forbid AI labels: it defers them to the user at the final stage and removes them from generated output. V20's engine does block delivery until an AI label is recorded.
 - **Text only.** No code from these repositories was run. Where a skill relies on an engine or service not in the repository, behaviour was judged from the documentation.
 - **Map choice affects the counts.** V10 makes 30–90 second videos but was audited with the long-form map, so many nodes were marked not applicable.
 - **"Needed" is a judgment.** It means needed for the skill's own stated goal, not needed for every user. A skill that stops at an MP4 file is not faulted for missing publishing steps.

@@ -8,11 +8,13 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.2.** The skill and five maps are here. It has been tested on twelve altered skills and used to audit 20 public video skills. It is early and the report format may change.
+> **Status: v0.3.** The skill, five maps and a helper script are here. It has been tested on twelve altered skills, used to audit 20 public video skills, and corrected after we re-checked that audit. It is early and the report format may change.
 
 ## First report
 
-[What 20 public video skills leave out](reports/video-20.md): 11 of 20 have no step to label AI-generated content, 10 have no rights step for footage, music or voices, 9 call the video done without anyone watching the final file, and 8 never fact-check the script.
+[What 20 public video skills leave out](reports/video-20.md). The gaps cluster around the video rather than in it: labelling AI-generated content, rights to footage, music and voices, fact-checking the script, and someone watching the final file.
+
+Then we checked our own report. Of the 46 findings rated Needed, 45 point at a real gap, but only 12 hold at that level: 33 were partly covered in files the audit had not read, or belong in a lower band, and 1 was wrong. [The re-check](reports/video-20/recheck.md) is public, and version 0.3.0 changes how the audit reads a skill because of it.
 
 ## What you get
 
@@ -75,6 +77,8 @@ So this tool uses both. The model finds gaps. The map supplies the evidence, the
 1. **Ask.** The model lists what it thinks the skill is missing, from its own knowledge of the domain.
 2. **Map.** Each node of the domain map is checked against the skill and marked covered, shallow, absent or excluded on purpose, with the quoted lines as evidence. The map is a YAML tree. Every node carries an id, a parent, a source, a link and a licence. A node with no source is not allowed in.
 3. **Trace.** Each step's output is followed to see whether a later step uses it. This finds gaps that no map lists.
+A small Python script (standard library only) does the mechanical parts: it reads the whole skill folder, builds a worksheet of map nodes with the skill lines that look related, fetches sources for the report, and checks the finished report against the map. The model's tokens go to judgement, not to reading the full map. Without Python the skill still works, by reading.
+
 4. **Profile.** Not every gap should be filled. You record what does not apply to you, with an optional reason, in a small profile file. The next run respects it. The public map stays the same for everyone and your profile holds what is specific to you.
 
 The split between a shared catalogue and a personal profile follows established practice in other fields, such as profiles in the NIST Cybersecurity Framework and catalogues and profiles in OSCAL.
@@ -82,7 +86,7 @@ The split between a shared catalogue and a personal profile follows established 
 ## What it is not
 
 - It does not score your skill or say it is good.
-- It does not generate the missing parts for you.
+- It does not write the missing parts for you. Each Needed finding says where a fix belongs and what it should add.
 - It does not replace running your skill on real tasks.
 
 ## Roadmap

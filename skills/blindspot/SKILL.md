@@ -3,7 +3,7 @@ name: blindspot
 description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
 license: MIT
 metadata:
-  version: 0.2.1
+  version: 0.3.0
 ---
 
 # blindspot
@@ -18,11 +18,26 @@ A skill author and a model both work inside the frame the skill started with. Th
 - Every finding carries its origin: `model`, `map`, `trace`, or a combination.
 - A finding that comes only from the model is kept and marked `unsourced`. Do not attach a source you have not read in the map.
 - Do not score the skill. Do not rewrite it. Do not add entries to the user's profile unless they ask.
+- Fewer, solid findings beat many weak ones. A Needed finding that turns out to be covered elsewhere in the skill costs the author's trust in every other finding.
+
+## Helper script
+
+`scripts/blindspot.py` (Python 3.8+, standard library only) does the mechanical parts so the model reads less. Use it when Python is available; if it is not, do the same work by reading.
+
+```bash
+S=<folder of this file>/scripts/blindspot.py
+python3 $S maps                                               # list maps and their scope
+python3 $S prepare <skill-folder> --map <id> --out worksheet.md
+python3 $S sources --map <id> <node-id> [<node-id> ...]       # sources for the report
+python3 $S lint blindspot-report.md --map <id>                # check the finished report
+```
+
+`prepare` reads every prose file in the skill folder and the data files `SKILL.md` names, lists code files by name without reading them, flags files `SKILL.md` links to that are missing, and writes a worksheet: for each map node, its title and description and the lines of the skill that share its key words. Hits are hints. A node without a hit can be covered in other words.
 
 ## Inputs
 
 1. **The skill.** A folder with a `SKILL.md`. Read `SKILL.md` and any file it tells the agent to read, such as files under `references/`. If a referenced file is absent, say so in the report and do not guess its content.
-2. **A domain map** (optional). A file that lists the stages and concerns of a domain, each with a source. Look for one in this order: a path the user gives, then the `maps/` folder next to this file. Read `maps/INDEX.md` to see which maps exist and pick the one whose scope fits the skill. If the user names a map, use that one. If none fits, run without a map and say so.
+2. **A domain map** (optional). A file that lists the stages and concerns of a domain, each with a source. Look for one in this order: a path the user gives, then the `maps/` folder next to this file. Run `python3 $S maps` or read `maps/INDEX.md` to see which maps exist and pick the one whose scope fits the skill. If the user names a map, use that one. If none fits, run without a map and say so.
 
    A map may build on another one. When its header has `extends: <id>`, load the base map first, drop the base nodes listed under `exclude`, then add the map's own nodes. Use the combined set in step 3 and name both maps in the report.
 3. **A profile** (optional). `.blindspot.yaml` in the skill's folder. It lists map nodes or findings the author leaves out on purpose.
@@ -33,7 +48,7 @@ Do the steps in this order. The order matters: step 2 must be finished and writt
 
 ### 1. Scope
 
-Read the skill. Write three to five lines:
+Read `SKILL.md` in full. If you use the helper, run `prepare` now, but do not read the node list yet: read only its Files and headings sections, then read the other files the skill tells the agent to read. Write three to five lines:
 
 - what kind of work it does and what it delivers
 - where its responsibility starts and ends (for example: ends at a rendered file, does not publish)
@@ -53,6 +68,8 @@ List up to 15, each as one specific item. "Fact checking of figures in the scrip
 ### 3. Map
 
 Skip this step if there is no map.
+
+With the helper, work from the worksheet's node list instead of the map file. It has every node of the combined map, already without the nodes the narrower map excludes. Open a hit line before you mark a node `covered`; a shared word is not coverage. Without the helper, read the map file.
 
 For each node in the map, decide one of:
 
@@ -88,9 +105,14 @@ Combine the three lists. Two findings that name the same gap become one, and it 
 - For each `model` finding with no matching map node, look once more through the map for a node that covers it. If one exists, add the map origin and its source. If none exists, mark it `unsourced`.
 - List `unsourced` findings separately at the end as candidates for the map. They may be real gaps that the map does not yet cover. The user or the map's maintainers can confirm them with a source.
 
+Before a finding goes in **Needed**, check it twice:
+
+- Search the whole skill folder for it, not only `SKILL.md`: references, docs, templates, recipe files, and the names and comments of scripts. If it is covered there, even in part, it is not Needed.
+- Check it against the scope from step 1. If the stage happens outside the skill, such as publishing for a skill that stops at a file, it is not Needed, and usually not a finding at all.
+
 Then sort the findings into three bands, judged against the scope from step 1:
 
-- **Needed**: work of this kind is unreliable or unsafe without it
+- **Needed**: work of this kind is unreliable or unsafe without it, the stage is inside the skill's scope, and nothing in the skill folder covers it
 - **Worth considering**: commonly expected, depends on the author's situation
 - **Minor**
 
@@ -118,6 +140,7 @@ Map: <map id and version, or "none">    Profile: <path, or "none">    Date: <dat
 1. **<gap>** [model+map]
    Map node: <id> — source: <source title, locator>
    Why: <what was searched for and not found, or the quoted line that shows it is shallow>
+   Fix: <one sentence: which step of the skill to change and what to add there>
 
 ### Worth considering
 ...
@@ -139,6 +162,10 @@ Map: <map id and version, or "none">    Profile: <path, or "none">    Date: <dat
 ```
 
 If there was no map, say in the first lines of the report that every finding is unsourced.
+
+Give every Needed finding a `Fix:` line. Point to a step or file of the skill and say what to add; do not write the new text for the author. Other bands may have one.
+
+With the helper, run `lint` on the finished report and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, and a counts line that does not match the table.
 
 ## Profile format
 

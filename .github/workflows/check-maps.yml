@@ -2,9 +2,9 @@ name: check-maps
 
 on:
   push:
-    paths: ["skills/blindspot/maps/**", "scripts/check_maps.py", ".github/workflows/check-maps.yml"]
+    paths: ["skills/blindspot/maps/**", "skills/blindspot/scripts/**", "scripts/check_maps.py", "reports/**", ".github/workflows/check-maps.yml"]
   pull_request:
-    paths: ["skills/blindspot/maps/**", "scripts/check_maps.py", ".github/workflows/check-maps.yml"]
+    paths: ["skills/blindspot/maps/**", "skills/blindspot/scripts/**", "scripts/check_maps.py", "reports/**", ".github/workflows/check-maps.yml"]
 
 permissions:
   contents: read
@@ -19,3 +19,8 @@ jobs:
           python-version: "3.12"
       - run: pip install pyyaml
       - run: python3 scripts/check_maps.py
+      - name: helper script smoke test
+        run: |
+          python3 skills/blindspot/scripts/blindspot.py maps
+          python3 skills/blindspot/scripts/blindspot.py sources --map video comp.ai-disclosure
+          python3 skills/blindspot/scripts/blindspot.py lint reports/video-20/V03.md --map video-short
