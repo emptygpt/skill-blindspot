@@ -19,6 +19,8 @@ What changed in `blindspot` 0.3.0 because of this:
 - A helper script reads every prose file in the skill folder and lists the code files, so the audit sees more than `SKILL.md`.
 - Before a finding is rated Needed, the audit must search the whole folder and check that the stage is inside the skill's scope.
 
+Ten of these skills were then audited again with 0.3.0: [results](v0.3/README.md).
+
 | Finding | Map node | Re-check | Band after re-check |
 |---|---|---|---|
 | V01-1 | comp.fact-check | holds | Needed |

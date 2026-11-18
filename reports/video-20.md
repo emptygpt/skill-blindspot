@@ -4,7 +4,7 @@ Audit date: 2026-11-17. Tool: `blindspot` 0.2.1 with the `video`, `video-short` 
 
 We ran `blindspot` on 20 public agent skills for making videos: 8 short-form, 8 long-form or explainer, and 4 general. The 20 were taken from two community lists, [awesome-claude-video-skills](https://github.com/zhuyansen/awesome-claude-video-skills) and [awesome-video-skills](https://github.com/ella-wang-opus/awesome-video-skills). Each one describes a multi-stage workflow. We left out skills that only wrap one tool.
 
-> **Re-check, same day:** we checked all 46 Needed findings against each skill's whole repository. 45 point at a real gap, but only 12 hold as Needed: 33 were partly covered elsewhere in the repository or belong in a lower band, and 1 was wrong. The counts in the table below are the audit as first run. Details and the per-finding verdicts: [video-20/recheck.md](video-20/recheck.md). `blindspot` 0.3.0 changes the audit because of it.
+> **Re-check, same day:** we checked all 46 Needed findings against each skill's whole repository. 45 point at a real gap, but only 12 hold as Needed: 33 were partly covered elsewhere in the repository or belong in a lower band, and 1 was wrong. The counts in the table below are the audit as first run. Details and the per-finding verdicts: [video-20/recheck.md](video-20/recheck.md). `blindspot` 0.3.0 changes the audit because of it; a [re-audit of ten skills with 0.3.0](video-20/v0.3/README.md) measures the effect.
 
 ## The short version
 

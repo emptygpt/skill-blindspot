@@ -14,7 +14,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 [What 20 public video skills leave out](reports/video-20.md). The gaps cluster around the video rather than in it: labelling AI-generated content, rights to footage, music and voices, fact-checking the script, and someone watching the final file.
 
-Then we checked our own report. Of the 46 findings rated Needed, 45 point at a real gap, but only 12 hold at that level: 33 were partly covered in files the audit had not read, or belong in a lower band, and 1 was wrong. [The re-check](reports/video-20/recheck.md) is public, and version 0.3.0 changes how the audit reads a skill because of it.
+Then we checked our own report. Of the 46 findings rated Needed, 45 point at a real gap, but only 12 hold at that level: 33 were partly covered in files the audit had not read, or belong in a lower band, and 1 was wrong. [The re-check](reports/video-20/recheck.md) is public, and version 0.3.0 changes how the audit reads a skill because of it. [Re-auditing ten of the skills with 0.3.0](reports/video-20/v0.3/README.md) gave 13 Needed findings instead of 33, and 8 of them held on review (62%, up from 30%). Both reviews were model runs and they do not always agree, so the size of the gain is rough.
 
 ## What you get
 
