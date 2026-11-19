@@ -50,6 +50,42 @@ class BenchmarkTests(unittest.TestCase):
         work = self.remove('Skill\n=====\nReview\n------\nCheck.\n## Send\nSend.\n', ['Review', 'Send'])
         self.assertEqual((work / 'altered/SKILL.md').read_text(), 'Skill\n=====\n')
 
+    def test_remove_excludes_vcs_metadata(self):
+        skill = self.root / 'skill'
+        skill.mkdir()
+        for name in ('.git', '.hg', '.svn'):
+            metadata = skill / 'nested' / name
+            metadata.mkdir(parents=True)
+            (metadata / 'original').write_text('## Review\nCheck.\n')
+        work = self.remove('# Skill\n## Review\nCheck.\n', ['Review'])
+        for name in ('.git', '.hg', '.svn'):
+            self.assertFalse(list((work / 'altered').rglob(name)))
+
+    def test_remove_rejects_symlinks(self):
+        skill = self.root / 'skill'
+        skill.mkdir()
+        for name, target in [('backup.md', 'SKILL.md'), ('alias', '.'), ('broken', 'missing')]:
+            with self.subTest(name=name):
+                link = skill / name
+                link.symlink_to(target)
+                with self.assertRaisesRegex(ValueError, name):
+                    self.remove('# Skill\n## Review\nCheck.\n', ['Review'])
+                self.assertFalse((self.root / 'run').exists())
+                link.unlink()
+
+    def test_remove_rejects_backup_copies_and_cleans_work_directory(self):
+        skill = self.root / 'skill'
+        skill.mkdir()
+        text = '# Skill\n## Review\nCheck.\n## Send\nSend.\n'
+        (skill / 'SKILL.md.bak').write_text(text)
+        (skill / 'copy.bin').write_bytes(b'prefix\x00## Send\nSend.\n')
+        with self.assertRaises(ValueError) as error:
+            self.remove(text, ['Review', 'Send'])
+        self.assertIn('SKILL.md.bak', str(error.exception))
+        self.assertIn('copy.bin', str(error.exception))
+        self.assertFalse((self.root / 'run').exists())
+        self.assertEqual((skill / 'SKILL.md.bak').read_text(), text)
+
     def test_findings_and_empty(self):
         report = self.root / 'report.md'
         out = self.root / 'marks.csv'
