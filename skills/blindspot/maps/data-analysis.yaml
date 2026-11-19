@@ -1,0 +1,402 @@
+# skill-blindspot map: data analysis and visualisation (maps/data-analysis.yaml)
+#
+# Rules for this map
+#   - Every node must cite at least one source that really exists in the
+#     "sources" list, with a locator copied from that source: a section or
+#     resource title, an O*NET task sentence with Task ID, a criterion title,
+#     or an article number and short statement.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Gaps that no source covers are listed below, not added as nodes.
+#   - Sources are only cited for titles and short statements; no body text of
+#     the codes, guidelines or web pages is copied.
+#   - Analysis code (SQL/Python/R notebooks and scripts) is in scope as an
+#     analysis artefact. Building/deploying production software, data pipelines
+#     or ML services belongs to software; writing and publishing the article
+#     or post containing results belongs to writing. Academic paper submission
+#     and dashboard product engineering are out of scope.
+#
+# Licence and attribution
+#   O*NET: This product includes information from the O*NET 31.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license. O*NET(R) is a trademark of
+#   USDOL/ETA. The task statements are shortened and regrouped here, so this
+#   map is an adaptation and has not been endorsed by USDOL/ETA.
+#   Wilson et al. (2017), Good enough practices in scientific computing,
+#   PLOS Computational Biology 13(6): e1005510, CC BY 4.0: recommendation
+#   titles are regrouped and adapted here. https://doi.org/10.1371/journal.pcbi.1005510
+#   The AQuA Book: Crown copyright, Open Government Licence v3.0; section
+#   headings are regrouped here. Other source licences are not verified;
+#   only titles and short statements are cited. WCAG criterion titles and
+#   Chinese law article locators retain the source wording.
+#
+# Not yet covered (no source found or read, so no node)
+#   - Dedicated missing-value treatment and imputation guidance; data validity
+#     checks below do not prescribe an imputation method.
+#   - Multiple comparisons, preregistration and p-hacking safeguards.
+#   - ASA Ethical Guidelines for Statistical Practice (2022): both the page
+#     and PDF returned HTTP 403, so no ASA principle is cited.
+#   - GDPR article-specific requirements: EUR-Lex ELI and HTML pages returned
+#     empty responses; no GDPR article is cited. PIPL nodes are not a substitute.
+#   - ESCO skill names, The Turing Way and the UK Code of Practice for
+#     Statistics were not read for this version.
+#
+map:
+  id: data-analysis
+  title: Data analysis and visualisation
+  version: 0.1.0
+  updated: '2026-11-19'
+  scope: 'Answering a question with data: framing, acquiring, cleaning, exploring and analysing data, making charts, and reporting results and their limits, including SQL/Python/R notebooks and scripts as analysis artefacts. Out of scope: building/deploying production software, data pipelines or ML services (software map); writing and publishing the article or post containing the results (writing map); academic paper submission; dashboard product engineering.'
+sources:
+- id: D1
+  title: 'O*NET OnLine: Data Scientists (15-2051.00)'
+  publisher: U.S. Department of Labor, Employment and Training Administration
+  url: https://www.onetonline.org/link/details/15-2051.00
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0 (O*NET 31.0 Database; attribution and adaptation notice above)
+- id: D2
+  title: 'O*NET OnLine: Statisticians (15-2041.00)'
+  publisher: U.S. Department of Labor, Employment and Training Administration
+  url: https://www.onetonline.org/link/details/15-2041.00
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0 (O*NET 31.0 Database; attribution and adaptation notice above)
+- id: D3
+  title: Good enough practices in scientific computing
+  publisher: Wilson et al., PLOS Computational Biology (2017)
+  url: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0 (linked from the article copyright statement)
+- id: D4
+  title: 'Data visualisation: charts'
+  publisher: UK Government Analysis Function
+  url: https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-charts/
+  retrieved: '2026-11-19'
+  licence: not verified; only headings cited
+- id: D5
+  title: 'Data visualisation: colours'
+  publisher: UK Government Analysis Function
+  url: https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/
+  retrieved: '2026-11-19'
+  licence: not verified; only headings cited
+- id: D6
+  title: Web Content Accessibility Guidelines (WCAG) 2.2
+  publisher: World Wide Web Consortium (W3C)
+  url: https://www.w3.org/TR/WCAG22/
+  retrieved: '2026-11-19'
+  licence: not verified; only criterion numbers and titles cited
+- id: D7
+  title: The AQuA Book (2025 update)
+  publisher: UK Government, Analysis Function
+  url: https://www.gov.uk/government/publications/the-aqua-book-guidance-on-producing-quality-analysis-for-government
+  retrieved: '2026-11-19'
+  licence: Open Government Licence v3.0 (stated on page)
+- id: D8
+  title: 中华人民共和国个人信息保护法
+  publisher: National People's Congress of the People's Republic of China
+  url: http://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html
+  retrieved: '2026-11-19'
+  licence: not verified; only article numbers and short statements cited
+groups:
+- id: question
+  title: Question and scope
+  nodes:
+  - id: question.problem
+    title: Define the question
+    description: State the decision or question that the analysis should inform.
+    sources:
+    - ref: D1
+      locator: 'Task 21831: Identify business problems or management objectives that can be addressed through data analysis.'
+  - id: question.stakeholders
+    title: Identify stakeholder needs
+    description: Ask stakeholders which questions and constraints matter to them.
+    sources:
+    - ref: D1
+      locator: 'Task 1001554: Interview stakeholders to identify questions or problems to address through data analysis.'
+  - id: question.acceptance
+    title: Agree scope and acceptance criteria
+    description: Agree the boundaries, intended use and criteria for accepting the analysis with its commissioner.
+    sources:
+    - ref: D7
+      locator: '6.1.1 The commissioner’s responsibilities'
+- id: data
+  title: Data acquisition and documentation
+  nodes:
+  - id: data.collection-plan
+    title: Plan data acquisition
+    description: Choose data collection methods and the population or sample needed to answer the question.
+    sources:
+    - ref: D2
+      locator: 'Task 8960: Plan data collection methods for specific projects, and determine the types and sizes of sample groups to be used.'
+  - id: data.source-suitability
+    title: Assess source suitability
+    description: Check whether the source is reliable and usable for this question.
+    sources:
+    - ref: D2
+      locator: 'Task 8959: Evaluate sources of information to determine any limitations, in terms of reliability or usability.'
+  - id: data.provenance-log
+    title: Record provenance and metadata
+    description: Record where each input came from, its ownership, meaning and reliability in a data log.
+    sources:
+    - ref: D7
+      locator: Data log
+  - id: data.reuse-permission
+    title: Check permission to use and share
+    description: Establish which licences and permissions apply to the input data and any shared outputs.
+    sources:
+    - ref: D3
+      locator: Make the license explicit.
+- id: preparation
+  title: Data preparation
+  nodes:
+  - id: preparation.preserve-raw
+    title: Preserve raw inputs
+    description: Keep the original input data separate from cleaned or transformed derivatives.
+    sources:
+    - ref: D3
+      locator: Save the raw data.
+  - id: preparation.raw-backup
+    title: Back up raw data
+    description: Maintain more than one recoverable copy of the original inputs subject to access restrictions.
+    sources:
+    - ref: D3
+      locator: Ensure that raw data are backed up in more than one location.
+  - id: preparation.quality-checks
+    title: Check data quality
+    description: Check inputs for inaccuracies and internal inconsistencies before analysis.
+    sources:
+    - ref: D2
+      locator: 'Task 8957: Prepare data for processing by organizing information, checking for inaccuracies, and adjusting and weighting the raw data.'
+  - id: preparation.outlier-review
+    title: Investigate unusual observations
+    description: Screen for outliers and unexpected distributions and investigate them before deciding on treatment.
+    sources:
+    - ref: D7
+      locator: '8.2.2 Data validity and data considerations'
+  - id: preparation.analysis-tables
+    title: Structure analysis-friendly tables
+    description: Arrange observations and variables in a form that supports the intended analysis.
+    sources:
+    - ref: D3
+      locator: Create analysis-friendly data.
+  - id: preparation.record-keys
+    title: Identify records across tables
+    description: Use explicit record identifiers when combining or relating multiple tables.
+    sources:
+    - ref: D3
+      locator: Anticipate the need to use multiple tables, and use a unique identifier for every record.
+  - id: preparation.transform-log
+    title: Record cleaning and transformation
+    description: Keep an executable or documented sequence of every processing step from input to analysis data.
+    sources:
+    - ref: D3
+      locator: Record all the steps used to process data.
+- id: exploration
+  title: Explore the data
+  nodes:
+  - id: exploration.relationships
+    title: Explore patterns and relationships
+    description: Inspect trends and relationships and note factors that could change their interpretation.
+    sources:
+    - ref: D2
+      locator: 'Task 8955: Identify relationships and trends in data, as well as any factors that could affect the results of research.'
+  - id: exploration.distributions
+    title: Inspect distributions
+    description: Examine observed distributions against expectations before choosing an analysis approach.
+    sources:
+    - ref: D7
+      locator: '8.2.2 Data validity and data considerations'
+- id: analysis
+  title: Analytical methods and uncertainty
+  nodes:
+  - id: analysis.method-fit
+    title: Choose methods for the question
+    description: Select methods appropriate to the research question and user needs rather than tool availability.
+    sources:
+    - ref: D2
+      locator: 'Task 21100: Determine whether statistical methods are appropriate, based on user needs or research questions of interest.'
+  - id: analysis.sampling-design
+    title: Check sampling and experimental design
+    description: Develop and test the sampling or experimental design needed for valid inference.
+    sources:
+    - ref: D2
+      locator: 'Task 8966: Develop and test experimental designs, sampling techniques, and analytical methods.'
+  - id: analysis.assumptions-log
+    title: Document assumptions
+    description: Record assumptions, their justification, risks and review decisions.
+    sources:
+    - ref: D7
+      locator: Assumptions log
+  - id: analysis.uncertainty-treatment
+    title: Assess uncertainty
+    description: Evaluate how uncertain inputs and analytical choices affect the results.
+    sources:
+    - ref: D7
+      locator: '8.4 Treatment of uncertainty'
+  - id: analysis.predictive-validation
+    title: Validate predictive models
+    description: Test predictions and revise models when validation shows they are not fit for the intended use.
+    applies_when: The analysis includes predictive modelling.
+    sources:
+    - ref: D1
+      locator: 'Task 21837: Test, validate, and reformulate models to ensure accurate prediction of outcomes of interest.'
+  - id: analysis.model-comparison
+    title: Compare model performance
+    description: Compare candidate models using statistical performance measures appropriate to the question.
+    applies_when: Candidate models are compared.
+    sources:
+    - ref: D1
+      locator: 'Task 21827: Compare models using statistical performance metrics, such as loss functions or proportion of explained variance.'
+- id: visualisation
+  title: Charts and accessibility
+  nodes:
+  - id: visualisation.chart-selection
+    title: Choose a chart for the message
+    description: Match the chart type to the statistical relationship and question being communicated.
+    sources:
+    - ref: D4
+      locator: Choosing the right chart
+  - id: visualisation.informative-titles
+    title: Supply informative titles
+    description: Give each chart a title that identifies its subject and relevant context.
+    sources:
+    - ref: D4
+      locator: Titles
+  - id: visualisation.readable-labels
+    title: Label axes and values clearly
+    description: Make labels readable and specify the quantities and units needed to interpret the chart.
+    sources:
+    - ref: D4
+      locator: Chart labels
+  - id: visualisation.bar-baseline
+    title: Preserve honest bar scales
+    description: Do not truncate the numerical axis of a bar chart in ways that distort comparisons.
+    sources:
+    - ref: D4
+      locator: Do not break the numerical axis on bar charts
+  - id: visualisation.time-gaps
+    title: Show breaks in time series
+    description: Show missing periods or methodological breaks without implying continuous observations.
+    sources:
+    - ref: D4
+      locator: Breaks in time series
+  - id: visualisation.colour-encoding
+    title: Do not encode meaning through colour alone
+    description: Provide labels or other cues so chart information remains available without colour perception.
+    sources:
+    - ref: D5
+      locator: Do not rely on colour alone
+    - ref: D6
+      locator: '1.4.1 Use of Color'
+  - id: visualisation.text-alternative
+    title: Provide a text alternative
+    description: Supply a text equivalent conveying the information in a chart image.
+    sources:
+    - ref: D6
+      locator: '1.1.1 Non-text Content'
+  - id: visualisation.text-contrast
+    title: Check text contrast
+    description: Check chart titles and labels against the applicable minimum text contrast requirements.
+    sources:
+    - ref: D6
+      locator: '1.4.3 Contrast (Minimum)'
+  - id: visualisation.graphic-contrast
+    title: Check graphical contrast
+    description: Check that graphical elements needed to understand a chart have sufficient contrast.
+    sources:
+    - ref: D6
+      locator: '1.4.11 Non-text Contrast'
+  - id: visualisation.uncertainty-display
+    title: Communicate uncertainty in charts
+    description: Show relevant uncertainty and quality limitations alongside the plotted estimates.
+    sources:
+    - ref: D4
+      locator: Communicating quality and uncertainty in charts
+- id: reporting
+  title: Results and reproducibility
+  nodes:
+  - id: reporting.audience-results
+    title: Present results for the audience
+    description: Present the analytical findings in a form the intended audience can interpret.
+    sources:
+    - ref: D2
+      locator: 'Task 20194: Present statistical and nonstatistical results, using charts, bullets, and graphs, in meetings or conferences to audiences such as clients, peers, and students.'
+  - id: reporting.limited-conclusions
+    title: Explain conclusions and limits
+    description: Explain what the results support and the uncertainty and limitations affecting their use.
+    sources:
+    - ref: D7
+      locator: '9.2.2 Communication'
+  - id: reporting.analysis-code
+    title: Retain the analysis code
+    description: Keep the SQL, Python or R scripts and notebooks needed to regenerate the results together as analysis artefacts.
+    sources:
+    - ref: D3
+      locator: Put project source code in the src directory.
+  - id: reporting.environment-record
+    title: Record dependencies and environment
+    description: State required tools, libraries and versions so the analysis environment can be recreated.
+    sources:
+    - ref: D3
+      locator: Make dependencies and requirements explicit.
+  - id: reporting.version-record
+    title: Identify the analysis version
+    description: Track which versions of code and inputs produced each delivered result.
+    sources:
+    - ref: D7
+      locator: Version control
+  - id: reporting.reproduction-example
+    title: Supply a reproducible example
+    description: Provide a small example or test dataset showing how to run the analysis code.
+    sources:
+    - ref: D3
+      locator: Provide a simple example or test data set.
+- id: assurance
+  title: Analytical quality assurance
+  nodes:
+  - id: assurance.proportional-review
+    title: Plan proportionate assurance
+    description: Choose assurance effort based on the consequences of error and analytical complexity.
+    sources:
+    - ref: D7
+      locator: '3.1 Factors for determining appropriate assurance'
+  - id: assurance.verify-validate
+    title: Verify implementation and validate fitness
+    description: Check both that the analysis was implemented correctly and that it answers the intended question.
+    sources:
+    - ref: D7
+      locator: '8.2.1 Verification and validation'
+  - id: assurance.code-review
+    title: Assure the analysis code
+    description: Review and test the analytical code for errors that could affect the results.
+    sources:
+    - ref: D7
+      locator: '8.2.3 Assurance of code'
+  - id: assurance.delivery-signoff
+    title: Record analytical sign-off
+    description: Obtain approval that the analysis and its assurance evidence are fit for the agreed use.
+    sources:
+    - ref: D7
+      locator: '9.2.3 Sign-off'
+- id: ethics
+  title: Privacy and compliance
+  nodes:
+  - id: ethics.personal-data-basis
+    title: Establish a basis for personal-data processing
+    description: Identify the applicable legal conditions before processing personal information under China's PIPL.
+    applies_when: Processing personal information falls within the scope of China's PIPL.
+    sources:
+    - ref: D8
+      locator: '第十三条 符合下列情形之一的，个人信息处理者方可处理个人信息'
+  - id: ethics.minimise-personal-data
+    title: Minimise personal information
+    description: Limit personal information to what is needed for the stated analytical purpose.
+    applies_when: Processing personal information falls within the scope of China's PIPL.
+    sources:
+    - ref: D8
+      locator: '第六条 处理个人信息应当具有明确、合理的目的'
+  - id: ethics.deidentification
+    title: Distinguish de-identification and anonymisation
+    description: Distinguish information that can be re-identified with additional information from irreversible anonymisation when choosing privacy safeguards.
+    applies_when: Processing personal information falls within the scope of China's PIPL.
+    sources:
+    - ref: D8
+      locator: '第七十三条 本法下列用语的含义'

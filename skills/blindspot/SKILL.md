@@ -1,7 +1,7 @@
 ---
 name: blindspot
 description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Before a skill is written, it can also give a sourced checklist of what the domain expects. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
-license: MIT
+license: MIT for the skill instructions and helper; see maps/INDEX.md for map data
 metadata:
   version: 0.4.1
 ---

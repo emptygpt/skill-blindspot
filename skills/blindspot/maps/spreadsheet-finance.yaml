@@ -1,0 +1,461 @@
+# skill-blindspot map: spreadsheet modeling and financial analysis (maps/spreadsheet-finance.yaml)
+#
+# Rules for this map
+#   - Every node cites a verified source title, heading or short task statement;
+#     O*NET task locators include the Task ID seen in the page's form.
+#   - Nodes may be merged and reworded; a node with no source never goes in.
+#   - Only titles and short statements are cited, never source body text.
+#   - Prose quality of a memo/report belongs to the writing map.
+#   - Engineering practice of VBA/Python/Office Script code (tests, version
+#     control of code, dependencies, security of code) belongs to software.
+#     This map keeps spreadsheet/finance-specific concerns, including workbook
+#     change control, formula auditing, presentation and accounting compliance.
+#
+# Licence and attribution
+#   O*NET: This product includes information from the O*NET 31.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license:
+#   https://creativecommons.org/licenses/by/4.0/
+#   O*NET(R) is a trademark of USDOL/ETA. Task statements are shortened and
+#   regrouped here; skill-blindspot has modified this information. USDOL/ETA
+#   has not approved, endorsed, or tested these modifications.
+#   ICAEW, Microsoft, IFRS Foundation and CFA Institute: licences not verified;
+#   only titles, headings and short statements are cited. Descriptions are
+#   independently worded. IFRS citations use public summaries, not full clauses.
+#   CFA standards titles identify general ethical concerns, not a claim that
+#   every spreadsheet user is subject to CFA Institute membership duties.
+#
+# Not yet covered (no verified source locator for these details, so no node)
+#   - Units, currency and sign conventions beyond basic number formatting.
+#   - Named ranges, date arithmetic and financial-function timing conventions.
+#   - Detailed three-statement schedules, discounted cash-flow mechanics and
+#     budgeting methods beyond scenario comparison and general forecasting.
+#   - XBRL and Inline XBRL tagging: attempted specification fetch returned no
+#     readable content; taxonomy and filing validation are not covered.
+#   - OOXML/file-format interoperability and Spreadsheet Compare procedures.
+#   - China enterprise accounting standards and jurisdiction-specific rules.
+#   - Detailed IFRS clauses: only the public IAS 1 / IFRS 18 overviews were read.
+#   - FAST Standard, ICAEW Financial Modelling Code and EuSpRIG methods were
+#     not read; this map uses ICAEW's public twenty spreadsheet principles.
+#
+map:
+  id: spreadsheet-finance
+  title: 'Spreadsheet modeling and financial analysis'
+  version: 0.1.0
+  updated: '2026-11-19'
+  scope: 'Building or changing a spreadsheet model or financial analysis (forecasts, budgets, valuation, financial statement analysis and derived reports), from the question through inputs, structure, formulas, checks, scenarios, outputs, review, documentation and disclosure. Prose quality of a memo/report belongs to the writing map; engineering practice of VBA/Python/Office Script code (tests, version control of code, dependencies, security of code) belongs to the software map. This map retains spreadsheet/finance-specific concerns such as workbook change control, formula auditing, number formats and financial statement presentation requirements. Out of scope: bookkeeping and audit engagements, tax filing, regulated investment advice specifics and general data science.'
+sources:
+- id: S1
+  title: '20 principles for good spreadsheet practice'
+  publisher: 'ICAEW'
+  url: https://www.icaew.com/technical/technology/excel-community/20-principles-for-good-spreadsheet-practice-2024-edition
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S2
+  title: 'Financial and Investment Analysts (13-2051.00), Job Duties Custom List'
+  publisher: 'National Center for O*NET Development'
+  url: https://www.onetonline.org/search/task/choose/13-2051.00
+  retrieved: '2026-11-19'
+  licence: 'CC BY 4.0 (O*NET 31.0 Database; https://www.onetcenter.org/license_db.html); task statements shortened and regrouped'
+- id: S3
+  title: 'Overview of formulas in Excel'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/get-started/overview-of-formulas-in-excel
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S4
+  title: 'More on data validation'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/more-on-data-validation
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S5
+  title: 'Introduction to What-If Analysis'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/introduction-to-what-if-analysis
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S6
+  title: 'Basic tasks in Excel'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/basic-tasks-in-excel
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S7
+  title: 'IFERROR function'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/functions/iferror-function
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S8
+  title: 'Evaluate a nested formula one step at a time'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/evaluate-a-nested-formula-one-step-at-a-time
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S9
+  title: 'ROUND function'
+  publisher: 'Microsoft'
+  url: https://support.microsoft.com/en-us/excel/functions/round-function
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S10
+  title: 'IAS 1 Presentation of Financial Statements'
+  publisher: 'IFRS Foundation'
+  url: https://www.ifrs.org/issued-standards/list-of-standards/ias-1-presentation-of-financial-statements/
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S11
+  title: 'IFRS 18 Presentation and Disclosure in Financial Statements'
+  publisher: 'IFRS Foundation'
+  url: https://www.ifrs.org/issued-standards/list-of-standards/ifrs-18-presentation-and-disclosure-in-financial-statements/
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S12
+  title: 'Financial Analysis Techniques (2026 refresher reading, public overview)'
+  publisher: 'CFA Institute'
+  url: https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/financial-analysis-techniques
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+- id: S13
+  title: 'Code of Ethics and Standards of Professional Conduct'
+  publisher: 'CFA Institute'
+  url: https://www.cfainstitute.org/standards/professionals/code-ethics-standards
+  retrieved: '2026-11-19'
+  licence: 'not verified; only titles, headings and short statements cited'
+groups:
+- id: purpose
+  title: 'Question, purpose and requirements'
+  nodes:
+  - id: purpose.question
+    title: 'Define the analytical question'
+    description: 'State the question and the decisions the spreadsheet must support.'
+    sources:
+    - ref: S1
+      locator: '5. Focus on the purposes of the spreadsheet.'
+  - id: purpose.audience
+    title: 'Identify users and downstream requirements'
+    description: 'Identify who will use the workbook and what dependent processes require from its outputs.'
+    sources:
+    - ref: S1
+      locator: '6. Tailor the design and documentation to the needs of the audience and dependent processes.'
+  - id: purpose.tool-fit
+    title: 'Confirm spreadsheet suitability'
+    description: 'Check that a spreadsheet and the available skills are appropriate for the calculation and data volume.'
+    sources:
+    - ref: S1
+      locator: '4. Determine if a spreadsheet is a suitable tool.'
+  - id: purpose.risk
+    title: 'Set risk-proportionate controls'
+    description: 'Identify critical workbooks and scale their checks and review to the consequences of error.'
+    sources:
+    - ref: S1
+      locator: '1. Determine how much your organisation depends on spreadsheets and plan your approach and processes accordingly.'
+  - id: purpose.competence
+    title: 'Check modeller and user competence'
+    description: 'Identify spreadsheet knowledge needed to build, operate and maintain the model.'
+    sources:
+    - ref: S1
+      locator: '3. Ensure designers and users of spreadsheets have appropriate knowledge, competence, experience, and awareness of functionality.'
+- id: inputs
+  title: 'Data inputs and assumptions'
+  nodes:
+  - id: inputs.quality
+    title: 'Clean and structure inputs'
+    description: 'Check and reshape incoming data before feeding it into calculations.'
+    sources:
+    - ref: S1
+      locator: '10. Seek to control, clean, and optimise data quality and structure prior to using them.'
+  - id: inputs.assumptions
+    title: 'Explain assumptions and logic'
+    description: 'Document assumptions and calculation logic so another user can interpret the model.'
+    sources:
+    - ref: S1
+      locator: '6. Tailor the design and documentation to the needs of the audience and dependent processes.'
+  - id: inputs.validation
+    title: 'Constrain input values'
+    description: 'Set appropriate lists, ranges and date restrictions for editable input cells.'
+    sources:
+    - ref: S4
+      locator: 'When is data validation useful?'
+  - id: inputs.messages
+    title: 'Explain invalid inputs'
+    description: 'Provide input guidance and choose error alerts appropriate to invalid entries.'
+    sources:
+    - ref: S4
+      locator: 'Data Validation Input and Error Messages'
+  - id: inputs.inherited-validation
+    title: 'Review inherited validation'
+    description: 'Inspect and update validation rules when changing an existing workbook.'
+    sources:
+    - ref: S4
+      locator: 'How to update or remove data validation in an inherited workbook'
+  - id: inputs.sourcing
+    title: 'Source financial context'
+    description: 'Identify the publications, company information and economic data underpinning the analysis.'
+    sources:
+    - ref: S2
+      locator: 'Task ID 21596: Monitor fundamental economic, industrial, and corporate developments by analyzing information'
+- id: structure
+  title: 'Model structure and layout'
+  nodes:
+  - id: structure.flow
+    title: 'Separate inputs, calculations and outputs'
+    description: 'Arrange workbook sections in an auditable flow with each input entered once.'
+    sources:
+    - ref: S1
+      locator: '9. Structure workbooks with a clear flow of inputs, processes, and outputs.'
+  - id: structure.layout
+    title: 'Use consistent worksheet layouts'
+    description: 'Keep comparable worksheets and periods organised consistently.'
+    sources:
+    - ref: S1
+      locator: '11. Structure worksheets to avoid inconsistent logic and layout.'
+  - id: structure.adaptability
+    title: 'Allow for model growth'
+    description: 'Design ranges and tables to accommodate foreseeable additions without manual formula repairs.'
+    sources:
+    - ref: S1
+      locator: '8. Design with adaptability in mind to minimise future manual intervention.'
+  - id: structure.conventions
+    title: 'Apply workbook conventions'
+    description: 'Use consistent spreadsheet formatting conventions and document workbook-specific conventions for users.'
+    sources:
+    - ref: S1
+      locator: '2. Adopt a consistent methodology for spreadsheets in your organisation.'
+    - ref: S1
+      locator: '7. Make the spreadsheet easy to use, providing supporting guidance where helpful.'
+  - id: structure.guidance
+    title: 'Document workbook operation'
+    description: 'Provide workbook purpose, owner, version and operating guidance for the next user.'
+    sources:
+    - ref: S1
+      locator: '7. Make the spreadsheet easy to use, providing supporting guidance where helpful.'
+- id: formulas
+  title: 'Formulas and functions'
+  nodes:
+  - id: formulas.consistent
+    title: 'Keep formulas consistent'
+    description: 'Maintain consistent formula patterns across comparable ranges and investigate exceptions.'
+    sources:
+    - ref: S1
+      locator: '12. Keep formulas consistent across ranges.'
+  - id: formulas.simple
+    title: 'Choose simple formulas'
+    description: 'Use the simplest suitable spreadsheet features and functions.'
+    sources:
+    - ref: S1
+      locator: '13. Use the simplest features, functions, or formulas for the task.'
+  - id: formulas.constants
+    title: 'Keep changeable values out of formulas'
+    description: 'Put changeable assumptions in identified input cells rather than embedding them in calculations.'
+    sources:
+    - ref: S1
+      locator: '14. Avoid using fixed values within formulas.'
+  - id: formulas.reuse
+    title: 'Reuse calculated results'
+    description: 'Reference an existing result instead of calculating the same quantity repeatedly.'
+    sources:
+    - ref: S1
+      locator: '15. Refer to existing calculated results instead of reperforming the calculation.'
+  - id: formulas.references
+    title: 'Select reference behaviour'
+    description: 'Choose relative, absolute or mixed references deliberately before copying formulas.'
+    sources:
+    - ref: S3
+      locator: 'The difference between absolute, relative, and mixed references'
+  - id: formulas.sheet-changes
+    title: 'Check worksheet reference changes'
+    description: 'Check formula references after moving, copying, inserting or deleting worksheets.'
+    sources:
+    - ref: S3
+      locator: 'What occurs when you move, copy, insert, or delete worksheets'
+  - id: formulas.function-use
+    title: 'Check function arguments'
+    description: 'Choose a suitable built-in function and supply arguments matching its intended calculation.'
+    sources:
+    - ref: S3
+      locator: 'Enter a formula that contains a built-in function'
+  - id: formulas.errors
+    title: 'Handle formula errors explicitly'
+    description: 'Specify the value returned when a formula evaluates to an error.'
+    sources:
+    - ref: S7
+      locator: 'IFERROR returns a value you specify if a formula evaluates to an error; otherwise, it returns the result of the formula.'
+  - id: formulas.rounding
+    title: 'Set calculation rounding'
+    description: 'Specify where values are rounded in calculations and to how many digits.'
+    sources:
+    - ref: S9
+      locator: 'The ROUND function rounds a number to a specified number of digits.'
+- id: checks
+  title: 'Checks, testing and review'
+  nodes:
+  - id: checks.built-in
+    title: 'Build visible model checks'
+    description: 'Include reconciliation and balance checks with alerts for failed model relationships.'
+    sources:
+    - ref: S1
+      locator: '17. Build in checks, controls, and alerts from the outset.'
+  - id: checks.test
+    title: 'Test workbook behaviour'
+    description: 'Vary inputs, test extreme or impossible values and systematically double-check key calculations.'
+    sources:
+    - ref: S1
+      locator: '18. Test and review to reduce the risk of error and identify inefficiencies.'
+  - id: checks.peer-review
+    title: 'Arrange independent workbook review'
+    description: 'Have another competent person review workbook design and calculations.'
+    sources:
+    - ref: S1
+      locator: '16. Collaborate in design and review processes. This ensures accuracy, robustness, and the mitigation of risks.'
+    - ref: S1
+      locator: '18. Test and review to reduce the risk of error and identify inefficiencies.'
+  - id: checks.evaluate
+    title: 'Audit nested formulas'
+    description: 'Use stepwise formula evaluation to inspect intermediate results and logical branches.'
+    sources:
+    - ref: S8
+      locator: 'Select Evaluate to examine the value of the underlined reference.'
+- id: scenarios
+  title: 'Scenarios and sensitivity'
+  nodes:
+  - id: scenarios.cases
+    title: 'Compare coherent scenarios'
+    description: 'Define alternative sets of assumptions and compare their resulting budgets or forecasts.'
+    sources:
+    - ref: S5
+      locator: 'Use scenarios to consider many different variables'
+  - id: scenarios.sensitivity
+    title: 'Vary key drivers'
+    description: 'Use one- or two-variable data tables to examine output sensitivity to selected inputs.'
+    sources:
+    - ref: S5
+      locator: 'Use Data Tables to see the effects of one or two variables on a formula'
+  - id: scenarios.target
+    title: 'Solve for a target result'
+    description: 'Use Goal Seek to find the single input value needed for a formula to produce a specified result.'
+    sources:
+    - ref: S5
+      locator: 'Use Goal Seek to find out how to get a desired result'
+  - id: scenarios.forecast
+    title: 'Choose forecast approach'
+    description: 'Generate forecast values from existing data using a suitable trend calculation or worksheet function.'
+    sources:
+    - ref: S5
+      locator: 'Prepare forecasts and advanced business models'
+- id: analysis
+  title: 'Financial analysis'
+  nodes:
+  - id: analysis.impact
+    title: 'Model financial impact'
+    description: 'Translate the financial question into a model of the transaction or proposed change.'
+    sources:
+    - ref: S2
+      locator: 'Task ID 21590: Employ financial models to develop solutions to financial problems or to assess the financial or capital impact of transactions.'
+  - id: analysis.valuation
+    title: 'Perform valuation'
+    description: 'Calculate a valuation or price for the securities being analysed.'
+    sources:
+    - ref: S2
+      locator: 'Task ID 21597: Perform securities valuation or pricing.'
+  - id: analysis.ratios
+    title: 'Interpret financial ratios'
+    description: 'Calculate and interpret activity, liquidity, solvency and profitability ratios.'
+    sources:
+    - ref: S12
+      locator: 'calculate and interpret activity, liquidity, solvency, and profitability ratios;'
+  - id: analysis.comparisons
+    title: 'Compare financial performance'
+    description: 'Choose meaningful peer and historical comparisons rather than interpreting isolated numbers.'
+    sources:
+    - ref: S12
+      locator: 'Cross-sectional analysis compares multiple companies at the same point in time or over the same range of time, and trend or time-series analysis compares measures for a single company over a period of time.'
+  - id: analysis.statements
+    title: 'Check financial statement presentation'
+    description: 'Check that the financial statements include the complete annual set and preceding-year comparatives.'
+    applies_when: 'When preparing or analysing IFRS financial statements, under IAS 1 or IFRS 18.'
+    sources:
+    - ref: S10
+      locator: 'It requires an entity to present a complete set of financial statements at least annually, with comparative amounts for the preceding year (including comparative amounts in the notes).'
+    - ref: S11
+      locator: 'It requires an entity to present a complete set of financial statements at least annually, with comparative amounts for the preceding year (including comparative amounts in the notes)'
+  - id: analysis.ifrs18
+    title: 'Determine applicable IFRS presentation standard'
+    description: 'Determine whether IFRS 18 applies for the reporting period, including any early adoption, before selecting presentation requirements.'
+    applies_when: 'When preparing or analysing IFRS financial statements; IFRS 18 is effective for annual periods beginning on or after 1 January 2027, with earlier application permitted.'
+    sources:
+    - ref: S11
+      locator: 'IFRS 18 is effective for annual reporting periods beginning on or after 1 January 2027, with earlier application permitted.'
+- id: reporting
+  title: 'Outputs and disclosure'
+  nodes:
+  - id: reporting.charts
+    title: 'Chart financial results'
+    description: 'Use spreadsheet charts to illustrate analytical results and relevant comparisons.'
+    sources:
+    - ref: S2
+      locator: 'Task ID 21589: Draw charts and graphs, using computer spreadsheets, to illustrate technical reports.'
+  - id: reporting.formats
+    title: 'Format financial quantities'
+    description: 'Use number formats to distinguish currencies, percentages and dates.'
+    sources:
+    - ref: S6
+      locator: 'Apply a number format'
+  - id: reporting.results
+    title: 'Present analytical findings'
+    description: 'Present the financial conclusions and their supporting results to the intended audience.'
+    sources:
+    - ref: S2
+      locator: 'Task ID 21600: Present oral or written reports on general economic trends, individual corporations, and entire industries.'
+  - id: reporting.disclosure
+    title: 'Check IFRS 18 disclosure requirements'
+    description: 'Check applicable requirements for management-defined performance measures and aggregation in the reporting output.'
+    applies_when: 'When IFRS 18 applies.'
+    sources:
+    - ref: S11
+      locator: 'requiring an entity to disclose management-defined performance measures'
+    - ref: S11
+      locator: 'adding new principles for aggregation and disaggregation of items.'
+- id: controls
+  title: 'Workbook controls'
+  nodes:
+  - id: controls.backup-version
+    title: 'Control workbook versions and backups'
+    description: 'Back up workbooks regularly and distinguish the latest file from previous versions.'
+    sources:
+    - ref: S1
+      locator: '19. Ensure there is a regular process of backup and version control. This minimises loss of work and avoids the use of the wrong version.'
+  - id: controls.protection
+    title: 'Control workbook access and editing'
+    description: 'Restrict workbook access and protect calculation cells against unintended or unauthorised changes.'
+    sources:
+    - ref: S1
+      locator: '20. Manage access levels and protection to reduce the risk of accidental or malicious changes.'
+- id: ethics
+  title: 'Ethics and compliance'
+  nodes:
+  - id: ethics.objectivity
+    title: 'Maintain analytical objectivity'
+    description: 'Keep model assumptions and conclusions independent of pressure for a preferred result.'
+    sources:
+    - ref: S13
+      locator: 'Standard I(B) Independence and Objectivity'
+  - id: ethics.misrepresentation
+    title: 'Avoid misleading analysis'
+    description: 'Do not misrepresent model results, assumptions or limitations.'
+    sources:
+    - ref: S13
+      locator: 'Standard I(C) Misrepresentation'
+  - id: ethics.confidentiality
+    title: 'Preserve confidentiality'
+    description: 'Control sharing of confidential financial inputs and workbook outputs.'
+    sources:
+    - ref: S13
+      locator: 'Standard III(E) Preservation of Confidentiality'
+  - id: ethics.records
+    title: 'Retain supporting records'
+    description: 'Retain the financial evidence and analysis supporting reported conclusions.'
+    sources:
+    - ref: S13
+      locator: 'Standard V(C) Record Retention'

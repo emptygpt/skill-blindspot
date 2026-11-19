@@ -72,8 +72,8 @@ from your checkout. The offline example above needs no checkout or network.
 
 `findings` reads only `## Findings`, with bands `### Needed`,
 `### Worth considering`, `### Minor`, numbered bold titles and optional
-`Map node:` lines, as in [C07](../reports/code-5/C07.md). Keep the report's
-global ranks, not numbering restarted in each band.
+`Map node:` lines, as in [C07](../reports/code-5/C07.md). Fenced examples are
+ignored. Keep the report's global ranks, not numbering restarted in each band.
 
 - `match`: one key ID such as `R1`, or blank. If a finding genuinely recovers
   multiple items, assign one ID and document the other judgement separately;
@@ -86,8 +86,10 @@ global ranks, not numbering restarted in each band.
 - Top-N recovery counts only matches with rank <= N (default 10), deduplicated.
   The report must contain the full ranked list to measure any-rank recovery.
 - False positives = rows marked `false`, not unmatched findings. Unmatched key
-  items are listed separately. Unknown IDs, invalid verdicts, duplicate or
-  nonpositive ranks are rejected. An empty findings list recovers nothing.
+  items are listed separately. Every CSV row must have all six columns.
+  Incorrect row widths, unknown IDs, invalid verdicts, and duplicate or
+  nonpositive ranks are rejected with a line number. An empty findings list
+  recovers nothing.
 
 To compare another approach, give a separate checker the same altered folder
 and ask, for example, “What is missing? List up to ten missing stages.” Do not
@@ -98,9 +100,11 @@ measure variation; do not mix an average of two runs with a single run silently.
 
 ## Recorded data
 
-[validation-2026-11.json](data/validation-2026-11.json) transcribes
-[docs/validation.md](../docs/validation.md), not new runs. Print it with
-`python3 benchmark/bench.py summary`.
+[validation-2026-11.json](data/validation-2026-11.json) contains historical
+pilot observations transcribed from [docs/validation.md](../docs/validation.md),
+not independently rescorable results. Print them with
+`python3 benchmark/bench.py summary`. The synthetic example checks the harness,
+not the pilot results.
 
 Scored runs are stored one skill per file as `data/run-<date>-<skill>.json`:
 source link pinned to a revision, removed heading and hash, checker and map
@@ -121,17 +125,18 @@ Test 3 used those twelve removed items once for the combined skill. All eleven
 recoveries appeared in its first ten findings; reports had 22–36 findings each.
 The JSON includes removed-item lists and the three skill links for test 1.
 Test 2 skill names/links are not given in the source. False-positive counts
-were not recorded: JSON uses `null`, not zero. The source calls test 3 “twelve
-altered skills” but its limits say six skills; the aggregate is preserved, not
-resolved by inventing per-skill records.
+were not recorded: JSON uses `null`, not zero. Tests 1–2 describe six source
+skills. Test 3 reports results for the same twelve items; the number of altered
+folders used in that run is unverified.
 
-Limits: two domains, six skills, twelve removed items, one model (Claude Sonnet),
+Limits: two domains, twelve removed items, one model (Claude Sonnet),
 one scorer who also judged shared findings. MDR is not truly obscure. Its map
 was widened from 63 to 171 nodes after the removed-item names were known to
 the person running the test (not the agent widening it), which could favour
-map-guided checks. One combined run cannot establish superiority. The original
-keys and per-run marks are not provided here, so these aggregates cannot be
-independently rescored with this harness.
+map-guided checks. One combined run on reused examples with a changed map
+cannot establish superiority or non-inferiority. Original keys, per-run reports
+and marks, exact prompts and settings, pinned skill revisions and exact map
+snapshots are not available for independent review.
 
 ## What to publish
 

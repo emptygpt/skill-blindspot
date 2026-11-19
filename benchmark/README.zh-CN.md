@@ -59,8 +59,8 @@ python3 benchmark/bench.py summary benchmark/work/trial/result.json
 
 `findings` 只读取 `## Findings`，支持 `### Needed`、
 `### Worth considering`、`### Minor` 三档，条目为编号加粗标题，可带
-`Map node:` 行，格式见 [C07](../reports/code-5/C07.md)。编号应贯穿全部档位，
-不能每档从 1 重来。
+`Map node:` 行，格式见 [C07](../reports/code-5/C07.md)。围栏代码块里的示例不计入。
+编号应贯穿全部档位，不能每档从 1 重来。
 
 - `match` 填一个答案 ID（如 `R1`），或留空。一个发现确实对应多个删除项时，
   此格式只能计一个；其余判断另作记录。
@@ -71,7 +71,8 @@ python3 benchmark/bench.py summary benchmark/work/trial/result.json
 - 前 N 找回数只计算排名不大于 N 的匹配，默认 N=10，同样去重。
   要测任意排名找回，须提供完整排序列表。
 - 误报数是 `false` 行数，不是不匹配答案的行数；另列未找回的答案项。
-  未知 ID、无效 verdict、非正数或重复排名都会报错。空发现列表找回零项。
+  每个 CSV 行都必须有六列。列数错误、未知 ID、无效 verdict、非正数或重复排名
+  都会带行号报错。空发现列表找回零项。
 
 比较另一种方法时，让独立检查者看同一个修改版，例如直接问「缺哪些环节？
 最多列十项」。不给答案，也不给另一份报告。转成同样的 Findings 格式，
@@ -81,8 +82,9 @@ python3 benchmark/bench.py summary benchmark/work/trial/result.json
 ## 已有数据
 
 [validation-2026-11.json](data/validation-2026-11.json) 转录自
-[docs/validation.md](../docs/validation.md)，不是新跑的实验。
-运行 `python3 benchmark/bench.py summary` 可打印表格。
+[docs/validation.md](../docs/validation.md)，是无法独立复算的早期试验观察。
+运行 `python3 benchmark/bench.py summary` 可打印表格。虚构示例只验证工具，
+不验证早期试验结果。
 
 已评分的运行按每个 skill 一个文件保存为 `data/run-<日期>-<skill>.json`：
 固定到 revision 的来源链接、删除的标题与哈希、检查器和地图版本、标注与评分说明。
@@ -101,14 +103,15 @@ python3 benchmark/bench.py summary benchmark/work/trial/result.json
 测试 1、2 各删六项，各查两次，所以每种方法各有十二次机会。测试 3 的组合
 skill 对这十二个删除项查一次；十一项找回均在各报告前十，报告各有 22–36 项。
 JSON 含删除项列表及测试 1 的三个 skill 链接。来源未给测试 2 的 skill 名称
-和链接。误报数未记录，用 `null` 而不是零。来源在测试 3 写了「十二个修改版
-skill」，但限制部分写六个 skill；保留总计，不臆造逐 skill 明细。
+和链接。误报数未记录，用 `null` 而不是零。测试 1、2 共涉及六个原始 skill；
+测试 3 报告同样十二项的结果，使用了多少个修改后的文件夹无法核实。
 
-限制：两个领域、六个 skill、十二个删除项、一个模型（Claude Sonnet），
+限制：两个领域、十二个删除项、一个模型（Claude Sonnet），
 同一人评分并判断两次共有项。法规领域并不十分冷门。测试 2 的底图在主持者
 知道删除项后从 63 节点扩为 171 节点（扩图 agent 未见答案），可能有利于底图
-方法。组合方法只跑一次，不能据此断言更好。这里没有原始答案和逐次评分，
-不能用本工具独立重算这些汇总数。
+方法。组合方法换了底图，却仍在同一批例子上只跑了一次，不能据此断言更好或
+不劣。原始答案、逐次报告与评分、确切提示词及设置、固定版本的 skill 和当时的
+底图快照均未公开，无法独立复核。
 
 ## 发布什么
 
