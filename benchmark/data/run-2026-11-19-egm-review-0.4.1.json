@@ -1,0 +1,117 @@
+{
+  "kind": "scored",
+  "name": "2026-11-19 run 2 (blindspot 0.4.1): egm-review",
+  "run_date": "2026-11-19",
+  "source_url": "https://github.com/google/elephant-goldfish-model/tree/70406c4d22cc7ea8299637c2c5b44625c48b3f08/skills/egm-review",
+  "repository": "google/elephant-goldfish-model (skills/egm-review)",
+  "items": [
+    {
+      "id": "R1",
+      "file": "SKILL.md",
+      "heading": "Subflow: Comprehension Test",
+      "removed_line_range": [
+        349,
+        370
+      ],
+      "line_count": 22,
+      "sha256": "2a76fb10998fc76d08b61379688127d2840257c35bd7c760a30369b7e2bb50f4"
+    }
+  ],
+  "method": {
+    "checker": "blindspot skill 0.4.1 run by a separate agent that saw only the altered folder; no external model API calls",
+    "map": "software 0.1.0",
+    "runs_per_skill": 1,
+    "setter_and_scorer": "same person (not the checker); same removed heading as run 1, re-removed from the pinned revision with identical SHA-256",
+    "findings_total": 11,
+    "checker_lint": "90/90 nodes in table; absent 4, covered 2, excluded 0, not-applicable 73, shallow 11",
+    "note": "Rerun of run 1 with blindspot 0.4.1 (PR #4). Scoring rules unchanged: recovery = unique key items matched; false positives = rows marked false."
+  },
+  "total": 1,
+  "recovered": 1,
+  "top": 10,
+  "recovered_top_n": 1,
+  "recovery_rate": 1.0,
+  "false_positives": 1,
+  "unmatched": [],
+  "marks": [
+    {
+      "rank": 1,
+      "band": "Needed",
+      "title": "Resolve and preflight the required review personas, standards and helper workflows",
+      "match": null,
+      "verdict": "false",
+      "note": "Finding points to review personas, standards and helper skills (egm-review-loop, egm-resolve) that exist elsewhere in the upstream repo but were outside the audited folder; judged covered, as in run 1."
+    },
+    {
+      "rank": 2,
+      "band": "Needed",
+      "title": "Separate document and fetched-page content from executable reviewer instructions",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 3,
+      "band": "Worth considering",
+      "title": "Require explicit risk acceptance instead of auto-accepting unresolved findings",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 4,
+      "band": "Worth considering",
+      "title": "Validate reviewer claims against evidence before ranking or applying them",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 5,
+      "band": "Worth considering",
+      "title": "Minimize and redact sensitive material in review context and saved artifacts",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 6,
+      "band": "Worth considering",
+      "title": "Make reviewer permissions read-only and scope remediation tools explicitly",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 7,
+      "band": "Worth considering",
+      "title": "Bind reports and resumed reviews to recoverable document revisions",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 8,
+      "band": "Worth considering",
+      "title": "Pass prior comprehension and critic outputs into the intermediate zoom-out review",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 9,
+      "band": "Worth considering",
+      "title": "Handle failed, incomplete or missing reviewer outputs before synthesis",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 10,
+      "band": "Worth considering",
+      "title": "Make exceptional preset routing and the interactive comprehension dispatch explicit",
+      "match": "R1",
+      "verdict": "real",
+      "note": "Names the missing interactive Stage 6 (comprehension) subflow, the removed section."
+    },
+    {
+      "rank": 11,
+      "band": "Minor",
+      "title": "Validate that the supplied target is readable, nonempty and suitable for review",
+      "match": null,
+      "verdict": "real"
+    }
+  ]
+}
