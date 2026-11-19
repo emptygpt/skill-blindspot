@@ -22,7 +22,9 @@
     "map": "video-long 0.2.1 (extends video 0.2.1)",
     "runs_per_skill": 1,
     "setter_and_scorer": "same person (not the checker); setter chose the heading without opening the map",
-    "findings_total": 16
+    "findings_total": 13,
+    "checker_lint": "139/139 nodes in table; absent 13, covered 35, excluded 0, not-applicable 83, shallow 8",
+    "note": "Rerun with the bench.py fix from PR #3 because the first altered copy included the source .git directory. The first run recovered 0/1 removed stages, with 0 false positives over 16 findings."
   },
   "total": 1,
   "recovered": 0,
@@ -36,113 +38,92 @@
   "marks": [
     {
       "rank": 1,
-      "band": "Worth considering",
-      "title": "Listen to the complete soundtrack, not just the opening sample",
+      "band": "Needed",
+      "title": "No AI-content label for a video with synthetic voice and agent-made visuals",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 2,
       "band": "Worth considering",
-      "title": "Bind the brief to a particular viewer and learning outcome",
+      "title": "Nobody listens to the full finished audio before delivery",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 3,
       "band": "Worth considering",
-      "title": "Keep a rights and consent decision for optional assets and custom voices",
+      "title": "Who the video is for and what they already know is never asked",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 4,
       "band": "Worth considering",
-      "title": "Caption QA stops short of an accessibility deliverable check",
+      "title": "No music, sound effects or mix stage",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 5,
       "band": "Worth considering",
-      "title": "Validate the delivered media against an agreed output specification",
+      "title": "Export has one fixed preset and no platform or loudness check",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 6,
       "band": "Worth considering",
-      "title": "Turn topic-sensitive safety and policy checks into an intake branch",
+      "title": "Research facts are not checked by anyone other than the research agent",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 7,
       "band": "Worth considering",
-      "title": "Preserve recoverable project versions, not just a well-organized directory",
+      "title": "Rights of TTS voices and names shown on screen are not checked",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 8,
       "band": "Worth considering",
-      "title": "Separate flash aesthetics from flash safety",
+      "title": "Chapter timestamps for the description are not produced",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 9,
       "band": "Minor",
-      "title": "Record budget approval for optional paid production choices",
+      "title": "No content-policy check for health or dangerous topics",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 10,
       "band": "Minor",
-      "title": "Make required AI and sponsorship notices part of the delivered-video brief",
+      "title": "End card leaves no room for a platform end screen",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 11,
       "band": "Minor",
-      "title": "Check the meaning of third-party marks before drawing branded graphics",
+      "title": "No caption file or translated captions",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 12,
       "band": "Minor",
-      "title": "Distinguish illustrative scenes on screen when viewers could take them as real",
+      "title": "Product names and logos on screen",
       "match": null,
       "verdict": "real"
     },
     {
       "rank": 13,
       "band": "Minor",
-      "title": "Check contact details only when delivery targets restrict them",
-      "match": null,
-      "verdict": "real"
-    },
-    {
-      "rank": 14,
-      "band": "Minor",
-      "title": "Unify the current motion thresholds across dispatch and QC references",
-      "match": null,
-      "verdict": "real"
-    },
-    {
-      "rank": 15,
-      "band": "Minor",
-      "title": "State how a necessary late factual correction invalidates dependent artifacts",
-      "match": null,
-      "verdict": "real"
-    },
-    {
-      "rank": 16,
-      "band": "Minor",
-      "title": "Specify placement and continuity rules if a sponsor segment is requested",
+      "title": "Agent cost of a run is not estimated",
       "match": null,
       "verdict": "real"
     }
