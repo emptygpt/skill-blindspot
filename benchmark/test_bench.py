@@ -6,6 +6,8 @@ import hashlib
 import io
 import json
 import pathlib
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -106,6 +108,23 @@ class BenchmarkTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             bench.findings(args)
 
+    def test_findings_ignore_fenced_bands_items_and_node_details(self):
+        report = self.root / 'report.md'
+        report.write_text(
+            '## Findings\n### Needed\n1. **Real finding**\n'
+            '   ~~~~markdown\n   Map node: fake.override\n'
+            '   ~~~\n### Minor\n2. **Shorter fence is not a close**\n'
+            '   ~~~~text\n3. **Fence with info is not a close**\n   ~~~~\n'
+            '   Map node: review.check\n'
+            '```md\n## Fake section end\n### Minor\n4. **Example**\n```\n'
+            '5. **Still Needed**\n'
+            '## Trace\n### Minor\n6. **Not a finding**\n',
+            encoding='utf-8')
+        with contextlib.redirect_stdout(io.StringIO()) as output:
+            bench.findings(argparse.Namespace(report=report, out=None))
+        self.assertEqual([(row['rank'], row['band'], row['nodes']) for row in csv.DictReader(
+            io.StringIO(output.getvalue()))], [('1', 'Needed', 'review.check'), ('5', 'Needed', '')])
+
     def test_score_normal_empty_and_errors(self):
         key, marks, out = [self.root / name for name in ('key.json', 'marks.csv', 'result.json')]
         args = argparse.Namespace(key=str(key), marks=str(marks), out=str(out), top=1)
@@ -128,10 +147,35 @@ class BenchmarkTests(unittest.TestCase):
         bench.write_json(key, {'items': []})
         self.assertIsNone(run([])['recovery_rate'])
 
+    def test_score_cli_rejects_short_and_long_csv_rows_with_line_number(self):
+        key, marks, out = [self.root / name for name in ('key.json', 'marks.csv', 'result.json')]
+        bench.write_json(key, {'items': [{'id': 'R1'}]})
+        for row in ('2,Needed,Incomplete', '2,Needed,Extra,,R1,real,extra'):
+            with self.subTest(row=row):
+                marks.write_text(','.join(bench.FIELDS) + '\n1,Needed,"Multi\nline",,R1,real\n' + row + '\n',
+                                 encoding='utf-8')
+                result = subprocess.run([sys.executable, bench.__file__, 'score', str(key), str(marks),
+                                         '--out', str(out)], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 2)
+                self.assertIn('CSV line 4: expected 6 columns', result.stderr)
+                self.assertNotIn('Traceback', result.stderr)
+                self.assertFalse(out.exists())
+
     def test_summary(self):
         with contextlib.redirect_stdout(io.StringIO()) as output:
             bench.summary(argparse.Namespace(results=[]))
-        self.assertIn('Test 1', output.getvalue())
+        self.assertIn('Historical pilot (not independently rescorable): Test 1', output.getvalue())
+        self.assertIn('Combined skill (one run) | 11/12', output.getvalue())
+
+    def test_recorded_pilot_counts_distinguish_items_from_repeated_chances(self):
+        pilot = json.loads((bench.HERE / 'data' / 'validation-2026-11.json').read_text(encoding='utf-8'))
+        video, mdr, combined = pilot['tests']
+        items = sum(len(test['removed_items']) for test in (video, mdr))
+        self.assertEqual(items, 12)
+        self.assertEqual(video['chances'] + mdr['chances'], items * 2)
+        self.assertEqual(combined['chances'], items)
+        self.assertEqual([a['recovered'] + b['recovered'] for a, b in zip(video['methods'], mdr['methods'])],
+                         [20, 18])
 
 
 if __name__ == '__main__':
