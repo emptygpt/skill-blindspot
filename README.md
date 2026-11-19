@@ -60,6 +60,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `video-short` | Short-form vertical video, on top of `video` | +29 |
 | `video-long` | Long-form video, on top of `video` | +22 |
 | `writing` | Non-fiction articles published online | 78 |
+| `research-paper` | Research papers and reproducible analysis | 66 |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 |
 

@@ -60,6 +60,7 @@ npx skills add emptygpt/skill-blindspot
 | `video-short` | 竖屏短视频，在 `video` 之上 | +29 |
 | `video-long` | 长视频，在 `video` 之上 | +22 |
 | `writing` | 在线发表的非虚构文章 | 78 |
+| `research-paper` | 科研论文与可复现分析 | 66 |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 |
 

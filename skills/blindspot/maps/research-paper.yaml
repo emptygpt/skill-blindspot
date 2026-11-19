@@ -1,0 +1,585 @@
+# skill-blindspot map: research papers and reproducible analysis (maps/research-paper.yaml)
+#
+# Rules for this map
+#   - Every node cites a source opened on the web, with a locator that appears
+#     there: a heading, principle id, skill name or task statement and Task ID.
+#   - Nodes may be regrouped and reworded; unsourced concepts stay below,
+#     never as nodes. Descriptions are our own words.
+#   - Only titles, principle ids and short statements are cited; no source
+#     body text is copied. A guideline-selection node is not its full checklist.
+#
+# Licence and attribution
+#   O*NET: This product includes information from O*NET OnLine by the U.S.
+#   Department of Labor, Employment and Training Administration (USDOL/ETA).
+#   Used under CC BY 4.0. O*NET(R) is a trademark of USDOL/ETA. Task statements
+#   are regrouped here; this adaptation is not endorsed by USDOL/ETA.
+#   ESCO: This publication uses the ESCO classification of the European
+#   Commission. The skill name is regrouped here; this is an adaptation.
+#   https://esco.ec.europa.eu (licence not verified for the API record).
+#   FAIR: Wilkinson et al. (2016), Scientific Data 3, 160018,
+#   doi:10.1038/sdata.2016.18, CC BY 4.0; principle ids are cited and the
+#   practice descriptions are adaptations in our own words.
+#   ICMJE, Nature Portfolio policy pages, EQUATOR, NISO CRediT and FORCE11:
+#   licences not verified; only headings and short statements cited.
+#
+# Not yet covered (no usable source read, so no node)
+#   - Detailed power/sample-size planning, missing-data methods, multiplicity
+#     adjustments and causal inference diagnostics; ASA 2016 p-value
+#     principles were not verified from readable source text.
+#   - Computational environment capture, random seeds and clean reruns;
+#     The Turing Way and ACM artifact criteria were not read.
+#   - Detailed CONSORT, PRISMA 2020, STROBE and ARRIVE checklist items;
+#     only guideline selection was verified via EQUATOR and ICMJE.
+#   - Point-by-point responses to a current journal's reviewers; only
+#     disclosure of previous review correspondence was verified.
+#   - NIH DMS plan requirements, retention periods and jurisdiction-specific
+#     consent/privacy rules; no applicable policy text was verified.
+#   - Standalone data citation principles and post-publication corrections;
+#     the relevant detailed guidance was not read.
+
+
+map:
+  id: research-paper
+  title: Research papers and reproducible analysis
+  version: 0.1.0
+  updated: '2026-11-19'
+  scope: "Research study planning, reproducible analysis and academic paper writing through submission and publication; this base map owns paper writing excluded by writing. Sources are strongest for biomedical and health research, with conditional nodes for specific study types, not universal mandates; analysis-code coverage is limited to research-source-specific reproducibility and availability concerns. Out of scope: grant writing, lab bench protocols, teaching, and general software-engineering practice (version control, code review, testing, CI and dependency/licence hygiene), which belongs to software."
+sources:
+- id: M
+  title: "Preparing a Manuscript for Submission to a Medical Journal"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: A
+  title: "Defining the Role of Authors and Contributors"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: E
+  title: "Protection of Research Participants"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/roles-and-responsibilities/protection-of-research-participants.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: T
+  title: "Clinical Trials"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/clinical-trial-registration.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: S
+  title: "Sending the Manuscript to the Journal"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/manuscript-preparation/sending-the-submission.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: I
+  title: "Scientific Misconduct"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/scientific-misconduct-expressions-of-concern-and-retraction.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: P
+  title: "Overlapping Publications"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/overlapping-publications.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: L
+  title: "Copyright"
+  publisher: "International Committee of Medical Journal Editors"
+  url: https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/copyright.html
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: F
+  title: "The FAIR Guiding Principles for scientific data management and stewardship"
+  publisher: "Wilkinson et al., Scientific Data 3, 160018 (2016)"
+  url: https://www.nature.com/articles/sdata201618
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (Rights and permissions); adapted descriptions, principle ids only"
+- id: N
+  title: "Reporting standards and availability of data, materials, code and protocols"
+  publisher: "Nature Portfolio"
+  url: https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: Q
+  title: "Reporting Guidelines"
+  publisher: "EQUATOR Network"
+  url: https://www.equator-network.org/
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: C
+  title: "CRediT role descriptors"
+  publisher: "NISO, CRediT"
+  url: https://credit.niso.org/contributor-roles-defined/
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: W
+  title: "Software Citation Principles (Published 2016)"
+  publisher: "Smith, Katz, Niemeyer and FORCE11 Software Citation Working Group"
+  url: https://force11.org/info/software-citation-principles-published-2016/
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+- id: ONET
+  title: "Medical Scientists, Except Epidemiologists (19-1042.00), task statements"
+  publisher: "U.S. Department of Labor, Employment and Training Administration (USDOL/ETA)"
+  url: https://www.onetonline.org/link/summary/19-1042.00
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0; adapted task grouping, O*NET OnLine updated 2026"
+- id: ESCO
+  title: "perform scientific research (skill record, English)"
+  publisher: "European Commission"
+  url: https://ec.europa.eu/esco/api/resource/skill?uri=http://data.europa.eu/esco/skill/4fabca9a-7435-4f33-b1da-3cdb00340fdc&language=en
+  retrieved: '2026-11-19'
+  licence: "not verified; only titles and short statements cited"
+groups:
+- id: design
+  title: Study design and registration
+  nodes:
+  - id: design.question
+    title: "Research question"
+    description: "Define the knowledge gap and a specific objective or hypothesis that the study can address."
+    sources:
+    - ref: M
+      locator: "c. Introduction"
+  - id: design.method
+    title: "Scientific approach"
+    description: "Choose an empirical approach that can produce evidence relevant to the question."
+    sources:
+    - ref: ESCO
+      locator: "perform scientific research"
+  - id: design.study-plan
+    title: "Study plan"
+    description: "Plan the investigation and the methods needed to answer the research question."
+    applies_when: "Medical or health-related investigations."
+    sources:
+    - ref: ONET
+      locator: "Task 7513: Plan and direct studies to investigate human or animal disease, preventive methods, and treatments for disease."
+  - id: design.outcomes
+    title: "Primary and secondary outcomes"
+    description: "Specify the main and secondary outcomes and how they will be measured."
+    sources:
+    - ref: M
+      locator: "ii. Data Collection and Measurements"
+  - id: design.participants
+    title: "Selection and exclusions"
+    description: "Define the population, eligibility criteria and exclusions and explain sample representativeness."
+    applies_when: "Studies involving participants or sampled populations."
+    sources:
+    - ref: M
+      locator: "i. Selection and Description of Participants"
+  - id: design.preregistration
+    title: "Study and analysis preregistration"
+    description: "Record the study and analysis plan prospectively in a public repository and provide registration details with submission."
+    applies_when: "Studies using preregistration or venues that request it."
+    sources:
+    - ref: N
+      locator: "Pre-registration"
+  - id: design.trial-registration
+    title: "Prospective trial registration"
+    description: "Register a clinical trial in an accepted public registry before the first participant consents to enrollment."
+    applies_when: "Clinical trials."
+    sources:
+    - ref: T
+      locator: "1. Registration"
+- id: ethics
+  title: Ethics and research integrity
+  nodes:
+  - id: ethics.approval
+    title: "Independent ethics approval"
+    description: "Obtain applicable independent review approval and retain documentation for the journal."
+    applies_when: "Human research."
+    sources:
+    - ref: E
+      locator: "E. Protection of Research Participants"
+  - id: ethics.publication-consent
+    title: "Consent for identifiable publication"
+    description: "Obtain and archive written publication consent before including essential identifying patient information."
+    applies_when: "Publication of potentially identifiable patient information."
+    sources:
+    - ref: E
+      locator: "E. Protection of Research Participants"
+  - id: ethics.privacy
+    title: "Participant privacy"
+    description: "Remove unnecessary identifying details without changing the scientific meaning of the evidence."
+    applies_when: "Research reports containing personal information."
+    sources:
+    - ref: E
+      locator: "E. Protection of Research Participants"
+  - id: ethics.animal-welfare
+    title: "Animal welfare compliance reporting"
+    description: "Report compliance with applicable institutional and national animal care standards."
+    applies_when: "Animal experiments."
+    sources:
+    - ref: E
+      locator: "E. Protection of Research Participants"
+  - id: ethics.misconduct
+    title: "Fabrication, falsification and plagiarism checks"
+    description: "Check that evidence is genuine, attribution is accurate and images have not been deceptively manipulated."
+    sources:
+    - ref: I
+      locator: "B. Scientific Misconduct"
+  - id: ethics.ai-disclosure
+    title: "AI assistance disclosure and accountability"
+    description: "Disclose how AI tools contributed to the work and have humans check the accuracy, originality and attribution of their outputs."
+    applies_when: "AI-assisted preparation or conduct of research."
+    sources:
+    - ref: A
+      locator: "4. Artificial Intelligence (AI)-Assisted Technology"
+- id: data
+  title: FAIR data stewardship
+  nodes:
+  - id: data.persistent-id
+    title: "Persistent dataset identifiers"
+    description: "Assign persistent identifiers so datasets and their metadata can be referenced unambiguously."
+    sources:
+    - ref: F
+      locator: "F1"
+  - id: data.metadata
+    title: "Descriptive metadata"
+    description: "Describe the dataset with metadata sufficient for discovery and interpretation."
+    sources:
+    - ref: F
+      locator: "F2"
+  - id: data.metadata-link
+    title: "Metadata-to-data linkage"
+    description: "Include the dataset identifier in its metadata so the record points to the correct object."
+    sources:
+    - ref: F
+      locator: "F3"
+  - id: data.indexing
+    title: "Searchable registration"
+    description: "Register or index research data and metadata in a searchable resource."
+    sources:
+    - ref: F
+      locator: "F4"
+  - id: data.retrieval
+    title: "Standard retrieval protocol"
+    description: "Make data and metadata retrievable through their identifiers using a standard communication protocol."
+    sources:
+    - ref: F
+      locator: "A1"
+  - id: data.controlled-access
+    title: "Authenticated access where needed"
+    description: "Provide an authentication and authorization route when data access must be controlled."
+    applies_when: "Datasets requiring controlled access."
+    sources:
+    - ref: F
+      locator: "A1.2"
+  - id: data.metadata-retention
+    title: "Metadata persistence"
+    description: "Keep metadata accessible even after the underlying data cease to be available."
+    sources:
+    - ref: F
+      locator: "A2"
+  - id: data.representation
+    title: "Interoperable representation"
+    description: "Represent data and metadata using a shared formal language suited to their community."
+    sources:
+    - ref: F
+      locator: "I1"
+  - id: data.vocabularies
+    title: "Shared vocabularies"
+    description: "Use vocabularies that themselves support FAIR discovery and reuse."
+    sources:
+    - ref: F
+      locator: "I2"
+  - id: data.relationships
+    title: "Qualified data relationships"
+    description: "Record meaningful references between related datasets and metadata."
+    sources:
+    - ref: F
+      locator: "I3"
+  - id: data.reuse-terms
+    title: "Data reuse licence"
+    description: "State clear and accessible terms governing reuse of the research data."
+    sources:
+    - ref: F
+      locator: "R1.1"
+  - id: data.provenance
+    title: "Data provenance"
+    description: "Document the origins and processing history needed to interpret the dataset."
+    sources:
+    - ref: F
+      locator: "R1.2"
+  - id: data.community-standards
+    title: "Domain data standards"
+    description: "Apply relevant community standards to the data and their metadata."
+    sources:
+    - ref: F
+      locator: "R1.3"
+- id: analysis
+  title: Statistical analysis and interpretation
+  nodes:
+  - id: analysis.methods
+    title: "Statistical methods"
+    description: "Describe and justify analytical methods in enough detail for a knowledgeable reader to assess and verify the results."
+    sources:
+    - ref: M
+      locator: "iii. Statistics"
+  - id: analysis.uncertainty
+    title: "Effect sizes and uncertainty"
+    description: "Report quantitative estimates with appropriate uncertainty rather than treating p-values alone as evidence of importance."
+    sources:
+    - ref: M
+      locator: "iii. Statistics"
+  - id: analysis.exploration
+    title: "Prespecified versus exploratory analyses"
+    description: "Separate prespecified analyses from exploratory and subgroup analyses in reporting."
+    sources:
+    - ref: M
+      locator: "iii. Statistics"
+  - id: analysis.complete-outcomes
+    title: "Complete outcome reporting"
+    description: "Report all primary and secondary outcomes specified in the methods, including unhelpful or null findings."
+    sources:
+    - ref: M
+      locator: "e. Results"
+  - id: analysis.denominators
+    title: "Absolute numbers and denominators"
+    description: "Provide underlying counts alongside percentages so readers can interpret the reported results."
+    sources:
+    - ref: M
+      locator: "e. Results"
+  - id: analysis.interpretation
+    title: "Limits of inference"
+    description: "Link conclusions to the evidence, discuss limitations and distinguish statistical significance from substantive importance."
+    sources:
+    - ref: M
+      locator: "f. Discussion"
+- id: computation
+  title: Reproducible analysis code
+  nodes:
+  - id: computation.versions
+    title: "Analysis software versions"
+    description: "Identify the statistical packages and exact versions used in the analysis."
+    applies_when: "Analyses performed with statistical software."
+    sources:
+    - ref: M
+      locator: "iii. Statistics"
+  - id: computation.code-access
+    title: "Code availability statement"
+    description: "Explain where custom code central to the conclusions can be accessed and disclose any access restrictions."
+    applies_when: "Studies using custom code or algorithms central to the conclusions."
+    sources:
+    - ref: N
+      locator: "Availability and peer review of computer code and algorithm"
+  - id: computation.review-access
+    title: "Code access during review"
+    description: "Provide editors and reviewers with the custom code needed to evaluate the paper's central claims."
+    applies_when: "Peer review of research using central custom code or algorithms."
+    sources:
+    - ref: N
+      locator: "Availability and peer review of computer code and algorithm"
+  - id: computation.archival-release
+    title: "Archived computational release"
+    description: "Deposit the custom analysis code in a persistent identifier-minting repository so readers can repeat published results."
+    applies_when: "Research relying on custom computational code."
+    sources:
+    - ref: N
+      locator: "Availability and peer review of computer code and algorithm"
+  - id: computation.software-citation
+    title: "Software citation and credit"
+    description: "Cite research software as a research product in the reference list rather than leaving it uncredited."
+    applies_when: "Research using software."
+    sources:
+    - ref: W
+      locator: "1. Importance"
+  - id: computation.specific-release
+    title: "Specific software identification"
+    description: "Make citations identify the particular software version or variant used for the reported results."
+    applies_when: "Research using software."
+    sources:
+    - ref: W
+      locator: "6. Specificity"
+  - id: computation.validation
+    title: "Reproducibility validation role"
+    description: "Identify the contribution responsible for checking reproducibility of the research outputs."
+    applies_when: "Studies reporting reproducibility validation contributions."
+    sources:
+    - ref: C
+      locator: "Validation"
+- id: reporting
+  title: Study-specific reporting guidelines
+  nodes:
+  - id: reporting.selection
+    title: "Reporting guideline selection"
+    description: "Select a reporting guideline appropriate to the study design and check the manuscript for required information."
+    sources:
+    - ref: M
+      locator: "2. Reporting Guidelines"
+  - id: reporting.consort
+    title: "Randomized trial reporting"
+    description: "Use CONSORT to check reporting completeness for a randomized trial."
+    applies_when: "Randomized trials."
+    sources:
+    - ref: Q
+      locator: "CONSORT"
+  - id: reporting.prisma
+    title: "Systematic review reporting"
+    description: "Use PRISMA to check reporting completeness for a systematic review or meta-analysis."
+    applies_when: "Systematic reviews and meta-analyses."
+    sources:
+    - ref: Q
+      locator: "PRISMA"
+  - id: reporting.strobe
+    title: "Observational study reporting"
+    description: "Use STROBE to check reporting completeness for observational epidemiology."
+    applies_when: "Cohort, case-control or cross-sectional observational epidemiology studies."
+    sources:
+    - ref: Q
+      locator: "STROBE"
+  - id: reporting.arrive
+    title: "Animal study reporting"
+    description: "Use ARRIVE to check the information reported about animal research."
+    applies_when: "Animal research."
+    sources:
+    - ref: Q
+      locator: "ARRIVE"
+  - id: reporting.stard
+    title: "Diagnostic accuracy reporting"
+    description: "Use STARD to check reporting completeness for diagnostic accuracy research."
+    applies_when: "Diagnostic test accuracy studies."
+    sources:
+    - ref: Q
+      locator: "STARD"
+  - id: reporting.qualitative
+    title: "Qualitative study reporting"
+    description: "Select SRQR for qualitative research reporting and check for missing study details."
+    applies_when: "Qualitative research studies."
+    sources:
+    - ref: Q
+      locator: "SRQR"
+- id: manuscript
+  title: Manuscript and contributions
+  nodes:
+  - id: manuscript.structure
+    title: "Manuscript structure"
+    description: "Organize the paper to reflect its research process and the article type required by the venue."
+    sources:
+    - ref: M
+      locator: "1. General Principles"
+  - id: manuscript.title-page
+    title: "Title and author metadata"
+    description: "Prepare an informative title and complete author affiliations and corresponding-author details."
+    sources:
+    - ref: M
+      locator: "a. Title Page"
+  - id: manuscript.orcid
+    title: "Author identifiers"
+    description: "Include author ORCID identifiers where supported by the journal."
+    sources:
+    - ref: M
+      locator: "a. Title Page"
+  - id: manuscript.funding
+    title: "Funding and relationship disclosures"
+    description: "Identify support for the work and include each author's relevant relationship disclosures."
+    sources:
+    - ref: M
+      locator: "a. Title Page"
+  - id: manuscript.abstract
+    title: "Accurate abstract"
+    description: "Summarize the purpose, methods, main findings and limitations consistently with the full paper."
+    sources:
+    - ref: M
+      locator: "b. Abstract"
+  - id: manuscript.methods
+    title: "Reproducible methods section"
+    description: "Explain how and why the study was conducted in sufficient detail for someone with the data to reproduce the results."
+    sources:
+    - ref: M
+      locator: "d. Methods"
+  - id: manuscript.references
+    title: "Reference accuracy"
+    description: "Check that citations support the claims made and that reference details identify the intended sources."
+    sources:
+    - ref: M
+      locator: "g. References"
+  - id: manuscript.tables
+    title: "Self-contained tables"
+    description: "Prepare numbered tables with clear headings, explanatory notes and defined uncertainty measures."
+    sources:
+    - ref: M
+      locator: "h. Tables"
+  - id: manuscript.figures
+    title: "Figures and legends"
+    description: "Prepare legible figures with explanatory legends and appropriate attribution for reused illustrations."
+    sources:
+    - ref: M
+      locator: "i. Illustrations (Figures)"
+  - id: manuscript.authorship
+    title: "Authorship eligibility"
+    description: "Agree authorship using contribution, approval and accountability criteria rather than status alone."
+    sources:
+    - ref: A
+      locator: "2. Who Is an Author?"
+  - id: manuscript.acknowledgments
+    title: "Non-author acknowledgments"
+    description: "Recognize contributions that do not qualify for authorship and obtain permission from those acknowledged."
+    sources:
+    - ref: A
+      locator: "3. Non-Author Contributors"
+  - id: manuscript.roles
+    title: "Contributor role statements"
+    description: "Record specific research contributions using role labels without treating those labels as authorship eligibility criteria."
+    sources:
+    - ref: C
+      locator: "CRediT role descriptors"
+- id: publication
+  title: Submission, review and publication
+  nodes:
+  - id: publication.journal-article
+    title: "Scientific journal communication"
+    description: "Prepare the research findings for publication as a scientific journal article."
+    sources:
+    - ref: ONET
+      locator: "Task 20201: Write and publish articles in scientific journals."
+  - id: publication.submission
+    title: "Submission package"
+    description: "Check the journal's required files, forms and reporting checklists and supply a complete submission package."
+    sources:
+    - ref: S
+      locator: "B. Sending the Manuscript to the Journal"
+  - id: publication.permissions
+    title: "Reuse and acknowledgment permissions"
+    description: "Supply permissions needed for reused material, identifiable individuals and acknowledged contributors."
+    applies_when: "Submissions using material or contributions requiring permission."
+    sources:
+    - ref: S
+      locator: "B. Sending the Manuscript to the Journal"
+  - id: publication.review-history
+    title: "Previous review history and replies"
+    description: "When transferring a previously reviewed paper, provide prior editorial comments and the authors' responses to support transparent review."
+    applies_when: "Resubmission of work previously reviewed at another journal."
+    sources:
+    - ref: S
+      locator: "B. Sending the Manuscript to the Journal"
+  - id: publication.data-availability
+    title: "Data availability statement"
+    description: "State how readers can obtain the data supporting the findings and explain access limits."
+    sources:
+    - ref: N
+      locator: "Availability of data"
+  - id: publication.trial-sharing
+    title: "Clinical trial data sharing plan"
+    description: "Describe which deidentified trial data and related documents can be shared, when and under what access criteria."
+    applies_when: "Reports of clinical trial results subject to the journal's data sharing policy."
+    sources:
+    - ref: T
+      locator: "3. Data Sharing"
+  - id: publication.preprints
+    title: "Preprint policy and disclosure"
+    description: "Check the target journal's preprint policy and disclose prior public versions of the manuscript."
+    applies_when: "Work posted or planned for posting as a preprint."
+    sources:
+    - ref: P
+      locator: "3. Preprints"
+  - id: publication.rights
+    title: "Publication rights and licences"
+    description: "Check the journal's publication licence or copyright transfer terms before agreeing to publication."
+    sources:
+    - ref: L
+      locator: "C. Copyright"
