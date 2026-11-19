@@ -26,6 +26,7 @@
 #   every spreadsheet user is subject to CFA Institute membership duties.
 #
 # Not yet covered (no verified source locator for these details, so no node)
+#   - Units, currency and sign conventions beyond basic number formatting.
 #   - Named ranges, date arithmetic and financial-function timing conventions.
 #   - Detailed three-statement schedules, discounted cash-flow mechanics and
 #     budgeting methods beyond scenario comparison and general forecasting.
@@ -39,10 +40,10 @@
 #
 map:
   id: spreadsheet-finance
-  title: '表格建模与财务分析 / Spreadsheet modeling and financial analysis'
+  title: 'Spreadsheet modeling and financial analysis'
   version: 0.1.0
   updated: '2026-11-19'
-  scope: 'Building or changing a spreadsheet model or financial analysis (forecasts, budgets, valuation, financial statement analysis and derived reports), from the question through inputs, structure, formulas, checks, scenarios, outputs, review, documentation and disclosure. Prose quality of a memo/report belongs to the writing map; engineering practice of VBA/Python/Office Script code (tests, version control of code, dependencies, security of code) belongs to the software map. This map retains spreadsheet/finance-specific concerns such as workbook change control, formula auditing, number formats, units/currency, sign conventions and accounting standard compliance. Out of scope: bookkeeping and audit engagements, tax filing, regulated investment advice specifics and general data science.'
+  scope: 'Building or changing a spreadsheet model or financial analysis (forecasts, budgets, valuation, financial statement analysis and derived reports), from the question through inputs, structure, formulas, checks, scenarios, outputs, review, documentation and disclosure. Prose quality of a memo/report belongs to the writing map; engineering practice of VBA/Python/Office Script code (tests, version control of code, dependencies, security of code) belongs to the software map. This map retains spreadsheet/finance-specific concerns such as workbook change control, formula auditing, number formats and financial statement presentation requirements. Out of scope: bookkeeping and audit engagements, tax filing, regulated investment advice specifics and general data science.'
 sources:
 - id: S1
   title: '20 principles for good spreadsheet practice'
@@ -218,7 +219,7 @@ groups:
       locator: '8. Design with adaptability in mind to minimise future manual intervention.'
   - id: structure.conventions
     title: 'Apply workbook conventions'
-    description: 'Use consistent spreadsheet formatting conventions and document workbook-specific units, currency and sign conventions.'
+    description: 'Use consistent spreadsheet formatting conventions and document workbook-specific conventions for users.'
     sources:
     - ref: S1
       locator: '2. Adopt a consistent methodology for spreadsheets in your organisation.'
@@ -277,16 +278,16 @@ groups:
       locator: 'Enter a formula that contains a built-in function'
   - id: formulas.errors
     title: 'Handle formula errors explicitly'
-    description: 'Define the intended response to error values without silently treating every failed calculation as zero.'
+    description: 'Specify the value returned when a formula evaluates to an error.'
     sources:
     - ref: S7
-      locator: 'IFERROR function'
+      locator: 'IFERROR returns a value you specify if a formula evaluates to an error; otherwise, it returns the result of the formula.'
   - id: formulas.rounding
     title: 'Set calculation rounding'
     description: 'Specify where values are rounded in calculations and to how many digits.'
     sources:
     - ref: S9
-      locator: 'ROUND function'
+      locator: 'The ROUND function rounds a number to a specified number of digits.'
 - id: checks
   title: 'Checks, testing and review'
   nodes:
@@ -298,7 +299,7 @@ groups:
       locator: '17. Build in checks, controls, and alerts from the outset.'
   - id: checks.test
     title: 'Test workbook behaviour'
-    description: 'Exercise normal inputs, empty inputs, invalid values and boundary cases before relying on the outputs.'
+    description: 'Vary inputs, test extreme or impossible values and systematically double-check key calculations.'
     sources:
     - ref: S1
       locator: '18. Test and review to reduce the risk of error and identify inefficiencies.'
@@ -308,12 +309,14 @@ groups:
     sources:
     - ref: S1
       locator: '16. Collaborate in design and review processes. This ensures accuracy, robustness, and the mitigation of risks.'
+    - ref: S1
+      locator: '18. Test and review to reduce the risk of error and identify inefficiencies.'
   - id: checks.evaluate
     title: 'Audit nested formulas'
     description: 'Use stepwise formula evaluation to inspect intermediate results and logical branches.'
     sources:
     - ref: S8
-      locator: 'Evaluate a nested formula one step at a time'
+      locator: 'Select Evaluate to examine the value of the underlined reference.'
 - id: scenarios
   title: 'Scenarios and sensitivity'
   nodes:
@@ -331,13 +334,13 @@ groups:
       locator: 'Use Data Tables to see the effects of one or two variables on a formula'
   - id: scenarios.target
     title: 'Solve for a target result'
-    description: 'Use Goal Seek for a single unknown input and check that the resulting value is meaningful.'
+    description: 'Use Goal Seek to find the single input value needed for a formula to produce a specified result.'
     sources:
     - ref: S5
       locator: 'Use Goal Seek to find out how to get a desired result'
   - id: scenarios.forecast
     title: 'Choose forecast approach'
-    description: 'Select an appropriate trend or model approach rather than extending historical values without examining the method.'
+    description: 'Generate forecast values from existing data using a suitable trend calculation or worksheet function.'
     sources:
     - ref: S5
       locator: 'Prepare forecasts and advanced business models'
@@ -352,36 +355,36 @@ groups:
       locator: 'Task ID 21590: Employ financial models to develop solutions to financial problems or to assess the financial or capital impact of transactions.'
   - id: analysis.valuation
     title: 'Perform valuation'
-    description: 'Select and apply an appropriate valuation or pricing approach with its assumptions exposed.'
+    description: 'Calculate a valuation or price for the securities being analysed.'
     sources:
     - ref: S2
       locator: 'Task ID 21597: Perform securities valuation or pricing.'
   - id: analysis.ratios
     title: 'Interpret financial ratios'
-    description: 'Calculate relevant activity, liquidity, solvency and profitability ratios and interpret them together.'
+    description: 'Calculate and interpret activity, liquidity, solvency and profitability ratios.'
     sources:
     - ref: S12
-      locator: 'Learning Outcomes'
+      locator: 'calculate and interpret activity, liquidity, solvency, and profitability ratios;'
   - id: analysis.comparisons
     title: 'Compare financial performance'
     description: 'Choose meaningful peer and historical comparisons rather than interpreting isolated numbers.'
     sources:
     - ref: S12
-      locator: 'Financial Analysis Techniques'
+      locator: 'Cross-sectional analysis compares multiple companies at the same point in time or over the same range of time, and trend or time-series analysis compares measures for a single company over a period of time.'
   - id: analysis.statements
     title: 'Check financial statement presentation'
-    description: 'Check statement coverage, comparative periods and applicable presentation requirements without claiming compliance from a partial checklist.'
+    description: 'Check that the financial statements include the complete annual set and preceding-year comparatives.'
     applies_when: 'When preparing or analysing IFRS financial statements before IFRS 18 applies.'
     sources:
     - ref: S10
-      locator: 'IAS 1 Presentation of Financial Statements'
+      locator: 'It requires an entity to present a complete set of financial statements at least annually, with comparative amounts for the preceding year (including comparative amounts in the notes).'
   - id: analysis.ifrs18
     title: 'Determine applicable IFRS presentation standard'
     description: 'Determine whether IFRS 18 applies for the reporting period, including any early adoption, before selecting presentation requirements.'
     applies_when: 'When preparing or analysing IFRS financial statements; IFRS 18 is effective for annual periods beginning on or after 1 January 2027, with earlier application permitted.'
     sources:
     - ref: S11
-      locator: 'IFRS 18 Presentation and Disclosure in Financial Statements'
+      locator: 'IFRS 18 is effective for annual reporting periods beginning on or after 1 January 2027, with earlier application permitted.'
 - id: reporting
   title: 'Outputs and disclosure'
   nodes:
@@ -393,7 +396,7 @@ groups:
       locator: 'Task ID 21589: Draw charts and graphs, using computer spreadsheets, to illustrate technical reports.'
   - id: reporting.formats
     title: 'Format financial quantities'
-    description: 'Use number formats that distinguish currencies, percentages and dates without confusing display precision with calculation precision.'
+    description: 'Use number formats to distinguish currencies, percentages and dates.'
     sources:
     - ref: S6
       locator: 'Apply a number format'
@@ -409,13 +412,15 @@ groups:
     applies_when: 'When IFRS 18 applies.'
     sources:
     - ref: S11
-      locator: 'IFRS 18 Presentation and Disclosure in Financial Statements'
+      locator: 'requiring an entity to disclose management-defined performance measures'
+    - ref: S11
+      locator: 'adding new principles for aggregation and disaggregation of items.'
 - id: controls
   title: 'Workbook controls'
   nodes:
   - id: controls.backup-version
     title: 'Control workbook versions and backups'
-    description: 'Retain recoverable workbook versions and identify the approved current file and changes.'
+    description: 'Back up workbooks regularly and distinguish the latest file from previous versions.'
     sources:
     - ref: S1
       locator: '19. Ensure there is a regular process of backup and version control. This minimises loss of work and avoids the use of the wrong version.'
