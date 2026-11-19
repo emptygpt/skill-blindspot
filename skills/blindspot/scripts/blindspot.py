@@ -120,8 +120,9 @@ def read_skill(folder):
     return folder, texts, code, data, skipped
 
 
-LINK_RE = re.compile(r'\]\(([^\s)]+)(?:\s+"[^"]*")?\)')
-LINK_TEXT_RE = re.compile(r'\[[^\]\n]*\]\([^)\n]*\)|\]\([^)\n]*\)')
+LINK_TARGET = r"""\]\(([^\s)]+)(?:\s+(?:"[^"\n]*"|'[^'\n]*'|\([^)\n]*\)))?\s*\)"""
+LINK_RE = re.compile(LINK_TARGET)
+LINK_TEXT_RE = re.compile(r"(?:\[[^\]\n]*)?" + LINK_TARGET)
 PROSE_RE = re.compile(r"(?<![\w/.$-])((?:\.{1,2}/)?[\w.-]+(?:/[\w.-]+)*\.(?:md|txt))\b")
 
 

@@ -98,6 +98,14 @@ class HelperTests(unittest.TestCase):
         self.assertEqual(blindspot.missing_references(self.root / 'skill', texts),
                          [('SKILL.md', 1, 'scripts/check.py')])
 
+    def test_titled_links_are_checked_without_title_text(self):
+        self.write('skill/SKILL.md',
+                   "[a](gone.md 'Guide') [b](lost.md \"see (old.md)\") [c](away.md (x.md))\n")
+        _, texts, _, _, _ = blindspot.read_skill(self.root / 'skill')
+        self.assertEqual(blindspot.missing_references(self.root / 'skill', texts),
+                         [('SKILL.md', 1, 'gone.md'), ('SKILL.md', 1, 'lost.md'),
+                          ('SKILL.md', 1, 'away.md')])
+
     def test_tree_drawing_lines_are_not_prose_references(self):
         self.write('skill/SKILL.md', '```\nresources/\n'
                    '├── guide.md\n│   notes.md\n└── missing.md\n```\n'
