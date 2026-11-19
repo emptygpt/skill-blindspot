@@ -60,9 +60,9 @@ npx skills add emptygpt/skill-blindspot
 | `video-short` | 竖屏短视频，在 `video` 之上 | +29 |
 | `video-long` | 长视频，在 `video` 之上 | +22 |
 | `writing` | 在线发表的非虚构文章 | 78 |
-| `research-paper` | 科研论文与可复现分析 | 66 |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 |
+| `research-paper` | 科研论文与可复现分析 | 76 |
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 

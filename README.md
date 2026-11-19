@@ -60,9 +60,9 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `video-short` | Short-form vertical video, on top of `video` | +29 |
 | `video-long` | Long-form video, on top of `video` | +22 |
 | `writing` | Non-fiction articles published online | 78 |
-| `research-paper` | Research papers and reproducible analysis | 66 |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 |
+| `research-paper` | Research papers and reproducible analysis | 76 |
 
 The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, TikTok, Bilibili and Douyin official pages, the US FTC and a Chinese advertising regulation. Douyin's creator learning centre could not be read.
 
