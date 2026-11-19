@@ -78,6 +78,36 @@ class HelperTests(unittest.TestCase):
         self.assertNotIn('YOUR_HOST', result.stdout)
         self.assertIn('MISSING: SKILL.md:2', result.stdout)
 
+    def test_link_labels_are_not_prose_references(self):
+        self.write('skill/SKILL.md', '[guide.md](resources/guide.md)\n'
+                   '[absent.md](resources/missing.md "Guide") and read missing.txt.\n')
+        self.write('skill/resources/guide.md', '# Guide\n')
+        _, texts, _, _, _ = blindspot.read_skill(self.root / 'skill')
+        self.assertEqual(blindspot.missing_references(self.root / 'skill', texts),
+                         [('SKILL.md', 2, 'resources/missing.md'),
+                          ('SKILL.md', 2, 'missing.txt')])
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn('mentions `guide.md`', result.stdout)
+        self.assertNotIn('mentions `absent.md`', result.stdout)
+        self.assertIn('mentions `resources/missing.md`', result.stdout)
+
+    def test_tree_drawing_lines_are_not_prose_references(self):
+        self.write('skill/SKILL.md', '```\nresources/\n'
+                   '├── guide.md\n│   notes.md\n└── missing.md\n```\n'
+                   'Read missing.md.\n└── [link](missing-link.md)\n')
+        self.write('skill/resources/guide.md', '# Guide\n')
+        _, texts, _, _, _ = blindspot.read_skill(self.root / 'skill')
+        self.assertEqual(blindspot.missing_references(self.root / 'skill', texts),
+                         [('SKILL.md', 7, 'missing.md'),
+                          ('SKILL.md', 8, 'missing-link.md')])
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn('MISSING: SKILL.md:3', result.stdout)
+        self.assertNotIn('MISSING: SKILL.md:4', result.stdout)
+        self.assertNotIn('MISSING: SKILL.md:5', result.stdout)
+        self.assertIn('MISSING: SKILL.md:7', result.stdout)
+
     def test_grep_rejects_missing_or_file_roots_before_searching(self):
         file_ = self.write('valid/note.md', 'review\n')
         for bad in (self.root / 'missing', file_):
