@@ -1,0 +1,710 @@
+# skill-blindspot map: SEO and website content operations (maps/seo-web.yaml)
+#
+# Rules for this map
+#   - Every node must cite a fetched source in "sources", with a locator
+#     copied from a heading, report name, article number, or short task statement.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Unverified gaps stay in the list below.
+#   - Only titles and short statements are cited; no source body text is copied.
+#
+# Scope and boundaries
+#   Site/search-engine operations, not writing a single article's content,
+#   reporting or ethics (map writing), or building/changing site code,
+#   security, testing or release (map software). Paid search ads (SEM bidding)
+#   and social media are out of scope. Technical nodes specify SEO requirements
+#   and inspect search outcomes; implementation belongs to software.
+#   Overlap with writing's head.metadata-seo and search engine-first content:
+#   this map covers metadata consistency across pages, search presentation,
+#   and site-level content decisions, not drafting or judging a single article.
+#   Advertising nodes cover site publishing controls for sponsored/affiliate
+#   pages, not general editorial ethics. Apply legal nodes in their jurisdiction.
+#
+# Licence and attribution
+#   Google Search Central and web.dev: page content is CC BY 4.0 as stated
+#   on the pages; code samples are Apache 2.0 and are not copied here.
+#   Headings are regrouped and descriptions reworded; this is an adaptation,
+#   not endorsed by Google. Search Console Help licence is not verified.
+#   O*NET: This product includes information from the O*NET 31.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license. O*NET(R) is a trademark of
+#   USDOL/ETA. Task statements are regrouped here, so this map is an adaptation
+#   and has not been endorsed by USDOL/ETA. Current version checked at
+#   https://www.onetcenter.org/database.html on 2026-11-19.
+#   Schema.org, FTC and Chinese law/regulation: licences not verified;
+#   only short titles, questions and article numbers are cited.
+#
+# Not yet covered (no usable source read, so no node)
+#   - ESCO search engine optimisation expert skill names: the occupation
+#     page returned a temporary-issue shell, not verifiable occupation skills.
+#   - Bing-specific webmaster rules: the fetched guidelines URL returned
+#     an application shell, not readable guideline text.
+#   - Baidu-specific operational rules: only the SEO guide 2.0 preface was
+#     read; its historical introduction does not support current workflow nodes.
+#   - Step-level editorial refresh schedules, ownership and approval workflows,
+#     and consolidation of non-duplicate pages: no detailed source read.
+#   - Search engines beyond the cited Google guidance; local business search,
+#     ecommerce feed operations, and jurisdiction-specific ad rules beyond
+#     the cited US and Chinese guidance: no detailed source read.
+
+map:
+  id: seo-web
+  title: SEO and website content operations
+  version: 0.1.0
+  updated: '2026-11-19'
+  scope: "Making a website's pages findable and useful in web search and keeping site content healthy: research, crawling/indexing, URL and site structure, titles/meta descriptions/headings, structured data, sitemaps/robots, page experience/Core Web Vitals, mobile, international hreflang, images/video in search, internal and qualified outbound links, helpful/people-first content, site-level updating/consolidating/removing, redirects/site moves, Search Console measurement, spam policies and sponsored/affiliate disclosure and advertising-law compliance. Out of scope: writing a single article's content, reporting or ethics (map writing); building/changing the site's code, security, testing or release (map software); paid search ads (SEM bidding); social media. Overlap with writing metadata and people-first content is limited here to site/search-engine operations."
+sources:
+- id: G1
+  title: "Google Search Essentials"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/essentials"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G2
+  title: "Search Engine Optimization (SEO) Starter Guide"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G3
+  title: "Creating helpful, reliable, people-first content"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G4
+  title: "Spam policies for Google web search"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/essentials/spam-policies"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G5
+  title: "Influencing your title links in search results"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/title-link"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G6
+  title: "Control your snippets in search results"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/snippet"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G7
+  title: "Introduction to structured data markup in Google Search"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G8
+  title: "General structured data guidelines"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G9
+  title: "Learn about sitemaps"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G10
+  title: "Introduction to robots.txt"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G11
+  title: "How to specify a canonical URL with rel=\"canonical\" and other methods"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G12
+  title: "Tell Google about localized versions of your page"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/specialty/international/localized-versions"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G13
+  title: "Understanding page experience in Google Search results"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/page-experience"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G14
+  title: "Mobile site and mobile-first indexing best practices"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G15
+  title: "Google image SEO best practices"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/google-images"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G16
+  title: "Video SEO best practices"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/appearance/video"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G17
+  title: "How to move a site"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G18
+  title: "Redirects and Google Search"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G19
+  title: "Link best practices for Google"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G20
+  title: "Qualify your outbound links to Google"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G21
+  title: "Block Search indexing with noindex"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/block-indexing"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: G22
+  title: "Remove a page hosted on your site from Google"
+  publisher: "Google Search Central"
+  url: "https://developers.google.com/search/docs/crawling-indexing/remove-information"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: C1
+  title: "Reports at a glance"
+  publisher: "Google Search Console Help"
+  url: "https://support.google.com/webmasters/answer/9133276?hl=en"
+  retrieved: '2026-11-19'
+  licence: "not verified; only report and tool names cited"
+- id: W1
+  title: "Web Vitals"
+  publisher: "Google web.dev"
+  url: "https://web.dev/articles/vitals"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0 (page content); code samples Apache 2.0"
+- id: S1
+  title: "Getting started with schema.org using Microdata"
+  publisher: "Schema.org"
+  url: "https://schema.org/docs/gs.html"
+  retrieved: '2026-11-19'
+  licence: "not verified; only section titles cited"
+- id: O1
+  title: "Search Marketing Strategists (13-1161.01), O*NET OnLine"
+  publisher: "USDOL/ETA"
+  url: "https://www.onetonline.org/link/summary/13-1161.01"
+  retrieved: '2026-11-19'
+  licence: "CC BY 4.0; O*NET 31.0 Database"
+- id: F1
+  title: "The FTC’s Endorsement Guides: What People Are Asking"
+  publisher: "U.S. Federal Trade Commission"
+  url: "https://search.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+  retrieved: '2026-11-19'
+  licence: "not verified; only headings and short questions cited"
+- id: L1
+  title: "中华人民共和国广告法"
+  publisher: "全国人民代表大会常务委员会 (via 中国政府网)"
+  url: "https://www.gov.cn/guoqing/2021-10/29/content_5647620.htm"
+  retrieved: '2026-11-19'
+  licence: "official law text; licence not verified; article numbers only"
+- id: L2
+  title: "互联网广告管理办法（国家市场监督管理总局令第72号）"
+  publisher: "国家市场监督管理总局 (via 中国政府网)"
+  url: "https://www.gov.cn/gongbao/2023/issue_10506/202306/content_6885261.html"
+  retrieved: '2026-11-19'
+  licence: "official regulation text; licence not verified; article numbers only"
+groups:
+- id: strategy
+  title: "Strategy and research"
+  nodes:
+  - id: strategy.intent
+    title: "Research audience search intent"
+    description: "Combine keyword research and other audience evidence to define which needs the site's pages should satisfy."
+    sources:
+    - ref: O1
+      locator: "Task 20319: Combine secondary data sources with keyword research to more accurately profile and satisfy user intent."
+  - id: strategy.terms
+    title: "Account for readers' search terms"
+    description: "Plan page coverage for the different terms that new and experienced visitors use to find the same subject."
+    sources:
+    - ref: G2
+      locator: "Expect your readers' search terms"
+  - id: strategy.competitors
+    title: "Research search trends and competitors"
+    description: "Compare query trends and competitor performance to identify gaps in the site's organic search coverage."
+    sources:
+    - ref: O1
+      locator: "Task 16186: Conduct market research analysis to identify search query trends, real-time search and news media activity, popular social media topics, electronic commerce trends, market opportunities, or competitor performance."
+  - id: strategy.content-strategy
+    title: "Define a site content strategy"
+    description: "Choose the site's content priorities and page roles before commissioning individual articles."
+    sources:
+    - ref: O1
+      locator: "Task 20321: Create content strategies for digital media."
+  - id: strategy.eligibility
+    title: "Check search eligibility requirements"
+    description: "Establish whether the site's pages meet search technical requirements before planning visibility work."
+    sources:
+    - ref: G1
+      locator: "Technical requirements"
+- id: crawl-index
+  title: "Crawling and indexing"
+  nodes:
+  - id: crawl-index.discover
+    title: "Check page discovery"
+    description: "Identify how search engines can discover the site's public pages."
+    sources:
+    - ref: G2
+      locator: "Help Google find your content"
+  - id: crawl-index.render
+    title: "Check search engine rendering"
+    description: "Inspect whether Google can see the intended page content rather than assuming browser visibility is enough."
+    sources:
+    - ref: G2
+      locator: "Check if Google can see your page the same way a user does"
+  - id: crawl-index.robots
+    title: "Define crawl controls"
+    description: "Decide which resources crawlers may request and review the site's robots.txt rules."
+    sources:
+    - ref: G10
+      locator: "What is a robots.txt file used for?"
+  - id: crawl-index.robots-limits
+    title: "Distinguish crawl blocking from removal"
+    description: "Do not rely on robots.txt alone to keep a URL out of search results or protect private content."
+    sources:
+    - ref: G10
+      locator: "Understand the limitations of a robots.txt file"
+  - id: crawl-index.noindex
+    title: "Define indexing exclusions"
+    description: "Specify which publicly reachable pages should carry noindex and ensure crawlers can read that instruction."
+    sources:
+    - ref: G21
+      locator: "Implementing noindex"
+  - id: crawl-index.sitemap
+    title: "Plan sitemap coverage"
+    description: "Decide whether a sitemap is needed and which discoverable site URLs it should represent."
+    sources:
+    - ref: G9
+      locator: "Do I need a sitemap?"
+  - id: crawl-index.sitemap-build
+    title: "Maintain sitemaps"
+    description: "Keep sitemap URL lists aligned with the pages intended for search discovery."
+    sources:
+    - ref: G9
+      locator: "Build a sitemap"
+- id: site-structure
+  title: "URL and site structure"
+  nodes:
+  - id: site-structure.urls
+    title: "Use descriptive URLs"
+    description: "Choose readable URL paths that indicate the subject of the destination page."
+    sources:
+    - ref: G2
+      locator: "Use descriptive URLs"
+  - id: site-structure.directories
+    title: "Group related pages"
+    description: "Organize related pages into a coherent directory structure."
+    sources:
+    - ref: G2
+      locator: "Group topically similar pages in directories"
+  - id: site-structure.duplicates
+    title: "Reduce duplicate URL exposure"
+    description: "Identify URL variants that expose the same content and choose how they should be handled."
+    sources:
+    - ref: G2
+      locator: "Reduce duplicate content"
+  - id: site-structure.canonical
+    title: "Choose canonical destinations"
+    description: "Select the preferred URL for duplicate or very similar pages and align canonical signals."
+    sources:
+    - ref: G11
+      locator: "Reasons to specify a canonical URL"
+  - id: site-structure.canonical-signals
+    title: "Align canonical methods"
+    description: "Keep redirects, canonical annotations and sitemap preferences consistent."
+    sources:
+    - ref: G11
+      locator: "Comparison of canonicalization methods"
+- id: on-page
+  title: "Search-facing page metadata and headings"
+  nodes:
+  - id: on-page.titles
+    title: "Maintain descriptive title links"
+    description: "Review page titles across the site for accurate and distinct search-result identification."
+    sources:
+    - ref: G5
+      locator: "Best practices for influencing title links"
+  - id: on-page.main-heading
+    title: "Make the main page title clear"
+    description: "Check that each page has an unambiguous main heading that agrees with its search-facing title."
+    sources:
+    - ref: G5
+      locator: "No clear main title"
+  - id: on-page.stale-titles
+    title: "Correct outdated title metadata"
+    description: "Find title elements that no longer match a page's current content or date."
+    sources:
+    - ref: G5
+      locator: "Obsolete <title> elements"
+  - id: on-page.descriptions
+    title: "Maintain unique meta descriptions"
+    description: "Give important pages distinct summaries that help searchers distinguish their purpose."
+    sources:
+    - ref: G6
+      locator: "Create unique descriptions for each page on your site"
+  - id: on-page.snippet-controls
+    title: "Control snippet exposure"
+    description: "Specify when search snippets should be suppressed or limited for a page."
+    sources:
+    - ref: G6
+      locator: "How to prevent snippets or adjust snippet length"
+- id: structured-data
+  title: "Structured data"
+  nodes:
+  - id: structured-data.eligibility
+    title: "Choose relevant search features"
+    description: "Identify supported structured data features appropriate to the actual page content without promising rich results."
+    sources:
+    - ref: G7
+      locator: "How structured data works in Google Search"
+  - id: structured-data.vocabulary
+    title: "Choose schema types and properties"
+    description: "Match the page's entities and attributes to appropriate schema.org types and properties."
+    sources:
+    - ref: S1
+      locator: "2a. schema.org types and properties"
+  - id: structured-data.format
+    title: "Specify a supported format"
+    description: "Choose a structured data format supported by the target search engine."
+    sources:
+    - ref: G7
+      locator: "Supported formats"
+  - id: structured-data.visible-content
+    title: "Match markup to visible content"
+    description: "Require structured data to describe the content visitors can actually find on the page."
+    sources:
+    - ref: G8
+      locator: "Content"
+  - id: structured-data.complete
+    title: "Check required information"
+    description: "Review structured data completeness for the intended search feature."
+    sources:
+    - ref: G8
+      locator: "Completeness"
+  - id: structured-data.validation
+    title: "Check markup validity"
+    description: "Validate the planned structured data and route code defects to the software workflow."
+    sources:
+    - ref: S1
+      locator: "2c. Testing your markup"
+- id: page-experience
+  title: "Page experience and mobile"
+  nodes:
+  - id: page-experience.review
+    title: "Assess search landing-page experience"
+    description: "Review usability problems across search landing pages and route implementation work to the software workflow."
+    sources:
+    - ref: G13
+      locator: "Self-assess your content's page experience"
+  - id: page-experience.cwv
+    title: "Monitor Core Web Vitals"
+    description: "Track loading, responsiveness and visual stability as distinct visitor-experience concerns."
+    sources:
+    - ref: W1
+      locator: "Core Web Vitals"
+  - id: page-experience.field
+    title: "Use field performance evidence"
+    description: "Assess real-user Core Web Vitals rather than treating a single lab run as the site's experience."
+    sources:
+    - ref: W1
+      locator: "Field tools to measure Core Web Vitals"
+  - id: page-experience.mobile
+    title: "Review mobile usability"
+    description: "Ensure the site's search landing pages remain useful on mobile devices."
+    sources:
+    - ref: G14
+      locator: "Create a mobile-friendly site"
+  - id: page-experience.mobile-parity
+    title: "Maintain mobile content parity"
+    description: "Check that mobile pages expose the same important content as desktop pages."
+    sources:
+    - ref: G14
+      locator: "Make sure that content is the same on desktop and mobile"
+  - id: page-experience.mobile-access
+    title: "Review mobile crawl access"
+    description: "Identify mobile resources or content that Google cannot access or render."
+    sources:
+    - ref: G14
+      locator: "Make sure that Google can access and render your content"
+  - id: page-experience.ads
+    title: "Limit distracting advertisements"
+    description: "Review ad placement for interference with visitors using search landing pages."
+    sources:
+    - ref: G2
+      locator: "Avoid distracting advertisements"
+- id: international
+  title: "International search"
+  nodes:
+  - id: international.alternates
+    title: "Identify localized page equivalents"
+    description: "Map language and regional alternatives before specifying hreflang relationships."
+    sources:
+    - ref: G12
+      locator: "Methods for indicating your alternate pages"
+  - id: international.hreflang
+    title: "Check alternate-page annotations"
+    description: "Review reciprocal hreflang references and consistency across localized page sets."
+    sources:
+    - ref: G12
+      locator: "Guidelines for all methods"
+  - id: international.codes
+    title: "Use supported locale codes"
+    description: "Specify valid language and optional region codes for localized search targeting."
+    sources:
+    - ref: G12
+      locator: "Supported language and region codes"
+  - id: international.fallback
+    title: "Define unmatched-language destinations"
+    description: "Identify an appropriate x-default destination when the site offers a language fallback."
+    sources:
+    - ref: G12
+      locator: "Use the x-default value for unmatched languages"
+- id: media
+  title: "Images and video in search"
+  nodes:
+  - id: media.image-discovery
+    title: "Make images discoverable"
+    description: "Check that search engines can find the site's important image resources."
+    sources:
+    - ref: G15
+      locator: "Help us discover and index your images"
+  - id: media.image-context
+    title: "Describe images for search context"
+    description: "Review image filenames, titles and alt text in the context of their landing pages."
+    sources:
+    - ref: G15
+      locator: "Use descriptive filenames, titles, and alt text"
+  - id: media.image-performance
+    title: "Balance image speed and quality"
+    description: "Identify image delivery problems affecting search landing-page quality and request implementation changes separately."
+    sources:
+    - ref: G15
+      locator: "Optimize for speed and quality"
+  - id: media.video-pages
+    title: "Provide dedicated video watch pages"
+    description: "Give important videos a discoverable page where watching the video is the main purpose."
+    sources:
+    - ref: G16
+      locator: "Create a dedicated watch page for each video"
+  - id: media.video-thumbnails
+    title: "Maintain video thumbnails"
+    description: "Provide stable, accessible, high-quality thumbnails for videos intended to appear in search."
+    sources:
+    - ref: G16
+      locator: "Provide a high-quality video thumbnail"
+  - id: media.video-files
+    title: "Allow video retrieval"
+    description: "Check that search engines can fetch video files intended for search indexing."
+    sources:
+    - ref: G16
+      locator: "Allow Google to fetch your video files"
+- id: links
+  title: "Internal and outbound links"
+  nodes:
+  - id: links.crawlable
+    title: "Check link crawlability"
+    description: "Review whether navigational links expose destinations in a form Google can crawl."
+    sources:
+    - ref: G19
+      locator: "Make your links crawlable"
+  - id: links.internal
+    title: "Connect related site pages"
+    description: "Use internal links so visitors and crawlers can reach relevant pages within the site."
+    sources:
+    - ref: G19
+      locator: "Internal links: cross-reference your own content"
+  - id: links.anchors
+    title: "Use descriptive anchor text"
+    description: "Make link labels explain their destinations in the surrounding page context."
+    sources:
+    - ref: G19
+      locator: "Write good anchor text"
+  - id: links.sponsored
+    title: "Qualify paid links"
+    description: "Require sponsored or affiliate outbound links to use the appropriate search-engine relationship attribute in addition to visible disclosures."
+    sources:
+    - ref: G20
+      locator: "rel=\"sponsored\""
+  - id: links.ugc
+    title: "Qualify user-generated links"
+    description: "Define when links supplied by site users should carry the ugc relationship."
+    sources:
+    - ref: G20
+      locator: "rel=\"ugc\""
+  - id: links.nofollow
+    title: "Use nofollow deliberately"
+    description: "Decide when an outbound link should not imply association with its destination."
+    sources:
+    - ref: G20
+      locator: "rel=\"nofollow\""
+- id: content-ops
+  title: "Site-level content operations"
+  nodes:
+  - id: content-ops.portfolio-review
+    title: "Review the content portfolio"
+    description: "Assess existing pages for usefulness and quality to decide which need substantive updates."
+    sources:
+    - ref: G3
+      locator: "Self-assess your content"
+  - id: content-ops.people-first
+    title: "Keep site priorities people-first"
+    description: "Evaluate site-wide content decisions against audience needs rather than creating pages primarily to attract search visits."
+    sources:
+    - ref: G3
+      locator: "Avoid creating search engine-first content"
+  - id: content-ops.freshness
+    title: "Avoid cosmetic freshness changes"
+    description: "Require substantive reasons for date changes and content additions or removals rather than chasing a site freshness signal."
+    sources:
+    - ref: G3
+      locator: "Avoid creating search engine-first content"
+  - id: content-ops.consolidate
+    title: "Consolidate duplicate content destinations"
+    description: "Choose a preferred destination when combining duplicate pages and align its canonical or redirect signals."
+    sources:
+    - ref: G11
+      locator: "Use redirects"
+  - id: content-ops.remove
+    title: "Plan permanent search removals"
+    description: "Choose a permanent removal method for retired pages rather than relying only on a temporary search block."
+    sources:
+    - ref: G22
+      locator: "Make your removal permanent"
+  - id: content-ops.redirects
+    title: "Choose redirect semantics"
+    description: "Specify permanent or temporary redirects according to the intended lifetime of a URL change."
+    sources:
+    - ref: G18
+      locator: "Overview of redirect types"
+  - id: content-ops.move-map
+    title: "Map URLs for a site move"
+    description: "Prepare old-to-new URL mappings before changing the site's public URL structure."
+    sources:
+    - ref: G17
+      locator: "Create a mapping of old to new URLs"
+  - id: content-ops.move-monitor
+    title: "Monitor site moves"
+    description: "Track search traffic after a site move and investigate unexpected losses."
+    sources:
+    - ref: G17
+      locator: "Use Search Console to monitor traffic"
+- id: measurement
+  title: "Search measurement"
+  nodes:
+  - id: measurement.kpis
+    title: "Define organic-search measures"
+    description: "Choose KPIs that connect organic search activity to the site's goals."
+    sources:
+    - ref: O1
+      locator: "Task 20326: Identify appropriate Key Performance Indicators (KPIs) and report key metrics from digital campaigns."
+  - id: measurement.performance
+    title: "Review search performance"
+    description: "Use Search Console queries, impressions and clicks to assess how the site's pages are found."
+    sources:
+    - ref: C1
+      locator: "Performance reports: Web Search"
+  - id: measurement.indexing
+    title: "Monitor index coverage"
+    description: "Review page indexing status and investigate exclusions or sudden changes."
+    sources:
+    - ref: C1
+      locator: "Page indexing report"
+  - id: measurement.inspect
+    title: "Inspect individual URLs"
+    description: "Use URL Inspection to compare Google's indexed view with a live page when diagnosing search issues."
+    sources:
+    - ref: C1
+      locator: "URL Inspection tool"
+  - id: measurement.sitemaps
+    title: "Monitor sitemap processing"
+    description: "Review sitemap submission status and processing errors."
+    sources:
+    - ref: C1
+      locator: "Sitemaps report"
+  - id: measurement.actions
+    title: "Review manual actions"
+    description: "Check for search-policy manual actions and track remediation and reconsideration requests."
+    sources:
+    - ref: C1
+      locator: "Manual actions report"
+- id: compliance
+  title: "Search policies and advertising disclosure"
+  nodes:
+  - id: compliance.spam
+    title: "Review search spam compliance"
+    description: "Check site practices against the search engine's published spam policies."
+    sources:
+    - ref: G4
+      locator: "Spam policies for Google web search"
+  - id: compliance.scaled
+    title: "Prevent scaled content abuse"
+    description: "Review large-scale publishing plans for content created primarily to manipulate search rankings."
+    sources:
+    - ref: G4
+      locator: "Scaled content abuse"
+  - id: compliance.link-spam
+    title: "Avoid link schemes"
+    description: "Review link acquisition and placement practices for search-ranking manipulation."
+    sources:
+    - ref: G4
+      locator: "Link spam"
+  - id: compliance.affiliate-value
+    title: "Review affiliate page usefulness"
+    description: "Identify affiliate pages that add insufficient value beyond the merchant's material."
+    sources:
+    - ref: G4
+      locator: "Thin affiliation"
+  - id: compliance.affiliate-disclosure
+    title: "Disclose affiliate relationships visibly"
+    description: "Require clear commission disclosures near relevant website recommendations rather than treating rel attributes as consumer disclosure."
+    sources:
+    - ref: F1
+      locator: "WHAT ABOUT AFFILIATE OR NETWORK MARKETING?"
+  - id: compliance.page-disclosure
+    title: "Disclose on affected pages"
+    description: "Check sponsored page templates so a home-page-only disclosure cannot leave individual recommendations undisclosed."
+    sources:
+    - ref: F1
+      locator: "Would a single disclosure on my home page that “many products discussed on this site are provided free by their manufacturers” be enough?"
+  - id: compliance.cn-identification
+    title: "Identify advertising under Chinese law"
+    description: "Require applicable website advertising to be recognizable as advertising and separated from non-advertising information."
+    sources:
+    - ref: L1
+      locator: "第十四条"
+  - id: compliance.cn-internet
+    title: "Review internet advertising presentation"
+    description: "For advertising subject to Chinese law, ensure internet ad presentation does not obstruct normal use and pop-ups have a clear one-click close control."
+    sources:
+    - ref: L1
+      locator: "第四十四条"
+  - id: compliance.cn-affiliate
+    title: "Label applicable shopping-link advertisements"
+    description: "For applicable Chinese internet advertisements, review promotional knowledge, experience and review pages with purchase links for conspicuous advertising labels."
+    sources:
+    - ref: L2
+      locator: "第九条"
