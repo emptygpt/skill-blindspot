@@ -62,6 +62,7 @@ npx skills add emptygpt/skill-blindspot
 | `writing` | 在线发表的非虚构文章 | 78 |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 |
+| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 |
 | `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 |
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
