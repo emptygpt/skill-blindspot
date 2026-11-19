@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import blindspot
 
@@ -27,6 +28,14 @@ class HelperTests(unittest.TestCase):
         return subprocess.run([sys.executable, '-B', str(pathlib.Path(blindspot.__file__)), *map(str, args)],
                               capture_output=True, text=True)
 
+    def test_resolve_rejects_invalid_extends(self):
+        maps = {'first': {'map': {'extends': 'second'}}, 'second': {'map': {'extends': 'first'}}}
+        with self.assertRaisesRegex(ValueError, 'extends cycle'):
+            blindspot.resolve(maps, 'first')
+        del maps['second']
+        with self.assertRaisesRegex(ValueError, 'unknown map'):
+            blindspot.resolve(maps, 'first')
+
     def test_prepare_reads_nested_skill_once(self):
         self.write('skill/SKILL.md', '# Parent\n')
         self.write('skill/nested/SKILL.md', '# Child\nReview the output.\n')
@@ -37,6 +46,15 @@ class HelperTests(unittest.TestCase):
         _, texts, _, _, _ = blindspot.read_skill(self.root / 'skill')
         self.assertEqual(set(texts), {'SKILL.md', 'nested/SKILL.md'})
         self.assertIn('Review the output.', texts['nested/SKILL.md'])
+
+    def test_prepare_empty_skill_with_automatic_profile(self):
+        self.write('skill/SKILL.md', '')
+        self.write('skill/.blindspot.yaml', 'exclude:\n  - node: requirements.understand-request\n')
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('## Profile\n- excluded node: requirements.understand-request', result.stdout)
+        self.assertIn('**requirements.understand-request** [excluded by profile]', result.stdout)
+        self.assertRegex(result.stdout, r'Summary: \d+ nodes, 0 with hits, \d+ without\.')
 
     def test_references_use_containing_file_not_basename(self):
         self.write('skill/SKILL.md', '[guide](missing/guide.md)\n')
@@ -195,6 +213,45 @@ class HelperTests(unittest.TestCase):
         for profile in (None, 'none'):
             status, output = self.lint(self.report(profile, excluded=False))
             self.assertEqual(status, 0, output)
+
+    def test_lint_missing_report_is_a_clean_cli_error(self):
+        report = self.root / 'missing.md'
+        result = self.cli('lint', report, '--map', 'software')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("lint: ", result.stderr)
+        self.assertIn(str(report), result.stderr)
+        self.assertNotIn('Traceback', result.stderr)
+
+    def test_invalid_map_json_diagnostic_identifies_the_file(self):
+        maps = self.write('maps.json', '{broken json')
+        with patch.object(blindspot, 'MAPS_JSON', maps), patch.object(sys, 'argv', ['blindspot.py', 'maps']):
+            with contextlib.redirect_stderr(io.StringIO()) as out, self.assertRaises(SystemExit) as error:
+                blindspot.main()
+        self.assertEqual(error.exception.code, 1)
+        self.assertIn(f"maps: {maps}:", out.getvalue())
+        self.assertIn('line 1 column', out.getvalue())
+
+    def test_sources_mixed_lookup_returns_failure_and_prints_valid_sources(self):
+        result = self.cli('sources', '--map', 'video', 'not.a-node', 'comp.ai-disclosure')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('not.a-node: unknown node in video', result.stderr)
+        self.assertIn('comp.ai-disclosure:', result.stdout)
+        self.assertIn('<https://', result.stdout)
+
+    def test_checklist_requires_positive_source_limit(self):
+        out = self.root / 'checklist.md'
+        for count in (0, -1, 'many'):
+            with self.subTest(count=count):
+                result = self.cli('checklist', '--map', 'software', '--max-sources', count, '--out', out)
+                self.assertEqual(result.returncode, 2)
+                self.assertIn('--max-sources: must be a positive integer', result.stderr)
+                self.assertFalse(out.exists())
+        result = self.cli('checklist', '--map', 'software', '--max-sources', 1)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        items = result.stdout.split('- [ ] **')[1:]
+        self.assertTrue(items)
+        for item in items:
+            self.assertEqual(item.count('<https://') + item.count('<http://'), 1, item)
 
 
 if __name__ == '__main__':

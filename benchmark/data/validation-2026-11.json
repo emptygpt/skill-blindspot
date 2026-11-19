@@ -3,11 +3,11 @@
   "source": "docs/validation.md",
   "source_url": "https://github.com/emptygpt/skill-blindspot/blob/main/docs/validation.md",
   "notes": [
-    "Transcribed aggregate results, not new benchmark runs or per-item answer keys.",
+    "Historical pilot observations transcribed from aggregate results. They cannot be independently rescored: the original keys, per-run reports and marks, exact prompts and settings, pinned skills and exact map snapshots are not available here.",
     "False positives were not recorded; null does not mean zero.",
     "Tests 1 and 2 have six removed items each, scored twice: 12 chances per method.",
     "Shared items are approximate counts out of 30, not recovery counts.",
-    "Test 3 uses the same removed items as tests 1 and 2. The source says twelve altered skills here but its limits say six skills; no per-skill reconstruction is attempted."
+    "Tests 1 and 2 describe six source skills across twelve removed items. Test 3 checked those same twelve items; the number of altered folders in that run is unverified."
   ],
   "tests": [
     {

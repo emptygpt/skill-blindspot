@@ -8,7 +8,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.4.** The skill, seven maps and a helper script are here. It has been tested on twelve altered skills, used to audit 20 public video skills, and corrected after we re-checked that audit. It is early and the report format may change.
+> **Status: v0.4.** The skill, seven maps and a helper script are here. It was used to audit 20 public video skills and corrected after we re-checked that audit. It is early and the report format may change.
 
 ## First report
 
@@ -70,11 +70,7 @@ To add a node or a map, see [CONTRIBUTING.md](CONTRIBUTING.md). Missing a domain
 
 ## What we tested first
 
-Before building anything we tested the obvious objection: can you just ask the model what is missing? We removed stages from six public skills in two domains and ran blind checks.
-
-**Asking the model recovered 20 of 24 removed items. The map-guided check recovered 18.** A map does not find more. It gives each finding a source and quoted evidence, and it produces a complete table instead of a top-10 list. Full method and numbers: [docs/validation.md](docs/validation.md).
-
-On the same twelve items the combined skill recovered 11 in a single run.
+In a [historical pilot](docs/validation.md), we removed twelve items from six public skills in two domains. Each of two methods checked them twice: model-only recovered **20/24 chances**, and map-guided recovered **18/24**. The combined skill later recovered **11/12 items** in one run on the same examples. The original per-run evidence is unavailable for independent rescoring; these observations do not establish whether one method is better.
 
 So this tool uses both. The model finds gaps. The map supplies the evidence, the table and a place to record what you skip on purpose.
 
@@ -105,7 +101,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 ## Roadmap
 
-- [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
+- [x] [Historical pilot](docs/validation.md): compare model-only and map-guided recovery
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
 - [x] Map: `software` and a report on five coding skills ([reports/code-5.md](reports/code-5.md))
@@ -131,8 +127,8 @@ Not yet covered because no source was found: screen recording, and comparison me
 
 ## Contributing
 
-The most useful contribution will be domain knowledge: a missing node with a source, or a correction to an existing one. The map format will be documented when the first map lands.
+The most useful contribution is domain knowledge: a missing node with a source, or a correction to an existing one. See the [map format guide](docs/map-format.md).
 
 ## Licence
 
-Code: MIT. Domain maps will carry the licence of their sources and be marked per node.
+The skill instructions and helper code are [MIT-licensed](LICENSE). The [map data](skills/blindspot/maps/INDEX.md), including the compiled cache, contains third-party material and is not uniformly MIT-licensed. Each node links to source records with attribution and licence notes. Check the applicable source terms before reusing map data or derived outputs; “not verified” is not permission.
