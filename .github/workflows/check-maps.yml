@@ -2,9 +2,9 @@ name: check-maps
 
 on:
   push:
-    paths: ["skills/blindspot/maps/**", "skills/blindspot/scripts/**", "scripts/check_maps.py", "reports/**", ".github/workflows/check-maps.yml"]
+    paths: ["skills/blindspot/maps/**", "skills/blindspot/scripts/**", "scripts/check_maps.py", "reports/**", "benchmark/**", ".github/workflows/check-maps.yml"]
   pull_request:
-    paths: ["skills/blindspot/maps/**", "skills/blindspot/scripts/**", "scripts/check_maps.py", "reports/**", ".github/workflows/check-maps.yml"]
+    paths: ["skills/blindspot/maps/**", "skills/blindspot/scripts/**", "scripts/check_maps.py", "reports/**", "benchmark/**", ".github/workflows/check-maps.yml"]
 
 permissions:
   contents: read
@@ -25,3 +25,11 @@ jobs:
           python3 skills/blindspot/scripts/blindspot.py sources --map video comp.ai-disclosure
           python3 skills/blindspot/scripts/blindspot.py lint reports/video-20/V03.md --map video-short
           python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip shooting publishing > /dev/null
+      - name: benchmark smoke test
+        run: |
+          python3 benchmark/bench.py remove benchmark/example/skill --heading Review --out benchmark/work/example
+          python3 benchmark/bench.py findings benchmark/example/report.md --out benchmark/work/example/template.csv
+          python3 benchmark/bench.py score benchmark/work/example/key.json benchmark/example/marks.csv --top 10 --out benchmark/work/example/result.json
+          python3 benchmark/bench.py summary benchmark/work/example/result.json
+          python3 benchmark/bench.py summary
+          python3 -m unittest discover -s benchmark -v

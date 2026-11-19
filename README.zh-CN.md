@@ -108,7 +108,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
 - [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`，每个节点都有来源
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
-- [ ] `benchmark/`：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
+- [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [x] 报告：[20 个公开视频 Skill 缺了什么](reports/video-20.md)（英文）
 - [x] 第二个领域（写作），以及做底图的说明：[docs/map-format.md](docs/map-format.md)
 
