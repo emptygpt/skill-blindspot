@@ -34,6 +34,7 @@ import json
 import pathlib
 import re
 import sys
+from urllib.parse import unquote, urlsplit
 
 HERE = pathlib.Path(__file__).resolve().parent
 MAPS_JSON = HERE.parent / "maps" / "maps.json"
@@ -90,7 +91,7 @@ def read_skill(folder):
         sys.exit(f"no SKILL.md in {folder}")
     texts, code, data, skipped, total = {}, [], [], [], 0
     skill_text = (folder / "SKILL.md").read_text(encoding="utf-8", errors="replace")
-    order = [folder / "SKILL.md"] + sorted(p for p in folder.rglob("*") if p.is_file() and p.name != "SKILL.md")
+    order = [folder / "SKILL.md"] + sorted(p for p in folder.rglob("*") if p.is_file() and p != folder / "SKILL.md")
     for p in order:
         rel = p.relative_to(folder).as_posix()
         if any(part in SKIP_DIRS for part in p.relative_to(folder).parts):
@@ -119,21 +120,26 @@ def read_skill(folder):
     return folder, texts, code, data, skipped
 
 
-LINK_RE = re.compile(r"\]\(([^)#\s]+)\)")
+LINK_RE = re.compile(r'\]\(([^\s)]+)(?:\s+"[^"]*")?\)')
 PROSE_RE = re.compile(r"(?<![\w/.$-])((?:\.{1,2}/)?[\w.-]+(?:/[\w.-]+)*\.(?:md|txt))\b")
 
 
 def missing_references(folder, texts):
-    """Files SKILL.md links to or names as .md/.txt that are not in the folder."""
+    """Missing local references, relative to the prose file containing them."""
     out, seen = [], set()
-    for i, line in enumerate(texts.get("SKILL.md", []), 1):
-        refs = LINK_RE.findall(line) + PROSE_RE.findall(line)
-        for ref in refs:
-            if "://" in ref or ref.startswith(("mailto:", "/", "~", "$")) or ref in seen:
-                continue
-            seen.add(ref)
-            if not (folder / ref).exists() and not any(folder.rglob(pathlib.Path(ref).name)):
-                out.append((i, ref))
+    for rel, lines in texts.items():
+        for i, line in enumerate(lines, 1):
+            refs = [(ref, False) for ref in LINK_RE.findall(line)]
+            refs += [(ref, True) for ref in PROSE_RE.findall(LINK_RE.sub("", line))]
+            for ref, prose in refs:
+                parsed = urlsplit(ref)
+                path = unquote(parsed.path)
+                key = (rel, path, prose)
+                if parsed.scheme or parsed.netloc or not path or path.startswith(("/", "~", "$")) or key in seen:
+                    continue
+                seen.add(key)
+                if not (folder / rel).parent.joinpath(path).exists() and not (prose and (folder / path).exists()):
+                    out.append((rel, i, ref))
     return out
 
 
@@ -254,8 +260,8 @@ def cmd_prepare(args):
     for s in skipped:
         out.append(f"- skipped, too large: {s}")
     miss = missing_references(folder, texts)
-    for i, ref in miss:
-        out.append(f"- MISSING: SKILL.md:{i} mentions `{ref}`, not in the folder")
+    for rel, i, ref in miss:
+        out.append(f"- MISSING: {rel}:{i} mentions `{ref}`, not found")
     if has_cjk:
         out.append("- note: the skill has CJK text; keyword hits use the map's English wording and node keywords only, so expect more nodes without hits. Check those by reading.")
     out.append("")
@@ -305,9 +311,12 @@ def cmd_prepare(args):
 
 def cmd_grep(args):
     terms = [t.lower() for t in args.e]
+    roots = [pathlib.Path(folder).resolve() for folder in args.folders]
+    for root in roots:
+        if not root.is_dir():
+            sys.exit(f"grep root does not exist or is not a directory: {root}")
     shown = 0
-    for folder in args.folders:
-        root = pathlib.Path(folder).resolve()
+    for root in roots:
         for p in sorted(root.rglob("*")):
             if not p.is_file() or any(part in SKIP_DIRS for part in p.relative_to(root).parts):
                 continue
@@ -382,7 +391,20 @@ def cmd_lint(args):
     for nid in sorted(all_nodes - set(states)):
         problems.append(f"table: {nid} is missing")
 
-    excl_nodes, _ = read_profile(args.profile)
+    profile = args.profile
+    if not profile:
+        header = text.split("\n## ", 1)[0]
+        match_ = re.search(r"Profile:[ \t]*(.*?)(?=[ \t]{2,}(?:Date|Map):|$)", header, re.M)
+        if match_:
+            value = match_.group(1).strip().strip("`\"'")
+            if value and value.lower() != "none":
+                profile = pathlib.Path(args.report).resolve().parent / value
+    if profile and not pathlib.Path(profile).is_file():
+        problems.append(f"profile: file not found: {profile}")
+    excl_nodes, _ = read_profile(profile)
+    for nid, state in sorted(states.items()):
+        if state == "excluded" and nid not in excl_nodes:
+            problems.append(f"profile: {nid} is marked excluded but not listed in the active profile")
     for nid in sorted(excl_nodes & all_nodes):
         if states.get(nid) not in (None, "excluded"):
             problems.append(f"profile: {nid} is excluded but marked {states[nid]}")

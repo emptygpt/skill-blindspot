@@ -3,7 +3,7 @@ name: blindspot
 description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Before a skill is written, it can also give a sourced checklist of what the domain expects. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
 license: MIT
 metadata:
-  version: 0.4.0
+  version: 0.4.1
 ---
 
 # blindspot
@@ -30,7 +30,7 @@ python3 $S maps                                               # list maps and th
 python3 $S prepare <skill-folder> --map <id> --out worksheet.md   # also writes worksheet-nodes.md
 python3 $S grep <skill-folder> [<repo-root>] -e <term> -e <term>  # before rating a finding Needed
 python3 $S sources --map <id> <node-id> [<node-id> ...]       # sources for the report
-python3 $S lint blindspot-report.md --map <id>                # check the finished report
+python3 $S lint blindspot-report.md --map <id>                # uses header Profile: path (or none); --profile overrides
 python3 $S checklist --map <id> [--skip <group> ...] --out checklist.md  # before a skill exists
 ```
 
@@ -69,7 +69,22 @@ Read `SKILL.md` in full. If you use the helper, run `prepare` now and read `work
 - where its responsibility starts and ends (for example: ends at a rendered file, does not publish)
 - what it plainly does not involve (for example: no filming of people)
 
-Everything later is judged against this scope.
+Everything later is judged against this scope, using the scope rules below.
+
+#### Scope rules
+
+These rules decide what is inside the boundary. The audit uses them in steps 1, 3 and 5, and a re-check of the report uses the same rules ([docs/recheck.md](../../docs/recheck.md)).
+
+1. **The boundary is what the skill makes the agent do.** Take it from the description, the steps, other skills it calls and code it runs. Write it as the last thing produced or done: "ends at a rendered file", "ends at a commit on a local branch", "uploads to YouTube". A stage the description promises is inside, even if the body never does it.
+2. **Work past the boundary is out of scope.** Its nodes are `not-applicable`, and a gap there is never Needed. If the output is clearly made for that later stage, for example a file made for a named platform, the gap can be Worth considering. Otherwise it is not a finding.
+3. **Platform rules are split in two.**
+   - Inside: what the rule asks of the content the skill makes. Examples are a disclosure shown, spoken or written in the output, metadata or a watermark the skill writes, and length and format limits.
+   - Outside, for a skill that stops at a file: what is set on the platform at upload, such as an AI-generated-content label or a paid-promotion setting. Rule 2 applies.
+   - Naming a target platform ("for YouTube Shorts") does not move the boundary to upload. It brings in that platform's rules for the content only.
+   - If the skill uploads, schedules or publishes, the upload settings are inside.
+   - A step that tells the user to set the label at upload is coverage. Mark it `covered` or `shallow`, not `absent`.
+4. **Other skills and code count only when the skill uses them.** A stage done by another skill it calls, or by code it runs, is inside and is judged there. A skill that only sits in the same repository, and that the skill neither calls nor points to, does not cover it.
+5. **A disputed boundary is not Needed.** If a finding depends on a boundary you are unsure of, put it in Worth considering and state the boundary question in `Why`.
 
 ### 2. Ask
 
