@@ -8,7 +8,7 @@
 
 `skill-blindspot` 检查一个 Agent Skill（含 `SKILL.md` 的文件夹）缺了哪些环节。它先问模型缺什么，再拿一张**领域底图**逐条对照。底图来自人已经整理好的知识：职业任务数据库、教材和课程目录、平台官方文档、法规原文。你得到一张逐条对照表：哪些已覆盖、哪些很浅、哪些没有，附上在你的 Skill 里找到的原文行，每个节点都有出处。
 
-> **状态：v0.4。** Skill、七张底图和一个辅助脚本已经在仓库里。审了 20 个公开视频 Skill，并在复核那次审查后做了修正。还很早期，报告格式可能会变。
+> **状态：v0.4。** Skill、八张底图和一个辅助脚本已经在仓库里。审了 20 个公开视频 Skill，并在复核那次审查后做了修正。还很早期，报告格式可能会变。
 
 ## 第一份报告
 
@@ -63,6 +63,7 @@ npx skills add emptygpt/skill-blindspot
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 |
 | `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 |
+| `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 |
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
@@ -103,7 +104,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 - [x] [早期试验](docs/validation.md)：对比仅用模型与底图引导的找回结果
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
-- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`，每个节点都有来源
+- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`、`seo-web`，每个节点都有来源
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [x] 报告：[20 个公开视频 Skill 缺了什么](reports/video-20.md)（英文）
