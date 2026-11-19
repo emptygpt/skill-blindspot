@@ -374,10 +374,12 @@ groups:
   - id: analysis.statements
     title: 'Check financial statement presentation'
     description: 'Check that the financial statements include the complete annual set and preceding-year comparatives.'
-    applies_when: 'When preparing or analysing IFRS financial statements before IFRS 18 applies.'
+    applies_when: 'When preparing or analysing IFRS financial statements, under IAS 1 or IFRS 18.'
     sources:
     - ref: S10
       locator: 'It requires an entity to present a complete set of financial statements at least annually, with comparative amounts for the preceding year (including comparative amounts in the notes).'
+    - ref: S11
+      locator: 'It requires an entity to present a complete set of financial statements at least annually, with comparative amounts for the preceding year (including comparative amounts in the notes)'
   - id: analysis.ifrs18
     title: 'Determine applicable IFRS presentation standard'
     description: 'Determine whether IFRS 18 applies for the reporting period, including any early adoption, before selecting presentation requirements.'
