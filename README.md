@@ -8,7 +8,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.4.** The skill, nine maps and a helper script are here. It was used to audit 20 public video skills and corrected after we re-checked that audit. It is early and the report format may change.
+> **Status: v0.4.** The skill, ten maps and a helper script are here. It was used to audit 20 public video skills and corrected after we re-checked that audit. It is early and the report format may change.
 
 ## First report
 
@@ -62,6 +62,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `writing` | Non-fiction articles published online | 78 |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 |
+| `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 |
 | `data-analysis` | Answering questions with data, including analysis code, charts and results with limits | 45 |
 | `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 |
 | `seo-web` | SEO and website content operations; article writing and software changes use their own maps | 74 |
@@ -107,6 +108,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, `seo-web`, every node sourced
 - [x] Map: `software` and a report on five coding skills ([reports/code-5.md](reports/code-5.md))
+- [x] Map: `tech-docs` (technical and API documentation)
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [x] [benchmark/](benchmark/): the remove-and-recover method and data, so others can test their own approach
 - [x] Report: [what 20 public video skills leave out](reports/video-20.md)
