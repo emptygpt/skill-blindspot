@@ -8,7 +8,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.4.** The skill, eight maps and a helper script are here. It was used to audit 20 public video skills and corrected after we re-checked that audit. It is early and the report format may change.
+> **Status: v0.4.** The skill, nine maps and a helper script are here. It was used to audit 20 public video skills and corrected after we re-checked that audit. It is early and the report format may change.
 
 ## First report
 
@@ -63,6 +63,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 |
 | `data-analysis` | Answering questions with data, including analysis code, charts and results with limits | 45 |
+| `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 |
 | `seo-web` | SEO and website content operations; article writing and software changes use their own maps | 74 |
 
 The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, TikTok, Bilibili and Douyin official pages, the US FTC and a Chinese advertising regulation. Douyin's creator learning centre could not be read.
