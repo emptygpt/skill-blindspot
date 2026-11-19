@@ -107,8 +107,8 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 - [x] 验证：带出处的底图，比直接问「缺什么」找到的更多吗？没有。见 [docs/validation.md](docs/validation.md)
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
-- [x] 底图：`tech-docs`（技术文档与 API 文档）
 - [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`，每个节点都有来源
+- [x] 底图：`tech-docs`（技术文档与 API 文档）
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [x] 报告：[20 个公开视频 Skill 缺了什么](reports/video-20.md)（英文）
