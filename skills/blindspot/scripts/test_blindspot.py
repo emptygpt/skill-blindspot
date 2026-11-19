@@ -68,6 +68,16 @@ class HelperTests(unittest.TestCase):
                          [('nested/notes.md', 2, 'references/style.md'),
                           ('nested/notes.md', 3, 'missing.md')])
 
+    def test_prepare_skips_unparseable_reference(self):
+        self.write('skill/SKILL.md', '[API](https://[YOUR_HOST]/docs)\n[local](missing.md)\n')
+        _, texts, _, _, _ = blindspot.read_skill(self.root / 'skill')
+        self.assertEqual(blindspot.missing_references(self.root / 'skill', texts),
+                         [('SKILL.md', 2, 'missing.md')])
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn('YOUR_HOST', result.stdout)
+        self.assertIn('MISSING: SKILL.md:2', result.stdout)
+
     def test_grep_rejects_missing_or_file_roots_before_searching(self):
         file_ = self.write('valid/note.md', 'review\n')
         for bad in (self.root / 'missing', file_):

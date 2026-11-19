@@ -132,7 +132,10 @@ def missing_references(folder, texts):
             refs = [(ref, False) for ref in LINK_RE.findall(line)]
             refs += [(ref, True) for ref in PROSE_RE.findall(LINK_RE.sub("", line))]
             for ref, prose in refs:
-                parsed = urlsplit(ref)
+                try:
+                    parsed = urlsplit(ref)
+                except ValueError:
+                    continue
                 path = unquote(parsed.path)
                 key = (rel, path, prose)
                 if parsed.scheme or parsed.netloc or not path or path.startswith(("/", "~", "$")) or key in seen:
