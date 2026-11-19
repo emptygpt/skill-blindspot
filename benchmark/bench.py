@@ -14,6 +14,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -50,6 +51,8 @@ def write_json(path, value):
 
 
 def remove(args):
+    if pathlib.Path(args.skill_folder).is_symlink():
+        raise ValueError('symlinks are not allowed in the source skill: ' + str(args.skill_folder))
     source = pathlib.Path(args.skill_folder).resolve()
     target = pathlib.Path(args.out).resolve()
     relative = pathlib.Path(args.file)
@@ -60,6 +63,12 @@ def remove(args):
     if relative.is_absolute() or '..' in relative.parts:
         raise ValueError('--file must stay inside the skill folder')
     path = source / relative
+    for directory, dirs, files in os.walk(str(source)):
+        for name in dirs + files:
+            entry = pathlib.Path(directory) / name
+            if entry.is_symlink():
+                raise ValueError('symlinks are not allowed in the source skill: ' +
+                                 entry.relative_to(source).as_posix())
     if source not in path.resolve().parents:
         raise ValueError('--file must stay inside the skill folder')
     lines = path.read_bytes().decode('utf-8').splitlines(keepends=True)
@@ -79,22 +88,37 @@ def remove(args):
     if target.exists():
         raise ValueError('work directory already exists; choose a new --out')
     target.mkdir(parents=True)
-    shutil.copytree(str(source), str(target / 'altered'))
-    (target / 'removed').mkdir()
-    items = []
-    for n, (start, end, title) in enumerate(selected, 1):
-        text = ''.join(lines[start:end]).encode('utf-8')
-        item_id = 'R' + str(n)
-        (target / 'removed' / (item_id + '.md')).write_bytes(text)
-        item = dict(id=item_id, file=relative.as_posix(), heading=title,
-                    removed_line_range=[start + 1, end], line_count=end - start,
-                    sha256=hashlib.sha256(text).hexdigest())
-        if args.node:
-            item['nodes'] = args.node
-        items.append(item)
-    retained = [line for i, line in enumerate(lines) if not any(a <= i < b for a, b, _ in selected)]
-    (target / 'altered' / relative).write_bytes(''.join(retained).encode('utf-8'))
-    write_json(target / 'key.json', dict(source_skill=str(source), source_url=args.source_url, items=items))
+    try:
+        shutil.copytree(str(source), str(target / 'altered'),
+                        ignore=shutil.ignore_patterns('.git', '.hg', '.svn'))
+        (target / 'removed').mkdir()
+        items, removed_texts = [], []
+        for n, (start, end, title) in enumerate(selected, 1):
+            text = ''.join(lines[start:end]).encode('utf-8')
+            removed_texts.append(text)
+            item_id = 'R' + str(n)
+            (target / 'removed' / (item_id + '.md')).write_bytes(text)
+            item = dict(id=item_id, file=relative.as_posix(), heading=title,
+                        removed_line_range=[start + 1, end], line_count=end - start,
+                        sha256=hashlib.sha256(text).hexdigest())
+            if args.node:
+                item['nodes'] = args.node
+            items.append(item)
+        retained = [line for i, line in enumerate(lines) if not any(a <= i < b for a, b, _ in selected)]
+        altered = target / 'altered'
+        (altered / relative).write_bytes(''.join(retained).encode('utf-8'))
+        leaks = []
+        for entry in sorted(altered.rglob('*')):
+            if entry.is_file():
+                content = entry.read_bytes()
+                if any(text in content for text in removed_texts):
+                    leaks.append(entry.relative_to(altered).as_posix())
+        if leaks:
+            raise ValueError('removed section text remains in altered files: ' + ', '.join(leaks))
+        write_json(target / 'key.json', dict(source_skill=str(source), source_url=args.source_url, items=items))
+    except Exception:
+        shutil.rmtree(str(target))
+        raise
     print('Removed {} section(s); key: {}'.format(len(items), target / 'key.json'))
 
 

@@ -27,6 +27,12 @@ sections. Optional repeated `--node` values annotate every removed item in that
 invocation; they do not decide whether a finding matches. `--source-url` records
 the source link; the source folder path is also recorded.
 
+`remove` excludes `.git`, `.hg` and `.svn` metadata, and rejects source
+symlinks with their paths instead of following them. After removal it scans
+every altered file for the exact removed section bytes; if any remain (for
+example in a backup copy), it lists the files and deletes the failed work
+directory. Review the altered folder for other clues before giving it to a checker.
+
 ## Offline example
 
 Run from the repository root, using a fresh work directory:
