@@ -92,6 +92,12 @@ class HelperTests(unittest.TestCase):
         self.assertNotIn('mentions `absent.md`', result.stdout)
         self.assertIn('mentions `resources/missing.md`', result.stdout)
 
+    def test_link_with_bracketed_label_is_checked(self):
+        self.write('skill/SKILL.md', 'Run [items[0]](scripts/check.py).\n')
+        _, texts, _, _, _ = blindspot.read_skill(self.root / 'skill')
+        self.assertEqual(blindspot.missing_references(self.root / 'skill', texts),
+                         [('SKILL.md', 1, 'scripts/check.py')])
+
     def test_tree_drawing_lines_are_not_prose_references(self):
         self.write('skill/SKILL.md', '```\nresources/\n'
                    '├── guide.md\n│   notes.md\n└── missing.md\n```\n'

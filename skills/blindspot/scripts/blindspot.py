@@ -120,7 +120,8 @@ def read_skill(folder):
     return folder, texts, code, data, skipped
 
 
-LINK_RE = re.compile(r'\[[^\]\n]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)')
+LINK_RE = re.compile(r'\]\(([^\s)]+)(?:\s+"[^"]*")?\)')
+LINK_TEXT_RE = re.compile(r'\[[^\]\n]*\]\([^)\n]*\)|\]\([^)\n]*\)')
 PROSE_RE = re.compile(r"(?<![\w/.$-])((?:\.{1,2}/)?[\w.-]+(?:/[\w.-]+)*\.(?:md|txt))\b")
 
 
@@ -131,7 +132,7 @@ def missing_references(folder, texts):
         for i, line in enumerate(lines, 1):
             refs = [(ref, False) for ref in LINK_RE.findall(line)]
             if not any(char in line for char in "├└│"):
-                refs += [(ref, True) for ref in PROSE_RE.findall(LINK_RE.sub("", line))]
+                refs += [(ref, True) for ref in PROSE_RE.findall(LINK_TEXT_RE.sub("", line))]
             for ref, prose in refs:
                 try:
                     parsed = urlsplit(ref)
