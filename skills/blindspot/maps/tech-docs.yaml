@@ -25,6 +25,9 @@
 #     product UI (implementation.accessibility). This map covers making the
 #     documentation itself. When a task is both a code change and its docs,
 #     check it against both maps.
+#   - seo-web (search and site content): docs-build.findable only asks that
+#     docs pages carry metadata and search terms; ranking, indexing and site
+#     structure for web search use "seo-web".
 #
 # Licence and attribution
 #   O*NET: This product includes information from the O*NET 31.0 Database by

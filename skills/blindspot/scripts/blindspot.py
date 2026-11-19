@@ -57,18 +57,27 @@ making keep kept give gives given get gets set sets need needs needed every very
 
 
 def load_maps():
-    if not MAPS_JSON.exists():
-        sys.exit(f"maps.json not found at {MAPS_JSON}")
-    return json.loads(MAPS_JSON.read_text(encoding="utf-8"))
+    try:
+        return json.loads(MAPS_JSON.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, UnicodeError) as error:
+        raise ValueError(f"{MAPS_JSON}: {error}") from None
 
 
 def resolve(maps, map_id):
     """Combined node list for a map, following extends and dropping excluded base nodes."""
     if map_id not in maps:
         sys.exit(f"unknown map {map_id!r}; known: {', '.join(sorted(maps))}")
-    chain = [maps[map_id]]
-    while chain[0]["map"].get("extends"):
-        chain.insert(0, maps[chain[0]["map"]["extends"]])
+    chain, seen = [], set()
+    current = map_id
+    while current:
+        if current in seen:
+            raise ValueError(f"extends cycle while resolving {map_id!r}: {current!r} repeats")
+        if current not in maps:
+            raise ValueError(f"unknown map {current!r} in extends chain of {map_id!r}")
+        seen.add(current)
+        chain.append(maps[current])
+        current = maps[current]["map"].get("extends")
+    chain.reverse()
     excluded = {e["node"] for d in chain for e in d.get("exclude") or []}
     sources, groups = {}, []
     for d in chain:
@@ -350,15 +359,18 @@ def cmd_grep(args):
 def cmd_sources(args):
     m = resolve(load_maps(), args.map)
     nodes = {n["id"]: n for g in m["groups"] for n in g["nodes"]}
+    status = 0
     for nid in args.nodes:
         n = nodes.get(nid)
         if not n:
-            print(f"{nid}: unknown node in {args.map}")
+            print(f"{nid}: unknown node in {args.map}", file=sys.stderr)
+            status = 1
             continue
         print(f"{nid}: {n['title']}")
         for s in n.get("sources") or []:
             src = m["sources"].get(s["ref"], {})
             print(f"  - {src.get('title', s['ref'])}, \"{s.get('locator', '')}\" <{src.get('url', '')}>")
+    return status
 
 
 def cmd_lint(args):
@@ -491,6 +503,16 @@ def cmd_maps(_):
         print(f"{mid}: {r['label']}, {sum(len(g['nodes']) for g in r['groups'])} nodes. {clip(r['scope'], 120)}")
 
 
+def positive_int(value):
+    try:
+        count = int(value)
+        if count > 0:
+            return count
+    except ValueError:
+        pass
+    raise argparse.ArgumentTypeError("must be a positive integer")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -501,10 +523,16 @@ def main():
     p = sub.add_parser("sources"); p.add_argument("--map", required=True); p.add_argument("nodes", nargs="+")
     p = sub.add_parser("lint"); p.add_argument("report"); p.add_argument("--map", required=True); p.add_argument("--profile")
     p = sub.add_parser("checklist"); p.add_argument("--map", required=True); p.add_argument("--skip", nargs="+")
-    p.add_argument("--groups", action="store_true"); p.add_argument("--out"); p.add_argument("--max-sources", type=int, default=1)
+    p.add_argument("--groups", action="store_true"); p.add_argument("--out")
+    p.add_argument("--max-sources", type=positive_int, default=1)
     sub.add_parser("maps")
     args = ap.parse_args()
-    return {"prepare": cmd_prepare, "grep": cmd_grep, "sources": cmd_sources, "lint": cmd_lint, "checklist": cmd_checklist, "maps": cmd_maps}[args.cmd](args) or 0
+    commands = {"prepare": cmd_prepare, "grep": cmd_grep, "sources": cmd_sources,
+                "lint": cmd_lint, "checklist": cmd_checklist, "maps": cmd_maps}
+    try:
+        return commands[args.cmd](args) or 0
+    except (OSError, ValueError) as error:
+        ap.exit(1, f"{args.cmd}: {error}\n")
 
 
 if __name__ == "__main__":

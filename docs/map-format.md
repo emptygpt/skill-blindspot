@@ -2,6 +2,8 @@
 
 A map is one YAML file in `skills/blindspot/maps/`. It lists the stages and concerns of a domain. Every node cites where it comes from.
 
+The [map licence and attribution notes](../skills/blindspot/maps/INDEX.md#licence-and-attribution) explain how source terms apply to map data and derived outputs.
+
 ## The rule
 
 **A node with no source does not go in.** A model may merge duplicates, reword and regroup. It may not decide alone that something belongs. A source can be an occupational database, a standard, a regulation, a textbook or course outline, official platform documentation, or a documented industry consensus. The `locator` must be text that really appears in the source: a section title, a clause number, a task statement, a skill name.
@@ -62,5 +64,7 @@ groups:             # nodes to add. A node here needs its own source.
 ```
 
 ## Contributing a node
+
+Run `python3 scripts/check_maps.py` to validate the YAML and check that the runtime cache is current. With `--write`, the checker updates the cache only after validation passes. Source records need all six fields shown above, with an HTTP(S) URL and a calendar date. Source, group and node IDs must be unique across a map and its ancestors; an extension can cite ancestral sources but cannot redeclare them. Extension chains must name existing maps and may not contain cycles.
 
 Open a pull request that adds the node with its source. Give the URL and the exact locator. If the source is behind a login or paywall, say so. Cite titles and short statements only. Do not copy body text from sources whose licence does not allow it.
