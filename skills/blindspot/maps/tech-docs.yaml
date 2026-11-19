@@ -188,8 +188,8 @@ groups:
     - ref: ESCO
       locator: interpret technical texts
   - id: doc-planning.topic-types
-    title: Choose a topic type for each page
-    description: Decide whether each page is a concept, a task, a reference or a troubleshooting page, and keep one type per page.
+    title: Choose a topic type for each topic
+    description: Give each topic one type, such as concept, task, reference or troubleshooting, and keep the content of a topic to that type. A page may hold several topics.
     keywords:
     - information type
     - content type
@@ -502,7 +502,7 @@ groups:
       locator: Make the OpenAPI Descriptions Available to the Users
   - id: api-description.info
     title: Fill in API metadata
-    description: State the API title, version, licence, contact and server addresses so readers know what they are calling and where.
+    description: State the API title, the version of the description document, licence, contact and server addresses so readers know what they are calling and where.
     applies_when: the API is an HTTP API described with OpenAPI or a similar format
     sources:
     - ref: OAS
