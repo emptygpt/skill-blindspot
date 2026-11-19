@@ -84,6 +84,10 @@ python3 benchmark/bench.py summary benchmark/work/trial/result.json
 [docs/validation.md](../docs/validation.md)，不是新跑的实验。
 运行 `python3 benchmark/bench.py summary` 可打印表格。
 
+已评分的运行按每个 skill 一个文件保存为 `data/run-<日期>-<skill>.json`：
+固定到 revision 的来源链接、删除的标题与哈希、检查器和地图版本、标注与评分说明。
+`summary` 会与已记录数据一起打印。
+
 | 测试 | 方法 | 前十找回 | 两次运行共有项 |
 |---|---|---|---|
 | 1：视频 | 仅模型 | 11/12 次机会 | 约 20/30 |

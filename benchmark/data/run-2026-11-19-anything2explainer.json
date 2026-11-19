@@ -1,0 +1,150 @@
+{
+  "kind": "scored",
+  "name": "2026-11-19 run 1: anything2explainer",
+  "run_date": "2026-11-19",
+  "source_url": "https://github.com/Vincentwei1021/anything2explainer/tree/cb560341742f9bf819fdfbd90700d6c13e36fdf5",
+  "repository": "Vincentwei1021/anything2explainer",
+  "items": [
+    {
+      "id": "R1",
+      "file": "SKILL.md",
+      "heading": "质量标尺（对照样片）",
+      "removed_line_range": [
+        81,
+        92
+      ],
+      "line_count": 12,
+      "sha256": "b9856424de9b91c6c226e5f2601d3210c08c617d881bd5f17ed6c6d0db16d3cc"
+    }
+  ],
+  "method": {
+    "checker": "blindspot skill 0.4.0 run by a separate agent that saw only the altered folder; no external model API calls",
+    "map": "video-long 0.2.1 (extends video 0.2.1)",
+    "runs_per_skill": 1,
+    "setter_and_scorer": "same person (not the checker); setter chose the heading without opening the map",
+    "findings_total": 16
+  },
+  "total": 1,
+  "recovered": 0,
+  "top": 10,
+  "recovered_top_n": 0,
+  "recovery_rate": 0.0,
+  "false_positives": 0,
+  "unmatched": [
+    "R1"
+  ],
+  "marks": [
+    {
+      "rank": 1,
+      "band": "Worth considering",
+      "title": "Listen to the complete soundtrack, not just the opening sample",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 2,
+      "band": "Worth considering",
+      "title": "Bind the brief to a particular viewer and learning outcome",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 3,
+      "band": "Worth considering",
+      "title": "Keep a rights and consent decision for optional assets and custom voices",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 4,
+      "band": "Worth considering",
+      "title": "Caption QA stops short of an accessibility deliverable check",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 5,
+      "band": "Worth considering",
+      "title": "Validate the delivered media against an agreed output specification",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 6,
+      "band": "Worth considering",
+      "title": "Turn topic-sensitive safety and policy checks into an intake branch",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 7,
+      "band": "Worth considering",
+      "title": "Preserve recoverable project versions, not just a well-organized directory",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 8,
+      "band": "Worth considering",
+      "title": "Separate flash aesthetics from flash safety",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 9,
+      "band": "Minor",
+      "title": "Record budget approval for optional paid production choices",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 10,
+      "band": "Minor",
+      "title": "Make required AI and sponsorship notices part of the delivered-video brief",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 11,
+      "band": "Minor",
+      "title": "Check the meaning of third-party marks before drawing branded graphics",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 12,
+      "band": "Minor",
+      "title": "Distinguish illustrative scenes on screen when viewers could take them as real",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 13,
+      "band": "Minor",
+      "title": "Check contact details only when delivery targets restrict them",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 14,
+      "band": "Minor",
+      "title": "Unify the current motion thresholds across dispatch and QC references",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 15,
+      "band": "Minor",
+      "title": "State how a necessary late factual correction invalidates dependent artifacts",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 16,
+      "band": "Minor",
+      "title": "Specify placement and continuity rules if a sponsor segment is requested",
+      "match": null,
+      "verdict": "real"
+    }
+  ]
+}

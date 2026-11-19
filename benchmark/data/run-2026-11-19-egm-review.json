@@ -1,0 +1,128 @@
+{
+  "kind": "scored",
+  "name": "2026-11-19 run 1: egm-review",
+  "run_date": "2026-11-19",
+  "source_url": "https://github.com/google/elephant-goldfish-model/tree/70406c4d22cc7ea8299637c2c5b44625c48b3f08/skills/egm-review",
+  "repository": "google/elephant-goldfish-model (skills/egm-review)",
+  "items": [
+    {
+      "id": "R1",
+      "file": "SKILL.md",
+      "heading": "Subflow: Comprehension Test",
+      "removed_line_range": [
+        349,
+        370
+      ],
+      "line_count": 22,
+      "sha256": "2a76fb10998fc76d08b61379688127d2840257c35bd7c760a30369b7e2bb50f4"
+    }
+  ],
+  "method": {
+    "checker": "blindspot skill 0.4.0 run by a separate agent that saw only the altered folder; no external model API calls",
+    "map": "software 0.1.0",
+    "runs_per_skill": 1,
+    "setter_and_scorer": "same person (not the checker); setter chose the heading without opening the map",
+    "findings_total": 13
+  },
+  "total": 1,
+  "recovered": 1,
+  "top": 10,
+  "recovered_top_n": 1,
+  "recovery_rate": 1.0,
+  "false_positives": 1,
+  "unmatched": [],
+  "marks": [
+    {
+      "rank": 1,
+      "band": "Worth considering",
+      "title": "Keep untrusted document content separate from orchestration instructions",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 2,
+      "band": "Worth considering",
+      "title": "Do not silently turn unresolved blockers into accepted trade-offs",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 3,
+      "band": "Worth considering",
+      "title": "Validate reviewer evidence before promoting reports to conclusions",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 4,
+      "band": "Worth considering",
+      "title": "Check the external review bundle before claiming rubric coverage",
+      "match": null,
+      "verdict": "false",
+      "note": "Finding points to sibling skills (egm-review-loop, egm-resolve, egm-synthesizer) that exist in the upstream repo but were outside the audited folder; judged covered."
+    },
+    {
+      "rank": 5,
+      "band": "Worth considering",
+      "title": "Minimize sensitive context even when a link stays inside the workspace",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 6,
+      "band": "Worth considering",
+      "title": "Limit reviewer tools separately from approved remediation authority",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 7,
+      "band": "Worth considering",
+      "title": "Bind each report to the document version it actually reviewed",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 8,
+      "band": "Worth considering",
+      "title": "Give failed or incomplete reviewer runs a defined outcome",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 9,
+      "band": "Worth considering",
+      "title": "Do not dispatch readiness review on an N/A implementation range",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 10,
+      "band": "Worth considering",
+      "title": "Define the interactive and standalone comprehension stage explicitly",
+      "match": "R1",
+      "verdict": "real"
+    },
+    {
+      "rank": 11,
+      "band": "Minor",
+      "title": "Persist enough state to resume after a real session exit",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 12,
+      "band": "Minor",
+      "title": "Validate intake values and report-name collisions before starting",
+      "match": null,
+      "verdict": "real"
+    },
+    {
+      "rank": 13,
+      "band": "Minor",
+      "title": "Explain the assurance difference between interactive and consolidated modes",
+      "match": null,
+      "verdict": "real"
+    }
+  ]
+}
