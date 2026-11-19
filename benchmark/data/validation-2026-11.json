@@ -1,0 +1,50 @@
+{
+  "kind": "recorded",
+  "source": "docs/validation.md",
+  "source_url": "https://github.com/emptygpt/skill-blindspot/blob/main/docs/validation.md",
+  "notes": [
+    "Transcribed aggregate results, not new benchmark runs or per-item answer keys.",
+    "False positives were not recorded; null does not mean zero.",
+    "Tests 1 and 2 have six removed items each, scored twice: 12 chances per method.",
+    "Shared items are approximate counts out of 30, not recovery counts.",
+    "Test 3 uses the same removed items as tests 1 and 2. The source says twelve altered skills here but its limits say six skills; no per-skill reconstruction is attempted."
+  ],
+  "tests": [
+    {
+      "name": "Test 1: video production",
+      "skills": [
+        "https://github.com/Aaryan-Kapoor/video-production-skill",
+        "https://github.com/Alisa0808/vox-director",
+        "https://github.com/HeyChengC/wallstreet-explainer"
+      ],
+      "removed_items": ["audio-visual sync", "final quality check", "background music", "captions", "opening hook design", "fact checking"],
+      "chances": 12,
+      "methods": [
+        {"name": "Model only", "recovered": 11, "top": 10, "runs_per_skill": 2, "shared": 20, "false_positives": null},
+        {"name": "Map-guided", "recovered": 10, "top": 10, "runs_per_skill": 2, "shared": 27, "false_positives": null}
+      ]
+    },
+    {
+      "name": "Test 2: EU MDR compliance",
+      "skills": null,
+      "skills_note": "Three public MDR 2017/745 skills by different authors; unnamed in the source.",
+      "removed_items": ["qualification of the clinical evaluator", "vigilance reporting timelines", "effect of combination devices on classification", "person responsible for regulatory compliance", "change control for off-the-shelf software and updates", "interoperability and fail-safe behaviour"],
+      "chances": 12,
+      "methods": [
+        {"name": "Model only", "recovered": 9, "top": 10, "runs_per_skill": 2, "shared": 25, "false_positives": null},
+        {"name": "Map-guided", "recovered": 8, "top": 10, "runs_per_skill": 2, "shared": 26, "false_positives": null}
+      ]
+    },
+    {
+      "name": "Test 3: combined skill v0.1",
+      "removed_items_from": ["Test 1", "Test 2"],
+      "chances": 12,
+      "methods": [
+        {"name": "Model only (two-run average)", "recovered": 10, "top": 10, "shared": null, "false_positives": null},
+        {"name": "Map-guided (two-run average)", "recovered": 9, "top": 10, "shared": null, "false_positives": null},
+        {"name": "Combined skill (one run)", "recovered": 11, "top": 10, "recovered_top_n": 11, "runs_per_skill": 1, "shared": null, "false_positives": null}
+      ],
+      "notes": ["22–36 findings per skill; all eleven recovered items were in the first ten findings.", "Qualification of the clinical evaluator was not recovered by any method in any run."]
+    }
+  ]
+}

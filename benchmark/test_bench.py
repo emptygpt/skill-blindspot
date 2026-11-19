@@ -1,0 +1,102 @@
+"""Offline tests: python3 -m unittest discover -s benchmark -v."""
+import argparse
+import contextlib
+import csv
+import hashlib
+import io
+import json
+import pathlib
+import tempfile
+import unittest
+
+import bench
+
+
+class BenchmarkTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = pathlib.Path(self.temp.name)
+
+    def remove(self, text, titles):
+        skill = self.root / 'skill'
+        skill.mkdir(exist_ok=True)
+        (skill / 'SKILL.md').write_bytes(text.encode())
+        args = argparse.Namespace(skill_folder=str(skill), out=str(self.root / 'run'),
+                                  file='SKILL.md', heading=titles, node=['review'], source_url=None)
+        with contextlib.redirect_stdout(io.StringIO()):
+            bench.remove(args)
+        return self.root / 'run'
+
+    def test_remove_nested_and_fenced_headings(self):
+        text = '# Skill\r\n## Keep\r\n```md\r\n## Review\r\n```\r\n## Review\r\nCheck.\r\n### Detail\r\nMore.\r\n## Send\r\nSend.\r\n'
+        work = self.remove(text, ['Review'])
+        key = json.loads((work / 'key.json').read_text())['items'][0]
+        removed = (work / 'removed/R1.md').read_bytes()
+        self.assertEqual(key['removed_line_range'], [6, 9])
+        self.assertEqual(key['line_count'], 4)
+        self.assertEqual(key['sha256'], hashlib.sha256(removed).hexdigest())
+        self.assertIn(b'## Send\r\n', (work / 'altered/SKILL.md').read_bytes())
+
+    def test_remove_missing_empty_ambiguous_overlap(self):
+        for text, titles in [('', ['Review']), ('## Other\n', ['Review']),
+                             ('## Review\n## Review\n', ['Review']),
+                             ('## Review\n### Child\n', ['Review', 'Child'])]:
+            with self.subTest(text=text), self.assertRaises(ValueError):
+                self.remove(text, titles)
+        self.assertFalse((self.root / 'run').exists())
+
+    def test_multiple_and_setext(self):
+        work = self.remove('Skill\n=====\nReview\n------\nCheck.\n## Send\nSend.\n', ['Review', 'Send'])
+        self.assertEqual((work / 'altered/SKILL.md').read_text(), 'Skill\n=====\n')
+
+    def test_findings_and_empty(self):
+        report = self.root / 'report.md'
+        out = self.root / 'marks.csv'
+        report.write_text('## Findings\n### Needed\n1. **Review** [map]\n   Map node: review.check — source: example\n## Trace\n2. **Ignore** [map]\n')
+        args = argparse.Namespace(report=str(report), out=str(out))
+        with contextlib.redirect_stdout(io.StringIO()):
+            bench.findings(args)
+        with out.open() as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['nodes'], 'review.check')
+        self.assertEqual(rows[0]['verdict'], '')
+        report.write_text('## Findings\nNone.\n')
+        with contextlib.redirect_stdout(io.StringIO()):
+            bench.findings(args)
+        self.assertEqual(out.read_text().strip(), ','.join(bench.FIELDS))
+        report.write_text('No section')
+        with self.assertRaises(ValueError):
+            bench.findings(args)
+
+    def test_score_normal_empty_and_errors(self):
+        key, marks, out = [self.root / name for name in ('key.json', 'marks.csv', 'result.json')]
+        args = argparse.Namespace(key=str(key), marks=str(marks), out=str(out), top=1)
+        bench.write_json(key, {'items': [{'id': 'R1'}, {'id': 'R2'}]})
+        def run(rows):
+            with marks.open('w', newline='') as handle:
+                writer = csv.writer(handle)
+                writer.writerow(bench.FIELDS)
+                writer.writerows(rows)
+            with contextlib.redirect_stdout(io.StringIO()):
+                bench.score(args)
+            return json.loads(out.read_text())
+        result = run([[1, 'Needed', 'a', '', 'R1', 'real'], [2, 'Minor', 'b', '', 'R1', 'real'],
+                      [3, 'Minor', 'c', '', '', 'false']])
+        self.assertEqual((result['recovered'], result['recovered_top_n'], result['false_positives']), (1, 1, 1))
+        self.assertEqual(result['unmatched'], ['R2'])
+        for match, verdict in [('R9', 'real'), ('R1', 'false'), ('', ''), ('', 'maybe')]:
+            with self.subTest(match=match, verdict=verdict), self.assertRaises(ValueError):
+                run([[1, 'Needed', 'a', '', match, verdict]])
+        bench.write_json(key, {'items': []})
+        self.assertIsNone(run([])['recovery_rate'])
+
+    def test_summary(self):
+        with contextlib.redirect_stdout(io.StringIO()) as output:
+            bench.summary(argparse.Namespace(results=[]))
+        self.assertIn('Test 1', output.getvalue())
+
+
+if __name__ == '__main__':
+    unittest.main()

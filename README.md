@@ -109,7 +109,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
 - [x] Map: `software` and a report on five coding skills ([reports/code-5.md](reports/code-5.md))
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
-- [ ] `benchmark/`: the remove-and-recover method and data, so others can test their own approach
+- [x] [benchmark/](benchmark/): the remove-and-recover method and data, so others can test their own approach
 - [x] Report: [what 20 public video skills leave out](reports/video-20.md)
 - [x] Second domain (writing) and a guide for building a map: [docs/map-format.md](docs/map-format.md)
 

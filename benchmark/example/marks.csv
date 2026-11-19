@@ -1,0 +1,4 @@
+rank,band,title,nodes,match,verdict
+1,Needed,Check the contents and address before sending,,R1,real
+2,Worth considering,Record a tracking number,,,real
+3,Minor,Hand the envelope to a courier,,,false

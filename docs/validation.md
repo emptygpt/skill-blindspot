@@ -4,6 +4,8 @@ Short answer: **no.** In our tests a plain "what is this skill missing?" prompt 
 
 ## Method
 
+For offline preparation, scoring and recorded data, see [benchmark/](../benchmark/).
+
 1. Take public agent skills. A setter agent removes two stages or requirements from each one and writes an answer key. The setter never sees the map.
 2. Two kinds of checker read the altered skill. Neither sees the original or the answer key. Each works in its own folder.
    - **Model only:** list up to 10 missing stages from your own knowledge of the domain.
