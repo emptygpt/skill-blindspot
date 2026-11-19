@@ -4,7 +4,8 @@
 #   - Every node must cite at least one source that really exists in the
 #     "sources" list, with a locator copied from that source: a heading, an
 #     object or criterion title, an O*NET task statement, an ESCO skill name,
-#     or a short statement from the page.
+#     or a short statement from the page. Where a source has many pages, the
+#     locator starts with the page title, then the heading or statement.
 #   - Nodes may be merged and reworded, but a node with no source must never
 #     be added. Gaps that no source covers are listed below, not added as nodes.
 #   - Sources are only cited for titles and short statements; no body text is
@@ -106,9 +107,9 @@ sources:
   retrieved: '2026-11-19'
   licence: CC BY 4.0 (stated in the page footer)
 - id: GITLAB
-  title: GitLab documentation style guide, topic types, workflows and testing pages
+  title: GitLab, Contribute to the GitLab documentation (Documentation Style Guide, Documentation topic types, Workflows, Documentation testing)
   publisher: GitLab Inc.
-  url: https://docs.gitlab.com/development/documentation/styleguide/
+  url: https://docs.gitlab.com/development/documentation/
   retrieved: '2026-11-19'
   licence: CC BY-SA 4.0 (stated in the page footer); only headings cited
 - id: WTD
@@ -204,7 +205,7 @@ groups:
     description: Keep each fact in one place and link to it, instead of repeating it in several pages, wikis or descriptions that drift apart.
     sources:
     - ref: GITLAB
-      locator: Documentation is the single source of truth (SSoT)
+      locator: 'Documentation Style Guide: Documentation is the single source of truth (SSoT)'
     - ref: OAI
       locator: Keep a Single Source of Truth
   - id: doc-planning.docs-with-code
@@ -212,9 +213,9 @@ groups:
     description: Plan the docs as part of the feature and ship them with it, rather than as a later separate task.
     sources:
     - ref: GITLAB
-      locator: Docs-first methodology
+      locator: 'Documentation Style Guide: Docs-first methodology'
     - ref: GITLAB
-      locator: Including documentation with code
+      locator: 'Workflows: Including documentation with code'
   - id: doc-planning.legal-safety
     title: Include required legal and safety information
     description: Find out which warnings, licences, data handling notes or regulatory statements the docs must carry, and where.
@@ -266,9 +267,9 @@ groups:
     - ref: GSTYLE
       locator: Procedures
     - ref: GSTYLE
-      locator: Use numbered lists for sequences.
+      locator: 'Highlights: Use numbered lists for sequences.'
     - ref: GSTYLE
-      locator: Put conditions before instructions
+      locator: 'Highlights: Put conditions before instructions'
     - ref: MSSTYLE
       locator: Procedures and instructions
   - id: page-structure.step-results
@@ -276,9 +277,9 @@ groups:
     description: Where it helps, state the goal of a step or the result the reader should see, so they can tell that the step worked.
     sources:
     - ref: GSTYLE
-      locator: Steps with goals
+      locator: 'Procedures: Steps with goals'
     - ref: GSTYLE
-      locator: Steps with results or justifications
+      locator: 'Procedures: Steps with results or justifications'
   - id: page-structure.links
     title: Link selectively with descriptive link text
     description: Link only to the most relevant pages, and make link text say where it goes; avoid "click here" and bare URLs.
@@ -286,7 +287,7 @@ groups:
     - ref: GSTYLE
       locator: Cross-references and linking
     - ref: GSTYLE
-      locator: Write descriptive link text
+      locator: 'Cross-references and linking: Write descriptive link text'
     - ref: WCAG
       locator: Success Criterion 2.4.4 Link Purpose (In Context)
   - id: page-structure.readme
@@ -331,9 +332,9 @@ groups:
     description: Write to the reader as "you", say who does each action, and use present tense.
     sources:
     - ref: GSTYLE
-      locator: Use second person
+      locator: 'Highlights: Use second person'
     - ref: GSTYLE
-      locator: Use active voice
+      locator: 'Highlights: Use active voice'
   - id: writing-style.terminology
     title: Use technical terms consistently
     description: Use one term for one thing, define terms and abbreviations on first use, and match the names used in the product and the code.
@@ -341,9 +342,9 @@ groups:
     - ref: ESCO
       locator: apply ICT terminology
     - ref: GSTYLE
-      locator: Use consistent terminology
+      locator: 'Write for a global audience: Use consistent terminology'
     - ref: GSTYLE
-      locator: Clarify abbreviations and pronouns
+      locator: 'Write for a global audience: Clarify abbreviations and pronouns'
   - id: writing-style.global
     title: Write for a global audience
     description: Use short sentences, plain words in their main sense and few idioms, so readers with other first languages and translation tools can follow.
@@ -353,7 +354,7 @@ groups:
     - ref: MSSTYLE
       locator: Global communications
     - ref: GITLAB
-      locator: Writing for localization
+      locator: 'Documentation Style Guide: Writing for localization'
   - id: writing-style.inclusive
     title: Write inclusive docs and examples
     description: Avoid gendered, ableist or loaded terms, write around non-inclusive terms in code, and vary names and places in examples.
@@ -361,7 +362,7 @@ groups:
     - ref: GSTYLE
       locator: Write inclusive documentation
     - ref: GSTYLE
-      locator: Write diverse and inclusive examples
+      locator: 'Write inclusive documentation: Write diverse and inclusive examples'
     - ref: MSSTYLE
       locator: Bias-free communication
   - id: writing-style.timeless
@@ -371,9 +372,9 @@ groups:
     - ref: GSTYLE
       locator: Timeless documentation
     - ref: GSTYLE
-      locator: Don't pre-announce anything in
+      locator: 'Highlights: Don''t pre-announce anything in documentation.'
     - ref: GITLAB
-      locator: Promising features in future versions
+      locator: 'Documentation Style Guide: Promising features in future versions'
   - id: writing-style.code-font
     title: Put code and UI text in the right format
     description: Format code elements, commands and file names in code font and UI labels in bold, and use one treatment for each kind of item.
@@ -381,9 +382,9 @@ groups:
     - ref: GSTYLE
       locator: Code in text
     - ref: GSTYLE
-      locator: Put code-related text in code font
+      locator: 'Highlights: Put code-related text in code font'
     - ref: GSTYLE
-      locator: Put UI elements in bold
+      locator: 'Highlights: Put UI elements in bold'
     - ref: MSSTYLE
       locator: Formatting developer text elements
   - id: writing-style.dates
@@ -391,7 +392,7 @@ groups:
     description: Use date and number formats that cannot be misread by readers in other countries.
     sources:
     - ref: GSTYLE
-      locator: Use unambiguous date formatting
+      locator: 'Highlights: Use unambiguous date formatting'
     - ref: MSSTYLE
       locator: Numbers
 - id: api-reference
@@ -408,19 +409,19 @@ groups:
     - ref: GSTYLE
       locator: API reference code comments
     - ref: GSTYLE
-      locator: Documentation basics
+      locator: 'API reference code comments: Documentation basics'
     - ref: MSSTYLE
-      locator: Elements of a reference article
+      locator: 'Reference documentation: Elements of a reference article'
   - id: api-reference.method-details
     title: Describe parameters, return values and exceptions
     description: For each method, say what it does, what every parameter means and allows, what it returns and which errors it raises.
     sources:
     - ref: GSTYLE
-      locator: Parameters
+      locator: 'API reference code comments: Parameters'
     - ref: GSTYLE
-      locator: Return values
+      locator: 'API reference code comments: Return values'
     - ref: GSTYLE
-      locator: Exceptions
+      locator: 'API reference code comments: Exceptions'
   - id: api-reference.docstrings
     title: Follow the language's comment conventions
     description: Write doc comments in the form the language and its tools expect, such as a one-line summary followed by details.
@@ -436,15 +437,15 @@ groups:
     description: Title reference pages with the element name and type, and use the same headings and order on every reference page.
     sources:
     - ref: MSSTYLE
-      locator: Article titles
+      locator: 'Reference documentation: Article titles'
     - ref: MSSTYLE
-      locator: Consistency is essential in reference documentation.
+      locator: 'Reference documentation: Consistency is essential in reference documentation.'
   - id: api-reference.generated-review
     title: Review generated reference text
     description: When the reference is generated from source comments, check that the comments are complete and remove internal or implementation details.
     sources:
     - ref: MSSTYLE
-      locator: If you automatically generate reference documentation and comments from the source code, review the quality and appropriateness of the comments.
+      locator: 'Reference documentation: If you automatically generate reference documentation and comments from the source code, review the quality and appropriateness of the comments.'
     - ref: AIP
       locator: Internal comments
   - id: api-reference.deprecations
@@ -452,7 +453,7 @@ groups:
     description: Mark deprecated methods, fields and operations in the reference and the API description, and say what to use instead or why there is no replacement.
     sources:
     - ref: GSTYLE
-      locator: Deprecations
+      locator: 'API reference code comments: Deprecations'
     - ref: AIP
       locator: Deprecations
     - ref: OAS
@@ -464,7 +465,7 @@ groups:
     - ref: AIP
       locator: Cross-references
     - ref: GSTYLE
-      locator: Linking API terms in Android
+      locator: 'Code in text: Linking API terms in Android'
   - id: api-reference.guides
     title: Pair the reference with task guides
     description: Next to the reference, give guides that show how to do common tasks with the API, since a reference alone does not show where to start.
@@ -578,39 +579,39 @@ groups:
     description: Write samples for tasks readers actually have, starting simple and covering commonly used or tricky elements first.
     sources:
     - ref: MSSTYLE
-      locator: Create concise examples that exemplify key development tasks.
+      locator: 'Code examples: Create concise examples that exemplify key development tasks.'
     - ref: MSSTYLE
-      locator: Prioritize frequently used elements and elements that may be difficult to understand or tricky to use.
+      locator: 'Code examples: Prioritize frequently used elements and elements that may be difficult to understand or tricky to use.'
   - id: code-samples.intro
     title: Introduce each sample
     description: Before a sample, say what it does and list what is needed to run it.
     sources:
     - ref: GSTYLE
-      locator: Introductory statements
+      locator: 'Code samples: Introductory statements'
     - ref: MSSTYLE
-      locator: List the requirements and dependencies for using or running the example.
+      locator: 'Code examples: List the requirements and dependencies for using or running the example.'
   - id: code-samples.copy-run
     title: Make samples easy to copy and run
     description: Let readers copy a sample in one action and run it without hidden setup; mark omitted code clearly.
     sources:
     - ref: MSSTYLE
-      locator: Provide an easy way for developers to copy and run the code.
+      locator: 'Code examples: Provide an easy way for developers to copy and run the code.'
     - ref: GSTYLE
-      locator: Basic guidelines
+      locator: 'Code samples: Basic guidelines'
   - id: code-samples.output
     title: Show the expected output
     description: Show what the sample prints or returns, so readers can check their result.
     sources:
     - ref: MSSTYLE
-      locator: Show expected output
+      locator: 'Code examples: Show expected output'
   - id: code-samples.style
     title: Follow the language's code style
     description: Format sample code the way the language's usual style guide does, with comments only where they help.
     sources:
     - ref: GSTYLE
-      locator: Code style guides
+      locator: 'Code samples: Code style guides'
     - ref: MSSTYLE
-      locator: Design code for reuse.
+      locator: 'Code examples: Design code for reuse.'
   - id: code-samples.placeholders
     title: Mark and explain placeholders
     description: Format values the reader must replace as placeholders and explain each one.
@@ -618,7 +619,7 @@ groups:
     - ref: GSTYLE
       locator: Format placeholders
     - ref: GSTYLE
-      locator: Explain placeholders
+      locator: 'Format placeholders: Explain placeholders'
   - id: code-samples.example-values
     title: Use reserved example names and addresses
     description: Use reserved example domains, IP addresses, emails and fictitious names in samples, never real customers, real hosts or real credentials.
@@ -652,9 +653,9 @@ groups:
     description: Give each informative image a text alternative, and do not put essential information only inside the image.
     sources:
     - ref: GSTYLE
-      locator: Alt text
+      locator: 'Diagrams, figures, and other images: Alt text'
     - ref: GSTYLE
-      locator: Text in figures
+      locator: 'Diagrams, figures, and other images: Text in figures'
     - ref: MSSTYLE
       locator: Accessibility guidelines and requirements
     - ref: WCAG
@@ -664,22 +665,22 @@ groups:
     description: Give figures captions and, for complex diagrams, a description in the text.
     sources:
     - ref: GSTYLE
-      locator: Figure captions
+      locator: 'Diagrams, figures, and other images: Figure captions'
     - ref: GSTYLE
-      locator: Figure descriptions
+      locator: 'Diagrams, figures, and other images: Figure descriptions'
   - id: images-media.quality
     title: Use sharp images
     description: Use high-resolution or vector images so text in them stays readable.
     sources:
     - ref: GSTYLE
-      locator: High-resolution images
+      locator: 'Diagrams, figures, and other images: High-resolution images'
   - id: images-media.video
     title: Make videos and GIFs accessible
     description: Caption videos and give a text version of what a recording or GIF shows.
     applies_when: the docs include video, recordings or animated images
     sources:
     - ref: GSTYLE
-      locator: Videos, recordings, and GIFs
+      locator: 'Write accessible documentation: Videos, recordings, and GIFs'
     - ref: WCAG
       locator: Success Criterion 1.2.2 Captions (Prerecorded)
 - id: accessibility
@@ -690,7 +691,7 @@ groups:
     description: Use short sentences and plain words and keep the reading level suited to the audience.
     sources:
     - ref: GSTYLE
-      locator: Ease of reading
+      locator: 'Write accessible documentation: Ease of reading'
     - ref: WCAG
       locator: Success Criterion 3.1.5 Reading Level
   - id: accessibility.structure
@@ -738,7 +739,7 @@ groups:
     - ref: GITLAB
       locator: Documentation testing
     - ref: GITLAB
-      locator: Run Vale, markdownlint, or link checks locally
+      locator: 'Documentation testing: Run Vale, markdownlint, or link checks locally'
   - id: docs-build.publish
     title: Publish to the right outputs
     description: Decide where the docs appear (site, in-product help, PDF, package page) and check the rendered result in each.
@@ -789,9 +790,9 @@ groups:
     description: Have the people who built the feature check that the docs are technically correct, and have a writer check clarity and style.
     sources:
     - ref: GITLAB
-      locator: Developer responsibilities
+      locator: 'Workflows: Developer responsibilities'
     - ref: GITLAB
-      locator: Technical writer responsibilities
+      locator: 'Workflows: Technical writer responsibilities'
   - id: doc-review.qa
     title: Check the docs before publishing
     description: Do a final pass for accuracy, completeness, broken links, formatting and whether the page meets its purpose.
@@ -805,15 +806,15 @@ groups:
     description: When docs are drafted with AI, have a person verify every statement, sample and link before it is published.
     sources:
     - ref: GITLAB
-      locator: AI-generated content
+      locator: 'Documentation Style Guide: AI-generated content'
     - ref: GITLAB
-      locator: AI-generated documentation
+      locator: 'Workflows: AI-generated documentation'
   - id: doc-review.plagiarism
     title: Do not copy others' text
     description: Write in your own words and do not paste text from other documentation without permission and attribution.
     sources:
     - ref: GITLAB
-      locator: Plagiarism
+      locator: 'Documentation Style Guide: Plagiarism'
   - id: doc-review.records
     title: Keep records of revisions
     description: Keep the history of changes and the reasons for them, so reviewers and later writers can see what changed.
@@ -836,15 +837,15 @@ groups:
     description: Collect feedback and issues about the docs and triage them regularly.
     sources:
     - ref: GITLAB
-      locator: Documentation feedback and improvements
+      locator: 'Workflows: Documentation feedback and improvements'
   - id: doc-maintenance.remove
     title: Remove outdated pages
     description: Delete or redirect pages for removed features instead of leaving them hidden or stale.
     sources:
     - ref: GITLAB
-      locator: Delete instead of hiding documentation
+      locator: 'Workflows: Delete instead of hiding documentation'
     - ref: GITLAB
-      locator: Moving content
+      locator: 'Workflows: Moving content'
   - id: doc-maintenance.localise
     title: Keep translations in step
     description: When docs are translated, plan the localisation workflow and check translated pages when the source changes.
@@ -853,4 +854,4 @@ groups:
     - ref: ESCO
       locator: manage localisation
     - ref: GITLAB
-      locator: Tests for translated documentation
+      locator: 'Documentation testing: Tests for translated documentation'
