@@ -683,10 +683,10 @@ groups:
       locator: 'Write accessible documentation: Videos, recordings, and GIFs'
     - ref: WCAG
       locator: Success Criterion 1.2.2 Captions (Prerecorded)
-- id: accessibility
+- id: doc-accessibility
   title: Accessible pages
   nodes:
-  - id: accessibility.reading
+  - id: doc-accessibility.reading
     title: Keep pages easy to read
     description: Use short sentences and plain words and keep the reading level suited to the audience.
     sources:
@@ -694,7 +694,7 @@ groups:
       locator: 'Write accessible documentation: Ease of reading'
     - ref: WCAG
       locator: Success Criterion 3.1.5 Reading Level
-  - id: accessibility.structure
+  - id: doc-accessibility.structure
     title: Use real headings, lists and tables
     description: Mark up headings, lists and tables as such, not only by visual style, so assistive technology can navigate them.
     sources:
@@ -702,7 +702,7 @@ groups:
       locator: Write accessible documentation
     - ref: WCAG
       locator: Success Criterion 1.3.1 Info and Relationships
-  - id: accessibility.color
+  - id: doc-accessibility.color
     title: Do not rely on colour alone
     description: Do not carry meaning by colour only, and keep enough contrast in text and images.
     sources:
@@ -710,7 +710,7 @@ groups:
       locator: Success Criterion 1.4.1 Use of Color
     - ref: WCAG
       locator: Success Criterion 1.4.3 Contrast (Minimum)
-  - id: accessibility.page
+  - id: doc-accessibility.page
     title: Set page titles and language
     description: Give each published page a title and declare its language.
     applies_when: the docs are published as web pages
