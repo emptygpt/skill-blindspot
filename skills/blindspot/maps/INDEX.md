@@ -11,3 +11,7 @@
 | `wechat-article` | `wechat-article.yaml` | Extends `writing`. Articles sent from a WeChat official account: title, cover, summary, original declaration, reprints, platform content rules, sending. | 40 |
 
 A map that says `extends: <id>` adds to a base map. Use it when the skill fits the narrower scope.
+
+## Licence and attribution
+
+The MIT licence for the skill instructions and helper does not grant rights to third-party material in the map YAML, compiled `maps.json`, or outputs derived from them. Follow each node's source IDs to the relevant `licence` fields and attribution notes, including sources inherited from a base map. Check the applicable terms (including attribution and share-alike where required) before reusing material. A licence marked “not verified” does not grant reuse permission.
