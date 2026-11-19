@@ -102,6 +102,10 @@ measure variation; do not mix an average of two runs with a single run silently.
 [docs/validation.md](../docs/validation.md), not new runs. Print it with
 `python3 benchmark/bench.py summary`.
 
+Scored runs are stored one skill per file as `data/run-<date>-<skill>.json`:
+source link pinned to a revision, removed heading and hash, checker and map
+versions, marks and scoring notes. `summary` prints them with the recorded data.
+
 | Test | Method | Recovered in top 10 | Shared items across two runs |
 |---|---|---|---|
 | 1: video | Model only | 11/12 chances | about 20/30 |
