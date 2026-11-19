@@ -62,6 +62,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `writing` | Non-fiction articles published online | 78 |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 |
+| `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 |
 
 The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, TikTok, Bilibili and Douyin official pages, the US FTC and a Chinese advertising regulation. Douyin's creator learning centre could not be read.
 
@@ -108,6 +109,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
 - [x] Map: `software` and a report on five coding skills ([reports/code-5.md](reports/code-5.md))
+- [x] Map: `tech-docs` (technical and API documentation)
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [x] [benchmark/](benchmark/): the remove-and-recover method and data, so others can test their own approach
 - [x] Report: [what 20 public video skills leave out](reports/video-20.md)

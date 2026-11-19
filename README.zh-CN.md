@@ -62,6 +62,7 @@ npx skills add emptygpt/skill-blindspot
 | `writing` | 在线发表的非虚构文章 | 78 |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 |
+| `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 |
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
@@ -106,6 +107,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 - [x] 验证：带出处的底图，比直接问「缺什么」找到的更多吗？没有。见 [docs/validation.md](docs/validation.md)
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
+- [x] 底图：`tech-docs`（技术文档与 API 文档）
 - [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`，每个节点都有来源
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法

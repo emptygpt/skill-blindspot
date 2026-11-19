@@ -1,0 +1,856 @@
+# skill-blindspot map: technical and API documentation (maps/tech-docs.yaml)
+#
+# Rules for this map
+#   - Every node must cite at least one source that really exists in the
+#     "sources" list, with a locator copied from that source: a heading, an
+#     object or criterion title, an O*NET task statement, an ESCO skill name,
+#     or a short statement from the page.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Gaps that no source covers are listed below, not added as nodes.
+#   - Sources are only cited for titles and short statements; no body text is
+#     copied. Descriptions are the map's own words.
+#
+# Boundaries with other maps
+#   - writing (non-fiction articles): this map is for documentation that helps
+#     a reader install, use, integrate with or operate a product or an API
+#     (reference pages, procedures, code samples, API descriptions). An essay,
+#     blog post or news-style article about a technology uses "writing". Some
+#     O*NET 27-3042.00 and ESCO technical communicator items are cited by both
+#     maps; here they apply to a documentation set, not to an article.
+#   - software (changing software): "software" asks whether a code change also
+#     updates its docs (documentation.technical-docs, documentation.review-docs)
+#     and owns versioning, breaking changes and changelogs (release.versioning,
+#     release.breaking-changes, release.changelog) and accessibility of the
+#     product UI (implementation.accessibility). This map covers making the
+#     documentation itself. When a task is both a code change and its docs,
+#     check it against both maps.
+#
+# Licence and attribution
+#   O*NET: This product includes information from the O*NET 31.0 Database by
+#   the U.S. Department of Labor, Employment and Training Administration
+#   (USDOL/ETA). Used under the CC BY 4.0 license. O*NET(R) is a trademark of
+#   USDOL/ETA. The task statements are regrouped here, so this map is an
+#   adaptation and has not been endorsed by USDOL/ETA.
+#   ESCO: This publication uses the ESCO classification of the European
+#   Commission. ESCO skill names are regrouped here, so this map is an
+#   adaptation of ESCO. https://esco.ec.europa.eu
+#   Google developer documentation style guide and Microsoft Writing Style
+#   Guide: CC BY 4.0. OpenAPI Specification: Apache 2.0. OpenAPI
+#   documentation (learn.openapis.org): CC BY 4.0. GitLab documentation:
+#   CC BY-SA 4.0; only headings are cited, and this map is shared under the
+#   same terms for the parts derived from them. PEP 257: public domain.
+#   Google AIP, GitHub Docs, Write the Docs, RFC 2606, WCAG 2.2, the Python
+#   documentation and the rustdoc book: page, heading and criterion titles and
+#   short statements only (see "sources").
+#   Not used on purpose: Diataxis (licence not found, as in the software map);
+#   per-category percentages from arXiv:2503.04761 (not verified one by one).
+#
+# Not yet covered (no source found or read, so no node)
+#   - ISO/IEC/IEEE 26514 and 26515 (information for users, agile
+#     documentation): paid standards; the ISO page could not be read.
+#   - Keeping several published versions of the docs in step with product
+#     releases: no source page read.
+#   - Measuring whether docs work (analytics, task success): only the ESCO
+#     skill name "track key performance indicators".
+#   - Description formats other than OpenAPI (AsyncAPI, GraphQL schemas): not
+#     read. Protocol buffer comments are covered only through Google AIP-192.
+#   - Release notes: left to the software map (release.changelog).
+
+map:
+  id: tech-docs
+  title: Technical and API documentation
+  version: 0.1.0
+  updated: '2026-11-19'
+  scope: 'Planning, writing, reviewing, publishing and maintaining technical documentation and API documentation for a software product: reference pages, procedures, getting-started pages, code samples, machine-readable API descriptions and READMEs. Out of scope: general non-fiction articles (see the writing map), the code change itself and its release (see the software map), marketing copy, hardware manuals.'
+sources:
+- id: ONET
+  title: O*NET 31.0, 27-3042.00 Technical Writers (task statements)
+  publisher: U.S. Department of Labor, Employment and Training Administration (USDOL/ETA)
+  url: https://www.onetonline.org/link/details/27-3042.00
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0
+- id: ESCO
+  title: ESCO classification, skills of technical communicator and ICT documentation manager
+  publisher: European Commission
+  url: https://esco.ec.europa.eu
+  retrieved: '2026-11-19'
+  licence: reusable with acknowledgement under Commission Decision 2011/833/EU; adapted versions must be marked as adapted
+- id: GSTYLE
+  title: Google developer documentation style guide
+  publisher: Google LLC
+  url: https://developers.google.com/style
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0 (stated in the page footer; code samples Apache 2.0)
+- id: AIP
+  title: 'AIP-192: Documentation'
+  publisher: Google LLC (API Improvement Proposals)
+  url: https://google.aip.dev/192
+  retrieved: '2026-11-19'
+  licence: not verified; only headings and one short statement cited
+- id: MSSTYLE
+  title: Microsoft Writing Style Guide
+  publisher: Microsoft
+  url: https://learn.microsoft.com/en-us/style-guide/welcome/
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0 (MicrosoftDocs/microsoft-style-guide repository)
+- id: OAS
+  title: OpenAPI Specification v3.1.1
+  publisher: OpenAPI Initiative
+  url: https://spec.openapis.org/oas/v3.1.1.html
+  retrieved: '2026-11-19'
+  licence: Apache 2.0 (stated in the specification)
+- id: OAI
+  title: OpenAPI documentation, Best Practices
+  publisher: OpenAPI Initiative
+  url: https://learn.openapis.org/best-practices.html
+  retrieved: '2026-11-19'
+  licence: CC BY 4.0 (stated in the page footer)
+- id: GITLAB
+  title: GitLab documentation style guide, topic types, workflows and testing pages
+  publisher: GitLab Inc.
+  url: https://docs.gitlab.com/development/documentation/styleguide/
+  retrieved: '2026-11-19'
+  licence: CC BY-SA 4.0 (stated in the page footer); only headings cited
+- id: WTD
+  title: Write the Docs, Software documentation guide and Docs as code
+  publisher: Write the Docs
+  url: https://www.writethedocs.org/guide/
+  retrieved: '2026-11-19'
+  licence: not verified; only headings cited
+- id: PEP257
+  title: 'PEP 257: Docstring Conventions'
+  publisher: Python Software Foundation
+  url: https://peps.python.org/pep-0257/
+  retrieved: '2026-11-19'
+  licence: public domain (stated in the document)
+- id: GHREADME
+  title: 'GitHub Docs: About the repository README file'
+  publisher: GitHub
+  url: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
+  retrieved: '2026-11-19'
+  licence: Page does not state a licence; the github/docs repository README gives CC BY 4.0 for content. Only headings cited.
+- id: RFC2606
+  title: 'RFC 2606: Reserved Top Level DNS Names'
+  publisher: IETF
+  url: https://www.rfc-editor.org/rfc/rfc2606.txt
+  retrieved: '2026-11-19'
+  licence: IETF Trust terms (BCP 78), not fully verified; only section titles cited
+- id: WCAG
+  title: Web Content Accessibility Guidelines (WCAG) 2.2 (criterion titles only)
+  publisher: W3C
+  url: https://www.w3.org/TR/WCAG22/
+  retrieved: '2026-11-19'
+  licence: W3C document licence, not fully verified; only titles cited
+- id: DOCTEST
+  title: doctest — Test interactive Python examples
+  publisher: Python Software Foundation
+  url: https://docs.python.org/3/library/doctest.html
+  retrieved: '2026-11-19'
+  licence: not verified; only the page title cited
+- id: RUSTDOC
+  title: The rustdoc book, Documentation tests
+  publisher: The Rust Project
+  url: https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html
+  retrieved: '2026-11-19'
+  licence: not verified; only the page title cited
+groups:
+- id: plan
+  title: Plan the documentation
+  nodes:
+  - id: plan.readers
+    title: Name the readers and what they need to do
+    description: Decide who will read the docs (new user, integrator, operator) and which tasks they come to finish, before choosing what to write.
+    keywords:
+    - audience
+    - user needs
+    sources:
+    - ref: ESCO
+      locator: identify ICT user needs
+    - ref: MSSTYLE
+      locator: Content planning
+  - id: plan.subject
+    title: Agree what the docs must cover
+    description: Settle with the product owners which features, versions and platforms the docs cover and to what depth.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Confer with customer representatives, vendors, plant executives, or publisher to establish technical specifications and to determine subject material to be developed for publication.'
+  - id: plan.gather
+    title: Learn the product from its builders and its specs
+    description: Read the specs, designs and code, try the product, and ask the engineers, so the docs describe how it really behaves.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Study drawings, specifications, mockups, and product samples to integrate and delineate technology, operating procedure, and production sequence and detail.'
+    - ref: ONET
+      locator: '27-3042.00 task: Observe production, developmental, and experimental activities to determine operating procedure and detail.'
+    - ref: ESCO
+      locator: gather technical information
+    - ref: ESCO
+      locator: interpret technical texts
+  - id: plan.topic-types
+    title: Choose a topic type for each page
+    description: Decide whether each page is a concept, a task, a reference or a troubleshooting page, and keep one type per page.
+    keywords:
+    - information type
+    - content type
+    sources:
+    - ref: GITLAB
+      locator: Documentation topic types (CTRT)
+    - ref: ESCO
+      locator: documentation types
+    - ref: ESCO
+      locator: utilise content types
+  - id: plan.single-source
+    title: Keep one source of truth
+    description: Keep each fact in one place and link to it, instead of repeating it in several pages, wikis or descriptions that drift apart.
+    sources:
+    - ref: GITLAB
+      locator: Documentation is the single source of truth (SSoT)
+    - ref: OAI
+      locator: Keep a Single Source of Truth
+  - id: plan.docs-with-code
+    title: Write the docs together with the feature
+    description: Plan the docs as part of the feature and ship them with it, rather than as a later separate task.
+    sources:
+    - ref: GITLAB
+      locator: Docs-first methodology
+    - ref: GITLAB
+      locator: Including documentation with code
+  - id: plan.legal-safety
+    title: Include required legal and safety information
+    description: Find out which warnings, licences, data handling notes or regulatory statements the docs must carry, and where.
+    sources:
+    - ref: ESCO
+      locator: develop documentation in accordance with legal requirements
+    - ref: ESCO
+      locator: develop ICT safety information
+    - ref: ESCO
+      locator: product usage risks analysis
+  - id: plan.project
+    title: Plan the documentation work
+    description: Set the deliverables, owners, review steps and dates for the documentation work.
+    applies_when: the documentation is a project with several pages or contributors
+    sources:
+    - ref: ESCO
+      locator: manage content development projects
+    - ref: ESCO
+      locator: content development processes
+- id: structure
+  title: Structure pages and navigation
+  nodes:
+  - id: structure.order
+    title: Organise information in a predictable order
+    description: Arrange pages and sections so that readers meet prerequisites first and can find the same kind of information in the same place.
+    sources:
+    - ref: ESCO
+      locator: structure information
+    - ref: ONET
+      locator: '27-3042.00 task: Organize material and complete writing assignment according to set standards regarding order, clarity, conciseness, style, and terminology.'
+  - id: structure.headings
+    title: Write descriptive titles and headings
+    description: Give each page and section a heading that says what it covers or what task it helps with, in a consistent style and hierarchy.
+    sources:
+    - ref: GSTYLE
+      locator: Headings and titles
+    - ref: MSSTYLE
+      locator: Scannable content
+    - ref: WCAG
+      locator: Success Criterion 2.4.6 Headings and Labels
+  - id: structure.procedures
+    title: Write procedures as numbered steps
+    description: Put sequences in numbered steps, one action per step, with conditions and the place of the action before the instruction and optional steps marked.
+    keywords:
+    - steps
+    - instructions
+    - how-to
+    sources:
+    - ref: GSTYLE
+      locator: Procedures
+    - ref: GSTYLE
+      locator: Use numbered lists for sequences.
+    - ref: GSTYLE
+      locator: Put conditions before instructions
+    - ref: MSSTYLE
+      locator: Procedures and instructions
+  - id: structure.step-results
+    title: Say what each step achieves
+    description: Where it helps, state the goal of a step or the result the reader should see, so they can tell that the step worked.
+    sources:
+    - ref: GSTYLE
+      locator: Steps with goals
+    - ref: GSTYLE
+      locator: Steps with results or justifications
+  - id: structure.links
+    title: Link selectively with descriptive link text
+    description: Link only to the most relevant pages, and make link text say where it goes; avoid "click here" and bare URLs.
+    sources:
+    - ref: GSTYLE
+      locator: Cross-references and linking
+    - ref: GSTYLE
+      locator: Write descriptive link text
+    - ref: WCAG
+      locator: Success Criterion 2.4.4 Link Purpose (In Context)
+  - id: structure.readme
+    title: Give the project a README
+    description: Put a README at the root that says what the project does, how to install and start using it, where to get help and how to contribute.
+    applies_when: the documentation lives in a code repository
+    sources:
+    - ref: GHREADME
+      locator: About READMEs
+    - ref: WTD
+      locator: How to start writing technical documentation
+  - id: structure.repo-links
+    title: Use relative links and image paths in repository docs
+    description: Inside a repository, link between Markdown files and images with relative paths so links keep working on branches and forks.
+    applies_when: the documentation lives in a code repository
+    sources:
+    - ref: GHREADME
+      locator: Relative links and image paths in markdown files
+  - id: structure.troubleshooting
+    title: Cover errors and troubleshooting
+    description: Document the errors a reader is likely to meet, what causes them and how to fix them.
+    sources:
+    - ref: GITLAB
+      locator: Documentation topic types (CTRT)
+    - ref: OAS
+      locator: Responses Object
+- id: style
+  title: Language and style
+  nodes:
+  - id: style.guide
+    title: Follow one style guide
+    description: Pick a documentation style guide and apply it to the whole set, including word choice, capitalisation, numbers and formatting.
+    sources:
+    - ref: GSTYLE
+      locator: Google developer documentation style guide
+    - ref: MSSTYLE
+      locator: Microsoft Writing Style Guide
+    - ref: ONET
+      locator: '27-3042.00 task: Organize material and complete writing assignment according to set standards regarding order, clarity, conciseness, style, and terminology.'
+  - id: style.voice
+    title: Address the reader directly in active voice
+    description: Write to the reader as "you", say who does each action, and use present tense.
+    sources:
+    - ref: GSTYLE
+      locator: Use second person
+    - ref: GSTYLE
+      locator: Use active voice
+  - id: style.terminology
+    title: Use technical terms consistently
+    description: Use one term for one thing, define terms and abbreviations on first use, and match the names used in the product and the code.
+    sources:
+    - ref: ESCO
+      locator: apply ICT terminology
+    - ref: GSTYLE
+      locator: Use consistent terminology
+    - ref: GSTYLE
+      locator: Clarify abbreviations and pronouns
+  - id: style.global
+    title: Write for a global audience
+    description: Use short sentences, plain words in their main sense and few idioms, so readers with other first languages and translation tools can follow.
+    sources:
+    - ref: GSTYLE
+      locator: Write for a global audience
+    - ref: MSSTYLE
+      locator: Global communications
+    - ref: GITLAB
+      locator: Writing for localization
+  - id: style.inclusive
+    title: Write inclusive docs and examples
+    description: Avoid gendered, ableist or loaded terms, write around non-inclusive terms in code, and vary names and places in examples.
+    sources:
+    - ref: GSTYLE
+      locator: Write inclusive documentation
+    - ref: GSTYLE
+      locator: Write diverse and inclusive examples
+    - ref: MSSTYLE
+      locator: Bias-free communication
+  - id: style.timeless
+    title: Describe the product as it is now
+    description: Avoid "new", "now", "soon" and promises about future releases, which go out of date and mislead readers.
+    sources:
+    - ref: GSTYLE
+      locator: Timeless documentation
+    - ref: GSTYLE
+      locator: Don't pre-announce anything in
+    - ref: GITLAB
+      locator: Promising features in future versions
+  - id: style.code-font
+    title: Put code and UI text in the right format
+    description: Format code elements, commands and file names in code font and UI labels in bold, and use one treatment for each kind of item.
+    sources:
+    - ref: GSTYLE
+      locator: Code in text
+    - ref: GSTYLE
+      locator: Put code-related text in code font
+    - ref: GSTYLE
+      locator: Put UI elements in bold
+    - ref: MSSTYLE
+      locator: Formatting developer text elements
+  - id: style.dates
+    title: Write dates and numbers unambiguously
+    description: Use date and number formats that cannot be misread by readers in other countries.
+    sources:
+    - ref: GSTYLE
+      locator: Use unambiguous date formatting
+    - ref: MSSTYLE
+      locator: Numbers
+- id: api
+  title: API reference
+  nodes:
+  - id: api.reference-comments
+    title: Document every public API element
+    description: Give each public class, member and method a description in the reference, usually from comments in the source code.
+    keywords:
+    - doc comments
+    - docstrings
+    - Javadoc
+    sources:
+    - ref: GSTYLE
+      locator: API reference code comments
+    - ref: GSTYLE
+      locator: Documentation basics
+    - ref: MSSTYLE
+      locator: Elements of a reference article
+  - id: api.method-details
+    title: Describe parameters, return values and exceptions
+    description: For each method, say what it does, what every parameter means and allows, what it returns and which errors it raises.
+    sources:
+    - ref: GSTYLE
+      locator: Parameters
+    - ref: GSTYLE
+      locator: Return values
+    - ref: GSTYLE
+      locator: Exceptions
+  - id: api.docstrings
+    title: Follow the language's comment conventions
+    description: Write doc comments in the form the language and its tools expect, such as a one-line summary followed by details.
+    sources:
+    - ref: PEP257
+      locator: One-line Docstrings
+    - ref: PEP257
+      locator: Multi-line Docstrings
+    - ref: AIP
+      locator: Documentation
+  - id: api.reference-titles
+    title: Keep reference pages consistent
+    description: Title reference pages with the element name and type, and use the same headings and order on every reference page.
+    sources:
+    - ref: MSSTYLE
+      locator: Article titles
+    - ref: MSSTYLE
+      locator: Consistency is essential in reference documentation.
+  - id: api.generated-review
+    title: Review generated reference text
+    description: When the reference is generated from source comments, check that the comments are complete and remove internal or implementation details.
+    sources:
+    - ref: MSSTYLE
+      locator: If you automatically generate reference documentation and comments from the source code, review the quality and appropriateness of the comments.
+    - ref: AIP
+      locator: Internal comments
+  - id: api.deprecations
+    title: Mark deprecated elements and give the replacement
+    description: Mark deprecated methods, fields and operations in the reference and the API description, and say what to use instead or why there is no replacement.
+    sources:
+    - ref: GSTYLE
+      locator: Deprecations
+    - ref: AIP
+      locator: Deprecations
+    - ref: OAS
+      locator: Declares this operation to be deprecated
+  - id: api.cross-references
+    title: Link API names to their reference pages
+    description: Where docs mention a class, method or field, link to its reference entry so readers can check details.
+    sources:
+    - ref: AIP
+      locator: Cross-references
+    - ref: GSTYLE
+      locator: Linking API terms in Android
+  - id: api.guides
+    title: Pair the reference with task guides
+    description: Next to the reference, give guides that show how to do common tasks with the API, since a reference alone does not show where to start.
+    sources:
+    - ref: WTD
+      locator: How to write API documentation
+    - ref: GITLAB
+      locator: Documentation topic types (CTRT)
+- id: openapi
+  title: Machine-readable API descriptions
+  nodes:
+  - id: openapi.design-first
+    title: Write the API description before the code
+    description: Agree on the API description first and build from it, so the docs and the implementation start from the same contract.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAI
+      locator: Use a Design-First Approach
+  - id: openapi.source-control
+    title: Keep the description in source control
+    description: Store the API description with the code, review its changes, and generate docs and tests from it instead of writing it by hand twice.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAI
+      locator: Add OpenAPI Descriptions to Source Control
+    - ref: OAI
+      locator: There is Seldom Need to Write OpenAPI Descriptions by Hand
+  - id: openapi.publish
+    title: Publish the description to users
+    description: Make the description file itself available, not only the rendered pages, so users can load it into their tools.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAI
+      locator: Make the OpenAPI Descriptions Available to the Users
+  - id: openapi.info
+    title: Fill in API metadata
+    description: State the API title, version, licence, contact and server addresses so readers know what they are calling and where.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAS
+      locator: Info Object
+    - ref: OAS
+      locator: Server Object
+    - ref: OAS
+      locator: License Object
+  - id: openapi.operations
+    title: Describe each operation
+    description: Give every operation a summary, a description and a unique operationId, and group operations with tags.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAS
+      locator: Operation Object
+    - ref: OAS
+      locator: Unique string used to identify the operation
+    - ref: OAS
+      locator: Tag Object
+  - id: openapi.inputs
+    title: Describe parameters, request bodies and schemas
+    description: Describe every parameter and request body with its type, whether it is required, its limits and its meaning, using schemas.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAS
+      locator: Parameter Object
+    - ref: OAS
+      locator: Request Body Object
+    - ref: OAS
+      locator: Schema Object
+  - id: openapi.responses
+    title: Describe success and error responses
+    description: List the responses each operation can return, including error status codes, their bodies and headers.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAS
+      locator: Responses Object
+    - ref: OAS
+      locator: Response Object
+    - ref: OAS
+      locator: Header Object
+  - id: openapi.examples
+    title: Give request and response examples
+    description: Add realistic example values for parameters, bodies and responses.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAS
+      locator: Example Object
+  - id: openapi.security
+    title: Document authentication
+    description: Describe how clients authenticate and which operations need which credentials or scopes.
+    applies_when: the API is an HTTP API described with OpenAPI or a similar format
+    sources:
+    - ref: OAS
+      locator: Security Scheme Object
+    - ref: OAS
+      locator: Security Requirement Object
+  - id: openapi.large
+    title: Split and reuse parts of a large description
+    description: For large APIs, move shared schemas and parameters into reusable components and references, and split the description into files.
+    applies_when: the API description is large
+    sources:
+    - ref: OAI
+      locator: Describing Large APIs
+    - ref: OAS
+      locator: Components Object
+    - ref: OAS
+      locator: Reference Object
+- id: samples
+  title: Code samples
+  nodes:
+  - id: samples.scenarios
+    title: Base samples on real tasks
+    description: Write samples for tasks readers actually have, starting simple and covering commonly used or tricky elements first.
+    sources:
+    - ref: MSSTYLE
+      locator: Create concise examples that exemplify key development tasks.
+    - ref: MSSTYLE
+      locator: Prioritize frequently used elements and elements that may be difficult to understand or tricky to use.
+  - id: samples.intro
+    title: Introduce each sample
+    description: Before a sample, say what it does and list what is needed to run it.
+    sources:
+    - ref: GSTYLE
+      locator: Introductory statements
+    - ref: MSSTYLE
+      locator: List the requirements and dependencies for using or running the example.
+  - id: samples.copy-run
+    title: Make samples easy to copy and run
+    description: Let readers copy a sample in one action and run it without hidden setup; mark omitted code clearly.
+    sources:
+    - ref: MSSTYLE
+      locator: Provide an easy way for developers to copy and run the code.
+    - ref: GSTYLE
+      locator: Basic guidelines
+  - id: samples.output
+    title: Show the expected output
+    description: Show what the sample prints or returns, so readers can check their result.
+    sources:
+    - ref: MSSTYLE
+      locator: Show expected output
+  - id: samples.style
+    title: Follow the language's code style
+    description: Format sample code the way the language's usual style guide does, with comments only where they help.
+    sources:
+    - ref: GSTYLE
+      locator: Code style guides
+    - ref: MSSTYLE
+      locator: Design code for reuse.
+  - id: samples.placeholders
+    title: Mark and explain placeholders
+    description: Format values the reader must replace as placeholders and explain each one.
+    sources:
+    - ref: GSTYLE
+      locator: Format placeholders
+    - ref: GSTYLE
+      locator: Explain placeholders
+  - id: samples.example-values
+    title: Use reserved example names and addresses
+    description: Use reserved example domains, IP addresses, emails and fictitious names in samples, never real customers, real hosts or real credentials.
+    sources:
+    - ref: RFC2606
+      locator: TLDs for Testing, & Documentation Examples
+    - ref: GSTYLE
+      locator: Example domains and names
+  - id: samples.tested
+    title: Test that samples still run
+    description: Run documented examples automatically where the toolchain allows, so samples break the build instead of silently going out of date.
+    applies_when: the language has a documentation test tool, such as Python or Rust
+    sources:
+    - ref: DOCTEST
+      locator: doctest — Test interactive Python examples
+    - ref: RUSTDOC
+      locator: Documentation tests
+- id: visuals
+  title: Images and media
+  nodes:
+  - id: visuals.select
+    title: Choose images that explain
+    description: Add screenshots, diagrams or charts only where they explain something faster than text.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Select photographs, drawings, sketches, diagrams, and charts to illustrate material.'
+    - ref: ESCO
+      locator: visual presentation techniques
+  - id: visuals.alt-text
+    title: Give every image alt text
+    description: Give each informative image a text alternative, and do not put essential information only inside the image.
+    sources:
+    - ref: GSTYLE
+      locator: Alt text
+    - ref: GSTYLE
+      locator: Text in figures
+    - ref: MSSTYLE
+      locator: Accessibility guidelines and requirements
+    - ref: WCAG
+      locator: Success Criterion 1.1.1 Non-text Content
+  - id: visuals.captions
+    title: Caption and describe figures
+    description: Give figures captions and, for complex diagrams, a description in the text.
+    sources:
+    - ref: GSTYLE
+      locator: Figure captions
+    - ref: GSTYLE
+      locator: Figure descriptions
+  - id: visuals.quality
+    title: Use sharp images
+    description: Use high-resolution or vector images so text in them stays readable.
+    sources:
+    - ref: GSTYLE
+      locator: High-resolution images
+  - id: visuals.video
+    title: Make videos and GIFs accessible
+    description: Caption videos and give a text version of what a recording or GIF shows.
+    applies_when: the docs include video, recordings or animated images
+    sources:
+    - ref: GSTYLE
+      locator: Videos, recordings, and GIFs
+    - ref: WCAG
+      locator: Success Criterion 1.2.2 Captions (Prerecorded)
+- id: access
+  title: Accessible pages
+  nodes:
+  - id: access.reading
+    title: Keep pages easy to read
+    description: Use short sentences and plain words and keep the reading level suited to the audience.
+    sources:
+    - ref: GSTYLE
+      locator: Ease of reading
+    - ref: WCAG
+      locator: Success Criterion 3.1.5 Reading Level
+  - id: access.structure
+    title: Use real headings, lists and tables
+    description: Mark up headings, lists and tables as such, not only by visual style, so assistive technology can navigate them.
+    sources:
+    - ref: GSTYLE
+      locator: Write accessible documentation
+    - ref: WCAG
+      locator: Success Criterion 1.3.1 Info and Relationships
+  - id: access.color
+    title: Do not rely on colour alone
+    description: Do not carry meaning by colour only, and keep enough contrast in text and images.
+    sources:
+    - ref: WCAG
+      locator: Success Criterion 1.4.1 Use of Color
+    - ref: WCAG
+      locator: Success Criterion 1.4.3 Contrast (Minimum)
+  - id: access.page
+    title: Set page titles and language
+    description: Give each published page a title and declare its language.
+    applies_when: the docs are published as web pages
+    sources:
+    - ref: WCAG
+      locator: Success Criterion 2.4.2 Page Titled
+    - ref: WCAG
+      locator: Success Criterion 3.1.1 Language of Page
+- id: build
+  title: Docs as code and publishing
+  nodes:
+  - id: build.docs-as-code
+    title: Treat docs as code
+    description: Keep docs in plain-text markup in version control, review them like code and build them with the same tools.
+    sources:
+    - ref: WTD
+      locator: Docs as code
+    - ref: ESCO
+      locator: use markup languages
+    - ref: ESCO
+      locator: apply tools for content development
+  - id: build.lint
+    title: Lint docs and check links in CI
+    description: Run prose linters, Markdown linters and link checkers on every change, and let writers run them locally.
+    sources:
+    - ref: GITLAB
+      locator: Documentation testing
+    - ref: GITLAB
+      locator: Run Vale, markdownlint, or link checks locally
+  - id: build.publish
+    title: Publish to the right outputs
+    description: Decide where the docs appear (site, in-product help, PDF, package page) and check the rendered result in each.
+    sources:
+    - ref: ESCO
+      locator: integrate content into output media
+    - ref: ESCO
+      locator: publishing strategy
+    - ref: ONET
+      locator: '27-3042.00 task: Assist in laying out material for publication.'
+  - id: build.online-help
+    title: Maintain in-product and online help
+    description: Keep help pages and in-product help linked to the features they explain.
+    applies_when: the product has online or in-product help
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Develop or maintain online help documentation.'
+    - ref: ESCO
+      locator: provide online help
+    - ref: ESCO
+      locator: ICT help platforms
+  - id: build.findable
+    title: Make docs findable
+    description: Add metadata, page descriptions and the words readers search for, so search engines and site search find the right page.
+    sources:
+    - ref: ESCO
+      locator: manage content metadata
+    - ref: MSSTYLE
+      locator: Search and writing
+  - id: build.cms
+    title: Use the content management system correctly
+    description: When docs live in a CMS or help platform, follow its structure, reuse and publishing workflow.
+    applies_when: the docs are managed in a content management system
+    sources:
+    - ref: ESCO
+      locator: use content management system software
+- id: review
+  title: Review and quality
+  nodes:
+  - id: review.edit
+    title: Edit for standards and consistency
+    description: Edit drafts, including other people's, against the style guide and the set's terminology.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Edit, standardize, or make changes to material prepared by other writers or establishment personnel.'
+  - id: review.technical
+    title: Get a technical review
+    description: Have the people who built the feature check that the docs are technically correct, and have a writer check clarity and style.
+    sources:
+    - ref: GITLAB
+      locator: Developer responsibilities
+    - ref: GITLAB
+      locator: Technical writer responsibilities
+  - id: review.qa
+    title: Check the docs before publishing
+    description: Do a final pass for accuracy, completeness, broken links, formatting and whether the page meets its purpose.
+    sources:
+    - ref: ESCO
+      locator: conduct content quality assurance
+    - ref: MSSTYLE
+      locator: Final publishing review
+  - id: review.ai-generated
+    title: Check AI-generated documentation
+    description: When docs are drafted with AI, have a person verify every statement, sample and link before it is published.
+    sources:
+    - ref: GITLAB
+      locator: AI-generated content
+    - ref: GITLAB
+      locator: AI-generated documentation
+  - id: review.plagiarism
+    title: Do not copy others' text
+    description: Write in your own words and do not paste text from other documentation without permission and attribution.
+    sources:
+    - ref: GITLAB
+      locator: Plagiarism
+  - id: review.records
+    title: Keep records of revisions
+    description: Keep the history of changes and the reasons for them, so reviewers and later writers can see what changed.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Maintain records and files of work and revisions.'
+- id: maintain
+  title: Maintain the docs
+  nodes:
+  - id: maintain.revise
+    title: Revise docs when the product changes
+    description: Watch product changes and published pages, and update or add docs where they no longer match.
+    sources:
+    - ref: ONET
+      locator: '27-3042.00 task: Analyze developments in specific field to determine need for revisions in previously published materials and development of new material.'
+    - ref: ONET
+      locator: '27-3042.00 task: Review published materials and recommend revisions or changes in scope, format, content, and methods of reproduction and binding.'
+  - id: maintain.feedback
+    title: Act on reader feedback
+    description: Collect feedback and issues about the docs and triage them regularly.
+    sources:
+    - ref: GITLAB
+      locator: Documentation feedback and improvements
+  - id: maintain.remove
+    title: Remove outdated pages
+    description: Delete or redirect pages for removed features instead of leaving them hidden or stale.
+    sources:
+    - ref: GITLAB
+      locator: Delete instead of hiding documentation
+    - ref: GITLAB
+      locator: Moving content
+  - id: maintain.localise
+    title: Keep translations in step
+    description: When docs are translated, plan the localisation workflow and check translated pages when the source changes.
+    applies_when: the docs are translated
+    sources:
+    - ref: ESCO
+      locator: manage localisation
+    - ref: GITLAB
+      locator: Tests for translated documentation
