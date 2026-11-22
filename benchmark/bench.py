@@ -24,19 +24,24 @@ HERE = pathlib.Path(__file__).resolve().parent
 FIELDS = ['rank', 'band', 'title', 'nodes', 'match', 'verdict']
 
 
-def headings(lines):
+def unfenced_lines(lines):
     fence = None
     for i, line in enumerate(lines):
-        marker = re.match(r'^ {0,3}(`{3,}|~{3,})', line)
+        marker = re.match(r'^ {0,3}(`{3,}|~{3,})([^\r\n]*)', line)
         if marker:
-            token = marker.group(1)
-            if fence is None:
+            token, rest = marker.groups()
+            if fence is None and (token[0] == '~' or '`' not in rest):
                 fence = token
-            elif token[0] == fence[0] and len(token) >= len(fence):
+                continue
+            if fence and token[0] == fence[0] and len(token) >= len(fence) and not rest.strip(' \t'):
                 fence = None
-            continue
-        if fence:
-            continue
+                continue
+        if fence is None:
+            yield i, line
+
+
+def headings(lines):
+    for i, line in unfenced_lines(lines):
         match = re.match(r'^ {0,3}(#{1,6})[ \t]+(.+?)\s*$', line)
         if match:
             yield i, len(match.group(1)), re.sub(r'[ \t]+#+[ \t]*$', '', match.group(2))
@@ -132,11 +137,16 @@ def findings(args):
     band = None
     rows = []
     current = None
-    for line in lines[start + 1:end]:
-        heading = re.match(r'^###\s+(.+?)\s*$', line)
-        if heading:
-            band = heading.group(1)
+    bands = {i: title for i, depth, title in entries if depth == 3}
+    for i, line in unfenced_lines(lines):
+        if i <= start:
+            continue
+        if i >= end:
+            break
+        if i in bands:
+            band = bands[i]
             current = None
+            continue
         item = re.match(r'^\s*(\d+)\.\s+\*\*(.+?)\*\*\s*(?:\[[^\]]*\])?\s*$', line)
         if item and band in {'Needed', 'Worth considering', 'Minor'}:
             current = dict(zip(FIELDS, [item.group(1), band, item.group(2), '', '', '']))
@@ -170,17 +180,23 @@ def score(args):
         if reader.fieldnames != FIELDS:
             raise ValueError('CSV columns must be: ' + ','.join(FIELDS))
         for row in reader:
-            rank = int(row['rank'])
+            where = f'CSV line {reader.line_num}'
+            if None in row or None in row.values():
+                raise ValueError(f'{where}: expected {len(FIELDS)} columns')
+            try:
+                rank = int(row['rank'])
+            except ValueError:
+                raise ValueError(f'{where}: rank must be an integer') from None
             if rank < 1 or rank in ranks:
-                raise ValueError('ranks must be positive and unique')
+                raise ValueError(f'{where}: ranks must be positive and unique')
             ranks.add(rank)
             verdict, match = row['verdict'].strip(), row['match'].strip()
             if verdict not in {'real', 'false'}:
-                raise ValueError('each verdict must be real or false (finish marking first)')
+                raise ValueError(f'{where}: each verdict must be real or false (finish marking first)')
             if match and match not in ids:
-                raise ValueError('unknown key id: ' + match)
+                raise ValueError(f'{where}: unknown key id: {match}')
             if match and verdict == 'false':
-                raise ValueError('a false positive cannot recover a key item')
+                raise ValueError(f'{where}: a false positive cannot recover a key item')
             false += verdict == 'false'
             if match:
                 recovered.add(match)
@@ -205,7 +221,7 @@ def summary(args):
             for test in data['tests']:
                 for method in test['methods']:
                     shared = method.get('shared')
-                    print('| {} / {} | {}/{} | {} | {} | not recorded |'.format(
+                    print('| Historical pilot (not independently rescorable): {} / {} | {}/{} | {} | {} | not recorded |'.format(
                         test['name'], method['name'], method['recovered'], test['chances'],
                         method.get('top', 'not recorded'),
                         'about {}/30'.format(shared) if shared is not None else 'not recorded'))

@@ -8,7 +8,7 @@
 
 `skill-blindspot` 检查一个 Agent Skill（含 `SKILL.md` 的文件夹）缺了哪些环节。它先问模型缺什么，再拿一张**领域底图**逐条对照。底图来自人已经整理好的知识：职业任务数据库、教材和课程目录、平台官方文档、法规原文。你得到一张逐条对照表：哪些已覆盖、哪些很浅、哪些没有，附上在你的 Skill 里找到的原文行，每个节点都有出处。
 
-> **状态：v0.4。** Skill、六张底图和一个辅助脚本已经在仓库里。在 12 个删过环节的 Skill 上测过，审了 20 个公开视频 Skill，并在复核那次审查后做了修正。还很早期，报告格式可能会变。
+> **状态：v0.4。** Skill、十一张底图和一个辅助脚本已经在仓库里。审了 20 个公开视频 Skill，并在复核那次审查后做了修正。还很早期，报告格式可能会变。
 
 ## 第一份报告
 
@@ -64,6 +64,11 @@ npx skills add emptygpt/skill-blindspot
 | `writing` | 在线发表的非虚构文章 | 78 |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 |
+| `research-paper` | 科研论文与可复现分析 | 76 |
+| `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 |
+| `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 |
+| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 |
+| `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 |
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
@@ -71,11 +76,7 @@ npx skills add emptygpt/skill-blindspot
 
 ## 我们先测了什么
 
-动手之前，我们先测了最直接的质疑：直接问模型缺什么，不就行了？我们从两个领域的 6 个公开 Skill 里删掉环节，做了盲测。
-
-**直接问模型，24 个被删项找回 20 个。带底图的检查找回 18 个。** 底图不会找到更多。它给每条缺口配上出处和原文证据，并且给出完整的对照表，不只是前 10 条。完整做法和数字见 [docs/validation.md](docs/validation.md)（英文）。
-
-同样 12 个被删项，合并后的 Skill 跑一次找回 11 个。
+在一次[早期试验](docs/validation.md)中，我们从两个领域的 6 个公开 Skill 中删除了 12 项。两种方法各检查两次：仅用模型找回 **20/24 次**，底图引导找回 **18/24 次**。组合 Skill 后来在同一批例子上跑了一次，找回 **11/12 项**。原始逐次证据未公开，无法独立复算；这些观察不能证明哪种方法更好。
 
 所以这个工具两样都用：模型负责发现，底图负责给依据、给对照表，并记下你故意不做的条目。
 
@@ -106,9 +107,10 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 ## 路线图
 
-- [x] 验证：带出处的底图，比直接问「缺什么」找到的更多吗？没有。见 [docs/validation.md](docs/validation.md)
+- [x] [早期试验](docs/validation.md)：对比仅用模型与底图引导的找回结果
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
-- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`，每个节点都有来源
+- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`、`seo-web`，每个节点都有来源
+- [x] 底图：`tech-docs`（技术文档与 API 文档）
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [x] 报告：[20 个公开视频 Skill 缺了什么](reports/video-20.md)（英文）
@@ -131,8 +133,8 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 ## 参与
 
-最有价值的贡献是领域知识：补一个带来源的节点，或者改正一个已有节点。第一张底图发布时会写明格式。
+最有价值的贡献是领域知识：补一个带来源的节点，或者改正一个已有节点。见[底图格式指南](docs/map-format.md)。
 
 ## 许可
 
-代码：MIT。领域底图沿用各来源的许可，逐节点标注。
+Skill 指令和辅助代码采用 [MIT 许可](LICENSE)。[底图数据](skills/blindspot/maps/INDEX.md)（含编译缓存）包含第三方材料，并非统一采用 MIT 许可。每个节点指向带署名和许可说明的来源记录。复用底图数据或衍生输出前，请核对适用的来源条款；「未核实」不等于已获许可。
