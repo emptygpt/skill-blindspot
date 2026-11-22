@@ -222,6 +222,34 @@ class HelperTests(unittest.TestCase):
         self.assertIn(str(report), result.stderr)
         self.assertNotIn('Traceback', result.stderr)
 
+    def test_lint_findings_skip_filenames_but_reject_unknown_nodes(self):
+        report = self.report(excluded=False)
+        original = report.read_text(encoding='utf-8')
+        for extension in sorted(blindspot.PROSE_EXT | blindspot.DATA_EXT | blindspot.CODE_EXT):
+            with self.subTest(extension=extension):
+                report.write_text(original.replace('## Findings\n',
+                                  '## Findings\nrequirements' + extension + ' requirements.config' + extension + '\n'),
+                                  encoding='utf-8')
+                status, output = self.lint(report)
+                self.assertEqual(status, 0, output)
+        report.write_text(original.replace('## Findings\n', '## Findings\nrequirements.unknown-node\n'),
+                          encoding='utf-8')
+        status, output = self.lint(report)
+        self.assertEqual(status, 1)
+        self.assertIn('findings: requirements.unknown-node is not a node of software', output)
+
+    def test_lint_known_node_with_file_extension_still_requires_finding(self):
+        resolved = {'groups': [{'id': 'requirements', 'nodes': [{'id': 'requirements.md'}]}]}
+        for finding, expected in (('', 1), ('requirements.md', 0)):
+            with self.subTest(finding=finding):
+                report = self.write('report.md', '## Findings\n' + finding +
+                                    '\n## Map table\n| requirements.md | absent |\n')
+                with patch.object(blindspot, 'resolve', return_value=resolved):
+                    status, output = self.lint(report)
+                self.assertEqual(status, expected, output)
+                if expected:
+                    self.assertIn('requirements.md is absent in the table but no finding names it', output)
+
     def test_invalid_map_json_diagnostic_identifies_the_file(self):
         maps = self.write('maps.json', '{broken json')
         with patch.object(blindspot, 'MAPS_JSON', maps), patch.object(sys, 'argv', ['blindspot.py', 'maps']):
