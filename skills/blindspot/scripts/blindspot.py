@@ -432,6 +432,8 @@ def cmd_lint(args):
         if st in ("absent", "shallow") and nid not in mentioned:
             problems.append(f"findings: {nid} is {st} in the table but no finding names it")
     for nid in sorted(mentioned):
+        if nid not in all_nodes and pathlib.PurePosixPath(nid).suffix in PROSE_EXT | DATA_EXT | CODE_EXT:
+            continue
         if "." in nid and nid.split(".")[0] in {k.split(".")[0] for k in all_nodes} and nid not in all_nodes and nid not in groups:
             problems.append(f"findings: {nid} is not a node of {args.map}")
 
