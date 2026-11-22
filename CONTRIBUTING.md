@@ -17,7 +17,7 @@ The full format, including how a narrower map extends a base map, is in [docs/ma
 
 ## Add a map
 
-Open a [map request](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml) first, so two people do not build the same one. A new map should not need any change to `SKILL.md`. If it does, say why in the issue.
+Open a [map request](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml) first, so two people do not build the same one. [Build your own domain map](docs/build-a-map.md) walks through the steps. A new map should not need any change to `SKILL.md`. If it does, say why in the issue.
 
 ## Share a report
 
