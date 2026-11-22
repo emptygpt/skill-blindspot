@@ -42,6 +42,8 @@ The report also lists findings the model raised that no source backs (marked uns
 
 [Five public coding skills](reports/code-5.md), audited with the new `software` map and version 0.3.0. Eight Needed findings, all of which held on a separate re-check, among them a security-audit skill whose agents are never told that the target repository's text is not instructions, and a TDD skill that never says to watch the test fail.
 
+[Fifteen additional coding workflows](reports/code-20.md), audited with 0.4.1 and ranked alongside the earlier five: four of five new Needed findings held on re-check; two understated bands are recorded separately.
+
 ## Install
 
 ```bash
@@ -107,7 +109,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] Validation: does a sourced map find more than a plain "what is missing?" prompt? It does not. See [docs/validation.md](docs/validation.md)
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
 - [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, every node sourced
-- [x] Map: `software` and a report on five coding skills ([reports/code-5.md](reports/code-5.md))
+- [x] Map: `software` and reports on five coding skills ([code-5](reports/code-5.md)) and fifteen additional workflows ([code-20](reports/code-20.md))
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube
 - [x] [benchmark/](benchmark/): the remove-and-recover method and data, so others can test their own approach
 - [x] Report: [what 20 public video skills leave out](reports/video-20.md)
