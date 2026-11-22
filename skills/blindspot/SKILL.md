@@ -106,7 +106,7 @@ For each node in the map, decide one of:
 | State | Meaning |
 |---|---|
 | `covered` | The skill tells the agent to do it and says how or when. Quote the line. |
-| `shallow` | The skill names it but gives no instruction, or covers only part of what the node describes. Quote the line. |
+| `shallow` | Available evidence establishes that the skill names it without instructions or covers only part of the node. Quote the line. |
 | `absent` | Nothing in the skill corresponds to it. |
 | `not-applicable` | Outside the scope written in step 1. Say why in a few words. |
 | `excluded` | Listed in the profile. |
@@ -118,7 +118,7 @@ Whole groups that are out of scope can be marked `not-applicable` in one row.
 
 Choosing between `absent` and `not-applicable`: a node is `not-applicable` only when the work it describes happens outside the boundary written in step 1, such as a publishing node for a skill that stops at a saved draft. If the skill does the work the node belongs to and leaves the node out, it is `absent`. When unsure, mark it `absent` and place it in the Minor band, so the author sees it and can exclude it in the profile.
 
-`undetermined` is about missing evidence, not uncertain scope. Use it only for nodes the unavailable material could affect. Keep any evidence you did inspect in the row. If a complete instruction or fallback is already visible, judge that instead. Scope and profile exclusions still apply.
+`undetermined` is about missing evidence, not uncertain scope. For an in-scope, non-excluded node, check for relevant unavailable material before choosing `absent` or `shallow`. If the skill delegates part of a check to an unavailable dependency and it could complete the node, mark it `undetermined`, not `shallow`. Quote the visible part and name what you could not verify. Judge a complete visible instruction or fallback on its own; do not mark unrelated nodes `undetermined`.
 
 ### 4. Trace
 
@@ -153,7 +153,7 @@ Do not cut the list to a fixed length. A node marked `absent` or `shallow` in th
 
 Several nodes that point at the same underlying gap become one finding. List every node id on it. Do not write one finding per node when they would all be fixed by the same change.
 
-Do not rank an `undetermined` node as a coverage gap: a reference missing from the audit inputs does not establish what the skill does when that reference is present. Record it as a limitation and, if relevant, note the unchecked handoff in the trace. Without a map, record the limitation without inventing a node.
+Move any provisional model, map, or trace finding based solely on unavailable audit evidence out of the ranked findings and into Evidence limitations. An unchecked handoff is not a confirmed gap; rank a separate defect only if the available evidence establishes it. Without a map, record the limitation without inventing a node.
 
 ### 6. Report
 
