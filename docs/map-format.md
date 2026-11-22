@@ -1,5 +1,7 @@
 # Map format
 
+For the method (choosing sources, boundaries, what to leave out), see [Build your own domain map](build-a-map.md).
+
 A map is one YAML file in `skills/blindspot/maps/`. It lists the stages and concerns of a domain. Every node cites where it comes from.
 
 The [map licence and attribution notes](../skills/blindspot/maps/INDEX.md#licence-and-attribution) explain how source terms apply to map data and derived outputs.

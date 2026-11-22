@@ -72,7 +72,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 
 The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, TikTok, Bilibili and Douyin official pages, the US FTC and a Chinese advertising regulation. Douyin's creator learning centre could not be read.
 
-To add a node or a map, see [CONTRIBUTING.md](CONTRIBUTING.md). Missing a domain? [Ask for a map](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml).
+To add a node or a map, see [CONTRIBUTING.md](CONTRIBUTING.md). To build a map for your own domain, follow [Build your own domain map](docs/build-a-map.md), which uses the five newest maps as worked examples. Missing a domain? [Ask for a map](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml).
 
 ## What we tested first
 
@@ -116,6 +116,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] [benchmark/](benchmark/): the remove-and-recover method and data, so others can test their own approach
 - [x] Report: [what 20 public video skills leave out](reports/video-20.md)
 - [x] Second domain (writing) and a guide for building a map: [docs/map-format.md](docs/map-format.md)
+- [x] Step-by-step guide to building your own map: [docs/build-a-map.md](docs/build-a-map.md)
 
 ## Sources for the video map
 
@@ -134,7 +135,7 @@ Not yet covered because no source was found: screen recording, and comparison me
 
 ## Contributing
 
-The most useful contribution is domain knowledge: a missing node with a source, or a correction to an existing one. See the [map format guide](docs/map-format.md).
+The most useful contribution is domain knowledge: a missing node with a source, or a correction to an existing one. See the [map format guide](docs/map-format.md), and [Build your own domain map](docs/build-a-map.md) for a whole new map.
 
 ## Licence
 

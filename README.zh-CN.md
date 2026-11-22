@@ -72,7 +72,7 @@ npx skills add emptygpt/skill-blindspot
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
-想补节点或加底图，见 [CONTRIBUTING.md](CONTRIBUTING.md)（英文）。缺某个领域的底图，可以[提一个底图请求](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml)。
+想补节点或加底图，见 [CONTRIBUTING.md](CONTRIBUTING.md)（英文）。想给自己的领域做一张底图，按[自己做一张领域底图](docs/build-a-map.zh-CN.md)一步步来，例子取自最新的五张底图。缺某个领域的底图，可以[提一个底图请求](https://github.com/emptygpt/skill-blindspot/issues/new?template=map-request.yml)。
 
 ## 我们先测了什么
 
@@ -115,6 +115,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 - [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法
 - [x] 报告：[20 个公开视频 Skill 缺了什么](reports/video-20.md)（英文）
 - [x] 第二个领域（写作），以及做底图的说明：[docs/map-format.md](docs/map-format.md)
+- [x] 自己做底图的分步指南：[docs/build-a-map.zh-CN.md](docs/build-a-map.zh-CN.md)
 
 ## 视频底图的来源
 
@@ -133,7 +134,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 ## 参与
 
-最有价值的贡献是领域知识：补一个带来源的节点，或者改正一个已有节点。见[底图格式指南](docs/map-format.md)。
+最有价值的贡献是领域知识：补一个带来源的节点，或者改正一个已有节点。见[底图格式指南](docs/map-format.md)；从头做一张新底图，见[自己做一张领域底图](docs/build-a-map.zh-CN.md)。
 
 ## 许可
 
