@@ -45,7 +45,7 @@ CODE_EXT = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx", ".sh", ".bash",
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", "dist", "build", ".next"}
 MAX_FILE_BYTES = 400_000
 MAX_TOTAL_BYTES = 3_000_000
-STATES = {"covered", "shallow", "absent", "not-applicable", "excluded"}
+STATES = {"covered", "shallow", "absent", "not-applicable", "excluded", "undetermined"}
 
 STOP = set("""
 a an and are as at be been before being by can do does each for from has have how in into is it its
@@ -401,6 +401,8 @@ def cmd_lint(args):
         if targets is None:
             problems.append(f"table: {key!r} is not a node or group of {args.map}")
             continue
+        if state == "undetermined" and (len(cells) < 3 or not cells[2]):
+            problems.append(f"table: {key}: undetermined needs evidence")
         for nid in targets:
             if nid in states and states[nid] != state:
                 problems.append(f"table: {nid} listed twice with different states")
@@ -437,14 +439,16 @@ def cmd_lint(args):
         if "." in nid and nid.split(".")[0] in {k.split(".")[0] for k in all_nodes} and nid not in all_nodes and nid not in groups:
             problems.append(f"findings: {nid} is not a node of {args.map}")
 
-    cm = re.search(r"covered (\d+), shallow (\d+), absent (\d+), not-applicable (\d+)", table)
+    counts = {k: sum(1 for v in states.values() if v == k) for k in sorted(STATES)}
+    cm = re.search(r"covered (\d+), shallow (\d+), absent (\d+), not-applicable (\d+)"
+                   r"(?:, undetermined (\d+))?", table)
     if cm:
-        want = dict(zip(("covered", "shallow", "absent", "not-applicable"), map(int, cm.groups())))
-        got = {k: sum(1 for v in states.values() if v == k) for k in want}
+        want = dict(zip(("covered", "shallow", "absent", "not-applicable", "undetermined"),
+                        (int(n or 0) for n in cm.groups())))
+        got = {k: counts[k] for k in want}
         if want != got:
             problems.append(f"counts line says {want}, table has {got}")
 
-    counts = {k: sum(1 for v in states.values() if v == k) for k in sorted(STATES)}
     print(f"{len(states)}/{len(all_nodes)} nodes in table; " + ", ".join(f"{k} {v}" for k, v in counts.items()))
     for p in problems:
         print(f"- {p}")

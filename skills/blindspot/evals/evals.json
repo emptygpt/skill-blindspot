@@ -1,0 +1,128 @@
+{
+  "skill_name": "blindspot",
+  "success_criteria": [
+    "Separate unknown coverage from confirmed gaps with an explicit map state and named unavailable evidence.",
+    "Preserve known evidence, profile exclusions, scope and mapless output.",
+    "Do not run an audit for adjacent tasks."
+  ],
+  "evals": [
+    {
+      "id": 1,
+      "kind": "explicit",
+      "should_trigger": true,
+      "prompt": "Use Blindspot to audit the supplied release-note skill against the three-node map below. The only available skill text says: “Draft release notes from merged PRs. Run the checks in `references/qa.md`, then return the draft. Do not publish.” `references/qa.md` is not included. Nodes: `draft.collect` (draft from merged PRs); `qa.verify` (verify the draft's facts before delivery); `publish.upload` (upload the final notes). Give the map table and ranked findings.",
+      "files": [],
+      "expectations": [
+        "qa.verify is undetermined; evidence names references/qa.md; no ranked coverage gap for qa.verify.",
+        "draft.collect is covered and publish.upload is not-applicable."
+      ],
+      "expected_output": "qa.verify is undetermined; evidence names references/qa.md; no ranked coverage gap for qa.verify. draft.collect is covered and publish.upload is not-applicable."
+    },
+    {
+      "id": 2,
+      "kind": "implicit",
+      "should_trigger": true,
+      "prompt": "What gaps are in an event handout Skill? Its full content: “Design the handout. Follow `proof.md` to verify the venue and time, then deliver a PDF. The organizer distributes it.” The review file `proof.md` is inaccessible. Mini-map: `layout.design` design handout; `proof.verify` verify venue and time; `proof.accessible` check PDF accessibility before handoff; `handoff.distribute` distribute handouts. The unavailable proof file is described as venue/time checks only. Give me each map node's status and actionable gaps.",
+      "files": [],
+      "expectations": [
+        "proof.verify is undetermined and names proof.md.",
+        "proof.accessible is absent and is included in ranked findings; handoff.distribute is not-applicable."
+      ],
+      "expected_output": "proof.verify is undetermined and names proof.md. proof.accessible is absent and is included in ranked findings; handoff.distribute is not-applicable."
+    },
+    {
+      "id": 3,
+      "kind": "noisy",
+      "should_trigger": true,
+      "prompt": "Our team has a big conference Friday and plenty of opinions about venue, but today I only need a gap audit of a meeting-summary Skill against this three-node map: `notes.collect` transcribe action items, `notes.verify` verify assignees, `publish.send` email recipients. The skill says: “Transcribe action items. Check each assignee against the attendee roster. Consult `credits.md` for the logo attribution. Return the summary as Markdown; do not send email.” `credits.md` is missing. List map states and relevant findings.",
+      "files": [],
+      "expectations": [
+        "notes.verify is covered despite unrelated missing credits.md.",
+        "publish.send is not-applicable. Other nodes are not indiscriminately marked undetermined."
+      ],
+      "expected_output": "notes.verify is covered despite unrelated missing credits.md. publish.send is not-applicable. Other nodes are not indiscriminately marked undetermined."
+    },
+    {
+      "id": 4,
+      "kind": "explicit",
+      "should_trigger": true,
+      "prompt": "Run Blindspot on a podcast-clip skill ending with an MP3. Its full text: “Cut the supplied audio. Before export, call `clip-review` to check rights and audio levels. It is mandatory. Export MP3, with no upload.” The `clip-review` skill is unavailable. Map nodes: `edit.cut` trim audio; `review.rights` check rights; `review.levels` check levels; `release.upload` upload to host. Show the coverage table and findings.",
+      "files": [],
+      "expectations": [
+        "Both review.rights and review.levels are undetermined and identify clip-review.",
+        "Neither review node is ranked as an absent coverage gap; release.upload is not-applicable."
+      ],
+      "expected_output": "Both review.rights and review.levels are undetermined and identify clip-review. Neither review node is ranked as an absent coverage gap; release.upload is not-applicable."
+    },
+    {
+      "id": 5,
+      "kind": "implicit",
+      "should_trigger": true,
+      "prompt": "Audit this stationery order Skill for weak spots: “Read `checks.md` before sending an order summary. If that file is missing, verify item count against the order before sharing. Never send to vendor.” checks.md is missing. Map has `order.count` verify item count; `order.cost` verify total cost. The missing file is described only as an item-count checklist. Use a node table and gap list.",
+      "files": [],
+      "expectations": [
+        "order.count is covered based on the complete available fallback.",
+        "order.cost is absent and included in findings."
+      ],
+      "expected_output": "order.count is covered based on the complete available fallback. order.cost is absent and included in findings."
+    },
+    {
+      "id": 6,
+      "kind": "noisy",
+      "should_trigger": true,
+      "prompt": "Don't optimize branding or delivery speed; I need a gap review of an expense-summary Skill. Text: “Use a local `rules.md` to run currency reconciliation before returning a spreadsheet. After reconciliation, return the spreadsheet.” rules.md was not provided. The profile omits `total.reconcile` (handled by finance). Map: `total.reconcile` reconcile currency; `output.sheet` return spreadsheet. Use that profile and show the map table and gap list.",
+      "files": [],
+      "expectations": [
+        "total.reconcile is excluded by profile, not undetermined, not a finding.",
+        "output.sheet is reported separately."
+      ],
+      "expected_output": "total.reconcile is excluded by profile, not undetermined, not a finding. output.sheet is reported separately."
+    },
+    {
+      "id": 7,
+      "kind": "implicit",
+      "should_trigger": true,
+      "prompt": "Audit this slide-generation Skill using these rows of my map: `quality.legibility` verify slide legibility, `quality.facts` verify figures. Skill text: “Check line contrast yourself. Follow `review.md` for the rest of the legibility review (text size and spacing). Verify each figure against the supplied data.” review.md cannot be opened. I want a table plus any confirmed gaps.",
+      "files": [],
+      "expectations": [
+        "quality.legibility is undetermined; the answer records the known partial check and what cannot be verified from review.md.",
+        "quality.facts is covered and does not become unknown due to review.md."
+      ],
+      "expected_output": "quality.legibility is undetermined; the answer records the known partial check and what cannot be verified from review.md. quality.facts is covered and does not become unknown due to review.md."
+    },
+    {
+      "id": 8,
+      "kind": "explicit",
+      "should_trigger": true,
+      "prompt": "Use Blindspot to audit this market summary Skill with no guide map: “Summarize the data in a Markdown memo; before delivery, run the accuracy checklist in `references/review.md`.” That checklist was not supplied. Are the accuracy checks missing?",
+      "files": [],
+      "expectations": [
+        "Reports no map and does not claim verified contents of references/review.md.",
+        "Treats accuracy check contents as unverified, without inventing map nodes."
+      ],
+      "expected_output": "Reports no map and does not claim verified contents of references/review.md. Treats accuracy check contents as unverified, without inventing map nodes."
+    },
+    {
+      "id": 9,
+      "kind": "negative",
+      "should_trigger": false,
+      "prompt": "Translate this document paragraph into English; do not critique it. Paragraph: “Comprueba los importes en el archivo adjunto. No publiques el informe.” The attachment is missing but the supplied sentence is all I need.",
+      "files": [],
+      "expectations": [
+        "Provides the translation without presenting a skill audit, sourced map, or evaluation."
+      ],
+      "expected_output": "Provides the translation without presenting a skill audit, sourced map, or evaluation."
+    },
+    {
+      "id": 10,
+      "kind": "negative",
+      "should_trigger": false,
+      "prompt": "I'm testing a Markdown parser. Which Python expression splits `| Node | State | Evidence |` into three cells? Just give me the expression; this isn't an audit.",
+      "files": [],
+      "expectations": [
+        "Answers with a parsing expression; no Blindspot findings or table."
+      ],
+      "expected_output": "Answers with a parsing expression; no Blindspot findings or table."
+    }
+  ]
+}
