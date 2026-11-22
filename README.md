@@ -83,7 +83,7 @@ So this tool uses both. The model finds gaps. The map supplies the evidence, the
 ## How it works
 
 1. **Ask.** The model lists what it thinks the skill is missing, from its own knowledge of the domain.
-2. **Map.** Each node of the domain map is checked against the skill and marked covered, shallow, absent or excluded on purpose, with the quoted lines as evidence. The map is a YAML tree. Every node carries an id, a parent, a source, a link and a licence. A node with no source is not allowed in.
+2. **Map.** Each node is checked against the skill and marked covered, shallow, absent, not applicable, excluded by profile, or undetermined. If evidence is unavailable, the report names it without counting the node as a gap. The map is a YAML tree. Every node carries an id, a parent, a source, a link and a licence. A node with no source is not allowed in.
 3. **Trace.** Each step's output is followed to see whether a later step uses it. This finds gaps that no map lists.
 A small Python script (standard library only) does the mechanical parts: it reads the whole skill folder, builds a worksheet of map nodes with the skill lines that look related, fetches sources for the report, and checks the finished report against the map. The model's tokens go to judgement, not to reading the full map. Without Python the skill still works, by reading.
 

@@ -3,7 +3,7 @@ name: blindspot
 description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Before a skill is written, it can also give a sourced checklist of what the domain expects. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
 license: MIT for the skill instructions and helper; see maps/INDEX.md for map data
 metadata:
-  version: 0.4.1
+  version: 0.4.2
 ---
 
 # blindspot
@@ -110,12 +110,15 @@ For each node in the map, decide one of:
 | `absent` | Nothing in the skill corresponds to it. |
 | `not-applicable` | Outside the scope written in step 1. Say why in a few words. |
 | `excluded` | Listed in the profile. |
+| `undetermined` | In scope, but a specific unavailable reference, called skill or script could change the verdict. Name it in Evidence and state what could not be checked. |
 
 Check meaning and not only words. A skill can use the word "hook" for the topic angle and say nothing about the opening seconds of the video. That node is `shallow` or `absent`.
 
 Whole groups that are out of scope can be marked `not-applicable` in one row.
 
 Choosing between `absent` and `not-applicable`: a node is `not-applicable` only when the work it describes happens outside the boundary written in step 1, such as a publishing node for a skill that stops at a saved draft. If the skill does the work the node belongs to and leaves the node out, it is `absent`. When unsure, mark it `absent` and place it in the Minor band, so the author sees it and can exclude it in the profile.
+
+`undetermined` is about missing evidence, not uncertain scope. Use it only for nodes the unavailable material could affect. Keep any evidence you did inspect in the row. If a complete instruction or fallback is already visible, judge that instead. Scope and profile exclusions still apply.
 
 ### 4. Trace
 
@@ -150,7 +153,7 @@ Do not cut the list to a fixed length. A node marked `absent` or `shallow` in th
 
 Several nodes that point at the same underlying gap become one finding. List every node id on it. Do not write one finding per node when they would all be fixed by the same change.
 
-If the skill refers to files that are not available, such as scripts, say for the affected nodes that the answer could not be determined. Do not guess either way.
+Do not rank an `undetermined` node as a coverage gap: a reference missing from the audit inputs does not establish what the skill does when that reference is present. Record it as a limitation and, if relevant, note the unchecked handoff in the trace. Without a map, record the limitation without inventing a node.
 
 ### 6. Report
 
@@ -181,6 +184,9 @@ Map: <map id and version, or "none">    Profile: <path, or "none">    Date: <dat
 ## Unsourced findings
 <model-only findings, each with a note that no source has been checked>
 
+## Evidence limitations
+<unavailable material and which checks it prevented, if any>
+
 ## Trace
 | Step | Produces | Used by | Checked |
 
@@ -195,7 +201,7 @@ If there was no map, say in the first lines of the report that every finding is 
 
 Give every Needed finding a `Fix:` line. Point to a step or file of the skill and say what to add; do not write the new text for the author. Other bands may have one.
 
-With the helper, run `lint` on the finished report and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, and a counts line that does not match the table.
+With the helper, run `lint` on the finished report and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, `undetermined` rows without evidence, and a counts line that does not match the table. If you include a counts line, count `undetermined` separately from confirmed coverage and gaps.
 
 ## Profile format
 

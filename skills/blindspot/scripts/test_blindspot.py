@@ -250,6 +250,37 @@ class HelperTests(unittest.TestCase):
                 if expected:
                     self.assertIn('requirements.md is absent in the table but no finding names it', output)
 
+    def test_lint_undetermined_requires_evidence_but_not_a_finding(self):
+        resolved = {'groups': [{'id': 'quality', 'nodes': [{'id': 'quality.check'}]}]}
+        for evidence, expected in (('Cannot read references/review.md', 0), ('', 1)):
+            with self.subTest(evidence=evidence):
+                report = self.write('report.md', '## Findings\n\n## Map table\n'
+                                    f'| quality.check | undetermined | {evidence} |\n')
+                with patch.object(blindspot, 'resolve', return_value=resolved):
+                    status, output = self.lint(report)
+                self.assertEqual(status, expected, output)
+                self.assertIn('undetermined 1', output)
+                self.assertNotIn('no finding names it', output)
+                if expected:
+                    self.assertIn('needs evidence', output)
+
+    def test_lint_undetermined_counts_and_legacy_counts(self):
+        resolved = {'groups': [{'id': 'quality', 'nodes': [{'id': 'quality.check'}]}]}
+        for state, counts, expected in (
+            ('covered', 'covered 1, shallow 0, absent 0, not-applicable 0', 0),
+            ('undetermined', 'covered 0, shallow 0, absent 0, not-applicable 0, undetermined 1', 0),
+            ('undetermined', 'covered 0, shallow 0, absent 0, not-applicable 0, undetermined 2', 1),
+            ('undetermined', 'covered 0, shallow 0, absent 0, not-applicable 0', 1),
+        ):
+            with self.subTest(state=state, counts=counts):
+                report = self.write('report.md', '## Findings\n\n## Map table\n'
+                                    f'| quality.check | {state} | Review instructions |\n\n{counts}\n')
+                with patch.object(blindspot, 'resolve', return_value=resolved):
+                    status, output = self.lint(report)
+                self.assertEqual(status, expected, output)
+                if expected:
+                    self.assertIn('counts line says', output)
+
     def test_invalid_map_json_diagnostic_identifies_the_file(self):
         maps = self.write('maps.json', '{broken json')
         with patch.object(blindspot, 'MAPS_JSON', maps), patch.object(sys, 'argv', ['blindspot.py', 'maps']):
