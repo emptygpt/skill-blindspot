@@ -13,7 +13,7 @@ Each map is applied to public skills pinned to commits, with a target of three s
 | [`tech-docs` 0.1.0](tech-docs.md) | [Addy Osmani: documentation-and-adrs](https://github.com/addyosmani/agent-skills/tree/8c99fa36d90068c82d547f7c12a9d67a3e95f4ee/skills/documentation-and-adrs) | 0 | 3 | 0 |
 | [`wechat-article` 0.1.0, extends `writing` 0.1.0](wechat-article.md) | [JimLiu: baoyu-post-to-wechat](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-post-to-wechat) | 0 | 4 | 0 |
 
-These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills. The first round used paraphrased evidence; the follow-up data-analysis and writing reports include short excerpts checked with `lint --skill`. The WeChat report includes all inherited writing nodes and audits a different skill.
+These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills. The first round used paraphrased evidence; the follow-up data-analysis, writing, and WeChat reports include short excerpts checked with `lint --skill`.
 
 The counts here are findings by severity, not counts of domain coverage or independent re-check results. The first-round audits found no Needed findings to send through a separate re-check.
 
@@ -26,3 +26,15 @@ The `writing` map has met the three-audit target. Its cases cover draft planning
 | [`writing` 0.1.0](writing.md) | [JimLiu: baoyu-format-markdown](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-format-markdown) | 0 | 1 | 1 |
 | [`writing` 0.1.0](writing-content-research-writer.md) | [ComposioHQ: content-research-writer](https://github.com/ComposioHQ/awesome-claude-skills/tree/044d48b594f060c164f3b20fac9ea01374721bca/content-research-writer) | 0 | 3 | 2 |
 | [`writing` 0.1.0](writing-humanizer.md) | [blader: humanizer](https://github.com/blader/humanizer/blob/3e5f816b5609c4002aebb69f12c6476fe3347d0a/SKILL.md) | 0 | 1 | 1 |
+
+## wechat-article
+
+All three reports use `wechat-article` 0.1.0 with `writing` 0.1.0. The two follow-up reports use short, lint-verified excerpts for covered and shallow nodes.
+
+The writing and reviewing audit initially found one Needed finding about AI disclosure. An independent re-check confirmed the omission and downgraded it to Worth considering because the skill ends at a Markdown file and in-body disclosure is a disputed boundary.
+
+| Report | Public skill | Needed | Worth considering | Minor |
+|---|---|---:|---:|---:|
+| [Publishing and draft delivery](wechat-article.md) | [JimLiu: baoyu-post-to-wechat](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-post-to-wechat) | 0 | 4 | 0 |
+| [Typesetting supplied articles](wechat-article-wxskill.md) | [webzol: wechat-typesetting](https://github.com/webzol/WXSKill/tree/964b3aa1c46a4119acbe6a0baf13e0e95feb6396) | 0 | 4 | 0 |
+| [Writing and reviewing research tutorials](wechat-article-ai-technology.md) | [just-ye: wechat-skill-article-workflow](https://github.com/just-ye/wechat-AI-technology-article-skill/tree/ae6d749d914065bb9a055c90dbcf0b370d03a08e) | 0 | 8 | 2 |
