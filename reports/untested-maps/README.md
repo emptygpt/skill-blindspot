@@ -1,10 +1,12 @@
 # Public skill audits for seven domain maps
 
-Each map was applied to public skills pinned to commits. These cases exercise the maps; they do not establish accuracy across a domain or rate the audited skills.
+Each map is applied to public skills pinned to commits, with a target of three skills per map. These cases exercise the maps; they do not establish accuracy across a domain or rate the audited skills.
 
 | Map and version | Public skill | Needed | Worth considering | Minor |
 |---|---|---:|---:|---:|
 | [`data-analysis` 0.1.0](data-analysis.md) | [K-Dense-AI: exploratory-data-analysis](https://github.com/K-Dense-AI/claude-scientific-skills/tree/c21d13b3cc2894680229ba9959a53281acb9200e/skills/exploratory-data-analysis) | 0 | 3 | 0 |
+| [`data-analysis` 0.1.0](data-analysis-analyze.md) | [Anthropic: analyze](https://github.com/anthropics/knowledge-work-plugins/tree/0e0fcacddcc892eb92a1b7873ff9d68159c47571/data/skills/analyze) | 0 | 5 | 3 |
+| [`data-analysis` 0.1.0](data-analysis-jupyter-notebook.md) | [OpenAI: jupyter-notebook](https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/jupyter-notebook) | 0 | 3 | 2 |
 | [`research-paper` 0.1.0](research-paper.md) | [K-Dense-AI: scientific-writing](https://github.com/K-Dense-AI/claude-scientific-skills/tree/c21d13b3cc2894680229ba9959a53281acb9200e/skills/scientific-writing) | 0 | 4 | 1 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance.md) | [Anthropic: xlsx](https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/xlsx) | 0 | 5 | 0 |
 | [`tech-docs` 0.1.0](tech-docs.md) | [Addy Osmani: documentation-and-adrs](https://github.com/addyosmani/agent-skills/tree/8c99fa36d90068c82d547f7c12a9d67a3e95f4ee/skills/documentation-and-adrs) | 0 | 3 | 0 |
@@ -19,6 +21,6 @@ Each map was applied to public skills pinned to commits. These cases exercise th
 | [`seo-web` 0.1.0](seo-web-claude-seo-schema.md) | [AgriciDaniel: seo-schema](https://github.com/AgriciDaniel/claude-seo/tree/468ed5b0d9e3249394783710e54abb02837e326b/skills/seo-schema) | 0 | 2 | 0 |
 | [`seo-web` 0.1.0](seo-web-geohub-seo.md) | [GEOHub: seo](https://github.com/yaojingang/GEOHub/tree/2210f7f22153cfdf721905c2ac86318db97401b1/skills/seo) | 0 | 8 | 4 |
 
-These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skill or its delegated files. The first-round reports paraphrase evidence; the two later SEO reports include short evidence quotes. The WeChat report includes all inherited writing nodes, while the separate writing audit uses a different skill.
+These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills or their delegated files. The first round used paraphrased evidence; the Anthropic and OpenAI data-analysis reports and the two later SEO reports include short, verified excerpts. The WeChat report includes all inherited writing nodes, while the separate writing audit uses a different skill.
 
-The counts are findings by severity, not domain coverage scores or independent re-check results. The audits found no Needed findings to send through a separate re-check.
+The counts here are findings by severity, not counts of domain coverage or independent re-check results.
