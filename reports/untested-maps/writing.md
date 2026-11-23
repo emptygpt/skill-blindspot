@@ -82,7 +82,6 @@ Read the bundled title reference and relevant helper code as evidence. No user p
 | fact.cite-sources | not-applicable | Underlying reporting and sourcing are outside the formatting job. |
 | fact.right-of-reply | not-applicable | Underlying reporting and sourcing are outside the formatting job. |
 | fact.not-misleading | shallow | SKILL.md:169–185 — guards the source wording but does not check whether new emphasis or headings change the overall impression. |
-
 | fact.expert-review | not-applicable | Underlying reporting and sourcing are outside the formatting job. |
 | edit.copyedit | shallow | SKILL.md:108–112,183,197–212 — fixes and automation are described, but no final reading pass. |
 | edit.proofread-method | shallow | SKILL.md:108–112,183,197–212 — fixes and automation are described, but no final reading pass. |

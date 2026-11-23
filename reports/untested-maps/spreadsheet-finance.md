@@ -81,7 +81,6 @@ Reviewed documented authoring steps and the recalculation path as static evidenc
 | purpose.question | covered | SKILL.md:3,9–14,25 — spreadsheet-only deliverable, tool selection by operation and exact workbook requirements. |
 | purpose.audience | not-applicable | Implements the specified artifact; no business case, fitness opinion or assurance engagement. |
 | purpose.tool-fit | covered | SKILL.md:3,9–14,25 — spreadsheet-only deliverable, tool selection by operation and exact workbook requirements. |
-
 | purpose.risk | not-applicable | Implements the specified artifact; no business case, fitness opinion or assurance engagement. |
 | purpose.competence | not-applicable | Implements the specified artifact; no business case, fitness opinion or assurance engagement. |
 | inputs.quality | shallow | SKILL.md:3,9–14 — names cleanup and workbook reads but no general check of source values. |
@@ -109,7 +108,6 @@ Reviewed documented authoring steps and the recalculation path as static evidenc
 | checks.peer-review | not-applicable | Ends with local handoff; no independent reviewer assigned. |
 | checks.evaluate | shallow | SKILL.md:40–58 — checks initial formulas and final evaluation errors; a clean but wrong result can still ship. |
 | scenarios.cases | shallow | SKILL.md:89,98–100 — labels case inputs but does not run named cases. |
-
 | scenarios.sensitivity | not-applicable | No substantive forecasting or investment analysis required from the authoring tool. |
 | scenarios.target | not-applicable | No substantive forecasting or investment analysis required from the authoring tool. |
 | scenarios.forecast | not-applicable | No substantive forecasting or investment analysis required from the authoring tool. |

@@ -81,7 +81,6 @@ Static review only. This audit concerns the skill's general, authorized local da
 | preparation.record-keys | not-applicable | Read-only profiling; no derived analysis dataset, join or cleaning pipeline is delivered. |
 | preparation.transform-log | not-applicable | Read-only profiling; no derived analysis dataset, join or cleaning pipeline is delivered. |
 | exploration.relationships | shallow | SKILL.md:123–155,176–223 — relationship-related diagnostic options exist but no systematic choice of pairwise plots for the question. |
-
 | exploration.distributions | covered | SKILL.md:123–155,176–223 — inspect distributions and investigate anomalies rather than silently treating them as errors. |
 | analysis.method-fit | covered | SKILL.md:123–155,176–224 — frames the analytical purpose and chooses diagnostics by support, limits and data shape. |
 | analysis.sampling-design | not-applicable | No study design, fitted predictive model or comparative modelling. |
@@ -109,7 +108,6 @@ Static review only. This audit concerns the skill's general, authorized local da
 | assurance.verify-validate | covered | SKILL.md:123–155,224–249 — requires reviewing diagnostics and contextualizing limits before report assembly. |
 | assurance.code-review | not-applicable | No software change or external sign-off required. |
 | assurance.delivery-signoff | not-applicable | No software change or external sign-off required. |
-
 | ethics.personal-data-basis | not-applicable | The generic local workflow and this audit do not establish a China PIPL processing scenario; operator authorization alone does not establish a legal basis. |
 | ethics.minimise-personal-data | covered | SKILL.md:15–38,103–121,159–164 — requires local authorization, limits input and defaults to redacted reporting. |
 | ethics.deidentification | covered | SKILL.md:15–38,103–121,159–164 — requires local authorization, limits input and defaults to redacted reporting. |

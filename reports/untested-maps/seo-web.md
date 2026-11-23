@@ -97,7 +97,6 @@ Audited text and bundled references without running the target workflow or inspe
 | strategy.competitors | covered | SKILL.md:479–485; references/rankings-push.md:5–30 — use search performance and top competing results to diagnose ranking opportunities. |
 | strategy.content-strategy | shallow | SKILL.md:274–287,315–325 — checks intent, variations and overlap; gives limited site-level decisions about distinct page roles. |
 | strategy.eligibility | covered | SKILL.md:19–34,53–59,274–281,315–325 — start from goals and search intent, then check technical eligibility. |
-
 | crawl-index.discover | covered | SKILL.md:66–89 — checks crawl rules, discovery paths, sitemap recency and indexable membership. |
 | crawl-index.render | covered | SKILL.md:40–51,459–475 — requires rendered or validator evidence rather than a static fetch for markup. |
 | crawl-index.robots | covered | SKILL.md:66–89 — checks crawl rules, discovery paths, sitemap recency and indexable membership. |
@@ -122,7 +121,6 @@ Audited text and bundled references without running the target workflow or inspe
 | structured-data.complete | shallow | SKILL.md:40–51,382–385,406–410,461–467 — finds and validates markup and calls out missing schema, but the audit offers little checking of content applicability and specific feature requirements. |
 | structured-data.validation | covered | SKILL.md:40–51,459–475 — requires rendered or validator evidence rather than a static fetch for markup. |
 | page-experience.review | covered | SKILL.md:113–142,459–464 — checks field experience and layout, navigation and content parity. |
-
 | page-experience.cwv | covered | SKILL.md:113–142,459–464 — checks field experience and layout, navigation and content parity. |
 | page-experience.field | covered | SKILL.md:113–142,459–464 — checks field experience and layout, navigation and content parity. |
 | page-experience.mobile | covered | SKILL.md:113–142,459–464 — checks field experience and layout, navigation and content parity. |
@@ -147,7 +145,6 @@ Audited text and bundled references without running the target workflow or inspe
 | links.nofollow | absent | No relationship-attribute check for outbound links in the site audit. |
 | content-ops.portfolio-review | covered | SKILL.md:274–287,331–362 — evaluates useful content and evidence quality at page level. |
 | content-ops.people-first | covered | SKILL.md:274–287,331–362 — evaluates useful content and evidence quality at page level. |
-
 | content-ops.freshness | shallow | SKILL.md:238–242,389–394; references/title-tags.md:60–83 — reviews rewriting and outdated pages, not a specific content-date mismatch check. |
 | content-ops.consolidate | shallow | SKILL.md:99–111,182–211 — spots duplicates and redirect issues but does not guide every consolidation or temporary/permanent redirect decision. |
 | content-ops.remove | not-applicable | Does not implement a retirement or plan a migration; does diagnose reported moves. |

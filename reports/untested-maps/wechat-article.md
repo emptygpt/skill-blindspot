@@ -72,7 +72,6 @@ No account, preferences, credentials or supplied article were used. Bundled rout
 |---|---|---|---|
 | Select route and account | Explicit publishing context | Metadata and packaging | SKILL.md:91–162 and references/multi-account.md:44–62 resolve account and access. |
 | Render and pack | Metadata and WeChat-ready content | Draft or submit path | SKILL.md:164–219 guards missing API covers but does not require a rendered editorial preview. |
-
 | Save or submit | Draft ID or browser result | User handoff | SKILL.md:221–223 names API output as a draft, not a sent article. |
 
 ## Map table
@@ -97,7 +96,6 @@ No account, preferences, credentials or supplied article were used. Bundled rout
 | rights.permissions | absent | The publishing routes do not distinguish rights-cleared original work from authorized reprints or prevent misleading originality claims. |
 | rights.attribution | shallow | SKILL.md:175,187,205–210 — carries ordinary links into citations and a source URL, but does not require source labels from the user for reused work. |
 | rights.own-copyright | not-applicable | No registration or commercial agreement. |
-
 | rights.commission-terms | not-applicable | No registration or commercial agreement. |
 | publish.format-upload | covered | SKILL.md:113–122,181–223 — routes input to the correct uploader and identifies the API output as a saved draft. |
 | publish.stale-check | not-applicable | Packages or submits current input; no publication schedule, delayed editorial cycle or promotion. |
@@ -122,7 +120,6 @@ No account, preferences, credentials or supplied article were used. Bundled rout
 | wx.cover-quality | shallow | SKILL.md:179; scripts/wechat-api.ts:799–843 — selects a supported cover or first body image; does not review the resulting crop or image suitability. |
 | wx.summary-author-fields | covered | SKILL.md:168–177,221–223 — resolves summary and author from supplied metadata or defined fallbacks. |
 | wx.read-original-link | covered | SKILL.md:175,205–210 — accepts and passes the source link as WeChat metadata. |
-
 | wx.topic-tags | absent | Metadata validation does not ask the operator to check the title constraint or optional topic classification. |
 | wx.body-limits | shallow | SKILL.md:115,183–185; scripts/wechat-api.ts:759–763 — has image-count/format and digest checks, not a full article payload length check. |
 | wx.body-images | covered | SKILL.md:113–122,181–187 — supports multiple images and instructs conversion of unsupported body images. |
@@ -147,7 +144,6 @@ No account, preferences, credentials or supplied article were used. Bundled rout
 | wx.personal-data | absent | No decision point checks the supplied article against the applicable publication policies. |
 | wx.legal-red-lines | absent | No decision point checks the supplied article against the applicable publication policies. |
 | wx.draft-first | covered | SKILL.md:113–122,181–223 — routes input to the correct uploader and identifies the API output as a saved draft. |
-
 | wx.publish-status | covered | SKILL.md:113–122,181–223 — routes input to the correct uploader and identifies the API output as a saved draft. |
 | wx.api-eligibility | covered | SKILL.md:150–163; references/api-setup.md:5–35 — requires account credentials and checks the route's access requirements. |
 | wx.mass-send-limit | absent | No explicit final-send quota or recommendation setting review for a route that can submit. |

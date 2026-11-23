@@ -72,7 +72,6 @@ Read the manuscript workflow, its references and checker interfaces as static ev
 | Step | Produces | Used by | Checked |
 |---|---|---|---|
 | Intake and route requirements | Evidence inventory and reporting checklist | Outline and draft | SKILL.md:75–160 blocks unsupported claims from the outline. |
-
 | Draft and verify | Manuscript and linked claims | Methods, citations and declarations review | SKILL.md:161–250 checks consistency, confidentiality and provenance. |
 | Audit and hand off | Approved draft and issue records | Human author or venue | SKILL.md:264–321 requires human approval; executable rerun not required. |
 
@@ -97,7 +96,6 @@ Read the manuscript workflow, its references and checker interfaces as static ev
 | analysis.uncertainty | covered | SKILL.md:147–200; references/imrad_structure.md:36–85 and references/writing_principles.md:20–80 — reconcile methods and results, show denominators, uncertainty, evidence and limitations. |
 | analysis.exploration | covered | SKILL.md:147–200; references/imrad_structure.md:36–85 and references/writing_principles.md:20–80 — reconcile methods and results, show denominators, uncertainty, evidence and limitations. |
 | analysis.complete-outcomes | covered | SKILL.md:147–200; references/imrad_structure.md:36–85 and references/writing_principles.md:20–80 — reconcile methods and results, show denominators, uncertainty, evidence and limitations. |
-
 | analysis.denominators | covered | SKILL.md:147–200; references/imrad_structure.md:36–85 and references/writing_principles.md:20–80 — reconcile methods and results, show denominators, uncertainty, evidence and limitations. |
 | analysis.interpretation | covered | SKILL.md:147–200; references/imrad_structure.md:36–85 and references/writing_principles.md:20–80 — reconcile methods and results, show denominators, uncertainty, evidence and limitations. |
 | analysis.model-compatibility | shallow | references/imrad_structure.md:36–72; references/writing_principles.md:20–60 — requires verified methods and uncertainty but not these specific checks on interpretation. |
@@ -122,7 +120,6 @@ Read the manuscript workflow, its references and checker interfaces as static ev
 | computation.artifact-package | covered | SKILL.md:94–108,220–234; references/research_integrity_open_science.md:63–77 — organize workspace and record artifacts, environment and restricted access. |
 | reporting.selection | covered | SKILL.md:109–125,252–263; references/reporting_guidelines.md:14–97 — routes by study design and records item-level reporting decisions. |
 | reporting.consort | covered | SKILL.md:109–125,252–263; references/reporting_guidelines.md:14–97 — routes by study design and records item-level reporting decisions. |
-
 | reporting.prisma | covered | SKILL.md:109–125,252–263; references/reporting_guidelines.md:14–97 — routes by study design and records item-level reporting decisions. |
 | reporting.strobe | covered | SKILL.md:109–125,252–263; references/reporting_guidelines.md:14–97 — routes by study design and records item-level reporting decisions. |
 | reporting.arrive | covered | SKILL.md:109–125,252–263; references/reporting_guidelines.md:14–97 — routes by study design and records item-level reporting decisions. |
@@ -147,7 +144,6 @@ Read the manuscript workflow, its references and checker interfaces as static ev
 | publication.data-availability | covered | SKILL.md:220–234,302–321; references/journal_policies.md:5–23,47–61 — checks venue requirements, permitted release and availability statements. |
 | publication.trial-sharing | shallow | SKILL.md:220–234; references/journal_policies.md:5–23 — general availability and policy checks; no trial-data sharing fields specified. |
 | publication.preprints | covered | SKILL.md:220–234,302–321; references/journal_policies.md:5–23,47–61 — checks venue requirements, permitted release and availability statements. |
-
 | publication.rights | covered | SKILL.md:220–234,302–321; references/journal_policies.md:5–23,47–61 — checks venue requirements, permitted release and availability statements. |
 | publication.data-citation | shallow | references/research_integrity_open_science.md:21–38,63–77; SKILL.md:126–146 — version and identifiers are recorded, but claim-level pointers to exact archived dependency and data releases are not required. |
 | publication.data-citation-version | shallow | references/research_integrity_open_science.md:21–38,63–77; SKILL.md:126–146 — version and identifiers are recorded, but claim-level pointers to exact archived dependency and data releases are not required. |

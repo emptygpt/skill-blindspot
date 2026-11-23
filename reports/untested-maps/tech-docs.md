@@ -73,7 +73,6 @@ The paths in the templates are illustrative project files, not bundled dependenc
 |---|---|---|
 | doc-planning.readers | shallow | SKILL.md:262–266 — names readers during review but does not identify their tasks or knowledge before drafting. |
 | doc-planning.subject | covered | SKILL.md:23–48,264–266 — selects artifact by purpose and checks current project conventions and sources. |
-
 | doc-planning.gather | covered | SKILL.md:23–48,264–266 — selects artifact by purpose and checks current project conventions and sources. |
 | doc-planning.topic-types | covered | SKILL.md:23–48,264–266 — selects artifact by purpose and checks current project conventions and sources. |
 | doc-planning.single-source | not-applicable | Local artifact guidance, not a docs platform, rights review or independent documentation program. |
@@ -98,7 +97,6 @@ The paths in the templates are illustrative project files, not bundled dependenc
 | writing-style.dates | not-applicable | The narrowly specified local technical artifacts do not promise localization, inclusive-language review, or date-specific authoring. |
 | api-reference.reference-comments | covered | SKILL.md:138–175,308–315 — inline rationale and API parameters, return types, errors and links to related rationale. |
 | api-reference.method-details | covered | SKILL.md:138–175,308–315 — inline rationale and API parameters, return types, errors and links to related rationale. |
-
 | api-reference.docstrings | not-applicable | No Python docstrings, generated page titles, deprecation project or standalone guide is promised. |
 | api-reference.reference-titles | not-applicable | No Python docstrings, generated page titles, deprecation project or standalone guide is promised. |
 | api-reference.generated-review | shallow | SKILL.md:157–199,308–315 — supplies inline annotations and a contract example, but checks coverage rather than generated render or contract agreement. |
@@ -123,7 +121,6 @@ The paths in the templates are illustrative project files, not bundled dependenc
 | code-samples.placeholders | not-applicable | No dedicated multi-language example library or placeholder-based examples. |
 | code-samples.example-values | shallow | SKILL.md:157–174,203–230 — a useful task call and quick start, not a method for contextual and verified example sets. |
 | code-samples.tested | covered | SKILL.md:168–172,210–222,264–266 — use concrete examples and check that documented code and commands work. |
-
 | images-media.* | not-applicable | No images, graphics or video deliverable. |
 | doc-accessibility.reading | shallow | SKILL.md:42,201–230 — useful headings and layout, without a specific accessibility review. |
 | doc-accessibility.structure | shallow | SKILL.md:42,201–230 — useful headings and layout, without a specific accessibility review. |
