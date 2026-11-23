@@ -15,11 +15,20 @@ Each map is applied to public skills pinned to commits, with a target of three s
 | [`tech-docs` 0.1.0](tech-docs-doc-coauthoring.md) | [Anthropic: doc-coauthoring](https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/doc-coauthoring) | 0 | 2 | 3 |
 | [`tech-docs` 0.1.0](tech-docs-document-api-endpoint.md) | [Sentry: document-api-endpoint](https://github.com/getsentry/skills/tree/a582c51ee29d0f35e6ac321340796f77d43da733/skills/document-api-endpoint) | 0 | 3 | 4 |
 | [`wechat-article` 0.1.0, extends `writing` 0.1.0](wechat-article.md) | [JimLiu: baoyu-post-to-wechat](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-post-to-wechat) | 0 | 4 | 0 |
+
+These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills or their delegated files. The first round used paraphrased evidence; the follow-up reports include short excerpts checked with `lint --skill`.
+
+The counts here are findings by severity, not counts of domain coverage or independent re-check results. The first-round audits found no Needed findings to send through a separate re-check.
+
+## Writing
+
+The `writing` map has met the three-audit target. Its cases cover draft planning and research, prose revision, and Markdown formatting; none exercises publication or follow-up.
+
+| Map and version | Public skill | Needed | Worth considering | Minor |
+|---|---|---:|---:|---:|
 | [`writing` 0.1.0](writing.md) | [JimLiu: baoyu-format-markdown](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-format-markdown) | 0 | 1 | 1 |
-
-These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills or their delegated files. The first round used paraphrased evidence; the follow-up reports include short, verified excerpts. The WeChat report includes all inherited writing nodes, while the separate writing audit uses a different skill.
-
-The counts are findings by severity, not domain coverage scores. The first-round reports found no Needed findings.
+| [`writing` 0.1.0](writing-content-research-writer.md) | [ComposioHQ: content-research-writer](https://github.com/ComposioHQ/awesome-claude-skills/tree/044d48b594f060c164f3b20fac9ea01374721bca/content-research-writer) | 0 | 3 | 2 |
+| [`writing` 0.1.0](writing-humanizer.md) | [blader: humanizer](https://github.com/blader/humanizer/blob/3e5f816b5609c4002aebb69f12c6476fe3347d0a/SKILL.md) | 0 | 1 | 1 |
 
 ## seo-web
 
