@@ -248,6 +248,16 @@ class HelperTests(unittest.TestCase):
         result = self.cli('lint', report, '--map', 'software', '--skill', skill)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_lint_checks_the_whole_nested_curly_quote(self):
+        skill = self.write('skill/SKILL.md', 'Check “risks” before delivery.').parent
+        for tail, expected in (('before delivery.', 0), ('after release.', 1)):
+            with self.subTest(tail=tail):
+                report = self.evidence_report('covered', f'“Check “risks” {tail}”')
+                result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+                self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+                if expected:
+                    self.assertIn(f'Check “risks” {tail}', result.stdout)
+
     def test_lint_ignores_evidence_quotes_for_other_states(self):
         skill = self.write('skill/SKILL.md', '# Skill').parent
         for state in ('absent', 'not-applicable', 'undetermined'):

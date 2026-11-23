@@ -374,7 +374,29 @@ def cmd_sources(args):
     return status
 
 
-EVIDENCE_QUOTE_RE = re.compile(r'"((?:\\.|[^"\\])*)"|“([^”]*)”')
+EVIDENCE_TOKEN_RE = re.compile(r'\\[\\"]|["“”]')
+
+
+def evidence_excerpts(evidence):
+    opening = None
+    depth = 0
+    for match in EVIDENCE_TOKEN_RE.finditer(evidence):
+        token = match[0]
+        if opening is None:
+            if token in ('"', '“'):
+                opening = match
+                depth = 1
+            continue
+        if opening[0] == '"':
+            if token == '"':
+                depth = 0
+        elif token == '“':
+            depth += 1
+        elif token == '”':
+            depth -= 1
+        if not depth:
+            yield evidence[opening.end():match.start()]
+            opening = None
 
 
 def evidence_files(roots):
@@ -445,8 +467,8 @@ def cmd_lint(args):
             problems.append(f"table: {key}: undetermined needs evidence")
         if roots and state in ("covered", "shallow") and len(cells) >= 3:
             evidence = cells[2].replace(r"\|", "|")
-            for straight, curly in EVIDENCE_QUOTE_RE.findall(evidence):
-                quote = " ".join((curly or straight.replace(r'\"', '"')).split())
+            for excerpt in evidence_excerpts(evidence):
+                quote = " ".join(excerpt.replace(r'\"', '"').split())
                 if quote:
                     evidence_quotes.append((key, quote))
         for nid in targets:
