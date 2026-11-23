@@ -118,14 +118,14 @@ Read SKILL.md and the agents/, references/ and templates/ files it routes to; ex
 | ethics.privacy | shallow | templates/imrad_template.md:112 "[IRB approval, informed consent, data protection.]" — no check of text, tables or figures for identifiable people. |
 | ethics.animal-welfare | absent | No animal-research statement or ARRIVE. |
 | ethics.misconduct | covered | SKILL.md:605 "Every citation must be verified via DOI or WebSearch"; agents/citation_compliance_agent.md:146 "Unacceptable: recycling results, discussion, or conclusions from prior publications" |
-| ethics.ai-disclosure | covered | SKILL.md:642 "normal `full` / `format-convert` flows include the existing generic AI tool-usage statement" |
+| ethics.ai-disclosure | covered | SKILL.md:642 "include the existing generic AI tool-usage statement" |
 | data.* | not-applicable | Data collection, curation and deposit happen outside the skill; the availability statement is under publication. |
 | analysis.methods | covered | templates/imrad_template.md:104 "[What analytical methods were applied? Software used?]" |
 | analysis.uncertainty | covered | references/apa7_extended_guide.md:160 "Effect sizes: always report"; references/apa7_extended_guide.md:161 "Confidence intervals: 95% CI [lower, upper]" |
 | analysis.exploration | shallow | agents/intake_agent.md:45 "Carry the validated" — the preregistration sidecar is carried, but no rule labels exploratory analyses. |
 | analysis.complete-outcomes | absent | No rule to report every prespecified outcome. |
 | analysis.denominators | shallow | templates/imrad_template.md:92 "Sample size and characteristics." — no counts behind percentages. |
-| analysis.interpretation | covered | agents/draft_writer_agent.md:295 "Present an inference or hypothesis only when it follows from identified evidence and is explicitly distinguished from an observed finding"; SKILL.md:643 "explicitly discuss study limitations" |
+| analysis.interpretation | covered | agents/draft_writer_agent.md:295 "Present an inference or hypothesis only when"; agents/draft_writer_agent.md:295 "explicitly distinguished from an observed finding"; SKILL.md:643 "explicitly discuss study limitations" |
 | analysis.model-compatibility | absent | Only p-value notation rules. |
 | analysis.hypothesis-probability | absent | Only p-value notation rules. |
 | analysis.thresholds | absent | agents/draft_writer_agent.md:214 suggests significance-threshold wording; no rule against threshold-only conclusions. |
@@ -148,7 +148,7 @@ Read SKILL.md and the agents/, references/ and templates/ files it routes to; ex
 | computation.artifact-package | not-applicable | No analysis artifact package is produced. |
 | reporting.selection | shallow | references/writing_judgment_framework.md:34 "Adherence to reporting guidelines" — a register note in this skill. deep-research/agents/research_architect_agent.md:223 puts a recommended guideline in the Methodology Blueprint that agents/intake_agent.md:32 reads, but intake extracts only the method (agents/intake_agent.md:55) and no phase checks the draft against the guideline. |
 | reporting.consort | absent | No CONSORT. |
-| reporting.prisma | shallow | SKILL.md:424 "its protocol and reporting checklist (PRISMA-ScR for a scoping review) stay with the author" — PRISMA appears for AI-use disclosure and scoping reviews only. |
+| reporting.prisma | shallow | SKILL.md:424 "its protocol and reporting checklist"; SKILL.md:424 "(PRISMA-ScR for a scoping review) stay with the author" — PRISMA appears for AI-use disclosure and scoping reviews only. |
 | reporting.strobe | absent | No STROBE. |
 | reporting.arrive | absent | No ARRIVE. |
 | reporting.stard | absent | No STARD. |
@@ -175,7 +175,7 @@ Read SKILL.md and the agents/, references/ and templates/ files it routes to; ex
 | publication.rights | absent | No licence or copyright step. |
 | publication.data-citation | absent | No instruction to cite datasets. |
 | publication.data-citation-version | absent | No dataset identifiers or versions. |
-| publication.revision-plan | covered | references/mode_selection_guide.md:190 "Want a Revision Roadmap that classifies, maps, and prioritizes each comment" |
+| publication.revision-plan | covered | references/mode_selection_guide.md:190 "a Revision Roadmap that classifies, maps, and prioritizes each comment" |
 | publication.reviewer-response | covered | templates/revision_tracking_template.md:134 "We have carefully addressed all comments and provide point-by-point" |
 
 counts: covered 25, shallow 11, absent 20, not-applicable 20, undetermined 0

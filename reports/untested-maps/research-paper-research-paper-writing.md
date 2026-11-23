@@ -35,7 +35,7 @@ None.
    Source: [ICMJE: Preparing a Manuscript for Submission to a Medical Journal](https://www.icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html) — iii. Statistics.
    Source: [ASA Statement on Statistical Significance and P-Values (2016)](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf) — principles 5 and 6.
    Source: [Reproducible Research, Kempner Institute Computing Handbook](https://handbook.eng.kempnerinstitute.harvard.edu/s2_swe_for_research/reproducible_research.html) — 10.4. Randomness and Seeds.
-   Why: The rigor checks ask whether gains are "meaningful, not just statistically tiny" and "consistent across multiple datasets/settings/metrics", but no table or experiments rule asks for seeds, number of runs, standard deviations or intervals; a searched grep for seed, variance and error bar found none in the guides.
+   Why: The rigor checks ask whether gains are references/paper-review.md:59 "meaningful, not just statistically tiny" and references/paper-review.md:61 "consistent across multiple datasets/settings/metrics", but no table or experiments rule asks for seeds, number of runs, standard deviations or intervals; a searched grep for seed, variance and error bar found none in the guides.
    Fix: In references/experiments.md (table rules and rigor checklist), ask for the number of runs, the spread or interval reported, and the seed policy when results vary between runs.
 2. **Check the venue's paper checklist and required statements** [model+map]
 
@@ -50,7 +50,7 @@ None.
    Map nodes: `ethics.misconduct`, `manuscript.references`.
    Source: [ICMJE: Scientific Misconduct](https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/scientific-misconduct-expressions-of-concern-and-retraction.html) — B. Scientific Misconduct.
    Source: [ICMJE: Preparing a Manuscript for Submission to a Medical Journal](https://www.icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html) — g. References.
-   Why: Claims must be supported or weakened, and the related-work checklist asks whether "citation coverage" is complete, but no step tells the agent not to supply numbers or references it was not given, or to check that each cited work exists and says what the sentence attributes to it.
+   Why: Claims must be supported or weakened, and the related-work checklist asks whether references/related-work.md:41 "citation coverage" is complete, but no step tells the agent not to supply numbers or references it was not given, or to check that each cited work exists and says what the sentence attributes to it.
    Fix: In the Execution Rules of SKILL.md, require that every number and reference in drafted text comes from the author's results or bibliography, and mark the rest as placeholders in the claim-evidence map.
 4. **Identify datasets and software, with versions, in the paper** [map]
 
@@ -117,7 +117,7 @@ Read SKILL.md and every file under references/ as static evidence; agents/openai
 | ethics.publication-consent | not-applicable | No patient material; consent is obtained outside the skill. |
 | ethics.privacy | absent | No step on identifiable people in text or figures. |
 | ethics.animal-welfare | not-applicable | No animal research in the skill's paper types. |
-| ethics.misconduct | shallow | SKILL.md:88 "If a claim cannot be supported by results, weaken or remove the claim." — no rule against supplying unsupplied numbers or references. |
+| ethics.misconduct | shallow | SKILL.md:88 "If a claim cannot be supported by results"; SKILL.md:88 "weaken or remove the claim." — no rule against supplying unsupplied numbers or references. |
 | ethics.ai-disclosure | absent | No mention of disclosing AI assistance. |
 | data.* | not-applicable | Depositing and describing data happens outside a writing skill. |
 | analysis.methods | covered | references/experiments.md:13 "Keep protocol fair (same data split, preprocessing, and evaluation settings)."; references/paper-review.md:70 "Are comparison and ablation protocols clearly documented?" |
@@ -138,7 +138,7 @@ Read SKILL.md and every file under references/ as static evidence; agents/openai
 | computation.software-citation | absent | No instruction to cite software used. |
 | computation.specific-release | absent | No software version in citations. |
 | computation.validation | not-applicable | Reproducibility checking of outputs is not performed by a writing skill. |
-| computation.environment | shallow | references/method.md:184 "Implementation details include hyperparameters (e.g., layer count, feature dimensions), coordinate transforms/normalization, and other practical details." — no environment or package versions. |
+| computation.environment | shallow | references/method.md:184 "Implementation details include hyperparameters"; references/method.md:184 "coordinate transforms/normalization, and other practical details." — no environment or package versions. |
 | computation.project-layout | not-applicable | Organizing the research compendium happens outside the skill. |
 | computation.data-version | not-applicable | Preserving inputs happens in the analysis; stating versions in the paper is under the citation nodes. |
 | computation.executable-analysis | not-applicable | No analysis is run or packaged. |
@@ -153,19 +153,19 @@ Read SKILL.md and every file under references/ as static evidence; agents/openai
 | reporting.arrive | not-applicable | Animal studies are outside the skill's paper types. |
 | reporting.stard | not-applicable | Diagnostic accuracy studies are outside the skill's paper types. |
 | reporting.qualitative | not-applicable | Qualitative studies are outside the skill's paper types. |
-| manuscript.structure | covered | SKILL.md:3 "drafting or revising Abstract, Introduction, Related Work, Method, Experiments, or Conclusion"; SKILL.md:84 "Build a mini-outline before drafting prose." |
+| manuscript.structure | covered | SKILL.md:3 "drafting or revising Abstract, Introduction"; SKILL.md:3 "Method, Experiments, or Conclusion"; SKILL.md:84 "Build a mini-outline before drafting prose." |
 | manuscript.title-page | absent | No title or author metadata step. |
 | manuscript.orcid | absent | No author identifiers. |
 | manuscript.funding | absent | No funding or competing-interest statement. |
-| manuscript.abstract | covered | references/abstract.md:99 "Can a reader identify task, challenge, insight/contribution, and results in one pass?"; references/abstract.md:100 "Are all major claims supported by experiments?" |
-| manuscript.methods | covered | references/paper-review.md:51 "Can a knowledgeable reader reproduce the method from the paper?"; references/method.md:184 "Put them near the end of Method or in a dedicated Implementation Details section." |
+| manuscript.abstract | covered | references/abstract.md:99 "identify task, challenge, insight/contribution, and results in one pass?"; references/abstract.md:100 "Are all major claims supported by experiments?" |
+| manuscript.methods | covered | references/paper-review.md:51 "Can a knowledgeable reader reproduce the method from the paper?"; references/method.md:184 "near the end of Method"; references/method.md:184 "in a dedicated Implementation Details section." |
 | manuscript.references | shallow | references/related-work.md:41 "Is citation coverage complete for all core claims?" — coverage, not accuracy of each reference. |
 | manuscript.tables | covered | references/experiments.md:72 "Label metric direction in column headers"; references/experiments.md:73 "Add units when needed so values are interpretable without guessing." |
-| manuscript.figures | shallow | SKILL.md:29 "Use a clean teaser and pipeline figure."; references/experiments.md:59 "Figure captions and table captions are equally important in the writing quality of Experiments." — no attribution for reused figures. |
+| manuscript.figures | shallow | SKILL.md:29 "Use a clean teaser and pipeline figure."; references/experiments.md:59 "Figure captions and table captions are equally important" — no attribution for reused figures. |
 | manuscript.authorship | absent | No authorship step. |
 | manuscript.acknowledgments | absent | No acknowledgment step. |
 | manuscript.roles | absent | No contributor roles. |
-| publication.journal-article | covered | SKILL.md:9 "Use this skill to rewrite a research paper into a reviewer-friendly, high-clarity draft." |
+| publication.journal-article | covered | SKILL.md:9 "rewrite a research paper into a reviewer-friendly, high-clarity draft." |
 | publication.submission | not-applicable | The skill stops at self-review before submission. |
 | publication.permissions | absent | No permissions for reused material. |
 | publication.review-history | not-applicable | Real reviews arrive after submission, outside the skill. |
