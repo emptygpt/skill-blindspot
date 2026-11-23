@@ -8,7 +8,7 @@
 
 `skill-blindspot` 检查一个 Agent Skill（含 `SKILL.md` 的文件夹）缺了哪些环节。它先问模型缺什么，再拿一张**领域底图**逐条对照。底图来自人已经整理好的知识：职业任务数据库、教材和课程目录、平台官方文档、法规原文。你得到一张逐条对照表：哪些已覆盖、哪些很浅、哪些没有，附上在你的 Skill 里找到的原文行，每个节点都有出处。
 
-> **状态：v0.4.2。** 仓库包含 Skill、十一张领域底图和一个 Python 辅助脚本。已公开的审查报告涵盖视频和编程 Skill。报告格式可能会变。
+> **状态：v0.4.2。** 仓库包含 Skill、十一张领域底图和一个 Python 辅助脚本。十一张底图均已有至少三份公开 Skill 审计报告。报告格式可能会变。
 
 ## 第一份报告
 
@@ -56,21 +56,21 @@ npx skills add emptygpt/skill-blindspot
 
 可以直接用。每个节点都写明出处，不用自己再去搜。范围和细节见 [skills/blindspot/maps/INDEX.md](skills/blindspot/maps/INDEX.md)。
 
-| 底图 | 覆盖 | 节点数 | 公开 Skill 实测 |
+| 底图 | 覆盖 | 节点数 | 公开 Skill 审计 |
 |---|---|---|---|
 | `video` | 线上视频，从选题到发布和复盘 | 118 | [4 份审计](reports/video-20.md) |
 | `video-short` | 竖屏短视频，在 `video` 之上 | +29 | [8 份审计](reports/video-20.md) |
 | `video-long` | 长视频，在 `video` 之上 | +22 | [8 份审计](reports/video-20.md) |
-| `writing` | 在线发表的非虚构文章 | 78 | [3 份审计](reports/untested-maps/README.md#writing) |
-| `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 | [3 份审计](reports/untested-maps/README.md#wechat-article) |
+| `writing` | 在线发表的非虚构文章 | 78 | [3 份审计](reports/untested-maps/README.md) |
+| `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 | [3 份审计](reports/untested-maps/README.md) |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 | [20 份审计](reports/code-20.md) |
-| `research-paper` | 科研论文与可复现分析 | 76 | 3 份审计：[科研写作](reports/untested-maps/research-paper.md)、[论文写作](reports/untested-maps/research-paper-research-paper-writing.md)、[学术论文](reports/untested-maps/research-paper-academic-paper.md) |
-| `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | 3 份审计：[架构决策记录](reports/untested-maps/tech-docs.md)、[协作编写](reports/untested-maps/tech-docs-doc-coauthoring.md)、[API 端点](reports/untested-maps/tech-docs-document-api-endpoint.md) |
-| `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [3 份审计](reports/untested-maps/) |
-| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [3 份审计](reports/untested-maps/) |
-| `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [3 份审计](reports/untested-maps/#seo-web) |
+| `research-paper` | 科研论文与可复现分析 | 76 | [3 份审计](reports/untested-maps/README.md) |
+| `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | [3 份审计](reports/untested-maps/README.md) |
+| `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [3 份审计](reports/untested-maps/README.md) |
+| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [3 份审计](reports/untested-maps/README.md) |
+| `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [3 份审计](reports/untested-maps/README.md) |
 
-标为「未经实测」的领域图尚未达到每张三份公开 Skill 审计的目标。进展见[公开 Skill 审计汇总](reports/untested-maps/)。
+所有底图都已达到每张三份公开 Skill 审计的目标。七张此前未达标的底图的审计报告见[公开 Skill 审计汇总](reports/untested-maps/README.md)。
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
