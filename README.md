@@ -61,7 +61,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `video` | Online video, from topic to publishing and review | 118 | [4 audits](reports/video-20.md) |
 | `video-short` | Short-form vertical video, on top of `video` | +29 | [8 audits](reports/video-20.md) |
 | `video-long` | Long-form video, on top of `video` | +22 | [8 audits](reports/video-20.md) |
-| `writing` | Non-fiction articles published online | 78 | [Provisional (1/3)](reports/untested-maps/writing.md) |
+| `writing` | Non-fiction articles published online | 78 | [3 audits](reports/untested-maps/README.md#writing) |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 | [3 audits](reports/untested-maps/README.md#wechat-article) |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 | [20 audits](reports/code-20.md) |
 | `research-paper` | Research papers and reproducible analysis | 76 | [Provisional (1/3)](reports/untested-maps/research-paper.md) |
