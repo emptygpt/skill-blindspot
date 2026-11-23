@@ -66,11 +66,11 @@ npx skills add emptygpt/skill-blindspot
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 | [20 份审计](reports/code-20.md) |
 | `research-paper` | 科研论文与可复现分析 | 76 | [未经实测（1/3）](reports/untested-maps/research-paper.md) |
 | `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | 3 份审计：[架构决策记录](reports/untested-maps/tech-docs.md)、[协作编写](reports/untested-maps/tech-docs-doc-coauthoring.md)、[API 端点](reports/untested-maps/tech-docs-document-api-endpoint.md) |
-| `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [未经实测（1/3）](reports/untested-maps/data-analysis.md) |
+| `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [3 份审计](reports/untested-maps/) |
 | `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [未经实测（1/3）](reports/untested-maps/spreadsheet-finance.md) |
 | `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [未经实测（1/3）](reports/untested-maps/seo-web.md) |
 
-「未经实测（1/3）」表示已有一份公开 Skill 审计，但尚未达到每张三份的目标。进展见[首轮审计汇总](reports/untested-maps/)。
+标为「未经实测」的领域图尚未达到每张三份公开 Skill 审计的目标。进展见[公开 Skill 审计汇总](reports/untested-maps/)。
 
 细分底图在通用底图之上扩展：只写新增的节点，并列出不适用的通用节点。每个文件开头都列了**还没有收**的环节，原因是没找到来源。视频底图引用了 YouTube、TikTok、B 站和抖音的官方页面，以及美国 FTC 和《互联网广告管理办法》，抖音创作者学习中心没有读到。
 
