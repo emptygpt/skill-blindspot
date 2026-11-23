@@ -65,7 +65,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 | [Provisional (1/3)](reports/untested-maps/wechat-article.md) |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 | [20 audits](reports/code-20.md) |
 | `research-paper` | Research papers and reproducible analysis | 76 | [Provisional (1/3)](reports/untested-maps/research-paper.md) |
-| `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 | [Provisional (1/3)](reports/untested-maps/tech-docs.md) |
+| `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 | 3 audits: [ADRs](reports/untested-maps/tech-docs.md), [co-authoring](reports/untested-maps/tech-docs-doc-coauthoring.md), [API endpoints](reports/untested-maps/tech-docs-document-api-endpoint.md) |
 | `data-analysis` | Answering questions with data, including analysis code, charts and results with limits | 45 | [Provisional (1/3)](reports/untested-maps/data-analysis.md) |
 | `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 | [Provisional (1/3)](reports/untested-maps/spreadsheet-finance.md) |
 | `seo-web` | SEO and website content operations; article writing and software changes use their own maps | 74 | [Provisional (1/3)](reports/untested-maps/seo-web.md) |
