@@ -103,7 +103,7 @@ None. This is a planning workflow; the omissions below do not make it generate u
 | strategy.terms | shallow | `seo.py:82` “Map real search intent and page roles” — the mapping calls for query evidence but not variants for readers with different vocabulary. |
 | strategy.competitors | absent | No comparison of demand trends or competitors in the keyword-map mode. |
 | strategy.content-strategy | shallow | `seo.py:82` “search intent and page roles” — assigns page roles but does not specify which gaps to prioritize across the site. |
-| strategy.eligibility | covered | `seo.py:78–79` “Check crawler access, URL discovery” and “index eligibility” — scopes status, discovery and rendered evidence before further planning. |
+| strategy.eligibility | covered | `seo.py:78` “Check crawler access, URL discovery” and `seo.py:79` “index eligibility” — scopes status, discovery and rendered evidence before further planning. |
 | crawl-index.discover | covered | `seo.py:78` “status paths, and internal discovery” — asks for HTTP, robots and sitemap artifacts to explain how URLs are found. |
 | crawl-index.render | shallow | `seo.py:79` “Separate fetched HTML, rendered DOM” — gathers render evidence but does not call for a search-engine view or comparison with visitor-facing content. |
 | crawl-index.robots | shallow | `seo.py:78` “robots controls” — requests the artifact without specifying user-agent or critical-resource rule checking. |
@@ -156,9 +156,9 @@ None. This is a planning workflow; the omissions below do not make it generate u
 | content-ops.consolidate | shallow | `seo.py:84` “Build URL mappings and align redirects” — makes consolidation possible but does not say how to choose the surviving duplicate destination. |
 | content-ops.remove | not-applicable | The migration mode plans a move, not permanent removals of retired content. |
 | content-ops.redirects | shallow | `seo.py:84` “align redirects, canonicals” — requests alignment without choosing temporary versus permanent responses. |
-| content-ops.move-map | covered | `seo.py:84` “Build URL mappings” from “old and new URL inventory” — makes the mapping part of the plan before any move. |
-| content-ops.move-monitor | shallow | `seo-method.md:11` “before evidence, rollback, verification, and platform-processing lag”; `seo.py:84` says “monitoring” — no post-move traffic comparison or escalation timing is specified. |
-| measurement.kpis | shallow | `seo.py:77` “Confirm outcome, market, language” and :85 “baseline and treatment inventory” — scopes outcomes but does not connect them to chosen search KPIs. |
+| content-ops.move-map | covered | `seo.py:84` “Build URL mappings” from `seo.py:84` “old and new URL inventory” — makes the mapping part of the plan before any move. |
+| content-ops.move-monitor | shallow | `seo-method.md:11` “before evidence, rollback, verification, and platform-processing lag”; `seo.py:84` “monitoring” — no post-move traffic comparison or escalation timing is specified. |
+| measurement.kpis | shallow | `seo.py:77` “Confirm outcome, market, language” and `seo.py:85` “baseline and treatment inventory” — scopes outcomes but does not connect them to chosen search KPIs. |
 | measurement.performance | shallow | `seo.py:83` “Segment page, query, market, device, search type, and time” — requests a first-party export but does not specify which measures to compare. |
 | measurement.indexing | shallow | `seo.py:97` “indexation outcome evidence” — asks for property evidence without a target-vs-indexed inventory or exclusion review. |
 | measurement.inspect | absent | No plan for comparing indexed and live URL Inspection views. |

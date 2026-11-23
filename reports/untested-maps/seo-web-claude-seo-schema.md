@@ -68,12 +68,12 @@ None.
 | crawl-index.sitemap-build | not-applicable | Does not maintain discovery inventory. |
 | site-structure | not-applicable | Does not design or consolidate site URLs. |
 | on-page | not-applicable | Does not edit or audit headings, titles, descriptions or snippet controls. |
-| structured-data.eligibility | covered | SKILL.md:34 “supported rich result types” and :84 “Identify page type from content analysis” — matches content to supported features and distinguishes unsupported uses. |
-| structured-data.vocabulary | covered | SKILL.md:85 “Select appropriate schema type(s)” and :86 “required + recommended properties” — selects types and attributes by entity and page type. |
+| structured-data.eligibility | covered | SKILL.md:34 “supported rich result types” and SKILL.md:84 “Identify page type from content analysis” — matches content to supported features and distinguishes unsupported uses. |
+| structured-data.vocabulary | covered | SKILL.md:85 “Select appropriate schema type(s)” and SKILL.md:86 “required + recommended properties” — selects types and attributes by entity and page type. |
 | structured-data.format | covered | SKILL.md:29 “recommend JSON-LD as primary format” — selects a supported format and recognizes Microdata and RDFa during detection. |
-| structured-data.visible-content | shallow | SKILL.md:87 “truthful, verifiable data” and :90 “prominently disclosed on the page” — explicit page-facing review disclosure, but no general markup-to-visible-data comparison. |
+| structured-data.visible-content | shallow | SKILL.md:87 “truthful, verifiable data” and SKILL.md:90 “prominently disclosed on the page” — explicit page-facing review disclosure, but no general markup-to-visible-data comparison. |
 | structured-data.complete | covered | SKILL.md:33 “required properties per schema type” — checks feature-specific required fields and calls for them on generation. |
-| structured-data.validation | covered | SKILL.md:88 “Validate output before presenting”; delegated `schema-types.md:131–132` names “Google Rich Results Test” and “Schema.org Validator”. The report identifies fixes for the caller rather than deploying them. |
+| structured-data.validation | covered | SKILL.md:88 “Validate output before presenting”; delegated `schema-types.md:131` “Google Rich Results Test” and `schema-types.md:132` “Schema.org Validator”. The report identifies fixes for the caller rather than deploying them. |
 | page-experience | not-applicable | No usability or performance audit. |
 | international | not-applicable | No alternate-page design or locale audit. |
 | media | not-applicable | Can write image and video markup, but does not plan media delivery or audit watch-page, thumbnail or file retrieval. |
