@@ -119,17 +119,17 @@ Instructions, delegated rules and references, and the guard’s validation code 
 | audience.define | covered | `wechat-rewriter/SKILL.md:49` — "默认读者是正在使用 AI 的硕博生" identifies the audience and tells the writer what vocabulary to assume. |
 | audience.tone-medium | covered | `wechat-rewriter/SKILL.md:49` — "可直接使用常见 AI、科研和 Skill 术语" ties level to the intended readers. |
 | audience.research | not-applicable | Writes for an assigned audience; no readership research brief. |
-| research.background | covered | `wechat-rewriter/SKILL.md:46` — "完整读取用户在当前任务中明确指定的 Skill 材料" gathers the supplied factual background before writing. |
+| research.background | covered | `wechat-rewriter/SKILL.md:46` — "明确指定的 Skill 材料" is read in full to gather the supplied factual background before writing. |
 | research.consult-sources | covered | `wechat-rewriter/SKILL.md:46–47` — "材料有链接时读取链接内容"; original facts and stylistic references are kept separate. |
 | research.interviews | not-applicable | No interview reporting. |
 | research.source-network | not-applicable | No contact or source development. |
 | research.online-third-party | shallow | `wechat-rewriter/SKILL.md:46` — "材料有链接时读取链接内容" but does not assess who controls the material or its reliability. |
-| research.notes | shallow | `references/SKILL.md:46` — "需要在提纲确认前向用户说明的信息缺口"; flags questions early but does not preserve provenance notes through handoff. |
+| research.notes | shallow | `references/SKILL.md:46` — "向用户说明的信息缺口"; flags questions early but does not preserve provenance notes through handoff. |
 | research.anonymous-sources | not-applicable | No anonymous sourcing. |
-| research.technical-subject | covered | `wechat-rewriter/SKILL.md:31` — "安装步骤、命令、参数和运行效果必须来自用户提供的材料"; the agent reads the specifications and asks for insufficient details. |
+| research.technical-subject | covered | `wechat-rewriter/SKILL.md:31` — technical details "必须来自用户提供的材料"; the agent reads the specifications and asks for missing details. |
 | structure.outline | covered | `wechat-rewriter/SKILL.md:53` — "正文前必须先输出大纲". |
 | structure.main-point | covered | `references/规则结构说明.md:9` — "两句话说清楚即可" makes the pain point explicit before the project explanation. |
-| structure.select-material | covered | `references/SKILL.md:25` — "按科研工作顺序组织的三至四个实操步骤" gives a selection and ordering rule with a single-step exception. |
+| structure.select-material | covered | `references/SKILL.md:25` — "三至四个实操步骤" follow the order of the research workflow, with a single-step exception. |
 | structure.length-format | covered | `references/SKILL.md:26` — "两段、四至五句话的结尾" sets length and structure alongside the intro and body guidance. |
 | structure.context | covered | `references/SKILL.md:23–24` — "安装方法与兼容性说明" accompanies project purpose and use cases. |
 | draft.first-draft | covered | `wechat-rewriter/SKILL.md:66` — "严格按照已确认大纲写作" directs drafting before review. |
@@ -148,7 +148,7 @@ Instructions, delegated rules and references, and the guard’s validation code 
 | fact.corroborate | absent | Cites user material as the only factual source; no second-source check. |
 | fact.authenticity | shallow | `workflow_guard.py:873–879` — "manifest = extract_fact_manifest(source)" in a validator that compares the output to a declared snapshot; it does not authenticate the upstream source. |
 | fact.rumour | not-applicable | No rumor reporting. |
-| fact.cite-sources | shallow | `wechat-reviewer/SKILL.md:54` — "URL、英文名称、命令、参数、数字和步骤没有丢失或改变"; URLs remain, but individual claims need not be credited. |
+| fact.cite-sources | shallow | `wechat-reviewer/SKILL.md:54` — "URL、英文名称、命令、参数" are checked for preservation, but individual claims need not be credited. |
 | fact.right-of-reply | not-applicable | No allegations or investigative reporting. |
 | fact.not-misleading | shallow | `wechat-reviewer/SKILL.md:55` — "没有新增未经材料支持的事实"; no overall impression or omissions check. |
 | fact.expert-review | not-applicable | Scope is a tutorial from user-supplied specifications, not independent expert validation. |
@@ -182,10 +182,10 @@ Instructions, delegated rules and references, and the guard’s validation code 
 | comp.law | not-applicable | No general press-law or release workflow; asset rights and applicable platform content rules are assessed separately. |
 | comp.ai-disclosure | absent | No instruction to disclose AI assistance in the article. |
 | comp.ai-accuracy | covered | `wechat-reviewer/SKILL.md:54–55` — "没有新增未经材料支持的事实"; review compares generated copy with named inputs. |
-| comp.honest-authorship | shallow | `wechat-reviewer/SKILL.md:45` — "不以 AI 助理、审核者或无依据的作者身份自居"; does not ask whose first-hand voice the prescribed collective narrator represents. |
+| comp.honest-authorship | shallow | `wechat-reviewer/SKILL.md:45` — "无依据的作者身份自居" is disallowed, but the skill does not ask whose first-hand voice the prescribed collective narrator represents. |
 | wx.title-length | absent | File-name normalization is not a platform title length check. |
 | wx.title-accurate | shallow | `wechat-rewriter/SKILL.md:55` — "标题方向" is approved before the full text exists. |
-| wx.title-no-bait | shallow | `wechat-reviewer/SKILL.md:42` — "删除比喻、拟人、夸张、反问、对偶等修辞表达" limits exaggeration but has no explicit headline bait check. |
+| wx.title-no-bait | shallow | `wechat-reviewer/SKILL.md:42` — "删除比喻、拟人、夸张" limits exaggeration but has no explicit headline bait check. |
 | wx.cover-set-crop | not-applicable | No cover delivered or configured. |
 | wx.cover-quality | not-applicable | No cover delivered or configured. |
 | wx.summary-author-fields | not-applicable | No WeChat summary or account author field. |
