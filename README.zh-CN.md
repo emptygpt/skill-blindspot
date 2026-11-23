@@ -68,7 +68,7 @@ npx skills add emptygpt/skill-blindspot
 | `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | 3 份审计：[架构决策记录](reports/untested-maps/tech-docs.md)、[协作编写](reports/untested-maps/tech-docs-doc-coauthoring.md)、[API 端点](reports/untested-maps/tech-docs-document-api-endpoint.md) |
 | `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [3 份审计](reports/untested-maps/) |
 | `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [3 份审计](reports/untested-maps/) |
-| `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [未经实测（1/3）](reports/untested-maps/seo-web.md) |
+| `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [3 份审计](reports/untested-maps/#seo-web) |
 
 标为「未经实测」的领域图尚未达到每张三份公开 Skill 审计的目标。进展见[公开 Skill 审计汇总](reports/untested-maps/)。
 
