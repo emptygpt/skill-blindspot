@@ -62,12 +62,12 @@ npx skills add emptygpt/skill-blindspot
 | `video-short` | 竖屏短视频，在 `video` 之上 | +29 | [8 份审计](reports/video-20.md) |
 | `video-long` | 长视频，在 `video` 之上 | +22 | [8 份审计](reports/video-20.md) |
 | `writing` | 在线发表的非虚构文章 | 78 | [未经实测（1/3）](reports/untested-maps/writing.md) |
-| `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 | [未经实测（1/3）](reports/untested-maps/wechat-article.md) |
+| `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 | [3 份审计](reports/untested-maps/README.md#wechat-article) |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 | [20 份审计](reports/code-20.md) |
 | `research-paper` | 科研论文与可复现分析 | 76 | [未经实测（1/3）](reports/untested-maps/research-paper.md) |
 | `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | [未经实测（1/3）](reports/untested-maps/tech-docs.md) |
 | `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [3 份审计](reports/untested-maps/) |
-| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [未经实测（1/3）](reports/untested-maps/spreadsheet-finance.md) |
+| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [3 份审计](reports/untested-maps/) |
 | `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [3 份审计](reports/untested-maps/#seo-web) |
 
 标为「未经实测」的领域图尚未达到每张三份公开 Skill 审计的目标。进展见[公开 Skill 审计汇总](reports/untested-maps/)。
