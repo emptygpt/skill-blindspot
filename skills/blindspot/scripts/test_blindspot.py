@@ -265,6 +265,14 @@ class HelperTests(unittest.TestCase):
         result = self.cli('lint', report, '--map', 'software', '--skill', skill)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_lint_reports_unbalanced_curly_quotes_and_checks_later_excerpts(self):
+        skill = self.write('skill/SKILL.md', 'A literal “ mark.').parent
+        report = self.evidence_report('covered', '“A literal “ mark.” and "Unsupported later excerpt."')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn('requirements.understand-request: malformed curly quote', result.stdout)
+        self.assertIn('evidence quote not found in the Skill: \'Unsupported later excerpt.\'', result.stdout)
+
     def test_lint_ignores_evidence_quotes_for_other_states(self):
         skill = self.write('skill/SKILL.md', '# Skill').parent
         for state in ('absent', 'not-applicable', 'undetermined'):

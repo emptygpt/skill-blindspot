@@ -380,25 +380,33 @@ EVIDENCE_TOKEN_RE = re.compile(MARKDOWN_ESCAPE_RE.pattern + r'|["“”]')
 
 
 def evidence_excerpts(evidence):
-    opening = None
-    depth = 0
-    for match in EVIDENCE_TOKEN_RE.finditer(evidence):
-        token = match[0]
-        if opening is None:
-            if token in ('"', '“'):
-                opening = match
-                depth = 1
+    tokens = list(EVIDENCE_TOKEN_RE.finditer(evidence))
+    curly_pairs = {}
+    open_curly = []
+    for index, match in enumerate(tokens):
+        if match[0] == '“':
+            open_curly.append(index)
+        elif match[0] == '”' and open_curly:
+            curly_pairs[open_curly.pop()] = index
+
+    straight_opening = None
+    curly_end = -1
+    for index, match in enumerate(tokens):
+        if index <= curly_end:
             continue
-        if opening[0] == '"':
+        token = match[0]
+        if straight_opening is not None:
             if token == '"':
-                depth = 0
+                yield evidence[straight_opening.end():match.start()]
+                straight_opening = None
+        elif token == '"':
+            straight_opening = match
         elif token == '“':
-            depth += 1
-        elif token == '”':
-            depth -= 1
-        if not depth:
-            yield evidence[opening.end():match.start()]
-            opening = None
+            if index in curly_pairs:
+                curly_end = curly_pairs[index]
+                yield evidence[match.end():tokens[curly_end].start()]
+            else:
+                yield None
 
 
 def evidence_files(roots):
@@ -468,10 +476,16 @@ def cmd_lint(args):
         if state == "undetermined" and (len(cells) < 3 or not cells[2]):
             problems.append(f"table: {key}: undetermined needs evidence")
         if roots and state in ("covered", "shallow") and len(cells) >= 3:
+            malformed_curly = False
             for excerpt in evidence_excerpts(cells[2]):
+                if excerpt is None:
+                    malformed_curly = True
+                    continue
                 quote = " ".join(MARKDOWN_ESCAPE_RE.sub(r"\1", excerpt).split())
                 if quote:
                     evidence_quotes.append((key, quote))
+            if malformed_curly:
+                problems.append(f"table: {key}: malformed curly quote; use straight quotes for a literal unmatched curly mark")
         for nid in targets:
             if nid in states and states[nid] != state:
                 problems.append(f"table: {nid} listed twice with different states")
