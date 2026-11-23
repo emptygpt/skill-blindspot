@@ -8,7 +8,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.4.** The skill, eleven maps and a helper script are here. It was used to audit 20 public video skills and corrected after we re-checked that audit. It is early and the report format may change.
+> **Status: v0.4.2.** The repository includes the skill, eleven domain maps and a Python helper. Published audits cover public video and coding skills. The report format may change.
 
 ## First report
 
