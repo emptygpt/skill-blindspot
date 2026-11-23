@@ -92,25 +92,25 @@ Recalculation uses recalc.py, which is not in this skill folder; its checks were
 
 | Node | State | Evidence |
 |---|---|---|
-| purpose.question | covered | SKILL.md:3, 782 — "Use when users need to value a company using DCF methodology" "Revenue growth rates for projection period" |
+| purpose.question | covered | SKILL.md:3 "Use when users need to value a company"; SKILL.md:782 "Revenue growth rates for projection period" |
 | purpose.audience | shallow | SKILL.md:615 — "Not professional or client-ready" names the bar, not the users or downstream needs. |
-| purpose.tool-fit | covered | SKILL.md:21–22 — "If running inside Excel (Office Add-in / Office JS environment):" "If generating a standalone .xlsx file (no live Excel session):" |
+| purpose.tool-fit | covered | SKILL.md:21 "If running inside Excel (Office Add-in / Office JS environment):"; SKILL.md:22 "If generating a standalone .xlsx file (no live Excel session):" |
 | purpose.risk | not-applicable | No assurance or criticality assessment in scope. |
 | purpose.competence | not-applicable | No staffing or training of model users in scope. |
-| inputs.quality | covered | SKILL.md:103–105 — "Verify net debt vs net cash (critical for valuation)" "Validate historical margins are consistent with business model" |
+| inputs.quality | covered | SKILL.md:103 "Verify net debt vs net cash (critical for valuation)"; SKILL.md:105 "Validate historical margins are consistent with business model" |
 | inputs.assumptions | covered | SKILL.md:1150 — "Explain reasoning behind key inputs" |
 | inputs.validation | shallow | TROUBLESHOOTING.md:37 — "Verify case selector cell contains 1, 2, or 3" after failure; no validation rule. |
 | inputs.messages | absent | No input or error messages on input cells. |
 | inputs.inherited-validation | not-applicable | Builds a new model; no inherited workbook. |
-| inputs.sourcing | covered | SKILL.md:70, 97 — "Every blue input must have a comment before moving to next section" "Data Sources Priority:" |
-| structure.flow | covered | SKILL.md:923–995 — "Section 2: Market Data (NOT case dependent)" "Section 3: DCF Scenario Assumptions" "Section 6: Discounting & Valuation" |
+| inputs.sourcing | covered | SKILL.md:70 "Every blue input must have a comment"; SKILL.md:97 "Data Sources Priority:" |
+| structure.flow | covered | SKILL.md:923 "Section 2: Market Data (NOT case dependent)"; SKILL.md:932 "Section 3: DCF Scenario Assumptions"; SKILL.md:995 "Section 6: Discounting & Valuation" |
 | structure.layout | covered | SKILL.md:87 — "Show assumptions horizontally across projection years within each block" |
 | structure.adaptability | shallow | SKILL.md:48 — "The model must flex when the user changes an assumption." Fixed-rate opex formulas do not flex with the case. |
 | structure.conventions | covered | SKILL.md:873 — "Font color tells you WHAT it is (input/formula/link)." |
 | structure.guidance | shallow | SKILL.md:1152 — "Describe any non-standard approaches" without a place in the workbook or operating notes. |
-| formulas.consistent | covered | SKILL.md:993, 1145 — "Test one column, then copy across." "Similar calculations follow similar patterns" |
-| formulas.simple | covered | SKILL.md:409 — "The consolidation column approach centralizes logic and makes the model easier to audit." |
-| formulas.constants | shallow | SKILL.md:47, 715 — "The only hardcoded numbers permitted are" yet "=E29*0.15" is marked correct. |
+| formulas.consistent | covered | SKILL.md:993 "Test one column, then copy across."; SKILL.md:1145 "Similar calculations follow similar patterns" |
+| formulas.simple | covered | SKILL.md:409 — "The consolidation column approach centralizes logic" |
+| formulas.constants | shallow | SKILL.md:47 "The only hardcoded numbers permitted are" yet SKILL.md:715 "=E29*0.15" is marked correct. |
 | formulas.reuse | covered | SKILL.md:560 — "Reference the main DCF calculation but substitute these values." |
 | formulas.references | covered | SKILL.md:89 — "Verify formulas reference correct scenario block cells" |
 | formulas.sheet-changes | covered | SKILL.md:654 — "Lock row layout FIRST, then write formulas" |
@@ -118,22 +118,22 @@ Recalculation uses recalc.py, which is not in this skill folder; its checks were
 | formulas.errors | covered | SKILL.md:83 — "Zero formula errors required" |
 | formulas.rounding | absent | Display formats only; no calculation rounding rule. |
 | checks.built-in | shallow | SKILL.md:1147 — "Sum checks and balance checks where applicable" with no check cells specified. |
-| checks.test | covered | SKILL.md:1144, 1235 — "Enter sample numbers to verify formulas" "Change case selector - does the consolidation column update properly?" |
+| checks.test | covered | SKILL.md:1144 "Enter sample numbers to verify formulas"; SKILL.md:1235 "Change case selector - does the consolidation column update properly?" |
 | checks.peer-review | covered | SKILL.md:1158 — "Have someone else check formulas" |
-| checks.evaluate | shallow | SKILL.md:1234 — "Test one FCF formula - does it reference the correct assumption rows?" Spot check only. |
+| checks.evaluate | shallow | SKILL.md:1234 "Test one FCF formula"; SKILL.md:1234 "does it reference the correct assumption rows?" Spot check only. |
 | scenarios.cases | covered | SKILL.md:86 — "Create separate blocks for Bear/Base/Bull cases" |
 | scenarios.sensitivity | covered | SKILL.md:362 — "Shows enterprise value sensitivity to discount rate and perpetuity growth" |
 | scenarios.target | not-applicable | No target-result solve requested. |
-| scenarios.forecast | covered | SKILL.md:137, 143 — "Growth Rate Framework:" "Revenue(Year N) = Revenue(Year N-1) × (1 + Growth Rate)" |
+| scenarios.forecast | covered | SKILL.md:137 "Growth Rate Framework:"; SKILL.md:143 "Revenue(Year N) = Revenue(Year N-1) × (1 + Growth Rate)" |
 | analysis.impact | not-applicable | No transaction or decision impact analysis. |
-| analysis.valuation | covered | SKILL.md:251, 327 — "Cash flows assumed to occur mid-year" "Implied Price per Share" |
+| analysis.valuation | covered | SKILL.md:251 "Cash flows assumed to occur mid-year"; SKILL.md:327 "Implied Price per Share" |
 | analysis.ratios | shallow | SKILL.md:116 — "ROIC, ROE trends" listed without interpretation. |
 | analysis.comparisons | covered | SKILL.md:106 — "Cross-check revenue growth rates with industry benchmarks" |
 | analysis.statements | not-applicable | Uses filed statements; prepares none. |
 | analysis.ifrs18 | not-applicable | No IFRS statement preparation. |
 | reporting.charts | not-applicable | No charts in the specified deliverable. |
 | reporting.formats | covered | SKILL.md:900 — "ALWAYS specify units in headers" |
-| reporting.results | shallow | SKILL.md:3, 795 — "outputs professional Excel models with executive summaries" vs "Main valuation model with sensitivity analysis at bottom" |
+| reporting.results | shallow | SKILL.md:3 "outputs professional Excel models with executive summaries" vs SKILL.md:795 "Main valuation model with sensitivity analysis at bottom" |
 | reporting.disclosure | not-applicable | No IFRS reporting output. |
 | controls.backup-version | shallow | SKILL.md:1159 — "Save versions as work progresses" without naming or a current-version rule. |
 | controls.protection | not-applicable | No shared or governed workbook deployment. |

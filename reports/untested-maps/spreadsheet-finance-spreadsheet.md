@@ -29,7 +29,7 @@ None.
    Source: [20 principles for good spreadsheet practice](https://www.icaew.com/technical/technology/excel-community/20-principles-for-good-spreadsheet-practice-2024-edition) — 17. Build in checks, controls, and alerts from the outset.; 18. Test and review to reduce the risk of error and identify inefficiencies.; 12. Keep formulas consistent across ranges.
    Source: [Evaluate a nested formula one step at a time](https://support.microsoft.com/en-us/excel/evaluate-a-nested-formula-one-step-at-a-time) — Select Evaluate to examine the value of the underlined reference.
    Source: [ROUND function](https://support.microsoft.com/en-us/excel/functions/round-function) — The ROUND function rounds a number to a specified number of digits.
-   Why: SKILL.md:37–47 recalculates "whenever possible" and renders "when rendering tooling is available"; the review looks at layout and visible results, and SKILL.md:94 names off-by-one and range mistakes without a way to find them. Nothing compares outputs with independently computed values, adds a reconciliation cell or says where rounding happens.
+   Why: SKILL.md:37 recalculates "whenever possible" and SKILL.md:38 renders "when rendering tooling is available"; the review looks at layout and visible results, and SKILL.md:94 names off-by-one and range mistakes without a way to find them. Nothing compares outputs with independently computed values, adds a reconciliation cell or says where rounding happens.
    Fix: In the Recalculation and visual review section, add a check of a few key outputs against values computed outside the workbook, a scan for formulas that break the pattern of their row or column, and a fallback when no recalculation tool exists.
 2. **Keep a restorable original when editing in place** [model+map]
    Map nodes: `controls.backup-version`, `formulas.sheet-changes`.
@@ -91,33 +91,33 @@ The four openpyxl example scripts were listed but not read as instructions; quot
 
 | Node | State | Evidence |
 |---|---|---|
-| purpose.question | shallow | SKILL.md:18 — "Confirm the file type and goal: create, edit, analyze, or visualize." Names the operation, not the decision it supports. |
+| purpose.question | shallow | SKILL.md:18 — "Confirm the file type and goal" Names the operation, not the decision it supports. |
 | purpose.audience | not-applicable | Builds the requested file; no business case or downstream process review promised. |
 | purpose.tool-fit | shallow | SKILL.md:19 — "for analysis and CSV/TSV workflows"; picks a library, not whether a spreadsheet suits the task. |
 | purpose.risk | not-applicable | No assurance or criticality assessment in scope. |
 | purpose.competence | not-applicable | No staffing or training of workbook users in scope. |
 | inputs.quality | shallow | SKILL.md:10 — "Read or analyze tabular data (filter, aggregate, pivot, compute metrics)." No check of source data first. |
-| inputs.assumptions | shallow | SKILL.md:98 — "For financial models, cite model inputs in cell comments." SKILL.md:137 — "yellow fill for key assumptions that need attention"; sources, not reasoning. |
+| inputs.assumptions | shallow | SKILL.md:98 "For financial models, cite model inputs in cell comments."; SKILL.md:137 "yellow fill for key assumptions that need attention"; sources, not reasoning. |
 | inputs.validation | absent | No data-validation constraints on input cells. |
 | inputs.messages | absent | No input or error messages. |
 | inputs.inherited-validation | absent | Editing rules cover formatting, not existing validation rules. |
-| inputs.sourcing | covered | SKILL.md:97 — "Cite sources inside the spreadsheet using plain-text URLs." SKILL.md:136 — "Cite sources for all raw inputs in cell comments." |
-| structure.flow | shallow | SKILL.md:112 — "Headers should be visually distinct from raw inputs and derived cells." Colour marks cell roles; no input-to-output arrangement. |
-| structure.layout | covered | SKILL.md:116–117 — "Group related calculations and make totals simple sums of the cells above them." "Add whitespace to separate sections." |
+| inputs.sourcing | covered | SKILL.md:97 "Cite sources inside the spreadsheet using plain-text URLs."; SKILL.md:136 "Cite sources for all raw inputs in cell comments." |
+| structure.flow | shallow | SKILL.md:112 — "Headers should be visually distinct from raw inputs" Colour marks cell roles; no input-to-output arrangement. |
+| structure.layout | covered | SKILL.md:116 "make totals simple sums of the cells above them"; SKILL.md:117 "Add whitespace to separate sections." |
 | structure.adaptability | absent | Nothing on extending rows or periods without repairing formulas. |
-| structure.conventions | covered | SKILL.md:101–105, 121 — "Preserve existing formatting and style exactly." "Color conventions (if no style guidance)" |
+| structure.conventions | covered | SKILL.md:103 "Preserve existing formatting and style exactly."; SKILL.md:121 "Color conventions (if no style guidance)" |
 | structure.guidance | absent | No notes area, purpose, owner or operating guidance for the next user. |
 | formulas.consistent | absent | Copy behaviour is covered under references; no check that comparable ranges share one formula pattern. |
-| formulas.simple | covered | SKILL.md:88 — "Keep formulas simple and legible; use helper cells for complex logic." |
+| formulas.simple | covered | SKILL.md:88 "Keep formulas simple and legible"; SKILL.md:88 "use helper cells for complex logic" |
 | formulas.constants | covered | SKILL.md:90 — "Prefer cell references over magic numbers" |
 | formulas.reuse | absent | Totals sum the cells above; no rule to reference an existing result instead of recomputing it. |
 | formulas.references | covered | SKILL.md:91 — "references carefully so copied formulas behave correctly." |
 | formulas.sheet-changes | shallow | SKILL.md:11 — "Modify existing workbooks without breaking formulas, references, or formatting." Goal stated, no check after edits. |
-| formulas.function-use | covered | SKILL.md:87–89 — "Do not use dynamic array functions like" "Avoid volatile functions like" |
-| formulas.errors | covered | SKILL.md:37, 93 — "Recalculate formulas before delivery whenever possible so cached values are present in the workbook." "Guard against" |
+| formulas.function-use | covered | SKILL.md:87 "Do not use dynamic array functions like"; SKILL.md:89 "Avoid volatile functions like" |
+| formulas.errors | covered | SKILL.md:37 "Recalculate formulas before delivery whenever possible"; SKILL.md:93 "Guard against" |
 | formulas.rounding | absent | SKILL.md:110 sets percentage display only; no calculation rounding rule. |
 | checks.built-in | absent | No reconciliation or check cells. |
-| checks.test | shallow | SKILL.md:47 — "Review rendered sheets for layout, formula results, clipping, inconsistent styles, and spilled text." Visual review only, when rendering exists. |
+| checks.test | shallow | SKILL.md:47 — "Review rendered sheets for layout, formula results, clipping" Visual review only, when rendering exists. |
 | checks.peer-review | not-applicable | Ends at local handoff; no reviewer assigned. |
 | checks.evaluate | shallow | SKILL.md:94 — "Check for off-by-one mistakes, circular references, and incorrect ranges." No method for inspecting formula steps. |
 | scenarios.cases | not-applicable | No forecasting or scenario analysis promised; IB-style models get layout rules only. |
@@ -125,8 +125,8 @@ The four openpyxl example scripts were listed but not read as instructions; quot
 | scenarios.target | not-applicable | No forecasting or scenario analysis promised; IB-style models get layout rules only. |
 | scenarios.forecast | not-applicable | No forecasting or scenario analysis promised; IB-style models get layout rules only. |
 | analysis.* | not-applicable | No valuation, ratio or statement analysis promised. |
-| reporting.charts | shallow | SKILL.md:12, 33 — "Visualize data with charts, summary tables, and sensible spreadsheet styling." "for native Excel charts when needed" |
-| reporting.formats | covered | SKILL.md:108, 111, 135 — "Use appropriate number and date formats." "Currencies should use the appropriate currency format." "Always specify units in headers" |
+| reporting.charts | shallow | SKILL.md:12 "Visualize data with charts, summary tables, and sensible spreadsheet styling."; SKILL.md:33 "for native Excel charts when needed" |
+| reporting.formats | covered | SKILL.md:108 "Use appropriate number and date formats."; SKILL.md:111 "Currencies should use the appropriate currency format."; SKILL.md:135 "Always specify units in headers" |
 | reporting.results | not-applicable | No separate findings memo or report. |
 | reporting.disclosure | not-applicable | No IFRS reporting output. |
 | controls.backup-version | shallow | SKILL.md:23 — "Save outputs, keep filenames stable, and clean up intermediate files." No copy of the original kept. |
