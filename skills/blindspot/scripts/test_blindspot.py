@@ -174,7 +174,7 @@ class HelperTests(unittest.TestCase):
 
     def lint(self, report, profile=None):
         with contextlib.redirect_stdout(io.StringIO()) as output:
-            status = blindspot.cmd_lint(argparse.Namespace(report=str(report), map='software', profile=profile, skill=None))
+            status = blindspot.cmd_lint(argparse.Namespace(report=str(report), map='software', profile=profile, skill=[]))
         return status, output.getvalue()
 
     def test_lint_relative_header_profile(self):
@@ -255,6 +255,15 @@ class HelperTests(unittest.TestCase):
                 report = self.evidence_report(state, '"Discussed in the report, not present in the Skill."')
                 result = self.cli('lint', report, '--map', 'software', '--skill', skill)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_lint_checks_explicit_delegated_files_and_folders(self):
+        skill = self.write('skill/SKILL.md', 'Read the brief.').parent
+        script = self.write('tools/check.py', 'Check the risks.')
+        called_skill = self.write('shared/review/references/guide.md', 'Record the decision.').parent.parent
+        report = self.evidence_report('covered', '"Check the risks." and "Record the decision."')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill,
+                          '--skill', script, '--skill', called_skill)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_lint_does_not_use_the_report_or_files_outside_the_skill_as_evidence(self):
         skill = self.write('skill/SKILL.md', 'Read the brief.').parent

@@ -22,7 +22,7 @@ Usage:
            (writes worksheet.md and worksheet-nodes.md; open the nodes file in step 3)
   python3 blindspot.py grep <folder> [<folder> ...] -e <term> [-e <term> ...]
   python3 blindspot.py sources --map <id> <node-id> [<node-id> ...]
-  python3 blindspot.py lint <report.md> --map <id> [--skill <skill-folder>] [--profile <.blindspot.yaml>]
+  python3 blindspot.py lint <report.md> --map <id> [--skill <skill-folder> [--skill <delegated-path>] ...] [--profile <.blindspot.yaml>]
   python3 blindspot.py checklist --map <id> [--skip <group> ...] [--out checklist.md]
   python3 blindspot.py checklist --map <id> --groups    (list group ids to skip)
   python3 blindspot.py maps
@@ -377,12 +377,20 @@ def cmd_sources(args):
 EVIDENCE_QUOTE_RE = re.compile(r'"((?:\\.|[^"\\])*)"|“([^”]*)”')
 
 
-def missing_evidence_quotes(folder, report, quotes):
+def evidence_files(roots):
+    for root in roots:
+        if root.is_file():
+            yield root
+        else:
+            for path in root.rglob("*"):
+                if ".git" not in path.relative_to(root).parts and not path.is_symlink() and path.is_file():
+                    yield path
+
+
+def missing_evidence_quotes(roots, report, quotes):
     missing = set(quotes)
-    for path in folder.rglob("*"):
-        if not missing:
-            break
-        if ".git" in path.relative_to(folder).parts or path == report or path.is_symlink() or not path.is_file():
+    for path in evidence_files(roots):
+        if path == report:
             continue
         try:
             text = path.read_text(encoding="utf-8")
@@ -392,6 +400,8 @@ def missing_evidence_quotes(folder, report, quotes):
             continue
         normalized = " ".join(text.split())
         missing = {quote for quote in missing if quote not in normalized}
+        if not missing:
+            break
     return missing
 
 
@@ -402,9 +412,12 @@ def cmd_lint(args):
     report = pathlib.Path(args.report).resolve()
     text = report.read_text(encoding="utf-8")
     problems = []
-    skill = pathlib.Path(args.skill).resolve() if args.skill else None
-    if skill and not (skill / "SKILL.md").is_file():
-        raise ValueError(f"no SKILL.md in {skill}")
+    roots = [pathlib.Path(path).resolve() for path in args.skill]
+    if roots and not (roots[0] / "SKILL.md").is_file():
+        raise ValueError(f"no SKILL.md in {roots[0]}")
+    for root in roots[1:]:
+        if not root.is_file() and not root.is_dir():
+            raise ValueError(f"evidence path is not a file or directory: {root}")
 
     sec = re.split(r"^## ", text, flags=re.M)
     sections = {s.split("\n", 1)[0].strip().lower(): s for s in sec[1:]}
@@ -430,7 +443,7 @@ def cmd_lint(args):
             continue
         if state == "undetermined" and (len(cells) < 3 or not cells[2]):
             problems.append(f"table: {key}: undetermined needs evidence")
-        if skill and state in ("covered", "shallow") and len(cells) >= 3:
+        if roots and state in ("covered", "shallow") and len(cells) >= 3:
             evidence = cells[2].replace(r"\|", "|")
             for straight, curly in EVIDENCE_QUOTE_RE.findall(evidence):
                 quote = " ".join((curly or straight.replace(r'\"', '"')).split())
@@ -442,7 +455,7 @@ def cmd_lint(args):
             states[nid] = state
 
     if evidence_quotes:
-        missing = missing_evidence_quotes(skill, report, (quote for _, quote in evidence_quotes))
+        missing = missing_evidence_quotes(roots, report, (quote for _, quote in evidence_quotes))
         for key, quote in evidence_quotes:
             if quote in missing:
                 problems.append(f"table: {key}: evidence quote not found in the Skill: {quote!r}")
@@ -567,7 +580,8 @@ def main():
     p.add_argument("--max", type=int, default=40)
     p = sub.add_parser("sources"); p.add_argument("--map", required=True); p.add_argument("nodes", nargs="+")
     p = sub.add_parser("lint"); p.add_argument("report"); p.add_argument("--map", required=True); p.add_argument("--profile")
-    p.add_argument("--skill", metavar="FOLDER", help="verify evidence quotes against the audited Skill folder")
+    p.add_argument("--skill", metavar="PATH", action="append", default=[],
+                   help="audited Skill folder; repeat for delegated files or folders")
     p = sub.add_parser("checklist"); p.add_argument("--map", required=True); p.add_argument("--skip", nargs="+")
     p.add_argument("--groups", action="store_true"); p.add_argument("--out")
     p.add_argument("--max-sources", type=positive_int, default=1)

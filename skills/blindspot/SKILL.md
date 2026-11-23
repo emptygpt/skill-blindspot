@@ -203,7 +203,7 @@ Give every Needed finding a `Fix:` line. Point to a step or file of the skill an
 
 With the helper, run `lint --skill <skill-folder>` on the finished report (with the report path and map as shown above) and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, `undetermined` rows without evidence, and a counts line that does not match the table. If you include a counts line, count `undetermined` separately from confirmed coverage and gaps.
 
-In `covered` and `shallow` Evidence cells, put exact excerpts in double quotes (straight or curly). Each excerpt must occur in a UTF-8 text file under the audited Skill folder, including references and scripts. Lint ignores differences in runs of whitespace, including line breaks. Quote separate excerpts separately rather than inserting ellipses or paraphrasing inside a quote. Without `--skill`, lint checks the report structure only; use that mode for historical reports when the audited files are unavailable.
+In `covered` and `shallow` Evidence cells, put exact excerpts in double quotes (straight or curly). Each excerpt must occur in a UTF-8 text file under the audited Skill folder, including references and scripts, or in a delegated file or folder. Pass the audited Skill folder first, then repeat `--skill <path>` only for evidence from files or folders the Skill actually uses outside its folder. Lint ignores differences in runs of whitespace, including line breaks. Quote separate excerpts separately rather than inserting ellipses or paraphrasing inside a quote. Without `--skill`, lint checks the report structure only; use that mode for historical reports when the audited files are unavailable.
 
 ## Profile format
 
