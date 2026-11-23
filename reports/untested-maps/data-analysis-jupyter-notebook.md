@@ -92,7 +92,7 @@ Static review of the pinned skill, its references, notebook templates, and scaff
 | preparation.record-keys | not-applicable | No required join or related-table preparation. |
 | preparation.transform-log | covered | SKILL.md:58–60; references/quality-checklist.md:5–6 — "Keep each code cell focused on one step"; execute in order without hidden state, preserving the sequence as code. |
 | exploration.relationships | not-applicable | The experiment path does not prescribe trend or relationship investigation; it also applies to runnable baselines without these outputs. |
-| exploration.distributions | shallow | assets/experiment-template.ipynb — "statistics.fmean(values)" is paired with extrema as a sample summary, not a check against expectations before selecting a method. |
+| exploration.distributions | shallow | assets/experiment-template.ipynb:53 — "statistics.fmean(values)" is paired with extrema as a sample summary, not a check against expectations before selecting a method. |
 | analysis.method-fit | covered | SKILL.md:22–25; references/experiment-patterns.md:7–8 — "If the request is exploratory, analytical, or hypothesis-driven" choose the experiment pattern, which plans metrics and a baseline before adding complexity. |
 | analysis.sampling-design | shallow | references/experiment-patterns.md:7 — "list hypotheses, sweeps, and metrics" outlines the design but does not check its validity for inference. |
 | analysis.assumptions-log | absent | No record of assumptions, justifications, or decisions about them. |
@@ -101,7 +101,7 @@ Static review of the pinned skill, its references, notebook templates, and scaff
 | analysis.model-comparison | not-applicable | No candidate model selection stage is required. |
 | visualisation | not-applicable | The experiment output prescribes notebook code with compact metrics and tables, not chart creation. |
 | reporting.audience-results | covered | SKILL.md:39,58–61; references/experiment-patterns.md:9 — "summarize findings in markdown near the relevant code" with concise structured metrics. |
-| reporting.limited-conclusions | shallow | assets/experiment-template.ipynb — "Surprises or failure modes" prompts for unexpected results but does not require limits on interpretation. |
+| reporting.limited-conclusions | shallow | assets/experiment-template.ipynb:67 — "Surprises or failure modes" prompts for unexpected results but does not require limits on interpretation. |
 | reporting.analysis-code | covered | SKILL.md:58–61,72–75 — "Fill the notebook with small, runnable steps" keeps the analysis code with the delivered results. |
 | reporting.environment-record | shallow | SKILL.md:89–98; scripts/new_notebook.py:57–61 — "Optional Python packages for local notebook execution" identifies tooling; template metadata is not an inventory of the executed environment. |
 | reporting.version-record | absent | No link between saved outputs and exact notebook and input versions. |
