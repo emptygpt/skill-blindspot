@@ -174,7 +174,7 @@ class HelperTests(unittest.TestCase):
 
     def lint(self, report, profile=None):
         with contextlib.redirect_stdout(io.StringIO()) as output:
-            status = blindspot.cmd_lint(argparse.Namespace(report=str(report), map='software', profile=profile))
+            status = blindspot.cmd_lint(argparse.Namespace(report=str(report), map='software', profile=profile, skill=[]))
         return status, output.getvalue()
 
     def test_lint_relative_header_profile(self):
@@ -221,6 +221,83 @@ class HelperTests(unittest.TestCase):
         self.assertIn("lint: ", result.stderr)
         self.assertIn(str(report), result.stderr)
         self.assertNotIn('Traceback', result.stderr)
+
+    def evidence_report(self, state, evidence, filename='reports/report.md'):
+        report = self.report(excluded=False)
+        text = report.read_text(encoding='utf-8').replace(
+            '| requirements.understand-request | covered | Synthetic evidence |',
+            f'| requirements.understand-request | {state} | {evidence} |')
+        return self.write(filename, text.replace('## Findings\n',
+                                                 '## Findings\nrequirements.understand-request\n'))
+
+    def test_lint_checks_every_evidence_quote_for_covered_and_shallow(self):
+        skill = self.write('skill/SKILL.md', 'Read the brief.').parent
+        for state in ('covered', 'shallow'):
+            with self.subTest(state=state):
+                report = self.evidence_report(state, '"Read the brief." and “Fabricated instruction.”')
+                result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn('requirements.understand-request', result.stdout)
+                self.assertIn('Fabricated instruction.', result.stdout)
+                self.assertNotIn('Read the brief.', result.stdout)
+
+    def test_lint_matches_evidence_across_whitespace_in_skill_and_nested_files(self):
+        skill = self.write('skill/SKILL.md', 'Read\n  the\tbrief.').parent
+        self.write('skill/scripts/review.py', 'Review    the risks and check x | y.')
+        report = self.evidence_report('shallow', '"Read the brief." and “Review the risks and check x \\| y.”')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_lint_checks_the_whole_nested_curly_quote(self):
+        skill = self.write('skill/SKILL.md', 'Check “risks” before delivery.').parent
+        for tail, expected in (('before delivery.', 0), ('after release.', 1)):
+            with self.subTest(tail=tail):
+                report = self.evidence_report('covered', f'“Check “risks” {tail}”')
+                result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+                self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+                if expected:
+                    self.assertIn(f'Check “risks” {tail}', result.stdout)
+
+    def test_lint_unescapes_only_markdown_punctuation_in_evidence(self):
+        skill = self.write('skill/SKILL.md', r'Use C:\temp and *literal* with x | y. Keep \q.').parent
+        report = self.evidence_report(
+            'covered', r'"Use C:\\temp and \*literal\* with x \| y." and “Keep \q.”')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_lint_reports_unbalanced_curly_quotes_and_checks_later_excerpts(self):
+        skill = self.write('skill/SKILL.md', 'A literal “ mark.').parent
+        report = self.evidence_report('covered', '“A literal “ mark.” and "Unsupported later excerpt."')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn('requirements.understand-request: malformed curly quote', result.stdout)
+        self.assertIn('evidence quote not found in the Skill: \'Unsupported later excerpt.\'', result.stdout)
+
+    def test_lint_ignores_evidence_quotes_for_other_states(self):
+        skill = self.write('skill/SKILL.md', '# Skill').parent
+        for state in ('absent', 'not-applicable', 'undetermined'):
+            with self.subTest(state=state):
+                report = self.evidence_report(state, '"Discussed in the report, not present in the Skill."')
+                result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_lint_checks_explicit_delegated_files_and_folders(self):
+        skill = self.write('skill/SKILL.md', 'Read the brief.').parent
+        script = self.write('tools/check.py', 'Check the risks.')
+        called_skill = self.write('shared/review/references/guide.md', 'Record the decision.').parent.parent
+        report = self.evidence_report('covered', '"Check the risks." and "Record the decision."')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill,
+                          '--skill', script, '--skill', called_skill)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_lint_does_not_use_the_report_or_files_outside_the_skill_as_evidence(self):
+        skill = self.write('skill/SKILL.md', 'Read the brief.').parent
+        outside = self.write('outside.txt', 'Fabricated instruction.')
+        (skill / 'outside.txt').symlink_to(outside)
+        report = self.evidence_report('covered', '"Fabricated instruction."', 'skill/report.md')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn('Fabricated instruction.', result.stdout)
 
     def test_lint_findings_skip_filenames_but_reject_unknown_nodes(self):
         report = self.report(excluded=False)

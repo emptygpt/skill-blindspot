@@ -30,7 +30,7 @@ python3 $S maps                                               # list maps and th
 python3 $S prepare <skill-folder> --map <id> --out worksheet.md   # also writes worksheet-nodes.md
 python3 $S grep <skill-folder> [<repo-root>] -e <term> -e <term>  # before rating a finding Needed
 python3 $S sources --map <id> <node-id> [<node-id> ...]       # sources for the report
-python3 $S lint blindspot-report.md --map <id>                # uses header Profile: path (or none); --profile overrides
+python3 $S lint blindspot-report.md --map <id> --skill <skill-folder>  # uses header Profile: path (or none); --profile overrides
 python3 $S checklist --map <id> [--skip <group> ...] --out checklist.md  # before a skill exists
 ```
 
@@ -201,7 +201,9 @@ If there was no map, say in the first lines of the report that every finding is 
 
 Give every Needed finding a `Fix:` line. Point to a step or file of the skill and say what to add; do not write the new text for the author. Other bands may have one.
 
-With the helper, run `lint` on the finished report and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, `undetermined` rows without evidence, and a counts line that does not match the table. If you include a counts line, count `undetermined` separately from confirmed coverage and gaps.
+With the helper, run `lint --skill <skill-folder>` on the finished report (with the report path and map as shown above) and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, `undetermined` rows without evidence, and a counts line that does not match the table. If you include a counts line, count `undetermined` separately from confirmed coverage and gaps.
+
+In `covered` and `shallow` Evidence cells, put exact excerpts in double quotes (straight or curly). Each excerpt must occur in a UTF-8 text file under the audited Skill folder, including references and scripts, or in a delegated file or folder. Pass the audited Skill folder first, then repeat `--skill <path>` only for evidence from files or folders the Skill actually uses outside its folder. Lint ignores differences in runs of whitespace, including line breaks. Quote separate excerpts separately rather than inserting ellipses or paraphrasing inside a quote. Without `--skill`, lint checks the report structure only; use that mode for historical reports when the audited files are unavailable.
 
 ## Profile format
 
