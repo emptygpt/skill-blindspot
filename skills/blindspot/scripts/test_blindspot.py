@@ -258,6 +258,13 @@ class HelperTests(unittest.TestCase):
                 if expected:
                     self.assertIn(f'Check “risks” {tail}', result.stdout)
 
+    def test_lint_unescapes_only_markdown_punctuation_in_evidence(self):
+        skill = self.write('skill/SKILL.md', r'Use C:\temp and *literal* with x | y. Keep \q.').parent
+        report = self.evidence_report(
+            'covered', r'"Use C:\\temp and \*literal\* with x \| y." and “Keep \q.”')
+        result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_lint_ignores_evidence_quotes_for_other_states(self):
         skill = self.write('skill/SKILL.md', '# Skill').parent
         for state in ('absent', 'not-applicable', 'undetermined'):

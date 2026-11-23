@@ -34,6 +34,7 @@ import argparse
 import json
 import pathlib
 import re
+import string
 import sys
 from urllib.parse import unquote, urlsplit
 
@@ -374,7 +375,8 @@ def cmd_sources(args):
     return status
 
 
-EVIDENCE_TOKEN_RE = re.compile(r'\\[\\"]|["“”]')
+MARKDOWN_ESCAPE_RE = re.compile(r"\\([" + re.escape(string.punctuation) + r"])")
+EVIDENCE_TOKEN_RE = re.compile(MARKDOWN_ESCAPE_RE.pattern + r'|["“”]')
 
 
 def evidence_excerpts(evidence):
@@ -466,9 +468,8 @@ def cmd_lint(args):
         if state == "undetermined" and (len(cells) < 3 or not cells[2]):
             problems.append(f"table: {key}: undetermined needs evidence")
         if roots and state in ("covered", "shallow") and len(cells) >= 3:
-            evidence = cells[2].replace(r"\|", "|")
-            for excerpt in evidence_excerpts(evidence):
-                quote = " ".join(excerpt.replace(r'\"', '"').split())
+            for excerpt in evidence_excerpts(cells[2]):
+                quote = " ".join(MARKDOWN_ESCAPE_RE.sub(r"\1", excerpt).split())
                 if quote:
                     evidence_quotes.append((key, quote))
         for nid in targets:
