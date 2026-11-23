@@ -64,7 +64,7 @@ npx skills add emptygpt/skill-blindspot
 | `writing` | 在线发表的非虚构文章 | 78 | [3 份审计](reports/untested-maps/README.md#writing) |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 | [3 份审计](reports/untested-maps/README.md#wechat-article) |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 | [20 份审计](reports/code-20.md) |
-| `research-paper` | 科研论文与可复现分析 | 76 | [未经实测（1/3）](reports/untested-maps/research-paper.md) |
+| `research-paper` | 科研论文与可复现分析 | 76 | 3 份审计：[科研写作](reports/untested-maps/research-paper.md)、[论文写作](reports/untested-maps/research-paper-research-paper-writing.md)、[学术论文](reports/untested-maps/research-paper-academic-paper.md) |
 | `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | 3 份审计：[架构决策记录](reports/untested-maps/tech-docs.md)、[协作编写](reports/untested-maps/tech-docs-doc-coauthoring.md)、[API 端点](reports/untested-maps/tech-docs-document-api-endpoint.md) |
 | `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [3 份审计](reports/untested-maps/) |
 | `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [3 份审计](reports/untested-maps/) |

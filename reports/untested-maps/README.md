@@ -8,6 +8,8 @@ Each map is applied to public skills pinned to commits, with a target of three s
 | [`data-analysis` 0.1.0](data-analysis-analyze.md) | [Anthropic: analyze](https://github.com/anthropics/knowledge-work-plugins/tree/0e0fcacddcc892eb92a1b7873ff9d68159c47571/data/skills/analyze) | 0 | 5 | 3 |
 | [`data-analysis` 0.1.0](data-analysis-jupyter-notebook.md) | [OpenAI: jupyter-notebook](https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/jupyter-notebook) | 0 | 3 | 2 |
 | [`research-paper` 0.1.0](research-paper.md) | [K-Dense-AI: scientific-writing](https://github.com/K-Dense-AI/claude-scientific-skills/tree/c21d13b3cc2894680229ba9959a53281acb9200e/skills/scientific-writing) | 0 | 4 | 1 |
+| [`research-paper` 0.1.0](research-paper-research-paper-writing.md) | [Master-cai: research-paper-writing](https://github.com/Master-cai/Research-Paper-Writing-Skills/tree/77e7c2c1ba06f7d71844873147665437a03aac1b/research-paper-writing) | 0 | 5 | 3 |
+| [`research-paper` 0.1.0](research-paper-academic-paper.md) | [Imbad0202: academic-paper](https://github.com/Imbad0202/academic-research-skills/tree/d103b1005bb8c9f7a597e6a7ed473b75dcf8830e/academic-paper) | 0 | 6 | 2 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance.md) | [Anthropic: xlsx](https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/xlsx) | 0 | 5 | 0 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance-spreadsheet.md) | [OpenAI: spreadsheet](https://github.com/openai/skills/tree/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/spreadsheet) | 0 | 6 | 2 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance-dcf-model.md) | [Anthropic financial-services: dcf-model](https://github.com/anthropics/financial-services/tree/3e32c2287dcb637c184c01cc0ad82d6af7e9bb0f/plugins/vertical-plugins/financial-analysis/skills/dcf-model) | 0 | 5 | 4 |
@@ -18,7 +20,7 @@ Each map is applied to public skills pinned to commits, with a target of three s
 
 These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills or their delegated files. The first round used paraphrased evidence; the follow-up reports include short excerpts checked with `lint --skill`.
 
-The counts here are findings by severity, not counts of domain coverage or independent re-check results. The first-round audits found no Needed findings to send through a separate re-check.
+The counts here are findings by severity, not counts of domain coverage or independent re-check results. The first-round audits found no Needed findings to send through a separate re-check. Among the follow-up audits, the academic-paper reporting-guideline finding was first rated Needed; a separate re-check downgraded it to Worth considering because deep-research recommends a guideline upstream.
 
 ## Writing
 
