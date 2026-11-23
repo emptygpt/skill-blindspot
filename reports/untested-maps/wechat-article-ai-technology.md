@@ -21,52 +21,53 @@ Map: wechat-article 0.1.0 extends writing 0.1.0    Profile: none    Date: 2026-1
 
 ### Needed
 
-1. **Disclose AI-generated prose in the Markdown itself** [model+map]
-
-   Map nodes: `comp.ai-disclosure`, `wx.ai-label`.
-   Source: [BBC Editorial Guidelines](https://www.bbc.co.uk/editorialguidelines/guidelines) — transparency about AI; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — prominent labelling of generated or synthesized content.
-   Why: The writing route asks an agent to generate the body; the rewriter, reviewer, rules, and final validator lack a reader-facing AI or AIGC disclosure step. An in-text disclosure is part of the deliverable, independently of any account setting the operator adds at upload.
-   Fix: In the mandatory review, require an accurate, prominent in-text disclosure when the route generates the article, and retain it through the final write.
+None after independent re-check.
 
 ### Worth considering
 
-1. **Check the provenance, version and limits of practical demonstrations** [model+map]
+1. **Flag AI-generated prose to the operator at handoff** [model+map]
+
+   Map nodes: `comp.ai-disclosure`, `wx.ai-label`.
+   Source: [BBC Editorial Guidelines](https://www.bbc.co.uk/editorialguidelines/guidelines) — transparency about AI; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — prominent labelling of generated or synthesized content.
+   Why: The independent re-check confirmed that there is no AI or AIGC disclosure step at revision `ae6d749`. The skill stops at a Markdown file, so scope rule 3 puts the upload-time AI label outside its scope. Whether the Markdown itself should carry a disclosure is disputed, so scope rule 5 puts this finding in Worth considering rather than Needed.
+   Fix: At final delivery, remind the operator to tick the AI creation declaration on upload and optionally add a disclosure line to the body.
+2. **Check the provenance, version and limits of practical demonstrations** [model+map]
 
    Map nodes: `research.online-third-party`, `fact.verify`, `fact.corroborate`, `fact.authenticity`, `fact.not-misleading`, `draft.first-hand`, `draft.opinion-labelled`, `wx.false-info`, `wx.overmarketing`.
    Source: [BBC Editorial Guidelines, §3](https://www.bbc.co.uk/editorialguidelines/guidelines) — online material, corroboration and avoiding misleading audiences; [Google’s people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) — demonstrate first-hand expertise; [SPJ Code of Ethics](https://www.spj.org/spj-code-of-ethics/) — label opinion and analysis; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — §§4.8–4.9.
    Why: Guard and reviewer preserve evidence anchors and prohibit invented results. That checks fidelity, not whether the supplied material still applies or whether the reader can distinguish a documented result, a hypothetical example and an endorsement. The writing structure calls for positive evaluation, which can omit material limitations even without introducing new facts.
    Fix: Ask the contributor for release or revision context and evidence for significant claims, flag unverified behavior, and distinguish demonstrated limitations and editorial judgments from factual instructions; do not install or execute the subject Skill.
-2. **Validate the final headline, not just the outline direction** [model+map+trace]
+3. **Validate the final headline, not just the outline direction** [model+map+trace]
 
    Map nodes: `head.headline`, `wx.title-length`, `wx.title-accurate`, `wx.title-no-bait`.
    Source: [Google’s people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) — descriptive, non-exaggerated headings; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — §§4.11 and 4.21; [WeChat draft API](https://developers.weixin.qq.com/doc/subscription/api/draftbox/draftmanage/api_draft_add.html) — title limit for that route.
    Why: The outline gets a title direction and the reviewer removes exaggeration generally. The file-name guard sanitizes names, but it neither compares the article’s final heading with the reviewed body nor checks a platform headline limit.
    Fix: Before writing the file, compare its headline to the reviewed body, remove unsupported hooks and flag titles that exceed a known target-route limit.
-3. **Carry source attribution and reuse choices through to the final copy** [model+map]
+4. **Carry source attribution and reuse choices through to the final copy** [model+map]
 
    Map nodes: `fact.cite-sources`, `rights.permissions`, `rights.attribution`, `head.byline`, `comp.honest-authorship`.
    Source: [SPJ Code of Ethics](https://www.spj.org/spj-code-of-ethics/) — identify sources and credit material; [O*NET Database](https://www.onetcenter.org/database.html) — 27-3041.00, arrange for copyright permissions; [Google’s people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) — byline and author information.
    Why: Keeping URLs and separating reference structures from factual sources prevents some copying. It does not say how to attribute a borrowed code example or screenshot, confirm that reuse is allowed, or identify the actual author when using the prescribed collective voice.
    Fix: Check what the user has permission to reproduce, attach source credit at the point of reuse, and ask for a byline or author context rather than assuming it.
-4. **Have the operator review the finished article before publication** [map]
+5. **Have the operator review the finished article before publication** [map]
 
    Map nodes: `publish.approval`, `edit.second-reader`, `wx.no-templated-or-automated`.
    Source: [O*NET Database](https://www.onetcenter.org/database.html) — 27-3043.00, submit work for approval; [Purdue OWL](https://owl.purdue.edu/owl/general_writing/the_writing_process/proofreading/index.html) — ask someone else to read the draft; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — §§3.27–3.28.
    Why: The operator approves the outline and the agent reviews the draft. Neither amounts to a human reviewing or contributing to the finished piece. A reusable article structure is not itself a violation, and the Skill does not post repeatedly.
    Fix: Recommend a human editorial pass at handoff for original contributions and release approval, without adding a platform publishing step.
-5. **Ask about commercial relationships before presenting recommendations** [model+map]
+6. **Ask about commercial relationships before presenting recommendations** [model+map]
 
    Map nodes: `comp.conflicts`, `comp.sponsored-disclosure`, `wx.ad-label`.
    Source: [SPJ Code of Ethics](https://www.spj.org/spj-code-of-ethics/) — disclose conflicts and label sponsorship; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — §4.20, third-party commercial marketing.
    Why: The normal case is an instructional piece, not an ad; neither the draft route nor the five review rules distinguishes an independent article from a paid recommendation.
    Fix: Ask for any relevant relationships and carry the applicable plain-language or advertising disclosure into the Markdown.
-6. **Review screenshots and linked assets before handoff** [model+map+trace]
+7. **Review screenshots and linked assets before handoff** [model+map+trace]
 
    Map nodes: `visual.select`, `visual.captions`, `visual.layout`, `comp.privacy`, `wx.personal-data`, `wx.sensitive-images`.
    Source: [O*NET Database](https://www.onetcenter.org/database.html) — 27-3042.00, select illustrations and lay out material; [ESCO](https://esco.ec.europa.eu) — write captions; [SPJ Code of Ethics](https://www.spj.org/spj-code-of-ethics/) — weigh consequences of amplifying personal information; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — §§4.16 and 4.26 and the private-information rule.
    Why: A reference example proposes an image, but there is no route from that placeholder to checking that an asset exists, illustrates the step, has a caption or alt text, and does not expose private material. This is conditional on an article using supplied evidence images, not a request to upload them.
    Fix: If the Markdown uses images, check the referenced assets, captions and redactions and resolve missing references before delivery.
-7. **Keep the tutorial usable without funneling readers to another account** [map]
+8. **Keep the tutorial usable without funneling readers to another account** [map]
 
    Map nodes: `wx.read-original-link`, `wx.no-external-diversion`.
    Source: [WeChat draft API](https://developers.weixin.qq.com/doc/subscription/api/draftbox/draftmanage/api_draft_add.html) — original source URL; [WeChat Official Platform Operating Rules](https://mp.weixin.qq.com/mp/opshowpage?action=newoplaw) — withholding content to direct readers elsewhere.
