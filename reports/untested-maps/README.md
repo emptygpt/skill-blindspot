@@ -8,7 +8,6 @@ Each map is applied to public skills pinned to commits, with a target of three s
 | [`data-analysis` 0.1.0](data-analysis-analyze.md) | [Anthropic: analyze](https://github.com/anthropics/knowledge-work-plugins/tree/0e0fcacddcc892eb92a1b7873ff9d68159c47571/data/skills/analyze) | 0 | 5 | 3 |
 | [`data-analysis` 0.1.0](data-analysis-jupyter-notebook.md) | [OpenAI: jupyter-notebook](https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/jupyter-notebook) | 0 | 3 | 2 |
 | [`research-paper` 0.1.0](research-paper.md) | [K-Dense-AI: scientific-writing](https://github.com/K-Dense-AI/claude-scientific-skills/tree/c21d13b3cc2894680229ba9959a53281acb9200e/skills/scientific-writing) | 0 | 4 | 1 |
-| [`seo-web` 0.1.0](seo-web.md) | [Corey Haines: seo-audit](https://github.com/coreyhaines31/marketingskills/tree/5b2b400eec1e7e1cec76245a715d0b0d4fd2a9c1/skills/seo-audit) | 0 | 5 | 1 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance.md) | [Anthropic: xlsx](https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/xlsx) | 0 | 5 | 0 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance-spreadsheet.md) | [OpenAI: spreadsheet](https://github.com/openai/skills/tree/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/spreadsheet) | 0 | 6 | 2 |
 | [`spreadsheet-finance` 0.1.0](spreadsheet-finance-dcf-model.md) | [Anthropic financial-services: dcf-model](https://github.com/anthropics/financial-services/tree/3e32c2287dcb637c184c01cc0ad82d6af7e9bb0f/plugins/vertical-plugins/financial-analysis/skills/dcf-model) | 0 | 5 | 4 |
@@ -17,7 +16,7 @@ Each map is applied to public skills pinned to commits, with a target of three s
 | [`tech-docs` 0.1.0](tech-docs-document-api-endpoint.md) | [Sentry: document-api-endpoint](https://github.com/getsentry/skills/tree/a582c51ee29d0f35e6ac321340796f77d43da733/skills/document-api-endpoint) | 0 | 3 | 4 |
 | [`wechat-article` 0.1.0, extends `writing` 0.1.0](wechat-article.md) | [JimLiu: baoyu-post-to-wechat](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-post-to-wechat) | 0 | 4 | 0 |
 
-These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills. The first round used paraphrased evidence; the follow-up reports include short excerpts checked with `lint --skill`.
+These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skills or their delegated files. The first round used paraphrased evidence; the follow-up reports include short excerpts checked with `lint --skill`.
 
 The counts here are findings by severity, not counts of domain coverage or independent re-check results. The first-round audits found no Needed findings to send through a separate re-check.
 
@@ -30,6 +29,14 @@ The `writing` map has met the three-audit target. Its cases cover draft planning
 | [`writing` 0.1.0](writing.md) | [JimLiu: baoyu-format-markdown](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-format-markdown) | 0 | 1 | 1 |
 | [`writing` 0.1.0](writing-content-research-writer.md) | [ComposioHQ: content-research-writer](https://github.com/ComposioHQ/awesome-claude-skills/tree/044d48b594f060c164f3b20fac9ea01374721bca/content-research-writer) | 0 | 3 | 2 |
 | [`writing` 0.1.0](writing-humanizer.md) | [blader: humanizer](https://github.com/blader/humanizer/blob/3e5f816b5609c4002aebb69f12c6476fe3347d0a/SKILL.md) | 0 | 1 | 1 |
+
+## seo-web
+
+| Map and version | Public skill | Needed | Worth considering | Minor |
+|---|---|---:|---:|---:|
+| [`seo-web` 0.1.0](seo-web.md) | [Corey Haines: seo-audit](https://github.com/coreyhaines31/marketingskills/tree/5b2b400eec1e7e1cec76245a715d0b0d4fd2a9c1/skills/seo-audit) | 0 | 5 | 1 |
+| [`seo-web` 0.1.0](seo-web-claude-seo-schema.md) | [AgriciDaniel: seo-schema](https://github.com/AgriciDaniel/claude-seo/tree/468ed5b0d9e3249394783710e54abb02837e326b/skills/seo-schema) | 0 | 2 | 0 |
+| [`seo-web` 0.1.0](seo-web-geohub-seo.md) | [GEOHub: seo](https://github.com/yaojingang/GEOHub/tree/2210f7f22153cfdf721905c2ac86318db97401b1/skills/seo) | 0 | 8 | 4 |
 
 ## wechat-article
 
