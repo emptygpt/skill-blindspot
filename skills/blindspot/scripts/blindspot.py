@@ -14,14 +14,15 @@ tokens on judgement:
            one source each, minus the groups outside the planned skill
   lint     check a finished report against the map: unknown node ids, nodes
            missing from the table, absent or shallow nodes that no finding
-           mentions, counts that do not add up
+           mentions, counts that do not add up; with --skill, verify evidence
+           quotes in covered and shallow rows against the audited files
 
 Usage:
   python3 blindspot.py prepare <skill-folder> --map <id> --out worksheet.md
            (writes worksheet.md and worksheet-nodes.md; open the nodes file in step 3)
   python3 blindspot.py grep <folder> [<folder> ...] -e <term> [-e <term> ...]
   python3 blindspot.py sources --map <id> <node-id> [<node-id> ...]
-  python3 blindspot.py lint <report.md> --map <id> [--profile <.blindspot.yaml>]
+  python3 blindspot.py lint <report.md> --map <id> [--skill <skill-folder>] [--profile <.blindspot.yaml>]
   python3 blindspot.py checklist --map <id> [--skip <group> ...] [--out checklist.md]
   python3 blindspot.py checklist --map <id> --groups    (list group ids to skip)
   python3 blindspot.py maps
@@ -373,12 +374,37 @@ def cmd_sources(args):
     return status
 
 
+EVIDENCE_QUOTE_RE = re.compile(r'"((?:\\.|[^"\\])*)"|“([^”]*)”')
+
+
+def missing_evidence_quotes(folder, report, quotes):
+    missing = set(quotes)
+    for path in folder.rglob("*"):
+        if not missing:
+            break
+        if ".git" in path.relative_to(folder).parts or path == report or path.is_symlink() or not path.is_file():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if "\x00" in text:
+            continue
+        normalized = " ".join(text.split())
+        missing = {quote for quote in missing if quote not in normalized}
+    return missing
+
+
 def cmd_lint(args):
     m = resolve(load_maps(), args.map)
     groups = {g["id"]: [n["id"] for n in g["nodes"]] for g in m["groups"]}
     all_nodes = {nid for ids in groups.values() for nid in ids}
-    text = pathlib.Path(args.report).read_text(encoding="utf-8")
+    report = pathlib.Path(args.report).resolve()
+    text = report.read_text(encoding="utf-8")
     problems = []
+    skill = pathlib.Path(args.skill).resolve() if args.skill else None
+    if skill and not (skill / "SKILL.md").is_file():
+        raise ValueError(f"no SKILL.md in {skill}")
 
     sec = re.split(r"^## ", text, flags=re.M)
     sections = {s.split("\n", 1)[0].strip().lower(): s for s in sec[1:]}
@@ -389,8 +415,9 @@ def cmd_lint(args):
         return 1
 
     states = {}
+    evidence_quotes = []
     for line in table.splitlines():
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        cells = [c.strip() for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
         if len(cells) < 2 or cells[0] in ("Node", "") or set(cells[0]) <= set("-: "):
             continue
         key, state = cells[0].strip("`* "), cells[1].strip("`* ").lower()
@@ -403,10 +430,22 @@ def cmd_lint(args):
             continue
         if state == "undetermined" and (len(cells) < 3 or not cells[2]):
             problems.append(f"table: {key}: undetermined needs evidence")
+        if skill and state in ("covered", "shallow") and len(cells) >= 3:
+            evidence = cells[2].replace(r"\|", "|")
+            for straight, curly in EVIDENCE_QUOTE_RE.findall(evidence):
+                quote = " ".join((curly or straight.replace(r'\"', '"')).split())
+                if quote:
+                    evidence_quotes.append((key, quote))
         for nid in targets:
             if nid in states and states[nid] != state:
                 problems.append(f"table: {nid} listed twice with different states")
             states[nid] = state
+
+    if evidence_quotes:
+        missing = missing_evidence_quotes(skill, report, (quote for _, quote in evidence_quotes))
+        for key, quote in evidence_quotes:
+            if quote in missing:
+                problems.append(f"table: {key}: evidence quote not found in the Skill: {quote!r}")
 
     for nid in sorted(all_nodes - set(states)):
         problems.append(f"table: {nid} is missing")
@@ -418,7 +457,7 @@ def cmd_lint(args):
         if match_:
             value = match_.group(1).strip().strip("`\"'")
             if value and value.lower() != "none":
-                profile = pathlib.Path(args.report).resolve().parent / value
+                profile = report.parent / value
     if profile and not pathlib.Path(profile).is_file():
         problems.append(f"profile: file not found: {profile}")
     excl_nodes, _ = read_profile(profile)
@@ -528,6 +567,7 @@ def main():
     p.add_argument("--max", type=int, default=40)
     p = sub.add_parser("sources"); p.add_argument("--map", required=True); p.add_argument("nodes", nargs="+")
     p = sub.add_parser("lint"); p.add_argument("report"); p.add_argument("--map", required=True); p.add_argument("--profile")
+    p.add_argument("--skill", metavar="FOLDER", help="verify evidence quotes against the audited Skill folder")
     p = sub.add_parser("checklist"); p.add_argument("--map", required=True); p.add_argument("--skip", nargs="+")
     p.add_argument("--groups", action="store_true"); p.add_argument("--out")
     p.add_argument("--max-sources", type=positive_int, default=1)
