@@ -15,3 +15,13 @@ Each previously unaudited map was applied to one public skill pinned to a commit
 These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skill; evidence is paraphrased. The WeChat report includes all inherited writing nodes, while the separate writing audit uses a different skill.
 
 The counts are findings by severity, not domain coverage scores or independent re-check results. The audits found no Needed findings to send through a separate re-check.
+
+## wechat-article
+
+All three reports use `wechat-article` 0.1.0 with `writing` 0.1.0. The two follow-up reports use short, lint-verified excerpts for covered and shallow nodes.
+
+| Report | Public skill | Needed | Worth considering | Minor |
+|---|---|---:|---:|---:|
+| [Publishing and draft delivery](wechat-article.md) | [JimLiu: baoyu-post-to-wechat](https://github.com/JimLiu/baoyu-skills/tree/bf1ff076e25f8da4a339eb1c8cf03361fea5ea4c/skills/baoyu-post-to-wechat) | 0 | 4 | 0 |
+| [Typesetting supplied articles](wechat-article-wxskill.md) | [webzol: wechat-typesetting](https://github.com/webzol/WXSKill/tree/964b3aa1c46a4119acbe6a0baf13e0e95feb6396) | 0 | 4 | 0 |
+| [Writing and reviewing research tutorials](wechat-article-ai-technology.md) | [just-ye: wechat-skill-article-workflow](https://github.com/just-ye/wechat-AI-technology-article-skill/tree/ae6d749d914065bb9a055c90dbcf0b370d03a08e) | 1 | 7 | 2 |
