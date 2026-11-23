@@ -61,7 +61,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `video` | Online video, from topic to publishing and review | 118 | [4 audits](reports/video-20.md) |
 | `video-short` | Short-form vertical video, on top of `video` | +29 | [8 audits](reports/video-20.md) |
 | `video-long` | Long-form video, on top of `video` | +22 | [8 audits](reports/video-20.md) |
-| `writing` | Non-fiction articles published online | 78 | [Provisional (1/3)](reports/untested-maps/writing.md) |
+| `writing` | Non-fiction articles published online | 78 | [3 audits](reports/untested-maps/README.md#writing) |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 | [Provisional (1/3)](reports/untested-maps/wechat-article.md) |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 | [20 audits](reports/code-20.md) |
 | `research-paper` | Research papers and reproducible analysis | 76 | [Provisional (1/3)](reports/untested-maps/research-paper.md) |
@@ -70,7 +70,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 | [Provisional (1/3)](reports/untested-maps/spreadsheet-finance.md) |
 | `seo-web` | SEO and website content operations; article writing and software changes use their own maps | 74 | [Provisional (1/3)](reports/untested-maps/seo-web.md) |
 
-Provisional maps have one public-skill audit each and have not yet met the three-audit target. See the [first-round audit index](reports/untested-maps/).
+Provisional maps have not yet met the three-audit target. See the [public audit index](reports/untested-maps/).
 
 The narrower maps extend a base map: they add nodes and list base nodes that do not apply. Each file's header lists what is **not yet covered** because no source was found. The video maps cite YouTube, TikTok, Bilibili and Douyin official pages, the US FTC and a Chinese advertising regulation. Douyin's creator learning centre could not be read.
 
