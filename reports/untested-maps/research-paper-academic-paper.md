@@ -28,18 +28,19 @@ Map: research-paper 0.1.0    Profile: none    Date: 2026-11-23
 
 ### Needed
 
+None.
+
+### Worth considering
+
 1. **Select and check a study-design reporting guideline** [model+map]
 
    Map nodes: `reporting.selection`, `reporting.consort`, `reporting.prisma`, `reporting.strobe`, `reporting.arrive`, `reporting.stard`, `reporting.qualitative`, `ethics.animal-welfare`, `publication.trial-sharing`.
    Source: [ICMJE: Preparing a Manuscript for Submission to a Medical Journal](https://www.icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html) — 2. Reporting Guidelines.
    Source: [EQUATOR Network: Reporting Guidelines](https://www.equator-network.org/) — CONSORT; PRISMA; STROBE; ARRIVE; STARD; SRQR.
    Source: [ICMJE: Clinical Trials](https://www.icmje.org/recommendations/browse/publishing-and-editorial-issues/clinical-trial-registration.html) — 3. Data Sharing.
-   Why: The skill offers medicine and other empirical disciplines and makes five statements mandatory, but no phase picks a reporting checklist from the study design; the only mentions say medical writing follows reporting guidelines and that a scoping review's checklist stays with the author. The full-mode compliance check is RAISE for AI use, not a design checklist, so a trial or observational paper can pass every gate without its required items.
-   Fix: In the Phase 0 configuration interview (agents/intake_agent.md), record the study design and the matching EQUATOR checklist, and have peer_reviewer_agent check the draft against its items before formatting.
-
-### Worth considering
-
-1. **Code, software and dataset identification** [model+map]
+   Why: The skill offers medicine and other empirical disciplines and makes five statements mandatory. deep-research partly covers this: its research_architect_agent (§7 Reporting Standards, deep-research/agents/research_architect_agent.md:124–131, 223) writes a recommended guideline into the Methodology Blueprint, which academic-paper's intake reads at handoff (agents/intake_agent.md:32). Gaps remain: intake carries only the method from the blueprint (agents/intake_agent.md:55), not the guideline; no phase checks the draft against the checklist; and a cold start without a blueprint never selects one. The full-mode compliance check is RAISE for AI use, not a design checklist.
+   Fix: In agents/intake_agent.md, carry the blueprint's recommended guideline forward or ask for one in the Phase 0 interview, then have peer_reviewer_agent check the draft against its items before formatting.
+2. **Code, software and dataset identification** [model+map]
 
    Map nodes: `computation.versions`, `computation.code-access`, `computation.review-access`, `computation.software-citation`, `computation.specific-release`, `computation.randomness`, `publication.data-citation`, `publication.data-citation-version`.
    Source: [Nature Portfolio: Reporting standards and availability of data, materials, code and protocols](https://www.nature.com/nature-portfolio/editorial-policies/reporting-standards) — Availability and peer review of computer code and algorithm.
@@ -49,26 +50,26 @@ Map: research-paper 0.1.0    Profile: none    Date: 2026-11-23
    Source: [Reproducible Research, Kempner Institute Computing Handbook](https://handbook.eng.kempnerinstitute.harvard.edu/s2_swe_for_research/reproducible_research.html) — 10.4. Randomness and Seeds.
    Why: Data availability is mandatory with four templates, but code appears only as optional supplementary material, the Methods template asks which software without versions, and no guide asks to cite datasets or software as references or to state seeds.
    Fix: Add a Code Availability Statement next to the Data Availability Statement in the mandatory list in SKILL.md, and extend the Data Analysis prompt in templates/imrad_template.md to software versions, seeds and dataset and software citations.
-2. **Generated figure code is called runnable but is not rerun** [trace+map]
+3. **Generated figure code is called runnable but is not rerun** [trace+map]
 
    Map nodes: `computation.clean-rerun`.
    Source: [Reproducible Research, Kempner Institute Computing Handbook](https://handbook.eng.kempnerinstitute.harvard.edu/s2_swe_for_research/reproducible_research.html) — 10.6. Testing Reproducibility.
    Why: visualization_agent states its code runs without modification and its quality step compares plotted values with the source, but no step executes the script in a fresh environment before the figure enters the paper.
    Fix: In Step 6 of agents/visualization_agent.md, run the generated script in a clean environment and compare its output with the figure, or mark the figure as not rerun.
-3. **Report all prespecified outcomes and label exploratory analyses** [model+map]
+4. **Report all prespecified outcomes and label exploratory analyses** [model+map]
 
    Map nodes: `analysis.complete-outcomes`, `analysis.exploration`, `analysis.transparency`, `analysis.denominators`.
    Source: [ICMJE: Preparing a Manuscript for Submission to a Medical Journal](https://www.icmje.org/recommendations/browse/manuscript-preparation/preparing-for-submission.html) — e. Results; iii. Statistics.
    Source: [ASA Statement on Statistical Significance and P-Values (2016)](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf) — 4. Proper inference requires full reporting and transparency.
    Why: A preregistration artifact is validated and carried through handoffs, but no drafting or review rule compares reported outcomes with it, labels unplanned analyses or reports deviations; sample size is asked for, but not counts behind percentages.
    Fix: In agents/draft_writer_agent.md, when a preregistration artifact is present, require each registered outcome in Results, a label on unplanned analyses and a deviations paragraph.
-4. **P-value wording beyond notation** [map]
+5. **P-value wording beyond notation** [map]
 
    Map nodes: `analysis.model-compatibility`, `analysis.hypothesis-probability`, `analysis.thresholds`.
    Source: [ASA Statement on Statistical Significance and P-Values (2016)](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf) — principles 1 to 3.
    Why: The APA guide requires exact p values, effect sizes and intervals, which is good; but the Chinese register rules suggest wording such as reaching statistical significance, and no rule warns against threshold-only conclusions or reading p as the probability a hypothesis is true.
    Fix: Add a short p-value interpretation rule to references/academic_writing_style.md and replace the threshold wording example in agents/draft_writer_agent.md.
-5. **Participant privacy, consent to publish and reused material** [model+map]
+6. **Participant privacy, consent to publish and reused material** [model+map]
 
    Map nodes: `ethics.privacy`, `ethics.publication-consent`, `publication.permissions`.
    Source: [ICMJE: Protection of Research Participants](https://www.icmje.org/recommendations/browse/roles-and-responsibilities/protection-of-research-participants.html) — E. Protection of Research Participants.
@@ -96,14 +97,14 @@ None.
 
 ## Evidence limitations
 
-Read SKILL.md and the agents/, references/ and templates/ files it routes to; examples/ were used only to understand intent, not as evidence. The helper listed 119 referenced paths outside the skill folder (shared/, academic-pipeline/, deep-research/, docs/); in the full repository at the pinned commit, shared/agents/compliance_agent.md and academic-pipeline/agents/integrity_verification_agent.md were searched for reporting guidelines and data or software citation and add none. The other outside paths were not read, so evidence there could change absent rows for reporting checklists and citations.
+Read SKILL.md and the agents/, references/ and templates/ files it routes to; examples/ were used only to understand intent, not as evidence. The helper listed 119 referenced paths outside the skill folder (shared/, academic-pipeline/, deep-research/, docs/); in the full repository at the pinned commit, shared/agents/compliance_agent.md and academic-pipeline/agents/integrity_verification_agent.md were searched for reporting guidelines and data or software citation and add none. deep-research/agents/research_architect_agent.md:124–131 and :223 recommend a reporting guideline in the Methodology Blueprint that intake reads at handoff; this is why the reporting-guideline finding is Worth considering rather than Needed. The other outside paths were not read, so evidence there could change absent rows for reporting checklists and citations.
 
 ## Trace
 
 | Step | Produces | Used by | Checked |
 |---|---|---|---|
-| Phase 0 intake | Paper Configuration Record, validated preregistration sidecar | All later phases | SKILL.md:208 requires user confirmation; the sidecar is carried but no later rule reads its outcomes (Worth considering 3). |
-| Drafting and visualization | Draft, figure code, captions | Citation check, peer review | agents/visualization_agent.md:17 calls the code runnable; no step runs it (Worth considering 2). |
+| Phase 0 intake | Paper Configuration Record, validated preregistration sidecar | All later phases | SKILL.md:208 requires user confirmation; the sidecar is carried but no later rule reads its outcomes (Worth considering 4). |
+| Drafting and visualization | Draft, figure code, captions | Citation check, peer review | agents/visualization_agent.md:17 calls the code runnable; no step runs it (Worth considering 3). |
 | Citation check and peer review, max 2 rounds | Flagged citations, review verdict, Acknowledged Limitations | Formatter | SKILL.md:210 caps loops and routes leftovers to the limitations section. |
 | Formatting | Manuscript, required statements, cover letter | User | agents/formatter_agent.md:65 delivers the package; statements follow the SKILL.md:641 list. |
 
@@ -145,7 +146,7 @@ Read SKILL.md and the agents/, references/ and templates/ files it routes to; ex
 | computation.clean-rerun | shallow | agents/visualization_agent.md:401 "confirm plotted values match source" — the figure code is not rerun in a clean environment. |
 | computation.run-record | not-applicable | Run records belong to the study's analysis. |
 | computation.artifact-package | not-applicable | No analysis artifact package is produced. |
-| reporting.selection | shallow | references/writing_judgment_framework.md:34 "Adherence to reporting guidelines" — a register note; no checklist is selected. |
+| reporting.selection | shallow | references/writing_judgment_framework.md:34 "Adherence to reporting guidelines" — a register note in this skill. deep-research/agents/research_architect_agent.md:223 puts a recommended guideline in the Methodology Blueprint that agents/intake_agent.md:32 reads, but intake extracts only the method (agents/intake_agent.md:55) and no phase checks the draft against the guideline. |
 | reporting.consort | absent | No CONSORT. |
 | reporting.prisma | shallow | SKILL.md:424 "its protocol and reporting checklist (PRISMA-ScR for a scoping review) stay with the author" — PRISMA appears for AI-use disclosure and scoping reviews only. |
 | reporting.strobe | absent | No STROBE. |
