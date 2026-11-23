@@ -15,3 +15,13 @@ Each previously unaudited map was applied to one public skill pinned to a commit
 These were static audits by Devin using the [blindspot workflow](../../skills/blindspot/SKILL.md); target skills were not executed. The reports record scope, pre-map observations, the trace and evidence by node. File and line references point into the pinned skill; evidence is paraphrased. The WeChat report includes all inherited writing nodes, while the separate writing audit uses a different skill.
 
 The counts are findings by severity, not domain coverage scores or independent re-check results. The audits found no Needed findings to send through a separate re-check.
+
+## spreadsheet-finance
+
+All three reports use `spreadsheet-finance` 0.1.0. The two follow-up reports use short, lint-verified excerpts for covered and shallow nodes.
+
+| Report | Public skill | Needed | Worth considering | Minor |
+|---|---|---:|---:|---:|
+| [Workbook creation and checks](spreadsheet-finance.md) | [Anthropic: xlsx](https://github.com/anthropics/skills/tree/e4bb5d960d87126ff3b3a8af1a104b7db67560ba/skills/xlsx) | 0 | 5 | 0 |
+| [General spreadsheet editing and formatting](spreadsheet-finance-spreadsheet.md) | [OpenAI: spreadsheet](https://github.com/openai/skills/tree/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/spreadsheet) | 0 | 6 | 2 |
+| [DCF equity valuation model](spreadsheet-finance-dcf-model.md) | [Anthropic financial-services: dcf-model](https://github.com/anthropics/financial-services/tree/3e32c2287dcb637c184c01cc0ad82d6af7e9bb0f/plugins/vertical-plugins/financial-analysis/skills/dcf-model) | 0 | 5 | 4 |

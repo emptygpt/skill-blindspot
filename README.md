@@ -67,7 +67,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `research-paper` | Research papers and reproducible analysis | 76 | [Provisional (1/3)](reports/untested-maps/research-paper.md) |
 | `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 | [Provisional (1/3)](reports/untested-maps/tech-docs.md) |
 | `data-analysis` | Answering questions with data, including analysis code, charts and results with limits | 45 | [Provisional (1/3)](reports/untested-maps/data-analysis.md) |
-| `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 | [Provisional (1/3)](reports/untested-maps/spreadsheet-finance.md) |
+| `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 | [3 audits](reports/untested-maps/README.md#spreadsheet-finance) |
 | `seo-web` | SEO and website content operations; article writing and software changes use their own maps | 74 | [Provisional (1/3)](reports/untested-maps/seo-web.md) |
 
 Provisional maps have one public-skill audit each and have not yet met the three-audit target. See the [first-round audit index](reports/untested-maps/).

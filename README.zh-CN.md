@@ -67,7 +67,7 @@ npx skills add emptygpt/skill-blindspot
 | `research-paper` | 科研论文与可复现分析 | 76 | [未经实测（1/3）](reports/untested-maps/research-paper.md) |
 | `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | [未经实测（1/3）](reports/untested-maps/tech-docs.md) |
 | `data-analysis` | 用数据回答问题，包括分析代码、图表、结果及其局限 | 45 | [未经实测（1/3）](reports/untested-maps/data-analysis.md) |
-| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [未经实测（1/3）](reports/untested-maps/spreadsheet-finance.md) |
+| `spreadsheet-finance` | 表格建模与财务分析，从问题、输入到检查、情景分析、报告与披露 | 49 | [3 份审计](reports/untested-maps/README.md#spreadsheet-finance) |
 | `seo-web` | SEO 与网站内容运营；单篇文章写作和软件修改分别使用各自的底图 | 74 | [未经实测（1/3）](reports/untested-maps/seo-web.md) |
 
 「未经实测（1/3）」表示已有一份公开 Skill 审计，但尚未达到每张三份的目标。进展见[首轮审计汇总](reports/untested-maps/)。
