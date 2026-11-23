@@ -62,12 +62,12 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `video-short` | Short-form vertical video, on top of `video` | +29 | [8 audits](reports/video-20.md) |
 | `video-long` | Long-form video, on top of `video` | +22 | [8 audits](reports/video-20.md) |
 | `writing` | Non-fiction articles published online | 78 | [Provisional (1/3)](reports/untested-maps/writing.md) |
-| `wechat-article` | WeChat official account articles, on top of `writing` | +40 | [Provisional (1/3)](reports/untested-maps/wechat-article.md) |
+| `wechat-article` | WeChat official account articles, on top of `writing` | +40 | [3 audits](reports/untested-maps/README.md#wechat-article) |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 | [20 audits](reports/code-20.md) |
 | `research-paper` | Research papers and reproducible analysis | 76 | [Provisional (1/3)](reports/untested-maps/research-paper.md) |
 | `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 | 3 audits: [ADRs](reports/untested-maps/tech-docs.md), [co-authoring](reports/untested-maps/tech-docs-doc-coauthoring.md), [API endpoints](reports/untested-maps/tech-docs-document-api-endpoint.md) |
 | `data-analysis` | Answering questions with data, including analysis code, charts and results with limits | 45 | [3 audits](reports/untested-maps/) |
-| `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 | [Provisional (1/3)](reports/untested-maps/spreadsheet-finance.md) |
+| `spreadsheet-finance` | Spreadsheet modeling and financial analysis, from question and inputs to checks, scenarios, reports and disclosure | 49 | [3 audits](reports/untested-maps/) |
 | `seo-web` | SEO and website content operations; article writing and software changes use their own maps | 74 | [Provisional (1/3)](reports/untested-maps/seo-web.md) |
 
 Provisional maps have not yet met the three-audit target. See the [public skill audit index](reports/untested-maps/).
