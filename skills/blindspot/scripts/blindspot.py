@@ -553,9 +553,11 @@ def cmd_lint(args):
     node_pattern = r"[a-z][a-z0-9-]*\.[a-z0-9.-]*[a-z0-9]"
     mentioned = set(re.findall(node_pattern, findings))
     node_id = f"(?:{node_pattern}|`{node_pattern}`)"
+    node_state = "|".join(sorted(STATES))
+    node_item = rf"{node_id}(?:[ \t]+\((?:{node_state})\))?"
     node_field = re.compile(
         r"^[ \t]*(?:\d+\.[ \t]+\*\*.+?\*\*[ \t]+(?:\[[^\]\n]+\][ \t]+)?)?"
-        rf"(?:Map )?Nodes?:[ \t]*({node_id}(?:[ \t]*,[ \t]*{node_id})*)",
+        rf"(?:Map )?Nodes?:[ \t]*({node_item}(?:[ \t]*[,;][ \t]*{node_item})*)",
         re.M | re.I,
     )
     declared_nodes = set()

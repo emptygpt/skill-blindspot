@@ -328,6 +328,19 @@ class HelperTests(unittest.TestCase):
         self.assertEqual(status, 1, output)
         self.assertIn('is deferred but named as a finding', output)
 
+    def test_lint_rejects_deferred_nodes_in_grouped_finding_lists(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ')
+        for separator in ('; ', ' (shallow), ', ' (absent); '):
+            with self.subTest(separator=separator):
+                declaration = ('  Nodes: testing.test-the-change' + separator
+                               + 'requirements.understand-request — source: Example.\n')
+                report.write_text(text.replace('## Findings\n', '## Findings\n' + declaration))
+                status, output = self.lint(report)
+                self.assertEqual(status, 1, output)
+                self.assertIn('is deferred but named as a finding', output)
+
     def test_prepare_rejects_conflicting_excluded_and_deferred_decisions(self):
         self.write('skill/SKILL.md', '# Example')
         self.write('skill/.blindspot.yaml',
