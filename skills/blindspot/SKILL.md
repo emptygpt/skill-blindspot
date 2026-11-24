@@ -138,6 +138,7 @@ Combine the three lists. Two findings that name the same gap become one, and it 
 
 - For each `model` finding with no matching map node, look once more through the map for a node that covers it. If one exists, add the map origin and its source. If none exists, mark it `unsourced`.
 - Move gaps that match a deferred node or finding to **Deferred by profile**, regardless of origin. Do not repeat them in any finding band, Unsourced findings, or the count of new findings. Keep distinct gaps that were not deferred.
+- For a deferred `finding:` entry that matches a mapped gap, use the exact profile description in the deferred section and list every node id for that gap in its `Map nodes` cell, separated by commas. Mark those nodes `deferred` in the map table. A deferral by node id alone does not defer other nodes.
 - List `unsourced` findings separately at the end as candidates for the map. They may be real gaps that the map does not yet cover. The user or the map's maintainers can confirm them with a source.
 
 Before a finding goes in **Needed**, check it twice:
@@ -196,7 +197,7 @@ Map: <map id and version, or "none">    Profile: <path, or "none">    Date: <dat
 | Node | State | Evidence |
 
 ## Deferred by profile
-| Node or finding | Reason |
+| Node or finding | Reason | Map nodes |
 
 ## Excluded by profile
 | Node or finding | Reason |

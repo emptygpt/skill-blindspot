@@ -523,6 +523,17 @@ def cmd_lint(args):
     if profile and not pathlib.Path(profile).is_file():
         problems.append(f"profile: file not found: {profile}")
     decisions = read_profile(profile)
+    deferred_nodes, deferred_findings = decisions["deferred"]
+    for line in sections.get("deferred by profile", "").splitlines():
+        cells = [c.strip() for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+        if len(cells) != 3 or MARKDOWN_ESCAPE_RE.sub(r"\1", cells[0]) not in deferred_findings:
+            continue
+        for node in cells[2].split(","):
+            nid = node.strip(" `")
+            if nid in all_nodes:
+                deferred_nodes.add(nid)
+            elif nid:
+                problems.append(f"deferred: {nid} is not a node of {args.map}")
     for decision, (nodes, _) in decisions.items():
         for nid, state in sorted(states.items()):
             if state == decision and nid not in nodes:

@@ -256,6 +256,27 @@ class HelperTests(unittest.TestCase):
                 self.assertEqual(status, 1, output)
                 self.assertIn('marked deferred but not listed', output)
 
+    def test_lint_finding_deferral_can_cover_multiple_map_nodes(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - finding: Verify the requested change\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ').replace(
+            '| testing.test-the-change | covered |', '| testing.test-the-change | deferred |')
+        deferred = ('\n\n## Deferred by profile\n| Node or finding | Reason | Map nodes |\n'
+                    '| Verify the requested change | Later | '
+                    '`requirements.understand-request`, `testing.test-the-change` |\n')
+        report.write_text(text + deferred)
+        status, output = self.lint(report)
+        self.assertEqual(status, 0, output)
+        report.write_text(text + deferred.replace('Verify the requested change', 'Unapproved deferral'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('marked deferred but not listed', output)
+        report.write_text((text + deferred).replace(
+            '| testing.test-the-change | deferred |', '| testing.test-the-change | shallow |'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('testing.test-the-change is deferred but marked shallow', output)
+
     def test_lint_rejects_reraised_deferred_node(self):
         self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
         report = self.report('profile.yaml')
