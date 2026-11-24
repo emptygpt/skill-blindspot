@@ -177,6 +177,116 @@ class HelperTests(unittest.TestCase):
             status = blindspot.cmd_lint(argparse.Namespace(report=str(report), map='software', profile=profile, skill=[]))
         return status, output.getvalue()
 
+    def diff_report(self, version, rows):
+        return self.write(f'{version}.md', '# Blindspot report: example\n\n'
+                          'Map: software 0.1.0\n\n## Map table\n\n'
+                          '| Node | State | Evidence |\n|---|---|---|\n' + '\n'.join(rows))
+
+    def test_diff_classifies_direction_and_shows_report_evidence(self):
+        old = self.diff_report('old', [
+            '| test.resolve | absent | Nothing. |',
+            '| test.partial | absent | Nothing. |',
+            '| test.fixed-shallow | shallow | "Check claims." |',
+            '| test.regress | covered | "Check each claim against the primary source." |',
+            '| test.lost | shallow | "Check claims." |',
+            '| test.unchanged | covered | "Ask a reviewer." |',
+        ])
+        new = self.diff_report('new', [
+            '| `test.resolve` | **Covered** | SKILL.md: “Match every claim against the transcript” |',
+            '| test.partial | shallow | "Check important claims." |',
+            '| test.fixed-shallow | covered | "Match each claim to a source and flag conflicts." |',
+            '| test.regress | shallow | "Check claims." |',
+            '| test.lost | absent | Nothing. |',
+            '| test.unchanged | covered | "Ask a second reviewer." |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('resolved 2, partially resolved 1, unchanged 1, regressed 2', result.stdout)
+        for key, before, after, change in [
+            ('test.resolve', 'absent', 'covered', 'resolved'),
+            ('test.partial', 'absent', 'shallow', 'partially resolved'),
+            ('test.fixed-shallow', 'shallow', 'covered', 'resolved'),
+            ('test.regress', 'covered', 'shallow', 'regressed'),
+            ('test.lost', 'shallow', 'absent', 'regressed'),
+            ('test.unchanged', 'covered', 'covered', 'unchanged'),
+        ]:
+            self.assertIn(f'| {key} | {before} | {after} | {change} |', result.stdout)
+        self.assertIn('“Match every claim against the transcript”', result.stdout)
+        self.assertIn('"Check each claim against the primary source."', result.stdout)
+
+    def test_diff_does_not_resolve_on_coverage_label_alone(self):
+        old = self.diff_report('old', [
+            '| test.same-quote | shallow | “Check factual accuracy.” |',
+            '| test.no-quote | absent | Nothing. |',
+            '| test.malformed-quote | absent | Nothing. |',
+        ])
+        new = self.diff_report('new', [
+            '| test.same-quote | covered | New location: "Check  factual accuracy." |',
+            '| test.no-quote | covered | SKILL.md mentions verification. |',
+            '| test.malformed-quote | covered | “Check claims. |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for key in ('test.same-quote', 'test.no-quote', 'test.malformed-quote'):
+            self.assertIn(f'| {key} |', result.stdout)
+        self.assertIn('resolved 0, partially resolved 3, unchanged 0, regressed 0', result.stdout)
+        self.assertIn('no new quoted evidence', result.stdout)
+
+    def test_diff_keeps_one_sided_scope_and_unknown_rows_neutral(self):
+        old = self.diff_report('old', [
+            '| test.removed | covered | "Check wording" |',
+            '| test.excluded | excluded | Profile. |',
+            '| test.out-of-scope | covered | "Ship the result." |',
+            '| test.unknown | absent | Nothing. |',
+        ])
+        new = self.diff_report('new', [
+            '| test.added | absent | Nothing. |',
+            '| test.excluded | absent | Nothing. |',
+            '| test.out-of-scope | not-applicable | Draft only. |',
+            '| test.unknown | undetermined | Missing reference. |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for key, before, after, note in [
+            ('test.removed', 'covered', '—', 'old report only'),
+            ('test.added', '—', 'absent', 'new report only'),
+            ('test.excluded', 'excluded', 'absent', 'scope or profile change'),
+            ('test.out-of-scope', 'covered', 'not-applicable', 'scope or profile change'),
+            ('test.unknown', 'absent', 'undetermined', 'insufficient evidence to compare'),
+        ]:
+            self.assertIn(f'| {key} | {before} | {after} | unchanged | {note} |', result.stdout)
+
+    def test_diff_expands_group_rows_and_preserves_escaped_evidence(self):
+        old = self.diff_report('old', [r'| `requirements.*` | not-applicable | External \| team. |'])
+        new = self.diff_report('new', [
+            '| requirements.understand-request | covered | "Confirm what the user wants." |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('| requirements.understand-request | not-applicable | covered | unchanged |', result.stdout)
+        self.assertIn(r'External \| team.', result.stdout)
+        group = next(group for group in blindspot.resolve(blindspot.load_maps(), 'software')['groups']
+                     if group['id'] == 'requirements')
+        for node in group['nodes']:
+            self.assertIn(f'| {node["id"]} |', result.stdout)
+
+    def test_diff_rejects_invalid_reports_without_printing_partial_results(self):
+        old = self.diff_report('old', ['| test.node | absent | Nothing. |'])
+        for content, error in [
+            ('## Findings\nNo map chosen.', 'no \'## Map table\' section'),
+            ('## Map table\n| Node | State | Evidence |', 'no node rows'),
+            ('## Map table\n| test.node | typo | Nothing. |', 'unknown state'),
+            ('## Map table\n| test.node | absent | Nothing. |\n| test.node | covered | "Check it." |',
+             'listed twice with different states'),
+        ]:
+            with self.subTest(error=error):
+                new = self.write('broken.md', content)
+                result = self.cli('diff', old, new)
+                self.assertEqual(result.returncode, 1, result.stderr)
+                self.assertIn('broken.md:', result.stderr)
+                self.assertIn(error, result.stderr)
+                self.assertEqual(result.stdout, '')
+
     def test_lint_relative_header_profile(self):
         self.write('reports/profiles/exclude.yaml', 'exclude:\n  - node: requirements.understand-request\n')
         status, output = self.lint(self.report('profiles/exclude.yaml'))

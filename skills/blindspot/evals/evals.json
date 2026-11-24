@@ -3,7 +3,9 @@
   "success_criteria": [
     "Separate unknown coverage from confirmed gaps with an explicit map state and named unavailable evidence.",
     "Preserve known evidence, profile exclusions, scope and mapless output.",
-    "Do not run an audit for adjacent tasks."
+    "Do not run an audit for adjacent tasks.",
+    "Compare audit reports by stable map node ID; distinguish coverage changes from scope and evidence limits.",
+    "Use the read-only diff helper without re-auditing when both reports are supplied."
   ],
   "evals": [
     {
@@ -123,6 +125,41 @@
         "Answers with a parsing expression; no Blindspot findings or table."
       ],
       "expected_output": "Answers with a parsing expression; no Blindspot findings or table."
+    },
+    {
+      "id": 11,
+      "kind": "explicit",
+      "should_trigger": true,
+      "prompt": "Use Blindspot diff on these before and after reports for the same Skill; don't audit again. Before: ## Map table\n| qa.facts | absent | None |\n| qa.layout | covered | \"Review the preview before export.\" |\nAfter: ## Map table\n| qa.facts | covered | SKILL.md: \"Compare each date and quote with the source transcript before exporting.\" |\n| qa.layout | shallow | \"Care about layout.\" |",
+      "files": [],
+      "expectations": [
+        "Runs diff on the supplied report text in chronological order; does not re-audit or modify the Skill.",
+        "Reports qa.facts resolved and qa.layout regressed, with evidence from the supplied tables."
+      ],
+      "expected_output": "qa.facts is resolved on the report evidence, and qa.layout regressed from covered to shallow."
+    },
+    {
+      "id": 12,
+      "kind": "implicit",
+      "should_trigger": true,
+      "prompt": "Did these changes to my handout Skill close the earlier audit gaps? Before: ## Map table\n| qa.facts | shallow | \"Check factual accuracy.\" |\n| qa.accessible | absent | None |\nAfter: ## Map table\n| qa.facts | covered | \"Check factual accuracy.\" |\n| qa.accessible | excluded | Profile |",
+      "files": [],
+      "expectations": [
+        "Does not report qa.facts resolved based on the label alone.",
+        "Does not treat qa.accessible's exclusion as a fix."
+      ],
+      "expected_output": "qa.facts is at most partially resolved because no new quoted evidence supports the upgrade; qa.accessible changed scope/profile, not coverage."
+    },
+    {
+      "id": 13,
+      "kind": "negative",
+      "should_trigger": false,
+      "prompt": "Compare these two versions of a blog paragraph for wording changes. They are not skill audit reports and have no map tables.",
+      "files": [],
+      "expectations": [
+        "Does not run blindspot diff or claim audit findings are resolved."
+      ],
+      "expected_output": "Compares the prose without invoking the audit workflow."
     }
   ]
 }
