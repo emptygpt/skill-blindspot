@@ -31,6 +31,7 @@ python3 $S prepare <skill-folder> --map <id> --out worksheet.md   # also writes 
 python3 $S grep <skill-folder> [<repo-root>] -e <term> -e <term>  # before rating a finding Needed
 python3 $S sources --map <id> <node-id> [<node-id> ...]       # sources for the report
 python3 $S lint blindspot-report.md --map <id> --skill <skill-folder>  # uses header Profile: path (or none); --profile overrides
+python3 $S diff <old-report.md> <new-report.md>                # verify coverage changes after re-auditing
 python3 $S checklist --map <id> [--skip <group> ...] --out checklist.md  # before a skill exists
 ```
 
@@ -231,4 +232,8 @@ On the next audit, show exclusions in **Excluded by profile**, not as findings. 
 
 ## Running again
 
-When the skill has changed, run the audit again and compare the map table with the previous report. Report what moved: nodes that became `covered`, nodes that became `absent` or `shallow`, and new findings.
+Keep the previous report. After the author changes the Skill, run a fresh audit using the same map and profile where possible, and keep both reports. Re-check the original gaps by node ID. Before marking a gap `covered`, check that the evidence shows what to do, when to do it, and what output the next step needs. Quote the supporting instructions and run `lint --skill` on the new report. Adding a reminder or rewording an old instruction does not prove the gap is fixed.
+
+When both reports already exist, compare them without running another audit. Run `diff` with the old report first, and summarize resolved, partially resolved, unchanged and regressed nodes with their evidence. The helper uses the `Map:` header to expand group rows; pass `--map <id>` if both reports use the same map but the headers don't identify it. A row present on only one side, a scope/profile change (including a move into or out of `deferred`), or a change involving `undetermined` is noted separately, not counted as a fix or regression. An upgrade to `covered` without a new quoted excerpt is at most partially resolved.
+
+The diff compares report evidence; it does not run the Skill or judge whether a quote is sufficient. Check the cited instructions for that before claiming a fix works. Review new findings not tied to a map node separately.

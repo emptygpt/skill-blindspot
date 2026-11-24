@@ -93,6 +93,16 @@ A small Python script (standard library only) does the mechanical parts: it read
 
 The split between a shared catalogue and a personal profile follows established practice in other fields, such as profiles in the NIST Cybersecurity Framework and catalogues and profiles in OSCAL.
 
+## Verify fixes after an audit
+
+Keep the old report and re-audit the updated Skill with the same map and profile where possible. Then compare the two reports, oldest first:
+
+```bash
+python3 skills/blindspot/scripts/blindspot.py diff old-report.md new-report.md
+```
+
+The read-only helper labels map nodes as resolved, partially resolved, unchanged, or regressed and shows the evidence from both reports. It flags rows found in only one report, scope/profile changes, and changes involving undetermined coverage separately; none of these establishes a fix or regression. An upgrade to covered without a new quoted excerpt is at most partially resolved. No model call is needed for the comparison: it compares audit evidence, not actual Skill behavior.
+
 ## Before you write a skill
 
 The same maps work as a checklist before a skill exists. Tell the agent what the skill will do and where it stops, and it writes `checklist.md`: every node of the map inside that boundary, each with a source, so the questions a skill builder asks you ("do you need rights to the images?") have something to check against. No model call is needed for the list itself:

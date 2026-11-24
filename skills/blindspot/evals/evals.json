@@ -4,6 +4,8 @@
     "Separate unknown coverage from confirmed gaps with an explicit map state and named unavailable evidence.",
     "Preserve known evidence, profile exclusions, scope and mapless output.",
     "Do not run an audit for adjacent tasks.",
+    "Compare audit reports by stable map node ID; distinguish coverage changes from scope and evidence limits.",
+    "Use the read-only diff helper without re-auditing when both reports are supplied.",
     "Carry forward only user-approved deferrals, separately from exclusions and new findings."
   ],
   "evals": [
@@ -129,6 +131,41 @@
       "id": 11,
       "kind": "explicit",
       "should_trigger": true,
+      "prompt": "Use Blindspot diff on these before and after reports for the same Skill; don't audit again. Before: ## Map table\n| qa.facts | absent | None |\n| qa.layout | covered | \"Review the preview before export.\" |\nAfter: ## Map table\n| qa.facts | covered | SKILL.md: \"Compare each date and quote with the source transcript before exporting.\" |\n| qa.layout | shallow | \"Care about layout.\" |",
+      "files": [],
+      "expectations": [
+        "Runs diff on the supplied report text in chronological order; does not re-audit or modify the Skill.",
+        "Reports qa.facts resolved and qa.layout regressed, with evidence from the supplied tables."
+      ],
+      "expected_output": "qa.facts is resolved on the report evidence, and qa.layout regressed from covered to shallow."
+    },
+    {
+      "id": 12,
+      "kind": "implicit",
+      "should_trigger": true,
+      "prompt": "Did these changes to my handout Skill close the earlier audit gaps? Before: ## Map table\n| qa.facts | shallow | \"Check factual accuracy.\" |\n| qa.accessible | absent | None |\nAfter: ## Map table\n| qa.facts | covered | \"Check factual accuracy.\" |\n| qa.accessible | excluded | Profile |",
+      "files": [],
+      "expectations": [
+        "Does not report qa.facts resolved based on the label alone.",
+        "Does not treat qa.accessible's exclusion as a fix."
+      ],
+      "expected_output": "qa.facts is at most partially resolved because no new quoted evidence supports the upgrade; qa.accessible changed scope/profile, not coverage."
+    },
+    {
+      "id": 13,
+      "kind": "negative",
+      "should_trigger": false,
+      "prompt": "Compare these two versions of a blog paragraph for wording changes. They are not skill audit reports and have no map tables.",
+      "files": [],
+      "expectations": [
+        "Does not run blindspot diff or claim audit findings are resolved."
+      ],
+      "expected_output": "Compares the prose without invoking the audit workflow."
+    },
+    {
+      "id": 14,
+      "kind": "explicit",
+      "should_trigger": true,
       "prompt": "Run Blindspot again on our handout Skill. It drafts handouts and delivers a PDF. Map: layout.design (draft the handout), proof.accessible (check PDF accessibility), proof.facts (check dates), handoff.distribute (mail the PDF). The Skill only says to draft and deliver. Our .blindspot.yaml:\nexclude:\n  - node: handoff.distribute\ndeferred:\n  - node: proof.accessible\n    reason: Accessibility checks are scheduled for next quarter.",
       "files": [],
       "expectations": [
@@ -138,7 +175,7 @@
       "expected_output": "Show proof.accessible as deferred, handoff.distribute as excluded, and proof.facts as a finding."
     },
     {
-      "id": 12,
+      "id": 15,
       "kind": "implicit",
       "should_trigger": true,
       "prompt": "Recheck where this runbook-writing Skill falls short. It drafts instructions for an on-call handoff. There is no map. The Skill doesn't check owner names or add rollback steps. Its active .blindspot.yaml has deferred:\n  - finding: Verify owner names\n    reason: The migration is not done.",
@@ -150,7 +187,7 @@
       "expected_output": "Separate the deferred owner-name check from the unsourced rollback finding."
     },
     {
-      "id": 13,
+      "id": 16,
       "kind": "noisy",
       "should_trigger": true,
       "prompt": "We're shipping Friday and someone said design reviews are annoying. Audit our design-review Skill, which returns a draft and claims to check contrast but has no contrast instructions. The only map node is review.contrast. Our active .blindspot.yaml has no deferred or excluded entries. Don't edit our files.",
@@ -162,7 +199,7 @@
       "expected_output": "Raise the contrast finding without deferring it or editing the profile."
     },
     {
-      "id": 14,
+      "id": 17,
       "kind": "negative",
       "should_trigger": false,
       "prompt": "Translate 'The decision was deferred, not excluded' into French. I am not asking you to audit anything.",
