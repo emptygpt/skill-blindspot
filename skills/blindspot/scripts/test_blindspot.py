@@ -320,6 +320,18 @@ class HelperTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1, result.stdout)
         self.assertIn('both excluded and deferred', result.stderr)
 
+    def test_prepare_preserves_hashes_inside_profile_values(self):
+        self.write('skill/SKILL.md', '# Example')
+        self.write('skill/.blindspot.yaml',
+                   'exclude:\n  - finding: "Release #alpha"  # comment\n'
+                   "deferred:\n  - finding: 'Release #beta'  # comment\n"
+                   '  - finding: Fix C# examples  # comment\n')
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('- excluded finding: Release #alpha\n', result.stdout)
+        self.assertIn('- deferred finding: Release #beta\n', result.stdout)
+        self.assertIn('- deferred finding: Fix C# examples\n', result.stdout)
+
     def test_lint_missing_report_is_a_clean_cli_error(self):
         report = self.root / 'missing.md'
         result = self.cli('lint', report, '--map', 'software')

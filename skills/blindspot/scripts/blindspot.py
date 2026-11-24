@@ -245,11 +245,19 @@ def read_profile(path):
         if section:
             state = {"exclude": "excluded", "deferred": "deferred"}.get(section.group(1))
             continue
-        m = re.match(r"\s*-\s*(node|finding):\s*(.+?)\s*(#.*)?$", line)
+        m = re.match(r"\s*-\s*(node|finding):\s*(.*?)\s*$", line)
         if m and state:
             nodes, findings = decisions[state]
-            val = m.group(2).strip().strip("\"'")
-            (nodes.add(val) if m.group(1) == "node" else findings.append(val))
+            value = m.group(2)
+            quoted = re.fullmatch(r"""(?:"((?:[^"\\]|\\.)*)"|'((?:[^']|'')*)')(?:\s+#.*)?""", value)
+            if quoted and quoted.group(1) is not None:
+                val = re.sub(r'\\(["\\])', r'\1', quoted.group(1))
+            elif quoted:
+                val = quoted.group(2).replace("''", "'")
+            else:
+                val = re.split(r"(?:^|\s+)#", value, maxsplit=1)[0]
+            if val:
+                (nodes.add(val) if m.group(1) == "node" else findings.append(val))
     (excl_nodes, excl_findings), (deferred_nodes, deferred_findings) = decisions.values()
     conflicts = (excl_nodes & deferred_nodes) | (set(excl_findings) & set(deferred_findings))
     if conflicts:
