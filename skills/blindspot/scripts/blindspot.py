@@ -449,13 +449,14 @@ def find_report_section(sections, title):
 
 
 TABLE_PIPE_RE = re.compile(r"(?<!\\)\|")
+UNESCAPED_PIPE_RE = re.compile(r"(?<!\\)((?:\\\\)*)\|")
+TRAILING_TABLE_PIPE_RE = re.compile(UNESCAPED_PIPE_RE.pattern + "$")
 
 
 def map_table_rows(table):
     for line in table.splitlines():
         row = line.strip().lstrip("|")
-        if row.endswith("|") and not row.endswith(r"\|"):
-            row = row[:-1]
+        row = TRAILING_TABLE_PIPE_RE.sub(r"\1", row)
         cells = [c.strip() for c in TABLE_PIPE_RE.split(row, maxsplit=2)]
         if len(cells) < 2 or cells[0] in ("Node", "") or set(cells[0]) <= set("-: "):
             continue
@@ -660,7 +661,7 @@ def cmd_diff(args):
     print("| Node | Before | After | Change | Note | Old evidence | New evidence |")
     print("|---|---|---|---|---|---|---|")
     for row in rows:
-        print("| " + " | ".join(TABLE_PIPE_RE.sub(r"\\|", cell) for cell in row) + " |")
+        print("| " + " | ".join(UNESCAPED_PIPE_RE.sub(r"\1\\|", cell) for cell in row) + " |")
 
 
 def cmd_checklist(args):

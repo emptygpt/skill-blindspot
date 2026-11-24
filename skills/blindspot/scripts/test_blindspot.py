@@ -309,6 +309,15 @@ class HelperTests(unittest.TestCase):
         self.assertIn('| test.node | shallow | covered | resolved |', result.stdout)
         self.assertIn(r'"Compare left\|right before exporting."', result.stdout)
 
+    def test_diff_escapes_pipes_after_even_backslash_runs(self):
+        old = self.diff_report('old', [
+            r'| test.node | shallow | "One \| two \\| three \\\| four \\\\|." |',
+        ])
+        new = self.diff_report('new', ['| test.node | covered | "Review the output." |'])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(r'"One \| two \\\| three \\\| four \\\\\|."', result.stdout)
+
     def test_diff_rejects_invalid_reports_without_printing_partial_results(self):
         old = self.diff_report('old', ['| test.node | absent | Nothing. |'])
         for content, error in [
