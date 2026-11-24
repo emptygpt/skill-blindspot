@@ -16,6 +16,7 @@ tokens on judgement:
            missing from the table, absent or shallow nodes that no finding
            mentions, counts that do not add up; with --skill, verify evidence
            quotes in covered and shallow rows against the audited files
+  diff     compare two audit reports by map node id, with before/after evidence
 
 Usage:
   python3 blindspot.py prepare <skill-folder> --map <id> --out worksheet.md
@@ -23,6 +24,7 @@ Usage:
   python3 blindspot.py grep <folder> [<folder> ...] -e <term> [-e <term> ...]
   python3 blindspot.py sources --map <id> <node-id> [<node-id> ...]
   python3 blindspot.py lint <report.md> --map <id> [--skill <skill-folder> [--skill <delegated-path>] ...] [--profile <.blindspot.yaml>]
+  python3 blindspot.py diff <old-report.md> <new-report.md> [--map <id>]
   python3 blindspot.py checklist --map <id> [--skip <group> ...] [--out checklist.md]
   python3 blindspot.py checklist --map <id> --groups    (list group ids to skip)
   python3 blindspot.py maps
@@ -437,9 +439,46 @@ def missing_evidence_quotes(roots, report, quotes):
     return missing
 
 
+def report_sections(text):
+    sections = re.split(r"^## ", text, flags=re.M)
+    return sections[0], {s.split("\n", 1)[0].strip().lower(): s for s in sections[1:]}
+
+
+def find_report_section(sections, title):
+    return next((v for k, v in sections.items() if k.startswith(title)), None)
+
+
+TABLE_PIPE_RE = re.compile(r"(?<!\\)\|")
+UNESCAPED_PIPE_RE = re.compile(r"(?<!\\)((?:\\\\)*)\|")
+TRAILING_TABLE_PIPE_RE = re.compile(UNESCAPED_PIPE_RE.pattern + "$")
+
+
+def map_table_rows(table):
+    for line in table.splitlines():
+        row = line.strip().lstrip("|")
+        row = TRAILING_TABLE_PIPE_RE.sub(r"\1", row)
+        cells = [c.strip() for c in TABLE_PIPE_RE.split(row, maxsplit=2)]
+        if len(cells) < 2 or cells[0] in ("Node", "") or set(cells[0]) <= set("-: "):
+            continue
+        key, state = cells[:2]
+        yield key.strip("`* "), state.strip("`* ").lower(), state, cells[2] if len(cells) == 3 else ""
+
+
+def map_groups(map_id):
+    m = resolve(load_maps(), map_id)
+    return {g["id"]: [n["id"] for n in g["nodes"]] for g in m["groups"]}
+
+
+def group_targets(groups, key):
+    return groups.get(key) or groups.get(key.rstrip(".*"))
+
+
+def normalize_evidence_quote(excerpt):
+    return " ".join(MARKDOWN_ESCAPE_RE.sub(r"\1", excerpt).split())
+
+
 def cmd_lint(args):
-    m = resolve(load_maps(), args.map)
-    groups = {g["id"]: [n["id"] for n in g["nodes"]] for g in m["groups"]}
+    groups = map_groups(args.map)
     all_nodes = {nid for ids in groups.values() for nid in ids}
     report = pathlib.Path(args.report).resolve()
     text = report.read_text(encoding="utf-8")
@@ -451,37 +490,32 @@ def cmd_lint(args):
         if not root.is_file() and not root.is_dir():
             raise ValueError(f"evidence path is not a file or directory: {root}")
 
-    sec = re.split(r"^## ", text, flags=re.M)
-    sections = {s.split("\n", 1)[0].strip().lower(): s for s in sec[1:]}
-    table = next((v for k, v in sections.items() if k.startswith("map table")), None)
-    findings = next((v for k, v in sections.items() if k.startswith("findings")), "")
+    header, sections = report_sections(text)
+    table = find_report_section(sections, "map table")
+    findings = find_report_section(sections, "findings") or ""
     if table is None:
         print("no '## Map table' section; nothing to check")
         return 1
 
     states = {}
     evidence_quotes = []
-    for line in table.splitlines():
-        cells = [c.strip() for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
-        if len(cells) < 2 or cells[0] in ("Node", "") or set(cells[0]) <= set("-: "):
-            continue
-        key, state = cells[0].strip("`* "), cells[1].strip("`* ").lower()
+    for key, state, state_cell, evidence in map_table_rows(table):
         if state not in STATES:
-            problems.append(f"table: {key}: unknown state {cells[1]!r}")
+            problems.append(f"table: {key}: unknown state {state_cell!r}")
             continue
-        targets = groups.get(key) or groups.get(key.rstrip(".*").rstrip(".")) or ([key] if key in all_nodes else None)
+        targets = group_targets(groups, key) or ([key] if key in all_nodes else None)
         if targets is None:
             problems.append(f"table: {key!r} is not a node or group of {args.map}")
             continue
-        if state == "undetermined" and (len(cells) < 3 or not cells[2]):
+        if state == "undetermined" and not evidence:
             problems.append(f"table: {key}: undetermined needs evidence")
-        if roots and state in ("covered", "shallow") and len(cells) >= 3:
+        if roots and state in ("covered", "shallow") and evidence:
             malformed_curly = False
-            for excerpt in evidence_excerpts(cells[2]):
+            for excerpt in evidence_excerpts(evidence):
                 if excerpt is None:
                     malformed_curly = True
                     continue
-                quote = " ".join(MARKDOWN_ESCAPE_RE.sub(r"\1", excerpt).split())
+                quote = normalize_evidence_quote(excerpt)
                 if quote:
                     evidence_quotes.append((key, quote))
             if malformed_curly:
@@ -502,7 +536,6 @@ def cmd_lint(args):
 
     profile = args.profile
     if not profile:
-        header = text.split("\n## ", 1)[0]
         match_ = re.search(r"Profile:[ \t]*(.*?)(?=[ \t]{2,}(?:Date|Map):|$)", header, re.M)
         if match_:
             value = match_.group(1).strip().strip("`\"'")
@@ -543,6 +576,84 @@ def cmd_lint(args):
         print(f"- {p}")
     print("ok" if not problems else f"{len(problems)} problem(s)")
     return 1 if problems else 0
+
+
+def report_nodes(report, map_id):
+    header, sections = report_sections(pathlib.Path(report).read_text(encoding="utf-8"))
+    table = find_report_section(sections, "map table")
+    if table is None:
+        raise ValueError(f"{report}: no '## Map table' section")
+    if not map_id:
+        match_ = re.search(r"^Map:[ \t]*`?([a-z][a-z0-9-]*)", header, re.M)
+        map_id = match_.group(1) if match_ else None
+
+    groups = None
+    nodes = {}
+    for key, state, state_cell, evidence in map_table_rows(table):
+        if state not in STATES:
+            raise ValueError(f"{report}: {key}: unknown state {state_cell!r}")
+        if re.fullmatch(r"[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)+", key):
+            targets = [key]
+        else:
+            if groups is None:
+                groups = map_groups(map_id) if map_id and map_id != "none" else {}
+            targets = group_targets(groups, key)
+            if not targets:
+                raise ValueError(f"{report}: cannot expand group {key!r}; use explicit node IDs or --map")
+        for nid in targets:
+            if nid in nodes and nodes[nid][0] != state:
+                raise ValueError(f"{report}: {nid} listed twice with different states")
+            nodes[nid] = state, evidence
+    if not nodes:
+        raise ValueError(f"{report}: no node rows in '## Map table'")
+    return nodes
+
+
+def quoted_evidence(evidence):
+    return {normalize_evidence_quote(excerpt) for excerpt in evidence_excerpts(evidence)
+            if excerpt is not None} - {""}
+
+
+def coverage_change(before, after, old_evidence, new_evidence):
+    coverage = {"absent": 0, "shallow": 1, "covered": 2}
+    if before == "—":
+        return "unchanged", "new report only"
+    if after == "—":
+        return "unchanged", "old report only"
+    if before == after:
+        return "unchanged", ""
+    if {before, after} & {"excluded", "not-applicable"}:
+        return "unchanged", "scope or profile change"
+    if "undetermined" in (before, after):
+        return "unchanged", "insufficient evidence to compare"
+    if coverage[after] < coverage[before]:
+        return "regressed", ""
+    if after == "shallow":
+        return "partially resolved", ""
+    old_quotes = quoted_evidence(old_evidence)
+    if not any(all(quote not in old_quote for old_quote in old_quotes) for quote in quoted_evidence(new_evidence)):
+        return "partially resolved", "no new quoted evidence"
+    return "resolved", ""
+
+
+def cmd_diff(args):
+    old = report_nodes(args.old_report, args.map)
+    new = report_nodes(args.new_report, args.map)
+    counts = {"resolved": 0, "partially resolved": 0, "unchanged": 0, "regressed": 0}
+    rows = []
+    for nid in sorted(old.keys() | new.keys()):
+        before, old_evidence = old.get(nid, ("—", ""))
+        after, new_evidence = new.get(nid, ("—", ""))
+        change, note = coverage_change(before, after, old_evidence, new_evidence)
+        counts[change] += 1
+        rows.append((nid, before, after, change, note, old_evidence, new_evidence))
+
+    print(f"{len(rows)} nodes; " + ", ".join(f"{change} {count}" for change, count in counts.items()))
+    print("Unchanged includes non-comparable rows (see Note). Labels compare report evidence, not Skill behavior.\n")
+    print("| Node | Before | After | Change | Note | Old evidence | New evidence |")
+    print("|---|---|---|---|---|---|---|")
+    for row in rows:
+        print("| " + " | ".join(UNESCAPED_PIPE_RE.sub(r"\1\\|", cell) for cell in row) + " |")
 
 
 def cmd_checklist(args):
@@ -619,13 +730,17 @@ def main():
     p = sub.add_parser("lint"); p.add_argument("report"); p.add_argument("--map", required=True); p.add_argument("--profile")
     p.add_argument("--skill", metavar="PATH", action="append", default=[],
                    help="audited Skill folder; repeat for delegated files or folders")
+    p = sub.add_parser("diff", help="compare two reports of the same Skill")
+    p.add_argument("old_report")
+    p.add_argument("new_report")
+    p.add_argument("--map", help="override both report headers when expanding group rows")
     p = sub.add_parser("checklist"); p.add_argument("--map", required=True); p.add_argument("--skip", nargs="+")
     p.add_argument("--groups", action="store_true"); p.add_argument("--out")
     p.add_argument("--max-sources", type=positive_int, default=1)
     sub.add_parser("maps")
     args = ap.parse_args()
     commands = {"prepare": cmd_prepare, "grep": cmd_grep, "sources": cmd_sources,
-                "lint": cmd_lint, "checklist": cmd_checklist, "maps": cmd_maps}
+                "lint": cmd_lint, "diff": cmd_diff, "checklist": cmd_checklist, "maps": cmd_maps}
     try:
         return commands[args.cmd](args) or 0
     except (OSError, ValueError) as error:
