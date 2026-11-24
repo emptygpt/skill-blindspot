@@ -247,22 +247,6 @@ class HelperTests(unittest.TestCase):
                       result.stdout)
         self.assertIn('| test.also-new | shallow | covered | resolved |', result.stdout)
 
-    def test_diff_detects_new_quotes_that_change_a_token(self):
-        old = self.diff_report('old', [
-            '| test.colon | shallow | "Run npm test:unit before committing." |',
-            '| test.hyphen | shallow | "Run safety-check before committing." |',
-            '| test.word | shallow | "Run tests before committing." |',
-        ])
-        new = self.diff_report('new', [
-            '| test.colon | covered | "npm test" |',
-            '| test.hyphen | covered | "check before committing" |',
-            '| test.word | covered | "Run test" |',
-        ])
-        result = self.cli('diff', old, new)
-        self.assertEqual(result.returncode, 0, result.stderr)
-        for key in ('test.colon', 'test.hyphen', 'test.word'):
-            self.assertIn(f'| {key} | shallow | covered | resolved |', result.stdout)
-
     def test_diff_keeps_one_sided_scope_and_unknown_rows_neutral(self):
         old = self.diff_report('old', [
             '| test.removed | covered | "Check wording" |',
@@ -317,6 +301,22 @@ class HelperTests(unittest.TestCase):
         result = self.cli('diff', old, new)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn(r'"One \| two \\\| three \\\| four \\\\\|."', result.stdout)
+
+    def test_diff_treats_prose_colon_and_chinese_substrings_as_reused_evidence(self):
+        old = self.diff_report('old', [
+            '| test.prose | shallow | "Review the preview: open it in a browser." |',
+            '| test.chinese | shallow | “导出前核对每条引文并记录结果。” |',
+        ])
+        new = self.diff_report('new', [
+            '| test.prose | covered | "Review the preview" |',
+            '| test.chinese | covered | “核对每条引文” |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for key in ('test.prose', 'test.chinese'):
+            with self.subTest(key=key):
+                self.assertIn(f'| {key} | shallow | covered | partially resolved | no new quoted evidence |',
+                              result.stdout)
 
     def test_diff_rejects_invalid_reports_without_printing_partial_results(self):
         old = self.diff_report('old', ['| test.node | absent | Nothing. |'])
