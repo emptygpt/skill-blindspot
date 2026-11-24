@@ -285,6 +285,14 @@ class HelperTests(unittest.TestCase):
         for node in group['nodes']:
             self.assertIn(f'| {node["id"]} |', result.stdout)
 
+    def test_diff_keeps_unescaped_pipes_inside_evidence(self):
+        old = self.diff_report('old', ['| test.node | shallow | "Review the output." |'])
+        new = self.diff_report('new', ['| test.node | covered | "Compare left|right before exporting." |'])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('| test.node | shallow | covered | resolved |', result.stdout)
+        self.assertIn(r'"Compare left\|right before exporting."', result.stdout)
+
     def test_diff_rejects_invalid_reports_without_printing_partial_results(self):
         old = self.diff_report('old', ['| test.node | absent | Nothing. |'])
         for content, error in [
@@ -372,6 +380,19 @@ class HelperTests(unittest.TestCase):
         report = self.evidence_report('shallow', '"Read the brief." and “Review the risks and check x \\| y.”')
         result = self.cli('lint', report, '--map', 'software', '--skill', skill)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_lint_checks_whole_quote_containing_an_unescaped_pipe(self):
+        skill = self.write('skill/SKILL.md', 'Compare left|right before exporting.').parent
+        for evidence, status in [
+            ('"Compare left|right before exporting."', 0),
+            ('"Compare left|wrong before exporting."', 1),
+        ]:
+            with self.subTest(evidence=evidence):
+                report = self.evidence_report('covered', evidence)
+                result = self.cli('lint', report, '--map', 'software', '--skill', skill)
+                self.assertEqual(result.returncode, status, result.stdout + result.stderr)
+                if status:
+                    self.assertIn('Compare left|wrong before exporting.', result.stdout)
 
     def test_lint_checks_the_whole_nested_curly_quote(self):
         skill = self.write('skill/SKILL.md', 'Check “risks” before delivery.').parent

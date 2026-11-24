@@ -448,12 +448,19 @@ def find_report_section(sections, title):
     return next((v for k, v in sections.items() if k.startswith(title)), None)
 
 
+TABLE_PIPE_RE = re.compile(r"(?<!\\)\|")
+
+
 def map_table_rows(table):
     for line in table.splitlines():
-        cells = [c.strip() for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+        row = line.strip().lstrip("|")
+        if row.endswith("|") and not row.endswith(r"\|"):
+            row = row[:-1]
+        cells = [c.strip() for c in TABLE_PIPE_RE.split(row, maxsplit=2)]
         if len(cells) < 2 or cells[0] in ("Node", "") or set(cells[0]) <= set("-: "):
             continue
-        yield cells[0].strip("`* "), cells[1].strip("`* ").lower(), cells[1], cells[2:]
+        key, state = cells[:2]
+        yield key.strip("`* "), state.strip("`* ").lower(), state, cells[2] if len(cells) == 3 else ""
 
 
 def map_groups(map_id):
@@ -491,7 +498,7 @@ def cmd_lint(args):
 
     states = {}
     evidence_quotes = []
-    for key, state, state_cell, rest in map_table_rows(table):
+    for key, state, state_cell, evidence in map_table_rows(table):
         if state not in STATES:
             problems.append(f"table: {key}: unknown state {state_cell!r}")
             continue
@@ -499,11 +506,11 @@ def cmd_lint(args):
         if targets is None:
             problems.append(f"table: {key!r} is not a node or group of {args.map}")
             continue
-        if state == "undetermined" and (not rest or not rest[0]):
+        if state == "undetermined" and not evidence:
             problems.append(f"table: {key}: undetermined needs evidence")
-        if roots and state in ("covered", "shallow") and rest:
+        if roots and state in ("covered", "shallow") and evidence:
             malformed_curly = False
-            for excerpt in evidence_excerpts(rest[0]):
+            for excerpt in evidence_excerpts(evidence):
                 if excerpt is None:
                     malformed_curly = True
                     continue
@@ -581,7 +588,7 @@ def report_nodes(report, map_id):
 
     groups = None
     nodes = {}
-    for key, state, state_cell, rest in map_table_rows(table):
+    for key, state, state_cell, evidence in map_table_rows(table):
         if state not in STATES:
             raise ValueError(f"{report}: {key}: unknown state {state_cell!r}")
         if re.fullmatch(r"[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)+", key):
@@ -592,7 +599,6 @@ def report_nodes(report, map_id):
             targets = group_targets(groups, key)
             if not targets:
                 raise ValueError(f"{report}: cannot expand group {key!r}; use explicit node IDs or --map")
-        evidence = rest[0] if rest else ""
         for nid in targets:
             if nid in nodes and nodes[nid][0] != state:
                 raise ValueError(f"{report}: {nid} listed twice with different states")
@@ -646,7 +652,7 @@ def cmd_diff(args):
     print("| Node | Before | After | Change | Note | Old evidence | New evidence |")
     print("|---|---|---|---|---|---|---|")
     for row in rows:
-        print("| " + " | ".join(row) + " |")
+        print("| " + " | ".join(TABLE_PIPE_RE.sub(r"\\|", cell) for cell in row) + " |")
 
 
 def cmd_checklist(args):
