@@ -247,6 +247,22 @@ class HelperTests(unittest.TestCase):
                       result.stdout)
         self.assertIn('| test.also-new | shallow | covered | resolved |', result.stdout)
 
+    def test_diff_detects_new_quotes_that_change_a_token(self):
+        old = self.diff_report('old', [
+            '| test.colon | shallow | "Run npm test:unit before committing." |',
+            '| test.hyphen | shallow | "Run safety-check before committing." |',
+            '| test.word | shallow | "Run tests before committing." |',
+        ])
+        new = self.diff_report('new', [
+            '| test.colon | covered | "npm test" |',
+            '| test.hyphen | covered | "check before committing" |',
+            '| test.word | covered | "Run test" |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for key in ('test.colon', 'test.hyphen', 'test.word'):
+            self.assertIn(f'| {key} | shallow | covered | resolved |', result.stdout)
+
     def test_diff_keeps_one_sided_scope_and_unknown_rows_neutral(self):
         old = self.diff_report('old', [
             '| test.removed | covered | "Check wording" |',

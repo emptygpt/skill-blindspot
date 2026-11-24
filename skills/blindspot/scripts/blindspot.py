@@ -613,6 +613,15 @@ def quoted_evidence(evidence):
             if excerpt is not None} - {""}
 
 
+def has_new_quoted_evidence(old_evidence, new_evidence):
+    old_quotes = quoted_evidence(old_evidence)
+    for quote in quoted_evidence(new_evidence):
+        excerpt = re.compile(rf"(?<![\w:-]){re.escape(quote)}(?![\w:-])")
+        if not any(excerpt.search(old_quote) for old_quote in old_quotes):
+            return True
+    return False
+
+
 def coverage_change(before, after, old_evidence, new_evidence):
     coverage = {"absent": 0, "shallow": 1, "covered": 2}
     if before == "—":
@@ -629,8 +638,7 @@ def coverage_change(before, after, old_evidence, new_evidence):
         return "regressed", ""
     if after == "shallow":
         return "partially resolved", ""
-    old_quotes = quoted_evidence(old_evidence)
-    if not any(all(quote not in old_quote for old_quote in old_quotes) for quote in quoted_evidence(new_evidence)):
+    if not has_new_quoted_evidence(old_evidence, new_evidence):
         return "partially resolved", "no new quoted evidence"
     return "resolved", ""
 
