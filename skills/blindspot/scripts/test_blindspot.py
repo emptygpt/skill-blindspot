@@ -293,6 +293,24 @@ class HelperTests(unittest.TestCase):
                 self.assertEqual(status, 1, output)
                 self.assertIn('is deferred but named as a finding', output)
 
+    def test_lint_allows_contextual_references_to_a_deferred_node(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ')
+        text = text.replace('## Findings\n', '## Findings\n'
+                            '  Nodes: testing.test-the-change\n'
+                            '  Why: requirements.understand-request does not cover this gap.\n'
+                            '\n## Unsourced findings\n'
+                            '- Back up material not covered by requirements.understand-request.\n')
+        report.write_text(text)
+        status, output = self.lint(report)
+        self.assertEqual(status, 0, output)
+        report.write_text(text.replace('Nodes: testing.test-the-change',
+                                       'Nodes: testing.test-the-change, requirements.understand-request'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('is deferred but named as a finding', output)
+
     def test_prepare_rejects_conflicting_excluded_and_deferred_decisions(self):
         self.write('skill/SKILL.md', '# Example')
         self.write('skill/.blindspot.yaml',

@@ -544,8 +544,12 @@ def cmd_lint(args):
 
     node_pattern = r"[a-z][a-z0-9-]*\.[a-z0-9.-]*[a-z0-9]"
     mentioned = set(re.findall(node_pattern, findings))
-    deferred_mentions = mentioned | set(re.findall(node_pattern, sections.get("unsourced findings", "")))
-    for nid in sorted(decisions["deferred"][0] & all_nodes & deferred_mentions):
+    declared_nodes = set()
+    for section in (findings, sections.get("unsourced findings", "")):
+        for value in re.findall(r"^[ \t]*(?:Map )?Nodes?:[ \t]*(.*)$", section, re.M | re.I):
+            ids = value.split(" — ", 1)[0].split(" - source:", 1)[0]
+            declared_nodes.update(re.findall(node_pattern, ids))
+    for nid in sorted(deferred_nodes & declared_nodes):
         problems.append(f"findings: {nid} is deferred but named as a finding")
     for nid, st in sorted(states.items()):
         if st in ("absent", "shallow") and nid not in mentioned:
