@@ -232,6 +232,21 @@ class HelperTests(unittest.TestCase):
         self.assertIn('resolved 0, partially resolved 3, unchanged 0, regressed 0', result.stdout)
         self.assertIn('no new quoted evidence', result.stdout)
 
+    def test_diff_does_not_count_excerpt_of_old_quote_as_new_evidence(self):
+        old = self.diff_report('old', [
+            '| test.shortened | shallow | “Before export, check claims against the source.” |',
+            '| test.also-new | shallow | “Before export, check claims against the source.” |',
+        ])
+        new = self.diff_report('new', [
+            '| test.shortened | covered | "check claims  against the source" |',
+            '| test.also-new | covered | "check claims against the source"; "Record mismatches in review.md." |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('| test.shortened | shallow | covered | partially resolved | no new quoted evidence |',
+                      result.stdout)
+        self.assertIn('| test.also-new | shallow | covered | resolved |', result.stdout)
+
     def test_diff_keeps_one_sided_scope_and_unknown_rows_neutral(self):
         old = self.diff_report('old', [
             '| test.removed | covered | "Check wording" |',

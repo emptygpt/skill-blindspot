@@ -623,7 +623,8 @@ def coverage_change(before, after, old_evidence, new_evidence):
         return "regressed", ""
     if after == "shallow":
         return "partially resolved", ""
-    if not quoted_evidence(new_evidence) - quoted_evidence(old_evidence):
+    old_quotes = quoted_evidence(old_evidence)
+    if not any(all(quote not in old_quote for old_quote in old_quotes) for quote in quoted_evidence(new_evidence)):
         return "partially resolved", "no new quoted evidence"
     return "resolved", ""
 
