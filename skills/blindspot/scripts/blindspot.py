@@ -49,7 +49,7 @@ CODE_EXT = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx", ".sh", ".bash",
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", "dist", "build", ".next"}
 MAX_FILE_BYTES = 400_000
 MAX_TOTAL_BYTES = 3_000_000
-STATES = {"covered", "shallow", "absent", "not-applicable", "excluded", "undetermined"}
+STATES = {"covered", "shallow", "absent", "not-applicable", "excluded", "deferred", "undetermined"}
 
 STOP = set("""
 a an and are as at be been before being by can do does each for from has have how in into is it its
@@ -238,15 +238,33 @@ def match(groups, texts, per_node=2):
 
 def read_profile(path):
     """Minimal reader for .blindspot.yaml: '- node: id' and '- finding: text' entries."""
-    nodes, findings = set(), []
+    decisions = {"excluded": (set(), []), "deferred": (set(), [])}
     if not path or not pathlib.Path(path).exists():
-        return nodes, findings
+        return decisions
+    state = "excluded"
     for line in pathlib.Path(path).read_text(encoding="utf-8").splitlines():
-        m = re.match(r"\s*-\s*(node|finding):\s*(.+?)\s*(#.*)?$", line)
-        if m:
-            val = m.group(2).strip().strip("\"'")
-            (nodes.add(val) if m.group(1) == "node" else findings.append(val))
-    return nodes, findings
+        section = re.match(r"^([\w-]+):", line)
+        if section:
+            state = {"exclude": "excluded", "deferred": "deferred"}.get(section.group(1))
+            continue
+        m = re.match(r"\s*-\s*(node|finding):\s*(.*?)\s*$", line)
+        if m and state:
+            nodes, findings = decisions[state]
+            value = m.group(2)
+            quoted = re.fullmatch(r"""(?:"((?:[^"\\]|\\.)*)"|'((?:[^']|'')*)')(?:\s+#.*)?""", value)
+            if quoted and quoted.group(1) is not None:
+                val = re.sub(r'\\(["\\])', r'\1', quoted.group(1))
+            elif quoted:
+                val = quoted.group(2).replace("''", "'")
+            else:
+                val = re.split(r"(?:^|\s+)#", value, maxsplit=1)[0]
+            if val:
+                (nodes.add(val) if m.group(1) == "node" else findings.append(val))
+    (excl_nodes, excl_findings), (deferred_nodes, deferred_findings) = decisions.values()
+    conflicts = (excl_nodes & deferred_nodes) | (set(excl_findings) & set(deferred_findings))
+    if conflicts:
+        raise ValueError(f"profile: both excluded and deferred: {', '.join(sorted(conflicts))}")
+    return decisions
 
 
 def clip(text, n=150):
@@ -261,7 +279,7 @@ def cmd_prepare(args):
     m = resolve(maps, args.map)
     folder, texts, code, data, skipped = read_skill(args.skill)
     profile = args.profile or (folder / ".blindspot.yaml")
-    excl_nodes, excl_findings = read_profile(profile)
+    decisions = read_profile(profile)
     hits = match(m["groups"], texts)
     hit_all = match(m["groups"], texts, per_node=10_000)
     hit_all = {k: v[0] for k, v in hit_all.items()}
@@ -288,10 +306,11 @@ def cmd_prepare(args):
     for i, h in headings(texts.get("SKILL.md", [])):
         out.append(f"- {i}: {h}")
     out.append("")
-    if excl_nodes or excl_findings:
+    if any(nodes or findings for nodes, findings in decisions.values()):
         out.append("## Profile")
-        out += [f"- excluded node: {n}" for n in sorted(excl_nodes)]
-        out += [f"- excluded finding: {f}" for f in excl_findings]
+        for state, (nodes, findings) in decisions.items():
+            out += [f"- {state} node: {n}" for n in sorted(nodes)]
+            out += [f"- {state} finding: {f}" for f in findings]
         out.append("")
     head_len = len(out)
     out.append("## Nodes")
@@ -303,7 +322,8 @@ def cmd_prepare(args):
         out.append(f"### {g['id']}: {g['title']} ({n_hit}/{len(g['nodes'])} nodes with hits)")
         for n in g["nodes"]:
             top, count = hits[n["id"]]
-            tag = " [excluded by profile]" if n["id"] in excl_nodes else ""
+            tag = next((f" [{state} by profile]" for state, (nodes, _) in decisions.items()
+                        if n["id"] in nodes), "")
             out.append(f"- **{n['id']}**{tag}: {n['title']}. {clip(n.get('description', ''), 200)}")
             if not top:
                 no_hit += 1
@@ -543,15 +563,42 @@ def cmd_lint(args):
                 profile = report.parent / value
     if profile and not pathlib.Path(profile).is_file():
         problems.append(f"profile: file not found: {profile}")
-    excl_nodes, _ = read_profile(profile)
-    for nid, state in sorted(states.items()):
-        if state == "excluded" and nid not in excl_nodes:
-            problems.append(f"profile: {nid} is marked excluded but not listed in the active profile")
-    for nid in sorted(excl_nodes & all_nodes):
-        if states.get(nid) not in (None, "excluded"):
-            problems.append(f"profile: {nid} is excluded but marked {states[nid]}")
+    decisions = read_profile(profile)
+    deferred_nodes, deferred_findings = decisions["deferred"]
+    for line in sections.get("deferred by profile", "").splitlines():
+        cells = [c.strip() for c in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+        if len(cells) != 3 or MARKDOWN_ESCAPE_RE.sub(r"\1", cells[0]) not in deferred_findings:
+            continue
+        for node in cells[2].split(","):
+            nid = node.strip(" `")
+            if nid in all_nodes:
+                deferred_nodes.add(nid)
+            elif nid:
+                problems.append(f"deferred: {nid} is not a node of {args.map}")
+    for decision, (nodes, _) in decisions.items():
+        for nid, state in sorted(states.items()):
+            if state == decision and nid not in nodes:
+                problems.append(f"profile: {nid} is marked {decision} but not listed in the active profile")
+        for nid in sorted(nodes & all_nodes):
+            if states.get(nid) not in (None, decision):
+                problems.append(f"profile: {nid} is {decision} but marked {states[nid]}")
 
-    mentioned = set(re.findall(r"[a-z][a-z0-9-]*\.[a-z0-9.-]*[a-z0-9]", findings))
+    node_pattern = r"[a-z][a-z0-9-]*\.[a-z0-9.-]*[a-z0-9]"
+    mentioned = set(re.findall(node_pattern, findings))
+    node_id = f"(?:{node_pattern}|`{node_pattern}`)"
+    node_state = "|".join(sorted(STATES))
+    node_item = rf"{node_id}(?:[ \t]+\((?:{node_state})\))?"
+    node_field = re.compile(
+        r"^[ \t]*(?:\d+\.[ \t]+\*\*.+?\*\*[ \t]+(?:\[[^\]\n]+\][ \t]+)?)?"
+        rf"(?:Map )?Nodes?:[ \t]*({node_item}(?:[ \t]*[,;][ \t]*{node_item})*)",
+        re.M | re.I,
+    )
+    declared_nodes = set()
+    for section in (findings, sections.get("unsourced findings", "")):
+        for value in node_field.findall(section):
+            declared_nodes.update(re.findall(node_pattern, value))
+    for nid in sorted(deferred_nodes & all_nodes & declared_nodes):
+        problems.append(f"findings: {nid} is deferred but named as a finding")
     for nid, st in sorted(states.items()):
         if st in ("absent", "shallow") and nid not in mentioned:
             problems.append(f"findings: {nid} is {st} in the table but no finding names it")
@@ -563,9 +610,9 @@ def cmd_lint(args):
 
     counts = {k: sum(1 for v in states.values() if v == k) for k in sorted(STATES)}
     cm = re.search(r"covered (\d+), shallow (\d+), absent (\d+), not-applicable (\d+)"
-                   r"(?:, undetermined (\d+))?", table)
+                   r"(?:, undetermined (\d+))?(?:, deferred (\d+))?", table)
     if cm:
-        want = dict(zip(("covered", "shallow", "absent", "not-applicable", "undetermined"),
+        want = dict(zip(("covered", "shallow", "absent", "not-applicable", "undetermined", "deferred"),
                         (int(n or 0) for n in cm.groups())))
         got = {k: counts[k] for k in want}
         if want != got:
@@ -622,6 +669,8 @@ def coverage_change(before, after, old_evidence, new_evidence):
         return "unchanged", "old report only"
     if before == after:
         return "unchanged", ""
+    if "deferred" in (before, after):
+        return "unchanged", "deferred profile decision"
     if {before, after} & {"excluded", "not-applicable"}:
         return "unchanged", "scope or profile change"
     if "undetermined" in (before, after):

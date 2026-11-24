@@ -2,6 +2,8 @@
 
 A re-check is a second pass over the findings of a finished report, done before or after it is published. It tests whether each finding holds at its band. [reports/video-20/recheck.md](../reports/video-20/recheck.md) is an example.
 
+A deferred item is a [profile decision](../skills/blindspot/SKILL.md#profile-format), not a verdict about the gap. Leave it out of the band counts and keep it visible in the audit's deferred section.
+
 ## What the reviewer reads
 
 - The report, including its `Scope` lines.

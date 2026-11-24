@@ -271,6 +271,20 @@ class HelperTests(unittest.TestCase):
         ]:
             self.assertIn(f'| {key} | {before} | {after} | unchanged | {note} |', result.stdout)
 
+    def test_diff_keeps_deferred_profile_decisions_separate_from_coverage(self):
+        old = self.diff_report('old', [
+            '| test.postponed | absent | Nothing. |',
+            '| test.reopened | deferred | Profile. |',
+        ])
+        new = self.diff_report('new', [
+            '| test.postponed | deferred | Profile. |',
+            '| test.reopened | covered | "Check facts." |',
+        ])
+        result = self.cli('diff', old, new)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('| test.postponed | absent | deferred | unchanged | deferred profile decision |', result.stdout)
+        self.assertIn('| test.reopened | deferred | covered | unchanged | deferred profile decision |', result.stdout)
+
     def test_diff_expands_group_rows_and_preserves_escaped_evidence(self):
         old = self.diff_report('old', [r'| `requirements.*` | not-applicable | External \| team. |'])
         new = self.diff_report('new', [
@@ -371,6 +385,154 @@ class HelperTests(unittest.TestCase):
         for profile in (None, 'none'):
             status, output = self.lint(self.report(profile, excluded=False))
             self.assertEqual(status, 0, output)
+
+    def test_prepare_keeps_deferred_decisions_separate_from_exclusions(self):
+        self.write('skill/SKILL.md', '# Example')
+        self.write('skill/.blindspot.yaml',
+                   'exclude:\n  - node: requirements.understand-request\n'
+                   'deferred:\n  - node: testing.test-the-change\n'
+                   '    reason: Later\n  - finding: "detailed release notes"\n')
+        worksheet = self.root / 'worksheet.md'
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software', '--out', worksheet)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        summary = worksheet.read_text()
+        nodes = worksheet.with_name('worksheet-nodes.md').read_text()
+        self.assertIn('- excluded node: requirements.understand-request', summary)
+        self.assertIn('- deferred node: testing.test-the-change', summary)
+        self.assertIn('- deferred finding: detailed release notes', summary)
+        self.assertIn('**testing.test-the-change** [deferred by profile]', nodes)
+        self.assertNotIn('excluded node: testing.test-the-change', summary)
+
+    def test_lint_deferred_state_is_visible_and_counted_separately(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ')
+        size = sum(len(g['nodes']) for g in blindspot.resolve(blindspot.load_maps(), 'software')['groups'])
+        counts = f'covered {size - 1}, shallow 0, absent 0, not-applicable 0, deferred 1'
+        report.write_text(text + '\n\n' + counts)
+        status, output = self.lint(report)
+        self.assertEqual(status, 0, output)
+        self.assertIn('deferred 1, excluded 0', output)
+        report.write_text(text + '\n\n' + counts.replace('deferred 1', 'deferred 0'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('counts line says', output)
+
+    def test_lint_deferred_requires_membership_in_active_profile(self):
+        self.write('reports/excluded.yaml', 'exclude:\n  - node: requirements.understand-request\n')
+        for profile in (None, 'excluded.yaml'):
+            with self.subTest(profile=profile):
+                report = self.report(profile)
+                report.write_text(report.read_text().replace(' | excluded | ', ' | deferred | '))
+                status, output = self.lint(report)
+                self.assertEqual(status, 1, output)
+                self.assertIn('marked deferred but not listed', output)
+
+    def test_lint_finding_deferral_can_cover_multiple_map_nodes(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - finding: Verify the requested change\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ').replace(
+            '| testing.test-the-change | covered |', '| testing.test-the-change | deferred |')
+        deferred = ('\n\n## Deferred by profile\n| Node or finding | Reason | Map nodes |\n'
+                    '| Verify the requested change | Later | '
+                    '`requirements.understand-request`, `testing.test-the-change` |\n')
+        report.write_text(text + deferred)
+        status, output = self.lint(report)
+        self.assertEqual(status, 0, output)
+        report.write_text(text + deferred.replace('Verify the requested change', 'Unapproved deferral'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('marked deferred but not listed', output)
+        report.write_text((text + deferred).replace(
+            '| testing.test-the-change | deferred |', '| testing.test-the-change | shallow |'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('testing.test-the-change is deferred but marked shallow', output)
+
+    def test_lint_rejects_reraised_deferred_node(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text()
+        report.write_text(text.replace(' | excluded | ', ' | absent | '))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('is deferred but marked absent', output)
+        for section in ('## Findings\n', '## Unsourced findings\n'):
+            with self.subTest(section=section):
+                report.write_text(text.replace(' | excluded | ', ' | deferred | ').replace(
+                    '## Findings\n', section + 'Map node: requirements.understand-request\n'))
+                status, output = self.lint(report)
+                self.assertEqual(status, 1, output)
+                self.assertIn('is deferred but named as a finding', output)
+
+    def test_lint_allows_contextual_references_to_a_deferred_node(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ')
+        text = text.replace('## Findings\n', '## Findings\n'
+                            '  Nodes: testing.test-the-change\n'
+                            '  Why: requirements.understand-request does not cover this gap.\n'
+                            '\n## Unsourced findings\n'
+                            '- Back up material not covered by requirements.understand-request.\n')
+        report.write_text(text)
+        status, output = self.lint(report)
+        self.assertEqual(status, 0, output)
+        report.write_text(text.replace('Nodes: testing.test-the-change',
+                                       'Nodes: testing.test-the-change, requirements.understand-request'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('is deferred but named as a finding', output)
+
+    def test_lint_rejects_deferred_nodes_declared_inline(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ')
+        finding = ('10. **Check the change** [map] Map node: testing.test-the-change. '
+                   'Fix: compare with requirements.understand-request.\n')
+        text = text.replace('## Findings\n', '## Findings\n\n### Minor\n' + finding)
+        report.write_text(text)
+        status, output = self.lint(report)
+        self.assertEqual(status, 0, output)
+        report.write_text(text.replace('Map node: testing.test-the-change.',
+                                       'Map node: testing.test-the-change, `requirements.understand-request`'
+                                       ' — source: Example.'))
+        status, output = self.lint(report)
+        self.assertEqual(status, 1, output)
+        self.assertIn('is deferred but named as a finding', output)
+
+    def test_lint_rejects_deferred_nodes_in_grouped_finding_lists(self):
+        self.write('reports/profile.yaml', 'deferred:\n  - node: requirements.understand-request\n')
+        report = self.report('profile.yaml')
+        text = report.read_text().replace(' | excluded | ', ' | deferred | ')
+        for separator in ('; ', ' (shallow), ', ' (absent); '):
+            with self.subTest(separator=separator):
+                declaration = ('  Nodes: testing.test-the-change' + separator
+                               + 'requirements.understand-request — source: Example.\n')
+                report.write_text(text.replace('## Findings\n', '## Findings\n' + declaration))
+                status, output = self.lint(report)
+                self.assertEqual(status, 1, output)
+                self.assertIn('is deferred but named as a finding', output)
+
+    def test_prepare_rejects_conflicting_excluded_and_deferred_decisions(self):
+        self.write('skill/SKILL.md', '# Example')
+        self.write('skill/.blindspot.yaml',
+                   'exclude:\n  - node: requirements.understand-request\n'
+                   'deferred:\n  - node: requirements.understand-request\n')
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('both excluded and deferred', result.stderr)
+
+    def test_prepare_preserves_hashes_inside_profile_values(self):
+        self.write('skill/SKILL.md', '# Example')
+        self.write('skill/.blindspot.yaml',
+                   'exclude:\n  - finding: "Release #alpha"  # comment\n'
+                   "deferred:\n  - finding: 'Release #beta'  # comment\n"
+                   '  - finding: Fix C# examples  # comment\n')
+        result = self.cli('prepare', self.root / 'skill', '--map', 'software')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('- excluded finding: Release #alpha\n', result.stdout)
+        self.assertIn('- deferred finding: Release #beta\n', result.stdout)
+        self.assertIn('- deferred finding: Fix C# examples\n', result.stdout)
 
     def test_lint_missing_report_is_a_clean_cli_error(self):
         report = self.root / 'missing.md'

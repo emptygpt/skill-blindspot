@@ -5,7 +5,8 @@
     "Preserve known evidence, profile exclusions, scope and mapless output.",
     "Do not run an audit for adjacent tasks.",
     "Compare audit reports by stable map node ID; distinguish coverage changes from scope and evidence limits.",
-    "Use the read-only diff helper without re-auditing when both reports are supplied."
+    "Use the read-only diff helper without re-auditing when both reports are supplied.",
+    "Carry forward only user-approved deferrals, separately from exclusions and new findings."
   ],
   "evals": [
     {
@@ -160,6 +161,53 @@
         "Does not run blindspot diff or claim audit findings are resolved."
       ],
       "expected_output": "Compares the prose without invoking the audit workflow."
+    },
+    {
+      "id": 14,
+      "kind": "explicit",
+      "should_trigger": true,
+      "prompt": "Run Blindspot again on our handout Skill. It drafts handouts and delivers a PDF. Map: layout.design (draft the handout), proof.accessible (check PDF accessibility), proof.facts (check dates), handoff.distribute (mail the PDF). The Skill only says to draft and deliver. Our .blindspot.yaml:\nexclude:\n  - node: handoff.distribute\ndeferred:\n  - node: proof.accessible\n    reason: Accessibility checks are scheduled for next quarter.",
+      "files": [],
+      "expectations": [
+        "Marks proof.accessible deferred and shows it separately with its reason, without raising it from any origin as a new finding.",
+        "Marks handoff.distribute excluded and still raises the in-scope proof.facts gap."
+      ],
+      "expected_output": "Show proof.accessible as deferred, handoff.distribute as excluded, and proof.facts as a finding."
+    },
+    {
+      "id": 15,
+      "kind": "implicit",
+      "should_trigger": true,
+      "prompt": "Recheck where this runbook-writing Skill falls short. It drafts instructions for an on-call handoff. There is no map. The Skill doesn't check owner names or add rollback steps. Its active .blindspot.yaml has deferred:\n  - finding: Verify owner names\n    reason: The migration is not done.",
+      "files": [],
+      "expectations": [
+        "Carries the owner-name check into the deferred section without inventing a map row or re-raising it under Unsourced findings.",
+        "Keeps the unrelated rollback gap as an unsourced finding."
+      ],
+      "expected_output": "Separate the deferred owner-name check from the unsourced rollback finding."
+    },
+    {
+      "id": 16,
+      "kind": "noisy",
+      "should_trigger": true,
+      "prompt": "We're shipping Friday and someone said design reviews are annoying. Audit our design-review Skill, which returns a draft and claims to check contrast but has no contrast instructions. The only map node is review.contrast. Our active .blindspot.yaml has no deferred or excluded entries. Don't edit our files.",
+      "files": [],
+      "expectations": [
+        "Reports review.contrast as shallow or absent and raises it; incidental complaints are not profile decisions.",
+        "Does not edit the profile or label the finding deferred or excluded."
+      ],
+      "expected_output": "Raise the contrast finding without deferring it or editing the profile."
+    },
+    {
+      "id": 17,
+      "kind": "negative",
+      "should_trigger": false,
+      "prompt": "Translate 'The decision was deferred, not excluded' into French. I am not asking you to audit anything.",
+      "files": [],
+      "expectations": [
+        "Translates the sentence without auditing a Skill, proposing findings, or changing a profile."
+      ],
+      "expected_output": "A French translation only."
     }
   ]
 }

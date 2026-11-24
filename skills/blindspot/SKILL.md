@@ -56,7 +56,7 @@ Without the helper, list the map's nodes and sources by reading the map file.
 2. **A domain map** (optional). A file that lists the stages and concerns of a domain, each with a source. Look for one in this order: a path the user gives, then the `maps/` folder next to this file. Run `python3 $S maps` or read `maps/INDEX.md` to see which maps exist and pick the one whose scope fits the skill. If the user names a map, use that one. If none fits, run without a map and say so.
 
    A map may build on another one. When its header has `extends: <id>`, load the base map first, drop the base nodes listed under `exclude`, then add the map's own nodes. Use the combined set in step 3 and name both maps in the report.
-3. **A profile** (optional). `.blindspot.yaml` in the skill's folder. It lists map nodes or findings the author leaves out on purpose.
+3. **A profile** (optional). Read `.blindspot.yaml` in the skill's folder if present, even without a map. It records what the author intentionally excludes and what they are not handling for now.
 
 ## Steps
 
@@ -110,16 +110,17 @@ For each node in the map, decide one of:
 | `shallow` | Available evidence establishes that the skill names it without instructions or covers only part of the node. Quote the line. |
 | `absent` | Nothing in the skill corresponds to it. |
 | `not-applicable` | Outside the scope written in step 1. Say why in a few words. |
-| `excluded` | Listed in the profile. |
+| `excluded` | Listed under `exclude` in the profile. |
+| `deferred` | Listed under `deferred` in the profile. The author is not handling it for now. |
 | `undetermined` | In scope, but a specific unavailable reference, called skill or script could change the verdict. Name it in Evidence and state what could not be checked. |
 
 Check meaning and not only words. A skill can use the word "hook" for the topic angle and say nothing about the opening seconds of the video. That node is `shallow` or `absent`.
 
-Whole groups that are out of scope can be marked `not-applicable` in one row.
+Whole groups that are out of scope can be marked `not-applicable` in one row, unless a node needs a separate row for a profile decision.
 
 Choosing between `absent` and `not-applicable`: a node is `not-applicable` only when the work it describes happens outside the boundary written in step 1, such as a publishing node for a skill that stops at a saved draft. If the skill does the work the node belongs to and leaves the node out, it is `absent`. When unsure, mark it `absent` and place it in the Minor band, so the author sees it and can exclude it in the profile.
 
-`undetermined` is about missing evidence, not uncertain scope. For an in-scope, non-excluded node, check for relevant unavailable material before choosing `absent` or `shallow`. If the skill delegates part of a check to an unavailable dependency and it could complete the node, mark it `undetermined`, not `shallow`. Quote the visible part and name what you could not verify. Judge a complete visible instruction or fallback on its own; do not mark unrelated nodes `undetermined`.
+`undetermined` is about missing evidence, not uncertain scope. For an in-scope node without a profile decision, check for relevant unavailable material before choosing `absent` or `shallow`. If the skill delegates part of a check to an unavailable dependency and it could complete the node, mark it `undetermined`, not `shallow`. Quote the visible part and name what you could not verify. Judge a complete visible instruction or fallback on its own; do not mark unrelated nodes `undetermined`.
 
 ### 4. Trace
 
@@ -137,6 +138,8 @@ Each break is a finding with origin `trace`.
 Combine the three lists. Two findings that name the same gap become one, and it keeps every origin.
 
 - For each `model` finding with no matching map node, look once more through the map for a node that covers it. If one exists, add the map origin and its source. If none exists, mark it `unsourced`.
+- Move gaps that match a deferred node or finding to **Deferred by profile**, regardless of origin. Do not repeat them in any finding band, Unsourced findings, or the count of new findings. Keep distinct gaps that were not deferred.
+- For a deferred `finding:` entry that matches a mapped gap, use the exact profile description in the deferred section and list every node id for that gap in its `Map nodes` cell, separated by commas. Mark those nodes `deferred` in the map table. A deferral by node id alone does not defer other nodes.
 - List `unsourced` findings separately at the end as candidates for the map. They may be real gaps that the map does not yet cover. The user or the map's maintainers can confirm them with a source.
 
 Before a finding goes in **Needed**, check it twice:
@@ -194,6 +197,9 @@ Map: <map id and version, or "none">    Profile: <path, or "none">    Date: <dat
 ## Map table
 | Node | State | Evidence |
 
+## Deferred by profile
+| Node or finding | Reason | Map nodes |
+
 ## Excluded by profile
 | Node or finding | Reason |
 ```
@@ -202,27 +208,32 @@ If there was no map, say in the first lines of the report that every finding is 
 
 Give every Needed finding a `Fix:` line. Point to a step or file of the skill and say what to add; do not write the new text for the author. Other bands may have one.
 
-With the helper, run `lint --skill <skill-folder>` on the finished report (with the report path and map as shown above) and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, `undetermined` rows without evidence, and a counts line that does not match the table. If you include a counts line, count `undetermined` separately from confirmed coverage and gaps.
+With the helper, run `lint --skill <skill-folder>` on the finished report (with the report path and map as shown above) and fix what it lists: node ids that are not in the map, nodes missing from the table, `absent` or `shallow` nodes that no finding names, `undetermined` rows without evidence, profile decisions that don't match the report, and a counts line that does not match the table. If you include a counts line, count `undetermined` and `deferred` separately from confirmed coverage and gaps, in that order after `not-applicable`.
 
 In `covered` and `shallow` Evidence cells, put exact excerpts in double quotes (straight or curly). Each excerpt must occur in a UTF-8 text file under the audited Skill folder, including references and scripts, or in a delegated file or folder. Pass the audited Skill folder first, then repeat `--skill <path>` only for evidence from files or folders the Skill actually uses outside its folder. Lint ignores differences in runs of whitespace, including line breaks. Quote separate excerpts separately rather than inserting ellipses or paraphrasing inside a quote. Without `--skill`, lint checks the report structure only; use that mode for historical reports when the audited files are unavailable.
 
 ## Profile format
 
 ```yaml
-# .blindspot.yaml — what this skill leaves out on purpose
+# .blindspot.yaml — what to leave out and what to handle later
 exclude:
   - node: publish.thumbnail
     reason: publishing is handled by another skill    # reason is optional
   - finding: "multi-language captions"
     reason: single-language channel
+deferred:
+  - node: pre.budget
+    reason: revisit once the production schedule is set
 ```
 
-When the user says a finding does not apply to them, offer to add it to the profile. Add it only after they agree. On the next run, excluded items appear only in the last section.
+When the user says a finding does not apply to them, offer to add it under `exclude`. When they say they are not handling it for now, offer to add it under `deferred`. Add it only at their request or after they agree. Use the node id if there is one, otherwise use `finding` with a short description of the gap. A reason is optional. Do not put the same item in both lists.
+
+On the next audit, show exclusions in **Excluded by profile**, not as findings. Show deferred items in their own section with any recorded reason, and mark mapped deferred items `deferred` in the map table. Do not report them as new. To reconsider one as a finding, remove its entry from `deferred` before the audit.
 
 ## Running again
 
 Keep the previous report. After the author changes the Skill, run a fresh audit using the same map and profile where possible, and keep both reports. Re-check the original gaps by node ID. Before marking a gap `covered`, check that the evidence shows what to do, when to do it, and what output the next step needs. Quote the supporting instructions and run `lint --skill` on the new report. Adding a reminder or rewording an old instruction does not prove the gap is fixed.
 
-When both reports already exist, compare them without running another audit. Run `diff` with the old report first, and summarize resolved, partially resolved, unchanged and regressed nodes with their evidence. The helper uses the `Map:` header to expand group rows; pass `--map <id>` if both reports use the same map but the headers don't identify it. A row present on only one side, a scope/profile change or a change involving `undetermined` is noted separately, not counted as a fix or regression. An upgrade to `covered` without a new quoted excerpt is at most partially resolved.
+When both reports already exist, compare them without running another audit. Run `diff` with the old report first, and summarize resolved, partially resolved, unchanged and regressed nodes with their evidence. The helper uses the `Map:` header to expand group rows; pass `--map <id>` if both reports use the same map but the headers don't identify it. A row present on only one side, a scope/profile change (including a move into or out of `deferred`), or a change involving `undetermined` is noted separately, not counted as a fix or regression. An upgrade to `covered` without a new quoted excerpt is at most partially resolved.
 
 The diff compares report evidence; it does not run the Skill or judge whether a quote is sufficient. Check the cited instructions for that before claiming a fix works. Review new findings not tied to a map node separately.
