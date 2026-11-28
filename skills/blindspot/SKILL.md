@@ -1,9 +1,9 @@
 ---
 name: blindspot
-description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Before a skill is written, it can also give a sourced checklist of what the domain expects. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it.
+description: Audit an agent skill for missing stages. Use when the user asks what a skill is missing, wants a skill checked for gaps, blind spots or domain coverage, or wants to re-check a skill after editing it. Before a skill is written, it can also give a sourced checklist of what the domain expects. Combines three checks - the model's own knowledge of the domain, a sourced domain map, and a trace of each step's outputs - and reports every finding with where it came from. Does not score the skill or rewrite it. 中文：检查一个 Skill 漏了哪些环节（盲区体检）。当用户说「这个 Skill 漏了什么」「帮我查查 Skill 的盲区」「发布前审一下这个 Skill」「写 Skill 之前给我一份带出处的清单」时使用；支持小红书笔记、公众号、视频、写作、软件等领域地图。
 license: MIT for the skill instructions and helper; see maps/INDEX.md for map data
 metadata:
-  version: 0.4.2
+  version: 0.5.0
 ---
 
 # blindspot
@@ -11,6 +11,12 @@ metadata:
 Find what a skill does not know it is missing.
 
 A skill author and a model both work inside the frame the skill started with. This audit looks outside that frame in three ways and merges the results. The model is good at noticing missing stages. A sourced map gives each finding a reference that a person can check. A trace of outputs catches breaks that no list of stages contains. No single one of the three decides the result.
+
+## Language
+
+Answer in the language the user writes in. When the user writes in Chinese, write the scope, findings, Why and Fix lines and the summary in Chinese. Keep the report's section headings, band names (Needed, Worth considering, Minor), state values (`covered`, `shallow`, `absent` and so on), origin tags, the line labels `Map node:`, `Why:` and `Fix:`, and node ids exactly as in the template: the helper script parses them. Quote the skill's own lines in their original language.
+
+中文用户：直接说「用 blindspot 查一下 `<Skill 目录>`」，审小红书笔记类 Skill 时加「用 xhs-note 地图」。报告正文用中文写，标题、分档名、状态值、行首标签和节点 id 保持英文，方便脚本检查。
 
 ## Ground rules
 

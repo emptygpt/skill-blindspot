@@ -8,7 +8,7 @@
 
 `skill-blindspot` 检查一个 Agent Skill（含 `SKILL.md` 的文件夹）缺了哪些环节。它先问模型缺什么，再拿一张**领域底图**逐条对照。底图来自人已经整理好的知识：职业任务数据库、教材和课程目录、平台官方文档、法规原文。你得到一张逐条对照表：哪些已覆盖、哪些很浅、哪些没有，附上在你的 Skill 里找到的原文行，每个节点都有出处。
 
-> **状态：v0.4.2。** 仓库包含 Skill、十一张领域底图和一个 Python 辅助脚本。十一张底图均已有至少三份公开 Skill 审计报告。报告格式可能会变。
+> **状态：v0.5.0。** 仓库包含 Skill、十二张领域底图和一个 Python 辅助脚本。其中十一张已有至少三份公开 Skill 审计报告；`xhs-note`（小红书笔记）是 0.5.0 新增，还没有公开审计。报告可以用中文写。报告格式可能会变。
 
 ## 第一份报告
 
@@ -63,6 +63,7 @@ npx skills add emptygpt/skill-blindspot
 | `video-long` | 长视频，在 `video` 之上 | +22 | [8 份审计](reports/video-20.md) |
 | `writing` | 在线发表的非虚构文章 | 78 | [3 份审计](reports/untested-maps/README.md) |
 | `wechat-article` | 微信公众号文章，在 `writing` 之上 | +40 | [3 份审计](reports/untested-maps/README.md) |
+| `xhs-note` | 小红书图文笔记，在 `writing` 之上 | +27 | 暂无 |
 | `software` | 借助 AI 编程 Agent 改软件，从需求到维护 | 90 | [20 份审计](reports/code-20.md) |
 | `research-paper` | 科研论文与可复现分析 | 76 | [3 份审计](reports/untested-maps/README.md) |
 | `tech-docs` | 技术文档与 API 文档：参考文档、操作步骤、代码示例、OpenAPI 描述 | 75 | [3 份审计](reports/untested-maps/README.md) |
@@ -121,7 +122,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 - [x] [早期试验](docs/validation.md)：对比仅用模型与底图引导的找回结果
 - [x] `blindspot` Skill v0.1：问、对照、追踪、个人档案（[skills/blindspot/SKILL.md](skills/blindspot/SKILL.md)）
-- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`、`seo-web`，每个节点都有来源
+- [x] 底图：`video`、`video-short`、`video-long`、`writing`、`wechat-article`、`xhs-note`、`seo-web`，每个节点都有来源
 - [x] 底图：`tech-docs`（技术文档与 API 文档）
 - [ ] 更多底图：小说（短篇、长篇），以及 YouTube 之外的视频平台
 - [x] [benchmark/](benchmark/README.zh-CN.md)：「删环节再找回」的测法和数据，别人可以拿来测自己的方法

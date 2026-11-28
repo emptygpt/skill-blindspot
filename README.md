@@ -8,7 +8,7 @@ Skill linters check format. Skill evals check whether the skill works on the tas
 
 `skill-blindspot` audits an agent skill (a folder with a `SKILL.md`) for missing stages. It asks the model what is missing, then checks the skill against a **domain map** built from knowledge that people have already organised: occupational task databases, textbook and course outlines, official platform documentation, regulation text. You get a node-by-node table of what is covered, shallow or absent, with the lines it found in your skill and a source for every node.
 
-> **Status: v0.4.2.** The repository includes the skill, eleven domain maps and a Python helper. All eleven maps have at least three public skill audits. The report format may change.
+> **Status: v0.5.0.** The repository includes the skill, twelve domain maps and a Python helper. Eleven maps have at least three public skill audits; `xhs-note` (Xiaohongshu notes) is new in 0.5.0 and has none yet. Reports can be written in Chinese. The report format may change.
 
 ## First report
 
@@ -63,6 +63,7 @@ Use them directly. Every node cites its source, so you do not have to search for
 | `video-long` | Long-form video, on top of `video` | +22 | [8 audits](reports/video-20.md) |
 | `writing` | Non-fiction articles published online | 78 | [3 audits](reports/untested-maps/README.md) |
 | `wechat-article` | WeChat official account articles, on top of `writing` | +40 | [3 audits](reports/untested-maps/README.md) |
+| `xhs-note` | Xiaohongshu (RED) image-and-text notes, on top of `writing` | +27 | none yet |
 | `software` | Making a change to software with an AI coding agent, from request to maintenance | 90 | [20 audits](reports/code-20.md) |
 | `research-paper` | Research papers and reproducible analysis | 76 | [3 audits](reports/untested-maps/README.md) |
 | `tech-docs` | Technical and API documentation: reference, procedures, code samples, OpenAPI descriptions | 75 | [3 audits](reports/untested-maps/README.md) |
@@ -121,7 +122,7 @@ python3 skills/blindspot/scripts/blindspot.py checklist --map video-short --skip
 
 - [x] [Historical pilot](docs/validation.md): compare model-only and map-guided recovery
 - [x] `blindspot` skill v0.1: ask, map, trace, profile ([skills/blindspot/SKILL.md](skills/blindspot/SKILL.md))
-- [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, `seo-web`, every node sourced
+- [x] Maps: `video`, `video-short`, `video-long`, `writing`, `wechat-article`, `xhs-note`, `seo-web`, every node sourced
 - [x] Map: `software` and reports on five coding skills ([code-5](reports/code-5.md)) and fifteen additional workflows ([code-20](reports/code-20.md))
 - [x] Map: `tech-docs` (technical and API documentation)
 - [ ] More maps: fiction (short story, novel), and video platforms beyond YouTube

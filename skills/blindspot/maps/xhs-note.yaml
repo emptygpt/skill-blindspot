@@ -1,0 +1,326 @@
+# skill-blindspot map: Xiaohongshu (RED) note (maps/xhs-note.yaml)
+#
+# Rules for this map
+#   - This map extends "writing". It lists only what is specific to notes
+#     published on Xiaohongshu (小红书 / RED): image-and-text notes and their
+#     title, cover, tags, comments and commercial content. Generic steps
+#     (research, fact-checking, editing and so on) stay in the base map.
+#   - Every node must cite at least one source that really exists in the
+#     "sources" list of this map, with a locator copied from that source: a
+#     clause number, a heading, or a short statement, in the original Chinese.
+#   - Nodes may be merged and reworded, but a node with no source must never
+#     be added. Gaps that no source covers are listed below, not added as nodes.
+#   - Only titles, clause numbers, headings and short statements are cited; no
+#     body text is copied.
+#   - Platform rules change. Check the "retrieved" date before relying on a
+#     node.
+#
+# Licence and attribution
+#   X1, X2 and X5 are Xiaohongshu pages; X3 and X4 are Chinese government
+#   regulations published on official government sites. Only titles, clause
+#   numbers, headings and short statements are cited; licences are not
+#   verified.
+#   X2 is published as a long image, not as text. Its locators are the
+#   headings and sentences read from that image on the retrieved date.
+#
+# Not yet covered (no source found or read, so no node)
+#   - Length limits of the title and body text in the note editor: the
+#     editor counters were not read, because that needs an image uploaded to
+#     a real account.
+#   - 《推广笔记社区规范》 linked from X1: the web link returns "page not
+#     available" and asks to open the app, so it was not read.
+#   - Brand partnership reporting through the platform's partnership tool
+#     (报备): no official page was read.
+#   - Video notes: specification of video files, covers and length.
+#   - Topic tags (#话题) and location tags: no rule page was read.
+#   - Paid promotion of a note (薯条) and its review rules.
+#   - Best publishing times and traffic mechanics: no official source.
+#   - Long-form notes (写长文) and podcasts (发播客): not read.
+
+map:
+  id: xhs-note
+  extends: writing
+  title: Xiaohongshu (RED) note
+  version: 0.1.0
+  updated: '2026-11-28'
+  scope: 'Image-and-text notes published on Xiaohongshu (小红书 / RED), from the note''s title, cover and images to publishing, comments and commercial content, and the platform and legal rules that apply to them. Out of scope: account registration and certification, live streaming, the shop and order handling, video-note production (see video-short), and notes for other platforms.'
+sources:
+- id: X1
+  title: 小红书社区规范（更新时间：2021年12月17日，生效时间：2021年12月24日）
+  publisher: 小红书 / Xingyin Information Technology (Shanghai)
+  url: https://www.xiaohongshu.com/crown/community/rules
+  retrieved: '2026-11-28'
+  licence: not verified (only clause numbers, headings and short statements cited)
+- id: X2
+  title: 小红书社区公约 2.0
+  publisher: 小红书 / Xingyin Information Technology (Shanghai)
+  url: https://www.xiaohongshu.com/crown/community/agreement
+  retrieved: '2026-11-28'
+  licence: not verified (published as a long image; only headings and short statements cited)
+- id: X3
+  title: 人工智能生成合成内容标识办法（国信办通字〔2025〕2号，2025年9月1日起施行）
+  publisher: 国家互联网信息办公室等四部门 / Cyberspace Administration of China et al.
+  url: https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm
+  retrieved: '2026-11-28'
+  licence: not verified (government regulation; only clause numbers and short statements cited)
+- id: X4
+  title: 互联网广告管理办法（国家市场监督管理总局令第72号）
+  publisher: 国家市场监督管理总局 / State Administration for Market Regulation
+  url: https://www.gov.cn/gongbao/2023/issue_10506/202306/content_6885261.html
+  retrieved: '2026-11-28'
+  licence: not verified (government regulation; only clause numbers and short statements cited)
+- id: X5
+  title: 小红书创作服务平台 · 发布笔记 · 上传图文
+  publisher: 小红书 / Xingyin Information Technology (Shanghai)
+  url: https://creator.xiaohongshu.com/publish/publish?target=image
+  retrieved: '2026-11-28'
+  licence: not verified (behind a login; only short statements of the upload limits cited)
+exclude:
+- node: draft.press-release
+  reason: A note is a personal share, not media communications for a client.
+- node: research.anonymous-sources
+  reason: Notes do not use anonymous news sources.
+- node: rights.own-copyright
+  reason: Copyright registration is not part of publishing a note.
+- node: head.byline
+  reason: The note is always shown under the publishing account.
+groups:
+- id: xhs-share
+  title: Sincere sharing
+  nodes:
+  - id: xhs.real-experience
+    title: Share real, first-hand experience
+    description: The note is based on the author's own use or experience, not on brand copy or invented feelings.
+    sources:
+    - ref: X2
+      locator: 请尊重原创，并分享真实的内容
+    - ref: X1
+      locator: 4.1.4 分享的产品和内容无相关性、无真实体验经历、未还原真实感受、过分参照商家指引或使用过多官方宣传语句
+  - id: xhs.ai-label
+    title: Label AI-generated or AI-assisted text and images
+    description: Say in the note, at the start or end or in the image description, that AI produced or helped produce the text or images, and use the platform's AI label.
+    sources:
+    - ref: X2
+      locator: 如果你在创作中使用了AI辅助工具，请主动标明
+    - ref: X2
+      locator: 你可以选择在开头或结尾标注“AI生成”，或在图片简介、视频片头等处注明。
+    - ref: X3
+      locator: 第十条 用户使用网络信息内容传播服务发布生成合成内容的，应当主动声明并使用服务提供者提供的标识功能进行标识。
+  - id: xhs.no-fake-persona
+    title: Do not build a false persona or stage a fake life
+    description: Do not invent wealth, education, income or relationships, or stage scenes to look like real life.
+    sources:
+    - ref: X2
+      locator: 请不要塑造虚假人设，包括财富、学历、收入、情感经历等
+  - id: xhs.title-cover-match
+    title: Keep the title and cover true to the note
+    description: The title and cover image match the content and do not use exaggeration or shock to attract clicks.
+    sources:
+    - ref: X2
+      locator: 请避免使用夸张、猎奇等手段吸引用户点击
+    - ref: X2
+      locator: 使用夸张、猎奇的标题和封面，是一种不真诚的分享行为
+    - ref: X1
+      locator: 4.1.3 发布严重影响用户体验的内容，如首图血腥恐怖、标题党、图文不符等
+  - id: xhs.science-claims
+    title: Back health and product claims with science
+    description: In health, wellness and commercial topics, share only what is scientifically supported, and never content that authorities have debunked.
+    sources:
+    - ref: X2
+      locator: 请分享经过科学论证的内容
+    - ref: X1
+      locator: 发布违背科学常识的内容，如在食品安全、健康养生等领域发布已被官方或权威机构辟谣的内容
+  - id: xhs.no-unqualified-advice
+    title: Do not give medical, investment or home-buying advice without qualification
+    description: Without the relevant professional qualification, do not give others guidance on seeing a doctor, investing or buying a home.
+    applies_when: the note touches health, money or property
+    sources:
+    - ref: X2
+      locator: 请避免在未取得相关职业资质的情况下，给他人提供医疗、投资、购房建议
+  - id: xhs.no-flaunting
+    title: Avoid flaunting spending far beyond ordinary people
+    description: When sharing purchases, judge by whether the note is useful to others, and never invent spending power.
+    applies_when: the note shows purchases or spending
+    sources:
+    - ref: X2
+      locator: 请避免炫耀远超常人的消费能力
+  - id: xhs.inclusive-language
+    title: Avoid discriminatory wording and say it is personal experience
+    description: Check for words that may discriminate or offend by gender, region, race, occupation or interest; say when a view is personal experience.
+    sources:
+    - ref: X2
+      locator: 请尊重不同的性别、地域、种族、职业和兴趣，让每一个独特的个体都能安心表达
+- id: xhs-commerce
+  title: Promotion, ads and diversion
+  nodes:
+  - id: xhs.ad-label
+    title: Label a promoting note as an ad
+    description: A note that promotes a product through experience sharing or review and adds a way to buy must be clearly labelled 广告.
+    applies_when: the note promotes a product or service, or is paid or sponsored
+    sources:
+    - ref: X4
+      locator: 第九条 互联网广告应当具有可识别性，能够使消费者辨明其为广告。
+    - ref: X4
+      locator: 通过知识介绍、体验分享、消费测评等形式推销商品或者服务，并附加购物链接等购买方式的，广告发布者应当显著标明“广告”。
+  - id: xhs.no-disguised-marketing
+    title: Do not disguise marketing as an ordinary user
+    description: Do not pose as an ordinary user, use account farms or hired writers to fake word of mouth, or push ads through private messages and @ mentions.
+    sources:
+    - ref: X2
+      locator: 请不要通过伪装素人、干预用户评价等手段不当营销，不滥发营销内容骚扰他人
+    - ref: X2
+      locator: 请避免通过私信、评论@等功能向用户滥发广告信息，尊重用户不愿被打扰的权利。
+  - id: xhs.health-disguised-ad
+    title: Keep health notes free of disguised medical ads
+    description: A note that shares health or wellness knowledge must not advertise medical services, drugs, devices or health food, or show their seller, contact or shopping link alongside.
+    applies_when: the note is about health, wellness, medicine or health food
+    sources:
+    - ref: X4
+      locator: 第八条 禁止以介绍健康、养生知识等形式，变相发布医疗、药品、医疗器械、保健食品、特殊医学用途配方食品广告。
+  - id: xhs.no-diversion
+    title: Do not divert users off the platform
+    description: No phone numbers, WeChat IDs, email, addresses, links, QR codes or watermarks that lead users elsewhere; trade through the platform's tools.
+    sources:
+    - ref: X1
+      locator: 3.2.1 发布导流到个人的联系方式，如手机号、微信号、邮箱、地址等
+    - ref: X1
+      locator: 3.2.2 发布导流到其他平台的联系方式，如网址链接、二维码、水印等
+    - ref: X2
+      locator: 请通过平台提供的工具完成交易，以保障买卖双方的权益，共同维护安全、放心的交易环境
+  - id: xhs.high-risk-goods
+    title: Do not sell high-risk or prohibited goods
+    description: Check the product against the high-risk and prohibited lists, such as cosmetic medicine, medical devices, prescription drugs and investment products.
+    applies_when: the note names or sells a product
+    sources:
+    - ref: X1
+      locator: 3.1.3 发布售卖高风险类的相关内容，如医美整形、医疗器械等
+    - ref: X1
+      locator: 2.3.1 禁止传播违法内容涉及违禁物品
+  - id: xhs.product-claims
+    title: Do not invent product effects or data
+    description: Every claim about a product's effect or a service's result has scientific basis or real experience behind it; sales and review numbers are real.
+    applies_when: the note describes a product or service
+    sources:
+    - ref: X2
+      locator: 请不要虚构服务和产品功效，不伪造数据，用真实信息赢取用户长久信任
+    - ref: X1
+      locator: 3.1.2 扰乱市场秩序的行为，如虚假宣传、虚假交易、价格欺诈、侵犯知识产权等
+  - id: xhs.business-identity
+    title: State the business identity
+    description: A brand, reseller or shop owner says so in the profile, note or live stream and uses the professional-account certification.
+    applies_when: the account belongs to a brand, seller or agent
+    sources:
+    - ref: X2
+      locator: 请亮明你的经营身份，提供真实有效的信息，合法合规地经营
+  - id: xhs.no-competitor-smear
+    title: Do not disparage competitors
+    description: No invented or unverified claims about competitors, and no organised attacks or mass reports against them.
+    applies_when: the note compares products or brands
+    sources:
+    - ref: X2
+      locator: 请不要贬低竞争对手，不编造不实信息，不滥用举报机制，维护良性的经营环境
+- id: xhs-rights
+  title: Privacy, minors and rights
+  nodes:
+  - id: xhs.others-privacy
+    title: Get consent before showing other people's information
+    description: Do not publish anyone's contact details, address, schedule, identity documents or medical history without their clear consent; blurring does not remove the risk.
+    sources:
+    - ref: X2
+      locator: 请尊重他人隐私，拒绝人肉搜索，不发起、不参与任何形式的网络暴力
+    - ref: X2
+      locator: 打码处理不能完全消除风险，分享前请务必征得本人同意。
+    - ref: X1
+      locator: 5.1.3 未经授权发布他人身份证号码、家庭住址、病史、财产信用状况等个人隐私资料
+  - id: xhs.minors
+    title: Put minors' interests first
+    description: In notes that show or concern children, do not expose their privacy or show unsafe behaviour.
+    applies_when: the note shows or concerns minors
+    sources:
+    - ref: X2
+      locator: 请与我们共同守护未成年人的身心健康，捍卫用户的个人隐私、人身与财产安全
+    - ref: X1
+      locator: 2.2 保护未成年人合法权益
+  - id: xhs.no-copying
+    title: Do not take others' images, video or text, or use their portrait
+    description: Use only material you made or are allowed to use, and do not use anyone's portrait, including bloggers' and ordinary users', for promotion without permission.
+    sources:
+    - ref: X1
+      locator: 5.2.1 未经他人授权，发布内容侵犯他人著作权权益，如视频，照片，图文等
+    - ref: X2
+      locator: 请不要通过侵权手段达成经营目的
+  - id: xhs.no-impersonation
+    title: Do not impersonate others
+    description: Do not use someone else's name, avatar or identity.
+    sources:
+    - ref: X2
+      locator: 请不要冒充他人
+    - ref: X1
+      locator: 5.1.1 未经授权使用信息，冒充他人注册账号或使用他人名称、头像等
+- id: xhs-safety
+  title: Content safety
+  nodes:
+  - id: xhs.sexual-content
+    title: Avoid nudity and sexual suggestion, including in titles
+    description: Even for education or medical topics, avoid suggestive images and titles.
+    sources:
+    - ref: X2
+      locator: 请不要分享过度裸露或性暗示的内容
+    - ref: X1
+      locator: 2.4.6 以庸俗和挑逗性标题吸引点击的内容
+  - id: xhs.dangerous-behaviour
+    title: Add safety warnings to risky activities
+    description: Do not show dangerous acts others may copy; give safety notes and show protection for extreme sports or work at height.
+    applies_when: the note shows a physical activity, tool or experiment
+    sources:
+    - ref: X1
+      locator: 4.3.1 易引人模仿的危险行为，如危险驾驶车辆，不当使用明火、干扰电梯等
+    - ref: X1
+      locator: 4.3.2 无安全提示、无防护措施的危险行为，如无提示的极限运动、无防护措施的高空行为等
+- id: xhs-publish
+  title: Publishing and interaction
+  nodes:
+  - id: xhs.image-spec
+    title: Check image format, size and ratio
+    description: Use png, jpg, jpeg or webp up to 32 MB (no GIF or Live photos), ideally between 3:4 and 2:1 and at least 720×960.
+    sources:
+    - ref: X5
+      locator: 最大32MB的图片文件
+    - ref: X5
+      locator: 推荐使用png、jpg、jpeg、webp，不支持gif、live及其转化后的图片
+    - ref: X5
+      locator: 推荐上传3:4至2:1之间、分辨率不低于720*960的照片
+  - id: xhs.no-automated-posting
+    title: Do not post in batches, at high frequency or by machine
+    description: An automated workflow must not publish notes in bulk or by script, or run many accounts.
+    sources:
+    - ref: X1
+      locator: 4.4.3 非正常模式地发布笔记，如批量发布、高频发布、机器发布等
+    - ref: X1
+      locator: 4.4.2 滥用权益注册或开设多个账号
+  - id: xhs.no-fake-engagement
+    title: Do not fake followers, likes, saves or comments
+    description: No scripts, paid clicks or grey channels to inflate engagement or rankings.
+    sources:
+    - ref: X1
+      locator: 4.4.4 通过程序、脚本模拟、人刷或其他非正常手段、方法，产生虚假数据，如虚假的粉丝关注、点赞、收藏、评论等
+    - ref: X2
+      locator: 不伪造销量、用户评价、点赞收藏等数据，不利用技术手段或灰色渠道进行刷量刷榜。
+  - id: xhs.comment-conduct
+    title: Reply in comments without spamming or attacking
+    description: Answer comments in a friendly way, do not flood comment sections or group chats, and do not pressure users over negative reviews.
+    sources:
+    - ref: X2
+      locator: 请换位思考，友善沟通
+    - ref: X2
+      locator: 请勿在评论区、群聊等公共空间刷屏或进行其他影响讨论氛围的行为。
+    - ref: X2
+      locator: 请不要以利益诱导、软性胁迫、举报差评等方式干预用户评价的真实性和完整性
+  - id: xhs.violation-appeal
+    title: Know the penalties and how to appeal
+    description: Violations can limit or remove a note or account; disagreement goes through the in-app appeal.
+    sources:
+    - ref: X1
+      locator: 6.2 违规处理措施
+    - ref: X1
+      locator: 均可通过APP-帮助与客服-笔记/账号申诉进行反馈
